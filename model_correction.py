@@ -1,3 +1,7 @@
+import sys
+
+sys.path.append("")
+
 import utils
 import os
 import json
@@ -27,15 +31,16 @@ def remove_incorrect_edge(kg, model, node_dict, edge_dict):
 
 
 if __name__ == '__main__':
-    trains = [19, 20, 28]
-    kg = utils.load_lg_graph(r"D:\DataMatching\museum_kg_20210906.lg")
-    with open(r"D:\DataMatching\museum-crm\node_dict.json", 'r')as f:
+    trains = [1, 6, 12]
+    kg = utils.load_lg_graph(r"D:\ASM\DataSets\museum-crm\museum_kg_20210906.lg")
+    with open(r"museum_node_dict.json", 'r') as f:
         node_dict = json.load(f)
-    with open(r"D:\DataMatching\museum-crm\edge_dict.json", 'r')as f:
+    with open(r"museum_edge_dict.json", 'r') as f:
         edge_dict = json.load(f)
     for i in range(1, 30):
         try:
-            os.chdir(rf"E:\exp_20210909\train_{trains[0]}_{trains[1]}_{trains[2]}\newSource_{i}\cytoscape")
+            os.chdir(
+                rf"D:\ASM\experiment\model_correction_20220220\train_{trains[0]}_{trains[1]}_{trains[2]}\newSource_{i}\cytoscape")
             c_model = utils.load_graph_from_csv("correct_model.csv")
             k_model = utils.load_graph_from_csv("model_0.csv")
             mg = utils.merge_graph(c_model, k_model, "__cm", "__km")
@@ -44,4 +49,3 @@ if __name__ == '__main__':
             utils.save_csv_graph(mg, "result.csv")
         except Exception as e:
             pass
-

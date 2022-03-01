@@ -3,11 +3,12 @@ import pandas as pd
 import scipy.stats as stats
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.linear_model import LogisticRegression
+
 
 def jaccard_similarity(x, y):
 
     intersection_cardinality = len(set.intersection(*[set(x), set(y)]))
+
     union_cardinality = len(set.union(*[set(x), set(y)]))
     return intersection_cardinality / float(union_cardinality)
 

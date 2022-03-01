@@ -2,11 +2,13 @@ import json
 import networkx as nx
 import os
 
+DS = "museum"
+
 
 def load_dict():
-    with open(r"node_dict.json", 'r')as f:
+    with open(DS+r"_node_dict.json", 'r')as f:
         node_dict = json.load(f)
-    with open(r"edge_dict.json", 'r')as f:
+    with open(DS+r"_edge_dict.json", 'r')as f:
         edge_dict = json.load(f)
     return node_dict, edge_dict
 
@@ -56,6 +58,7 @@ def load_graph_from_csv(filename):
 
 def get_mcs(g1, g2) -> nx.DiGraph:
     matching_graph = nx.Graph()
+
     for (n1, n2) in g2.edges():
         for (m1, m2) in g1.edges():
             if g1.nodes[m1]['label'] == g2.nodes[n1]['label'] and g1.nodes[m2]['label'] == g2.nodes[n2]['label']:
@@ -90,7 +93,7 @@ def merge_graph(g1: nx.DiGraph, g2: nx.DiGraph, s1: str, s2: str) -> nx.DiGraph:
                 i_node = s_node if s_node in mcs_g2.nodes else t_node
                 n_node = s_node if s_node not in mcs_g2.nodes else t_node
                 for node in mcs_g1.nodes:
-                    if i_node[:-1] == node[:-1]:
+                    if i_node[:-1] == node[:-1] and mcs_g2.degree(i_node) == mcs_g1.degree(node):
                         if i_node == s_node:
                             merged_graph.add_edge(node+s1, n_node+s2, label=edge[2]['label'])
                         else:
@@ -122,8 +125,8 @@ def csv_to_lg(csv_graph):
 
 def lg_to_csv(lg_graph):
     node_dict, edge_dict = load_dict()
-    node_dict = {v:k for k,v in node_dict.items()}
-    edge_dict = {v:k for k,v in edge_dict.items()}
+    node_dict = {v: k for k, v in node_dict.items()}
+    edge_dict = {v: k for k, v in edge_dict.items()}
 
     graph = nx.DiGraph()
     nodes = [[node[0], node[1]['label']] for node in lg_graph.nodes.data()]
@@ -190,23 +193,14 @@ def save_csv_graph(g, filename):
             f.write(",".join([source, target, edge_label]) + "\n")
 
 
-def trans_to_RM(lg:nx.DiGraph):
-    lg = lg.to_undirected()
-    print('t', lg.number_of_edges(), lg.number_of_nodes())
-    for node in lg.nodes.data():
-        print('v', node[0], node[1]['label'], nx.degree(lg, node[0]))
-    for edge in lg.edges:
-        print('e', edge[0], edge[1])
 
 
 if __name__ == '__main__':
 
-    os.chdir(r"E:\exp_20210830\train_2_5_6\newSource_1\cytoscape")
+    graph = load_graph_from_csv(r"D:\ASM\experiment\model_correction_20220217\train_2_5_6\newSource_16\cytoscape\model_0.csv")
+    # graph.remove_node("E38_Image1")
+    graph.remove_node("E52_Time-Span1")
+    # graph.remove_node("E55_Type1")
+    graph.remove_node("E78_Collection1")
+    save_lg_graph(csv_to_lg(graph), r"D:\ASM\experiment\exp_20220218\s16Seed.lg")
 
-    c_model = load_graph_from_csv("correct_model.csv")
-    k_model = load_graph_from_csv("model_0.csv")
-    mcs = get_mcs(c_model, k_model)
-
-    mg = merge_graph(c_model, k_model, "__cm", "__km")
-
-    save_csv_graph(mg, "test.csv")

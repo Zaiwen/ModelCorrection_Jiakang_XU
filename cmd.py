@@ -1,3 +1,6 @@
+import sys
+sys.path.append("")
+
 import os
 import utils
 
@@ -78,11 +81,11 @@ def gen_cmd_file(dir):
 
 if __name__ == '__main__':
 
-    trains = [19, 20, 28]
+    trains = [1, 6, 12]
 
-    dir = rf"E:\exp_20210909\train_{trains[0]}_{trains[1]}_{trains[2]}"
+    dir = rf"D:\ASM\experiment\model_correction_20220220\train_{trains[0]}_{trains[1]}_{trains[2]}"
 
-    os.chdir(rf"E:\exp_20210909\train_{trains[0]}_{trains[1]}_{trains[2]}")
+    # os.chdir(rf"E:\exp_20210909\train_{trains[0]}_{trains[1]}_{trains[2]}")
 
     gen_cmd_file(dir)
     # files = [file for file in os.listdir() if file.startswith('newSource')]

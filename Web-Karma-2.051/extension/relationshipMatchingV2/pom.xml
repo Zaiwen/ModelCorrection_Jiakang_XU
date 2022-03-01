@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--<parent>-->
+        <!--<artifactId>d2dcrc-parent</artifactId>-->
+        <!--<groupId>au.com.d2dcrc</groupId>-->
+        <!--<version>0.1.8</version>-->
+    <!--</parent>-->
+
+    <groupId>au.com.d2dcrc</groupId><!--newly added-->
+    <artifactId>yago-to-es</artifactId>
+    <version>0.0.3-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>indexer</module>
+        <module>plugin</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <elasticsearch.version>2.3.2</elasticsearch.version>
+    </properties>
+
+    <build><!--added on 12 Jan 2019-->
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+<!--
+
+   <scm>
+        <connection>scm:git:https://bitbucket.org/d2dcrc/yago-to-es.git</connection>
+        <developerConnection>scm:git:https://bitbucket.org/d2dcrc/yago-to-es.git</developerConnection>
+        <url>https://bitbucket.org/d2dcrc/yago-to-es/</url>
+        <tag>HEAD</tag>
+    </scm>
+
+-->
+
+  <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>d2dcrc-snapshots</id>-->
+            <!--<name>D2DCRC Snapshots</name>-->
+            <!--<url>https://maven.d2dcrc.net/content/repositories/snapshots/</url>-->
+            <!--<releases>-->
+                <!--<enabled>false</enabled>-->
+            <!--</releases>-->
+            <!--<snapshots>-->
+                <!--<enabled>true</enabled>-->
+            <!--</snapshots>-->
+        <!--</repository>-->
+        <!--<repository>-->
+            <!--<id>d2dcrc-releases</id>-->
+            <!--<name>D2DCRC Releases</name>-->
+            <!--<url>https://maven.d2dcrc.net/content/repositories/releases/</url>-->
+            <!--<releases>-->
+                <!--<enabled>true</enabled>-->
+            <!--</releases>-->
+            <!--<snapshots>-->
+                <!--<enabled>false</enabled>-->
+            <!--</snapshots>-->
+        <!--</repository>-->
+  <!--</repositories>-->
+
+
+
+</project>

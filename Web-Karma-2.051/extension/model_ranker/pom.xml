@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>extension</artifactId>
+        <groupId>edu.isi</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>unisa</groupId>
+    <artifactId>model_ranker</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>edu.isi</groupId>
+            <artifactId>karma-research</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.isi</groupId>
+            <artifactId>karma-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>ExactSubgraphMatching</groupId>
+            <artifactId>GraMi_ExactSubgraphMatching</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>unisa</groupId>
+            <artifactId>knowledge_graph</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency><!--added on 14 Jan 2019-->
+            <groupId>au.com.d2dcrc</groupId>
+            <artifactId>yago-indexer</artifactId>
+            <version>0.0.3-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build><!--compulsory. For diamond expression comply successfully. 8 Jan 2019-->
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

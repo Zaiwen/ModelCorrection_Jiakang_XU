@@ -612,8 +612,9 @@ public class ModelLearner_KnownModels4 {
 
         /**Import all of the semantic models, including new data source and training data source, into Karma. 14 Aug 2018**/
         if(semanticModels == null) {
-            semanticModels = ModelReader.importSemanticModelsFromJsonFiles(Params.ROOT_DIR + "models-json-modified", Params.MODEL_MAIN_FILE_EXT);
+            semanticModels = ModelReader.importSemanticModelsFromJsonFiles(Params.ROOT_DIR + "models-json-tmp", Params.MODEL_MAIN_FILE_EXT);
         }
+
 
         List<SemanticModel> trainingData = new ArrayList<SemanticModel>();
 
@@ -934,13 +935,8 @@ public class ModelLearner_KnownModels4 {
         ontologyManager = null;
 
 
-        SemanticModel candidateModel = getCandidateSemanticModels(0, new Integer[]{1, 4, 5}).get(0);
-        List<ColumnNode> columnNodes =  candidateModel.getColumnNodes();
-        for (ColumnNode columnNode : columnNodes) {
-            System.out.println(columnNode.getColumnName());
-            List<SemanticType> learnedSemanticTypes = columnNode.getLearnedSemanticTypes();
+        SemanticModel candidateModel = getCandidateSemanticModels(11, new Integer[]{1, 4, 5}).get(0);
 
-        }
 
         // Leave One Out
 //        for (int i = 0; i < 15; i++) {

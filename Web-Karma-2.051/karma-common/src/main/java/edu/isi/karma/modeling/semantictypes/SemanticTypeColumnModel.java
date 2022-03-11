@@ -51,6 +51,7 @@ public class SemanticTypeColumnModel implements Jsonizable {
 		}
 	}
 
+
 	public HashMap<String, Double> getScoreMap() {
 		return scoreMap;
 	}

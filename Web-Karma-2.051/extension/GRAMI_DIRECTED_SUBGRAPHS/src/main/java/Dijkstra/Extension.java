@@ -18,10 +18,11 @@ public class Extension {
 //    public static final String GRAPH_PATH =
 //            String.format("D:\\ASM\\experiment\\model_correction_20220217\\train_%d_%d_%d\\newSource_%d\\modelgraphs\\",
 //                    TRAIN[0], TRAIN[1], TRAIN[2] , TEST);
-    public static final String GRAPH_PATH = "D:\\ASM\\experiment\\exp_20220218\\s16Seed.lg";
-    public static final String KGPATH = "D:\\ASM\\DataSets\\museum-crm\\museum_kg_20210604.lg";
-    public static final String OUT_PATH =
-            String.format("D:\\ASM\\experiment\\exp_20220218\\(%d, %d, %d)-%d\\", TRAIN[0], TRAIN[1], TRAIN[2], TEST);
+    public static final String GRAPH_PATH = "D:\\ASM\\experiment\\tmp\\model.lg";
+    public static final String KGPATH = "D:\\ASM\\DataSets\\museum-crm\\museum_kg_20210906.lg";
+//    public static final String OUT_PATH =
+//            String.format("D:\\ASM\\experiment\\exp_20220218\\(%d, %d, %d)-%d\\", TRAIN[0], TRAIN[1], TRAIN[2], TEST);
+    public static final String OUT_PATH = "D:\\ASM\\experiment\\tmp\\";
     public static final int[] newNodeArr = {4, 22};
     public static final int FREQ = 5;
 

@@ -34,7 +34,7 @@ public class Params {
 //	public static String DATASET_NAME = "music";
     public static String DATASET_NAME = "museum-crm";
 
-	public static String ROOT_DIR = "D:\\ASM\\DataSets\\" + DATASET_NAME + "\\";
+	public static String ROOT_DIR = "C:\\D_Drive\\ASM\\DataSets\\" + DATASET_NAME + "\\";
 	
 	public static String ONTOLOGY_DIR = ROOT_DIR + "preloaded-ontologies/";
 	public static String MUSEUM_DATA_DIR = "/Users/fengz/karma/preloaded-ontologies/";//added on 23 Jan 2019

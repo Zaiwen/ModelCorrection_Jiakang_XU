@@ -14,17 +14,19 @@ public class Tmp {
 
 
         Graph kg = new Graph(1, 1);
-        kg.loadFromFile_Ehab("D:\\ASM\\DataSets\\museum-crm\\museum_kg_20210906.lg");
+        kg.loadFromFile_Ehab("D:\\ASM\\DataSets\\museum-crm\\museum_kg_20210604.lg");
+//        kg.loadFromFile_Ehab("D:\\DataMatching\\s10.lg");
+
 
         kg.setShortestPaths_1hop();
 
-//        FileWriter fw = new FileWriter("D:\\model_correction_20211206\\correct_model_freq.txt");
+//        FileWriter fw = new FileWriter("D:\\ASM\\experiment\\correct_model_freq1.txt");
 //        fw.write("model\tfreq\n");
 
 
         Graph qryGraph = new Graph(2,1);
-        qryGraph.loadFromFile("E:\\experiment\\model_correction_20210705\\train_2_5_6\\newSource_1\\mcs\\correct_model.lg");
-//        File graphsPath = new File("D:\\model_correction_20211206\\correct_models");
+        qryGraph.loadFromFile("D:\\ASM\\experiment\\s10_model.lg");
+//        File graphsPath = new File("D:\\ASM\\experiment\\correct_models");
 //        File[] graphs = graphsPath.listFiles();
 //        for (File graph : graphs) {
 //            Graph qryGraph = new Graph(2,0);

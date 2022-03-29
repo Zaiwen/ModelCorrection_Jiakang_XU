@@ -44,8 +44,8 @@ public class VF2GraphAdapter {
 
             System.out.println(nodeLabel+": "+LabelDir.NodeLabel.getOrDefault(nodeLabel, defaultLabel));
         }
-        System.out.println(vf2Graph.nodes.size());
-        System.out.println();
+//        System.out.println(vf2Graph.nodes.size());
+//        System.out.println();
 
         for (Node node1 : nodes) {
             for (Node node2 : nodes) {
@@ -75,10 +75,10 @@ public class VF2GraphAdapter {
 //            }
 
             vf2Graph.addEdge(sourceId,targetId,LabelDir.EdgeLabel.getOrDefault(edgeLabel,defaultLabel));
-            System.out.println(edgeLabel+": "+LabelDir.EdgeLabel.getOrDefault(edgeLabel, defaultLabel));
+//            System.out.println(edgeLabel+": "+LabelDir.EdgeLabel.getOrDefault(edgeLabel, defaultLabel));
 
         }
-        System.out.println(vf2Graph.edges.size());
+//        System.out.println(vf2Graph.edges.size());
 
 
         return vf2Graph;

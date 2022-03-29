@@ -1,21 +1,5 @@
 package edu.isi.karma.semantictypes.typinghandler;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.*;
-
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.DirectoryReader;
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexableField;
-import org.apache.lucene.store.FSDirectory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import edu.isi.karma.modeling.semantictypes.ISemanticTypeModelHandler;
 import edu.isi.karma.modeling.semantictypes.SemanticTypeLabel;
 import edu.isi.karma.semantictypes.numeric.KSTest;
@@ -24,6 +8,20 @@ import edu.isi.karma.semantictypes.tfIdf.Searcher;
 import edu.isi.karma.webserver.ContextParametersRegistry;
 import edu.isi.karma.webserver.ServletContextParameterMap;
 import edu.isi.karma.webserver.ServletContextParameterMap.ContextParameter;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.IndexableField;
+import org.apache.lucene.store.FSDirectory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.*;
 
 /**
  * LATEST
@@ -43,7 +41,7 @@ public class HybridSTModelHandler implements ISemanticTypeModelHandler {
 			.getLogger(HybridSTModelHandler.class.getSimpleName());
 	private ArrayList<String> allowedCharacters;
 
-	private boolean modelEnabled = false;
+	private boolean modelEnabled = true;
 	private String contextId;
 
 	/*
@@ -205,12 +203,12 @@ public class HybridSTModelHandler implements ISemanticTypeModelHandler {
 		if (isNumeric) {
 //			indexDirectory = contextParameters
 //					.getParameterValue(ContextParameter.NUMERIC_SEMTYPE_MODEL_DIRECTORY);
-			indexDirectory = "C:\\Users\\Dell\\karma\\numeric-semantic-type-files";
+			indexDirectory = "C:\\Users\\16141\\karma\\numeric-semantic-type-files";
 		}
 		else {
 //			indexDirectory = contextParameters
 //					.getParameterValue(ContextParameter.TEXTUAL_SEMTYPE_MODEL_DIRECTORY);
-			indexDirectory = "C:\\Users\\Dell\\karma\\textual-semantic-type-files";
+			indexDirectory = "C:\\Users\\16141\\karma\\textual-semantic-type-files";
 
 		}
 		File dir = new File(indexDirectory);
@@ -418,13 +416,13 @@ public class HybridSTModelHandler implements ISemanticTypeModelHandler {
 		if (isNumeric) {
 //			indexDirectory = contextParameters
 //					.getParameterValue(ContextParameter.NUMERIC_SEMTYPE_MODEL_DIRECTORY);
-			indexDirectory = "C:\\Users\\Dell\\karma\\numeric-semantic-type-files";
+			indexDirectory = "C:\\Users\\16141\\karma\\numeric-semantic-type-files";
 
 		}
 		else {
 //			indexDirectory = contextParameters
 //					.getParameterValue(ContextParameter.TEXTUAL_SEMTYPE_MODEL_DIRECTORY);
-			indexDirectory = "C:\\Users\\Dell\\karma\\textual-semantic-type-files";
+			indexDirectory = "C:\\Users\\16141\\karma\\textual-semantic-type-files";
 
 		}
 		return indexDirectory;

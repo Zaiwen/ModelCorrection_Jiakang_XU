@@ -8,7 +8,7 @@ import utils
 def classNodes():
     os.chdir("cytoscape")
     c_model = utils.load_graph_from_csv("correct_model.csv")
-    k_model = utils.load_graph_from_csv("model_0.csv")
+    k_model = utils.load_graph_from_csv("candidate_model.csv")
     m_model = utils.load_graph_from_csv("model.csv")
     mg = utils.merge_graph(c_model, k_model, "__cm", "__km")
     mcs = utils.get_mcs(k_model, c_model)
@@ -21,7 +21,7 @@ def classNodes():
     return grayNodes, yellowNodes, blueNodes, orangeNodes
 
 
-def markColor():
+def markColorCmd():
     mc_cmd = ""
     grayNodes, yellowNodes, blueNodes, orangeNodes = classNodes()
 
@@ -38,9 +38,8 @@ def markColor():
     return mc_cmd
 
 
-def importNetWork():
-    graphs = [os.getcwd() + '\\cytoscape\\' + graph for graph in os.listdir("cytoscape") if
-              graph in ["correct_model.csv", "model_0.csv", "model.csv", "result.csv"]]
+def importNetWorkCmd():
+    graphs = [os.getcwd() + '\\cytoscape\\' + graph for graph in os.listdir("cytoscape")]
     start = f'network import file file="'
     end = f'" indexColumnSourceInteraction=1 indexColumnTargetInteraction=2 indexColumnTypeInteraction=3 '
     end += f'startLoadRow=1 firstRowAsColumnNames=true rootNetworkList="-- Create new network collection --"\n'
@@ -51,7 +50,7 @@ def importNetWork():
     return cmd.replace('\\', '/')
 
 
-def saveSession():
+def saveSessionCmd():
     sf = os.getcwd() + r"\result.cys"
     return f'''session save file="{sf}"\n'''.replace('\\', '/')
 
@@ -64,11 +63,11 @@ def gen_cmd_file(dir):
         os.chdir(file)
         try:
             cmd += "session new\n"
-            cmd += importNetWork()
+            cmd += importNetWorkCmd()
             if "result.csv" in os.listdir("cytoscape"):
                 cmd += '''network set current network="result.csv"\n'''
-                cmd += markColor()
-            cmd += saveSession()
+                cmd += markColorCmd()
+            cmd += saveSessionCmd()
             cmd += "command sleep duration=0.5\n"
             cmd += "\n"
             print(cmd)
@@ -81,30 +80,8 @@ def gen_cmd_file(dir):
 
 if __name__ == '__main__':
 
-    trains = [1, 6, 12]
+    trains = [1, 10, 21]
 
-    dir = rf"D:\ASM\experiment\model_correction_20220220\train_{trains[0]}_{trains[1]}_{trains[2]}"
-
-    # os.chdir(rf"E:\exp_20210909\train_{trains[0]}_{trains[1]}_{trains[2]}")
+    dir = rf"D:\ASM\experiment\exp_20220322\train_{trains[0]}_{trains[1]}_{trains[2]}"
 
     gen_cmd_file(dir)
-    # files = [file for file in os.listdir() if file.startswith('newSource')]
-    #
-    # cmd = ''
-    # for file in files:
-    #     os.chdir(file)
-    #     try:
-    #         cmd += "session new\n"
-    #         cmd += importNetWork()
-    #         if "result.csv" in os.listdir("cytoscape"):
-    #             cmd += '''network set current network="result.csv"\n'''
-    #             cmd += markColor()
-    #         cmd += saveSession()
-    #         cmd += "command sleep duration=0.5\n"
-    #         cmd += "\n"
-    #         print(cmd)
-    #     except Exception as e:
-    #         pass
-    #     os.chdir(os.pardir)
-    # with open('cmd.txt', 'w')as f:
-    #     f.write(cmd)

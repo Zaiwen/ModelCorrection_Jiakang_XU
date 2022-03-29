@@ -1,0 +1,29 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s11.csv"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="E33_Linguistic_Object2"];
+n3[shape="plaintext",style="filled",fillcolor="gold",label="occupation"];
+n4[style="filled",color="white",fillcolor="lightgray",label="E21_Person1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="E82_Actor_Appellation1"];
+n6[style="filled",color="white",fillcolor="lightgray",label="E74_Group1"];
+n7[style="filled",color="white",fillcolor="lightgray",label="E33_Linguistic_Object1"];
+n8[shape="plaintext",style="filled",fillcolor="gold",label="nationality"];
+n9[shape="plaintext",style="filled",fillcolor="gold",label="Actor_URI"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="birth_data_and_place"];
+n11[shape="plaintext",style="filled",fillcolor="gold",label="long_biography"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="artist_name"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="P3_has_note"]
+n4 -> n5[color="brown",fontcolor="black",label="P131_is_identified_by"]
+n4 -> n6[color="brown",fontcolor="black",label="P107i_is_current_or_former_member_of"]
+n7 -> n4[color="brown",fontcolor="black",label="P129_is_about"]
+n6 -> n8[color="brown",fontcolor="black",label="label"]
+n4 -> n9[color="brown",fontcolor="black",label="classLink"]
+n2 -> n4[color="brown",fontcolor="black",label="P129_is_about"]
+n7 -> n10[color="brown",fontcolor="black",label="P3_has_note"]
+n7 -> n11[color="brown",fontcolor="black",label="P3_has_note"]
+n5 -> n12[color="brown",fontcolor="black",label="label"]
+}

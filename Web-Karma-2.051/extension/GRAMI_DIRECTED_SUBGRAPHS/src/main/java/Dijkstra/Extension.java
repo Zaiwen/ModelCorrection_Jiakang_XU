@@ -14,17 +14,17 @@ import java.util.HashMap;
 public class Extension {
 
     public static final int[] TRAIN = {2, 5, 6};
-    public static final int TEST = 16;
+    public static final int TEST = 8;
 //    public static final String GRAPH_PATH =
 //            String.format("D:\\ASM\\experiment\\model_correction_20220217\\train_%d_%d_%d\\newSource_%d\\modelgraphs\\",
 //                    TRAIN[0], TRAIN[1], TRAIN[2] , TEST);
-    public static final String GRAPH_PATH = "D:\\ASM\\experiment\\tmp\\model.lg";
+    public static final String GRAPH_PATH = "D:\\ASM\\experiment\\exp_20220329\\s08_seed.lg";
     public static final String KGPATH = "D:\\ASM\\DataSets\\museum-crm\\museum_kg_20210906.lg";
 //    public static final String OUT_PATH =
 //            String.format("D:\\ASM\\experiment\\exp_20220218\\(%d, %d, %d)-%d\\", TRAIN[0], TRAIN[1], TRAIN[2], TEST);
-    public static final String OUT_PATH = "D:\\ASM\\experiment\\tmp\\";
-    public static final int[] newNodeArr = {4, 22};
-    public static final int FREQ = 5;
+    public static final String OUT_PATH = "D:\\ASM\\experiment\\exp_20220329\\";
+    public static final int[] newNodeArr = {23};
+    public static final int FREQ = 10;
 
 
     public static void main(String[] args) throws Exception {
@@ -45,9 +45,13 @@ public class Extension {
         constraintMap.put(0,1);
         constraintMap.put(1,1);
         constraintMap.put(2,1);
-        constraintMap.put(3,1);
-        constraintMap.put(7,1);
-        constraintMap.put(8,1);
+//        constraintMap.put(3,1);
+//        constraintMap.put(4,3);
+//        constraintMap.put(5,1);
+//        constraintMap.put(7,1);
+//        constraintMap.put(8,1);
+//        constraintMap.put(17,1);
+
 
         long start = System.currentTimeMillis();
 

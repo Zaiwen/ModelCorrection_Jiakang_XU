@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 public class VF2Graph {
     public String name;
-    public ArrayList<Node> nodes = new ArrayList<Node>(); // 存储该图所有节点
-    public ArrayList<Edge> edges = new ArrayList<Edge>(); // 存储该图所有边
+    public ArrayList<Node> nodes = new ArrayList<Node>();
+    public ArrayList<Edge> edges = new ArrayList<Edge>();
 
 
     public VF2Graph() {

@@ -1,5 +1,6 @@
 import json
 import networkx as nx
+import pandas as pd
 import os
 
 DS = "museum"
@@ -56,6 +57,26 @@ def load_graph_from_csv(filename):
         print("the file", filename, "does not exist!")
 
 
+def load_graph_from_csv1(filename):
+    graph = nx.DiGraph()
+    try:
+        df = pd.read_csv(filename)
+        for _,row in df.iterrows():
+            source = row["source"]
+            target = row["target"]
+            edge_label = row["edge_label"]
+            target_node_type = row["target_node_type"]
+            graph.add_node(source, label=source[:-1], nodeType="InternalNode")
+            if target_node_type == "InternalNode":
+                graph.add_node(target, label=target[:-1], nodeType=target_node_type)
+            else:
+                graph.add_node(target, nodeType=target_node_type, learnedTypes=row["learned_types"])
+            graph.add_edge(source, target, label=edge_label)
+        return graph
+    except Exception:
+        print("the file", filename, "does not exist!")
+
+
 def get_mcs(g1, g2) -> nx.DiGraph:
     matching_graph = nx.Graph()
 
@@ -71,6 +92,12 @@ def get_mcs(g1, g2) -> nx.DiGraph:
 
 def merge_graph(g1: nx.DiGraph, g2: nx.DiGraph, s1: str, s2: str) -> nx.DiGraph:
     merged_graph = nx.DiGraph()
+
+    try:
+        g1.remove_nodes_from([node for node in g1.nodes if g1.nodes[node]["nodeType"] == "columnNode"])
+        g2.remove_nodes_from([node for node in g2.nodes if g2.nodes[node]["nodeType"] == "columnNode"])
+    except:
+        pass
 
     for node in g1.nodes.data():
         merged_graph.add_node(node[0] + s1, label=node[1]['label'])
@@ -106,6 +133,11 @@ def merge_graph(g1: nx.DiGraph, g2: nx.DiGraph, s1: str, s2: str) -> nx.DiGraph:
 
 def csv_to_lg(csv_graph):
     node_dict, edge_dict = load_dict()
+    try:
+        csv_graph.remove_nodes_from(nodes=[node for node in csv_graph.nodes if csv_graph.nodes[node]["nodeType"] == "columnNode"])
+    except Exception:
+        pass
+
     graph = nx.DiGraph()
     i = 0
     for node in csv_graph.nodes:
@@ -193,14 +225,11 @@ def save_csv_graph(g, filename):
             f.write(",".join([source, target, edge_label]) + "\n")
 
 
-
-
 if __name__ == '__main__':
 
-    graph = load_graph_from_csv(r"D:\ASM\experiment\model_correction_20220217\train_2_5_6\newSource_16\cytoscape\model_0.csv")
-    # graph.remove_node("E38_Image1")
-    graph.remove_node("E52_Time-Span1")
-    # graph.remove_node("E55_Type1")
-    graph.remove_node("E78_Collection1")
-    save_lg_graph(csv_to_lg(graph), r"D:\ASM\experiment\exp_20220218\s16Seed.lg")
+    # graph = load_graph_from_csv(r"D:\ASM\experiment\exp_20220322\train_2_5_6\newSource_24\cytoscape\model.csv")
+    #
+    # save_lg_graph(csv_to_lg(graph), r"D:\ASM\experiment\exp_20220329\s24_seed.lg")
 
+    graph = load_lg_graph(r"D:\ASM\experiment\exp_20220329\s08_result.lg")
+    save_csv_graph(lg_to_csv(graph), r"D:\ASM\experiment\exp_20220329\s08_result.csv")

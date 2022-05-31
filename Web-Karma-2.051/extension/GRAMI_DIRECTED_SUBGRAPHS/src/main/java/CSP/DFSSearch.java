@@ -19,7 +19,6 @@ along with Grami.  If not, see <http://www.gnu.org/licenses/>.
 
 package CSP;
 
-import au.com.d2dcrc.GramiMatcher;
 import automorphism.Automorphism;
 import dataStructures.*;
 import edu.isi.karma.rep.alignment.InternalNode;
@@ -975,8 +974,8 @@ public class DFSSearch
 		ArrayList<Integer> costs= new ArrayList<Integer>();
 		for (int i = variables.length-1; i >=0 ; i--) //Line 9 in Algorithm ISFREQUENT
 		{
-			System.out.println("\n");
-			System.out.println("now begin to run the No. " + i + " variable (counting until 0). There are totally " + variables.length + " variables.");//added on 22 Jan 2019
+//			System.out.println("\n");
+//			System.out.println("now begin to run the No. " + i + " variable (counting until 0). There are totally " + variables.length + " variables.");//added on 22 Jan 2019
 
             /**Check if the current variable represents a special nodes (anchors or limit nodes) or not. Added on 22 Feb 2019**/
             int label = variables[i].getLabel();
@@ -1093,6 +1092,7 @@ public class DFSSearch
 							System.out.println("passed the time threshold!!");
 						isStopped=false;
 						timer.cancel();
+						instance.clear();
 						break;
 					}
 					timer.cancel();
@@ -1195,7 +1195,7 @@ public class DFSSearch
 			if(Settings.isAutomorphismOn)
 				preComputed[i]=1;
 
-			System.out.println("now finish running the No. " + i + " variable.");//added on 22 Jan 2019
+//			System.out.println("now finish running the No. " + i + " variable.");//added on 22 Jan 2019
 
 		}
 //

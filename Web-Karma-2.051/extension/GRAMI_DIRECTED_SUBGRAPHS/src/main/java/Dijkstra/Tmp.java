@@ -14,33 +14,38 @@ public class Tmp {
 
 
         Graph kg = new Graph(1, 1);
-        kg.loadFromFile_Ehab("D:\\ASM\\DataSets\\museum-crm\\museum_kg_20210604.lg");
-//        kg.loadFromFile_Ehab("D:\\DataMatching\\s10.lg");
+
+        kg.loadFromFile_Ehab("C:\\D_Drive\\ASM\\DataSets\\museum-crm\\museum_kg_20220513.lg");
 
 
         kg.setShortestPaths_1hop();
 
-//        FileWriter fw = new FileWriter("D:\\ASM\\experiment\\correct_model_freq1.txt");
-//        fw.write("model\tfreq\n");
+//        Graph qryGraph = new Graph(2,1);
+//        qryGraph.loadFromFile("C:\\D_Drive\\ASM\\experiment\\correct_models\\s10.csv.lg");
+//        GramiMatcher gm = new GramiMatcher();
+//        gm.setGraph(kg);
+//        gm.setQry(new Query(qryGraph.getListGraph()));
+//        System.out.println(gm.getFrequency(new HashMap<>(), 1));
+//        System.exit(1);
 
+        FileWriter fw = new FileWriter("C:\\D_Drive\\ASM\\experiment\\correct_model_freq0.txt");
+        fw.write("model\tfreq\n");
+//
+//
 
-        Graph qryGraph = new Graph(2,1);
-        qryGraph.loadFromFile("D:\\ASM\\experiment\\s10_model.lg");
-//        File graphsPath = new File("D:\\ASM\\experiment\\correct_models");
-//        File[] graphs = graphsPath.listFiles();
-//        for (File graph : graphs) {
-//            Graph qryGraph = new Graph(2,0);
-//            qryGraph.loadFromFile_Ehab(graph.getAbsolutePath());
-//            GramiMatcher gm = new GramiMatcher();
-//            gm.setGraph(kg);
-//            gm.setQry(new Query(qryGraph.getListGraph()));
-//            fw.write(graph.getName()+'\t'+gm.getFrequency(new HashMap<>(), 1)+'\n');
-//        }
-//        fw.close();
-        GramiMatcher gm = new GramiMatcher();
-        gm.setGraph(kg);
-        gm.setQry(new Query(qryGraph.getListGraph()));
-        System.out.println(gm.getFrequency(new HashMap<>(), 1));
+        File graphsPath = new File("C:\\D_Drive\\ASM\\experiment\\correct_models\\lg");
+        File[] graphs = graphsPath.listFiles();
+        for (File graph : graphs) {
+            Graph qryGraph = new Graph(2,0);
+            qryGraph.loadFromFile_Ehab(graph.getAbsolutePath());
+            GramiMatcher gm = new GramiMatcher();
+            gm.setGraph(kg);
+            gm.setQry(new Query(qryGraph.getListGraph()));
+            fw.write(graph.getName()+'\t'+gm.getFrequency(new HashMap<>(), 1)+'\n');
+            fw.flush();
+        }
+        fw.close();
+
 
     }
 

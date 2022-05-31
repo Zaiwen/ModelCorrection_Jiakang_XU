@@ -17,30 +17,54 @@ import java.util.List;
 public class ModelLearner {
     public static void main(String[] args) throws Exception {
 
-//        List<SemanticModel> models = ModelReader.importSemanticModelsFromJsonFiles(
+
+//        List<SemanticModel> correctModels = ModelReader.importSemanticModelsFromJsonFiles(
 //                Params.ROOT_DIR+"models-json-tmp", Params.MODEL_MAIN_FILE_EXT);
+
+//        FileWriter fw = new FileWriter("C:\\D_Drive\\ASM\\experiment\\semanticType.csv");
 //
-//        for (SemanticModel model : models) {
-//            if (model.getName().endsWith("csv")) {
-//                writeCSV(model.getSimpliedGraph(), "E:\\correct_models\\" + model.getName());
+//        fw.write(String.join(",", "data_source", "column_name", "correct_type", "candidate_types")+"\n");
+//
+//        for (SemanticModel model : correctModels) {
+//            DirectedWeightedMultigraph<Node, LabeledLink> graph = model.getGraph();
+//            for (Node node : graph.vertexSet()) {
+//                if (node instanceof ColumnNode){
+//                    String columnName = ((ColumnNode) node).getColumnName();
+//                    String correctTypeName = ((ColumnNode) node).getUserSemanticTypes().get(0).getDomain().getSimplifiedDisplayName();
+//                    String correctDataPropertyName = ((ColumnNode) node).getUserSemanticTypes().get(0).getType().getSimplifiedDisplayName();
+//                    String correctType = correctTypeName+";"+correctDataPropertyName;
+//                    String learnedTypes = "[";
+//                    List<SemanticType> learnedSemanticTypes = ((ColumnNode) node).getLearnedSemanticTypes();
+//                    if (learnedSemanticTypes!=null){
+//                        for (SemanticType semanticType : learnedSemanticTypes) {
+//                            learnedTypes += semanticType.getDomain().getSimplifiedDisplayName();
+//                            learnedTypes += ";";
+//                            learnedTypes += semanticType.getType().getSimplifiedDisplayName();
+//                            learnedTypes += ";";
+//                            learnedTypes += semanticType.getConfidenceScore();
+//                            learnedTypes += "\t";
+//                        }
+//                    }
+//                    learnedTypes += "]";
+//                    fw.write(String.join(",", model.getName(), columnName, correctType, learnedTypes)+"\n");
+//                }
 //            }
-////            System.out.println(model.getName());
 //        }
 //
-//
-//
+//        fw.close();
+
 
 //        System.exit(1);
 
         Integer[][] train = {
-                {0, 9, 20}
+                {0, 5, 11}
         };
 
 
         for (Integer[] trainDataIndex : train) {
             for (int i = 0; i < 29; i++) {
                 if(i != trainDataIndex[0] && i!= trainDataIndex[1] && i != trainDataIndex[2] && i != 26){
-                    String outputPath = String.format("D:\\ASM\\experiment\\exp_20220322\\train_%d_%d_%d\\newSource_",
+                    String outputPath = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220530\\train_%d_%d_%d___1\\newSource_",
                             trainDataIndex[0]+1,trainDataIndex[1]+1, trainDataIndex[2]+1);
                     File expDir = new File(outputPath+(i+1));
                     if(!expDir.exists()){
@@ -58,6 +82,11 @@ public class ModelLearner {
 
     public static String learnedTypesStr(List<SemanticType> learnedTypes){
         StringBuilder str = new StringBuilder();
+        boolean flag = false;
+        if (learnedTypes != null && learnedTypes.size() > 1 &&
+                learnedTypes.get(0).getConfidenceScore() / learnedTypes.get(1).getConfidenceScore() > 5){
+            flag = true;
+        }
         for (SemanticType learnedType : learnedTypes) {
 //            System.out.println(learnedType.getType());
             String candidateType = learnedType.getDomain().getLocalName();
@@ -66,7 +95,14 @@ public class ModelLearner {
             candidateProperty = candidateProperty.contains("#")?candidateProperty.substring(candidateProperty.lastIndexOf("#")+1)
                     :candidateProperty.substring(candidateProperty.lastIndexOf("/")+1);
 //            System.out.println(candidateType + " " + candidateProperty + " " + learnedType.getConfidenceScore());
-            str.append(String.join(" ", candidateType, candidateProperty, learnedType.getConfidenceScore().toString(), "\t"));
+            Double score = learnedType.getConfidenceScore();
+            if (score < 0.05){
+                break;
+            }
+            str.append(String.join(" ", candidateType, candidateProperty, score.toString(), "\t"));
+            if (flag){
+                break;
+            }
         }
         return String.valueOf(str);
     }
@@ -102,7 +138,7 @@ public class ModelLearner {
                 target = target.substring(target.lastIndexOf("/") + 1);
                 String edgeLabel = e.getLabel().getLocalName();
                 edgeLabel = edgeLabel.substring(edgeLabel.lastIndexOf("/") + 1);
-                String str = String.join(",", source, target, edgeLabel, "InternalNode", "null", "\n");
+                String str = String.join(",", source, target, edgeLabel, "InternalNode", "", "\n");
                 fw.append(str);
             }else if(e.getTarget() instanceof ColumnNode) {
                 String source = e.getSource().getLocalId();
@@ -113,7 +149,7 @@ public class ModelLearner {
                 String edgeLabel = e.getLabel().getLocalName();
                 edgeLabel = edgeLabel.contains("#")? edgeLabel.substring(edgeLabel.lastIndexOf("#") + 1):
                         edgeLabel.substring(edgeLabel.lastIndexOf("/") + 1);
-                String learnedTypes = targetNode.getLearnedSemanticTypes() == null?"null":learnedTypesStr(targetNode.getLearnedSemanticTypes());
+                String learnedTypes = targetNode.getLearnedSemanticTypes() == null?"":learnedTypesStr(targetNode.getLearnedSemanticTypes());
                 String str = String.join(",", source, target, edgeLabel, "columnNode", learnedTypes, "\n");
                 fw.append(str);
             }
@@ -128,32 +164,39 @@ public class ModelLearner {
         List<SortableSemanticModel> candidateModels = ModelLearner_KnownModels4.
                 getCandidateSemanticModels(newSourceIndex, trainDataIndex, outputPath);
 
-        SemanticModel candidateModel = candidateModels.get(0);
+        double precision = 0;
+        double recall=0;
 
-        System.out.println("We get " + candidateModels.size() + " candidate semantic models for the new source!");
-        System.out.println("============================================");
 
-        SemanticModel correctModel = ModelReader.importSemanticModelsFromJsonFiles(
-                Params.ROOT_DIR+"models-json-tmp", Params.MODEL_MAIN_FILE_EXT).get(newSourceIndex);
-        DirectedWeightedMultigraph<Node, LabeledLink> correctModelGraph = correctModel.getSimpliedGraph();
+        if (candidateModels.size() > 0) {
 
-        String modelPath = outputPath + "\\modelgraphs";
-        String cytoscapePath = outputPath + "\\cytoscape";
+            SemanticModel candidateModel = candidateModels.get(0);
 
-        File modelDir = new File(modelPath);
-        File cytoscapeDir = new File(cytoscapePath);
 
-        if (!modelDir.exists()){
-            modelDir.mkdir();
-        }
+//            System.out.println("We get " + candidateModels.size() + " candidate semantic models for the new source!");
+//            System.out.println("============================================");
 
-        if (!cytoscapeDir.exists()){
-            cytoscapeDir.mkdir();
-        }
+            SemanticModel correctModel = ModelReader.importSemanticModelsFromJsonFiles(
+                    Params.ROOT_DIR + "models-json-tmp", Params.MODEL_MAIN_FILE_EXT).get(newSourceIndex);
+            DirectedWeightedMultigraph<Node, LabeledLink> correctModelGraph = correctModel.getSimpliedGraph();
 
-        VF2Graph correctGraph = VF2GraphAdapter.graphAdaptToVF2(correctModelGraph);
-        VF2Graph.writeIntoFile(correctGraph,modelPath+"\\correct_model.lg");
-        writeCSV(correctModel.getGraph(),cytoscapePath+"\\correct_model.csv");
+            String modelPath = outputPath + "\\modelgraphs";
+            String cytoscapePath = outputPath + "\\cytoscape";
+
+            File modelDir = new File(modelPath);
+            File cytoscapeDir = new File(cytoscapePath);
+
+            if (!modelDir.exists()) {
+                modelDir.mkdir();
+            }
+
+            if (!cytoscapeDir.exists()) {
+                cytoscapeDir.mkdir();
+            }
+
+            VF2Graph correctGraph = VF2GraphAdapter.graphAdaptToVF2(correctModelGraph);
+//        VF2Graph.writeIntoFile(correctGraph,modelPath+"\\correct_model.lg");
+            writeCSV(correctModel.getGraph(), cytoscapePath + "\\correct_model.csv");
 
 //        int i = 0;
 //        int j = 0;
@@ -166,13 +209,16 @@ public class ModelLearner {
 //            visualizeGraphInCytoscape(modelGraph,cytoscapePath + "\\model_"+(j++)+".csv");
 //        }
 
-        DirectedWeightedMultigraph<Node, LabeledLink> modelGraph = candidateModel.getSimpliedGraph();
-        VF2Graph graph = VF2GraphAdapter.graphAdaptToVF2(modelGraph);
+            DirectedWeightedMultigraph<Node, LabeledLink> modelGraph = candidateModel.getSimpliedGraph();
+            VF2Graph graph = VF2GraphAdapter.graphAdaptToVF2(modelGraph);
 //        VF2Graph.printVF2Graph(graph);
 
-        VF2Graph.writeIntoFile(graph,modelPath + "\\candidate_model.lg");
-        writeCSV(candidateModel.getGraph(),cytoscapePath + "\\candidate_model.csv");
+//        VF2Graph.writeIntoFile(graph,modelPath + "\\candidate_model.lg");
+            writeCSV(candidateModel.getGraph(), cytoscapePath + "\\candidate_model.csv");
 
+            precision = candidateModel.evaluate(correctModel).getPrecision();
+            recall = candidateModel.evaluate(correctModel).getRecall();
+        }
     }
 
 }

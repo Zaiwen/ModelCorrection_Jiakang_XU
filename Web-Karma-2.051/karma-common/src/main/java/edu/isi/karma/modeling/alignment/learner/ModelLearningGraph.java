@@ -21,30 +21,23 @@
 
 package edu.isi.karma.modeling.alignment.learner;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-
+import edu.isi.karma.config.ModelingConfiguration;
+import edu.isi.karma.config.ModelingConfigurationRegistry;
+import edu.isi.karma.modeling.alignment.*;
+import edu.isi.karma.modeling.ontology.OntologyManager;
 import edu.isi.karma.rep.alignment.*;
+import edu.isi.karma.webserver.ContextParametersRegistry;
+import edu.isi.karma.webserver.ServletContextParameterMap;
+import edu.isi.karma.webserver.ServletContextParameterMap.ContextParameter;
 import org.jgrapht.graph.DirectedWeightedMultigraph;
 import org.python.google.common.collect.Sets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.isi.karma.config.ModelingConfiguration;
-import edu.isi.karma.config.ModelingConfigurationRegistry;
-import edu.isi.karma.modeling.alignment.GraphBuilder;
-import edu.isi.karma.modeling.alignment.GraphBuilderTopK;
-import edu.isi.karma.modeling.alignment.GraphUtil;
-import edu.isi.karma.modeling.alignment.GraphVizLabelType;
-import edu.isi.karma.modeling.alignment.GraphVizUtil;
-import edu.isi.karma.modeling.alignment.NodeIdFactory;
-import edu.isi.karma.modeling.alignment.SemanticModel;
-import edu.isi.karma.modeling.ontology.OntologyManager;
-import edu.isi.karma.webserver.ContextParametersRegistry;
-import edu.isi.karma.webserver.ServletContextParameterMap;
-import edu.isi.karma.webserver.ServletContextParameterMap.ContextParameter;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class ModelLearningGraph {
 
@@ -281,7 +274,7 @@ public abstract class ModelLearningGraph {
             Set<InternalNode> allNodes =  model.getInternalNodes();
             allNodes.addAll(nodeToBeAddedAtOnt);
             this.graphBuilder.addClosureAndUpdateLinks(allNodes, null);
-            //this.graphBuilder.addClosureAndUpdateLinks(model.getInternalNodes(), null);//remove on 3 June 2019.
+//            this.graphBuilder.addClosureAndUpdateLinks(model.getInternalNodes(), null);//remove on 3 June 2019.
         }
 	}
 	

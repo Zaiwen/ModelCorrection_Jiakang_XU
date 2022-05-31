@@ -903,6 +903,27 @@ public class HPListGraph<NodeType, EdgeType> implements
 		return edgeLabels;
 	}
 
+
+	public boolean hasEdge(NodeType nodeLabelA, NodeType nodeLabelB){
+
+		IntIterator eit = edgeIndexIterator();
+		while (eit.hasNext()){
+			int edgeIdx = eit.next();
+			int nodeA = getNodeA(edgeIdx);
+			int nodeB = getNodeB(edgeIdx);
+			NodeType labelA = getNodeLabel(nodeA);
+			NodeType labelB = getNodeLabel(nodeB);
+//			System.out.println(getDirection(edgeIdx));
+			if(getDirection(edgeIdx) == 1 && nodeLabelA.equals(labelA) && nodeLabelB.equals(labelB)){
+				return true;
+			}else if (getDirection(edgeIdx) == -1 && nodeLabelA.equals(labelB) && nodeLabelB.equals(labelA)){
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 	public String toString() {
 		return DFScodeSerializer.serialize(this);
 	}

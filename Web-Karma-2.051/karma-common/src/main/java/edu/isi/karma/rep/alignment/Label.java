@@ -126,6 +126,17 @@ public class Label implements Serializable {
 		return name;
 	}
 
+	public String getSimplifiedDisplayName(){
+		String displayName = getDisplayName();
+		String simplifiedDisplayName = "";
+		if (displayName.contains("#")){
+			simplifiedDisplayName = displayName.substring(displayName.lastIndexOf("#")+1);
+		}else {
+			simplifiedDisplayName = displayName.substring(displayName.lastIndexOf("/")+1);
+		}
+		return simplifiedDisplayName;
+	}
+
 	public String getRdfsLabel() {
 		return rdfsLabel;
 	}

@@ -1,20 +1,10 @@
 package edu.isi.karma.modeling.steiner.topk;
 
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Set;
-import java.util.TreeSet;
-
 import edu.isi.karma.config.ModelingConfiguration;
 import edu.isi.karma.config.ModelingConfigurationRegistry;
+
+import java.util.*;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
@@ -165,7 +155,7 @@ public class CustomizedBANKS extends TopKSteinertrees {
 		mainQueueMap.put(queueId, ancestor);
 		searchNodeInQueues.add(mainQueueMap);
 
-		int max = this.maxPermutations.intValue();
+		int max = this.maxPermutations;
 		
 //		if (this.maxPermutations == null) {
 //			if (duplicateIndex.size() <= 15) max = 3;
@@ -177,6 +167,7 @@ public class CustomizedBANKS extends TopKSteinertrees {
 		
 		List<HashMap<Integer, SteinerNode>> permutations = 
 				getPermutation(searchNodeInQueues, processedNodes, searchNode, 0, max, queueId);
+
 		
 		ModelingConfiguration modelingConfiguration = ModelingConfigurationRegistry.getInstance().getModelingConfiguration(contextId);
 
@@ -354,7 +345,7 @@ public class CustomizedBANKS extends TopKSteinertrees {
 
 					processedNodesHelper.get(queue.id).put(replacedNode.name(), replacedNode);
 
-					int numOfaddedTrees=isCommonAncestor(n, processedNodes, processedNodesHelper, queue.id);
+					int numOfaddedTrees = isCommonAncestor(n, processedNodes, processedNodesHelper, queue.id);
 					count += numOfaddedTrees;
 					if (debug && numOfaddedTrees > 0) {
 						System.out.println("==========================  new:" + numOfaddedTrees + ", total:" + count);

@@ -21,28 +21,6 @@
 
 package edu.isi.karma.modeling.alignment;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.Iterator;
-
-import edu.isi.karma.rep.alignment.*;
-import org.jgrapht.graph.DirectedWeightedMultigraph;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Multimap;
@@ -52,13 +30,18 @@ import com.google.common.math.BigIntegerMath;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-
 import edu.isi.karma.controller.command.selection.SuperSelection;
-//import edu.isi.karma.controller.command.selection.SuperSelectionManager;
-//import edu.isi.karma.modeling.semantictypes.SemanticTypeUtil;
 import edu.isi.karma.rep.Worksheet;
 import edu.isi.karma.rep.Workspace;
+import edu.isi.karma.rep.alignment.*;
 import edu.isi.karma.rep.alignment.SemanticType.Origin;
+import org.jgrapht.graph.DirectedWeightedMultigraph;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class SemanticModel {
 
@@ -708,7 +691,6 @@ public class SemanticModel {
 		
 		if (correct == null || result == null)
 			return null;
-		
 		int intersection = Sets.intersection(correct, result).size();
 		int resultSize = result.size();
 		

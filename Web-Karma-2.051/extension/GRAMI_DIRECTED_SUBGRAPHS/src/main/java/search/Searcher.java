@@ -238,7 +238,7 @@ public class Searcher<NodeType, EdgeType>
 	public DFSCode<NodeType, EdgeType> getCode(){
 		Algorithm<NodeType, EdgeType> algo = new Algorithm<NodeType, EdgeType>();
 		algo.setInitials(initials);
-		RecursiveStrategy<NodeType, EdgeType> rs = new RecursiveStrategy<>((HPListGraph<NodeType, EdgeType>) singleGraph.getListGraph());
+		RecursiveStrategy<NodeType, EdgeType> rs = new RecursiveStrategy<>(singleGraph.getListGraph());
 		return rs.searchDFSCode(algo);
 	}
 	
@@ -259,5 +259,5 @@ public class Searcher<NodeType, EdgeType>
 	{
 		return singleGraph;
 	}
-	
+
 }

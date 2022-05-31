@@ -146,6 +146,7 @@ public class ModelLearner_KnownModels4 {
             /**Get the top k Steiner Trees. 22 May 2018.**/
             int k = modelingConfiguration.getTopKSteinerTree();
 
+
             topKSteinerTrees =  ((GraphBuilderTopK)this.graphBuilder).getTopKSteinerTrees(sn, k, null, null, false);
         }
         else
@@ -164,6 +165,7 @@ public class ModelLearner_KnownModels4 {
 //		logger.info("END ...");
 
         for (DirectedWeightedMultigraph<Node, LabeledLink> tree: topKSteinerTrees) {
+
             if (tree != null) {
 //					System.out.println();
                 SemanticModel sm = new SemanticModel(new RandomGUID().toString(),
@@ -196,7 +198,19 @@ public class ModelLearner_KnownModels4 {
         List<SemanticType> candidateSemanticTypes = null;
 
         if (!useCorrectTypes) {
-            candidateSemanticTypes = steinerNode.getTopKLearnedSemanticTypes(numberOfCandidates);
+
+            if (steinerNode.getLearnedSemanticTypes()!=null && steinerNode.getLearnedSemanticTypes().size() > 0){
+                if (steinerNode.getLearnedSemanticTypes().size() > 1 &&
+                        steinerNode.getLearnedSemanticTypes().get(0).getConfidenceScore()
+                                / steinerNode.getLearnedSemanticTypes().get(1).getConfidenceScore() > 1){
+                    candidateSemanticTypes = steinerNode.getTopKLearnedSemanticTypes(1);
+                }else {
+                    candidateSemanticTypes = steinerNode.getTopKLearnedSemanticTypes(numberOfCandidates);
+                }
+//                candidateSemanticTypes = steinerNode.getTopKLearnedSemanticTypes(numberOfCandidates);
+            }else{
+                candidateSemanticTypes = steinerNode.getUserSemanticTypes();
+            }
         } else if (steinerNode.getSemanticTypeStatus() == ColumnSemanticTypeStatus.UserAssigned) {
             candidateSemanticTypes = steinerNode.getUserSemanticTypes();
         }
@@ -255,7 +269,9 @@ public class ModelLearner_KnownModels4 {
                 for (Node source : nodesWithSameUriOfDomain) {
                     String linkId = LinkIdFactory.getLinkId(propertyUri, source.getId(), steinerNode.getId());
                     LabeledLink link = new DataPropertyLink(linkId, new Label(propertyUri));
-                    if (!this.graphBuilder.addLink(source, steinerNode, link)) continue;;
+                    if (!this.graphBuilder.addLink(source, steinerNode, link)) {
+                        continue;
+                    };
                 }
             }
 
@@ -366,10 +382,10 @@ public class ModelLearner_KnownModels4 {
         ModelLearner_KnownModels4 modelLearner;
 
         boolean iterativeEvaluation = false;
-        boolean useCorrectType = true;
+        boolean useCorrectType = false;
         boolean randomModel = false;
 
-        int numberOfCandidates = 1;
+        int numberOfCandidates = 4;
         int numberOfKnownModels;
         String filePath = Params.RESULTS_DIR + "temp/";
         String filename = "";
@@ -478,7 +494,7 @@ public class ModelLearner_KnownModels4 {
 //
 //            // save graph to file
 //            try {
-////						GraphUtil.exportJson(modelLearningGraph.getGraphBuilder().getGraph(), graphName);
+//						GraphUtil.exportJson(modelLearningGraph.getGraphBuilder().getGraph(), graphName);
 //                /**Visualize the merged graph (model learning graph). 18 June 2018.**/
 //                GraphVizUtil.exportJGraphToGraphviz(modelLearner.graphBuilder.getGraph(),
 //                        "test20190531_alignment_without_steiner_n",
@@ -642,10 +658,10 @@ public class ModelLearner_KnownModels4 {
         ModelLearner_KnownModels4 modelLearner;
 
         boolean iterativeEvaluation = false;
-        boolean useCorrectType = true;
+        boolean useCorrectType = false;
         boolean randomModel = false;
 
-        int numberOfCandidates = 1;
+        int numberOfCandidates = 4;
         int numberOfKnownModels;
         String filePath = Params.RESULTS_DIR + "temp/";
         String filename = "";
@@ -674,7 +690,7 @@ public class ModelLearner_KnownModels4 {
 
         logger.info("======================================================");
         logger.info(newSource.getName() + "(#attributes:" + newSource.getColumnNodes().size() + ")");
-        System.out.println(newSource.getName() + "(#attributes:" + newSource.getColumnNodes().size() + ")");
+//        System.out.println(newSource.getName() + "(#attributes:" + newSource.getColumnNodes().size() + ")");
         logger.info("======================================================");
 
 //        numberOfKnownModels = iterativeEvaluation ? 0 : semanticModels.size() - 1;
@@ -773,7 +789,7 @@ public class ModelLearner_KnownModels4 {
         long elapsedTimeMillis = System.currentTimeMillis() - start;
         float elapsedTimeSec = elapsedTimeMillis/1000F;
 
-        System.out.println("time: " + elapsedTimeSec);
+//        System.out.println("time: " + elapsedTimeSec);
 
         int cutoff = 20;//ModelingConfiguration.getMaxCandidateModels();
         List<SortableSemanticModel> topHypotheses = null;
@@ -822,10 +838,10 @@ public class ModelLearner_KnownModels4 {
                 models.put(label, m);
 
                 if (k == 0) { // first rank model
-                    System.out.println("number of known models: " + numberOfKnownModels +
-                            ", precision: " + me.getPrecision() +
-                            ", recall: " + me.getRecall() +
-                            ", time: " + elapsedTimeSec);
+//                    System.out.println("number of known models: " + numberOfKnownModels +
+//                            ", precision: " + me.getPrecision() +
+//                            ", recall: " + me.getRecall() +
+//                            ", time: " + elapsedTimeSec);
                     logger.info("number of known models: " + numberOfKnownModels +
                             ", precision: " + me.getPrecision() +
                             ", recall: " + me.getRecall() +
@@ -838,7 +854,7 @@ public class ModelLearner_KnownModels4 {
 //                            resultsArray[numberOfKnownModels + 2].append(" \t ");
 //                        resultsArray[numberOfKnownModels + 2].append(s);
                     } else {
-                        s = newSource.getName() + "," + me.getPrecision() + "," + me.getRecall() + "," + elapsedTimeSec;
+                        s = newSource.getName() + "," + me.getPrecision() + "," + me.getRecall() + "," +elapsedTimeSec;
                         System.out.println(s);
 //                        resultFile.println(s);
                     }
@@ -934,9 +950,7 @@ public class ModelLearner_KnownModels4 {
         semanticModels = null;
         ontologyManager = null;
 
-
-        SemanticModel candidateModel = getCandidateSemanticModels(11, new Integer[]{1, 4, 5}).get(0);
-
+        List<SortableSemanticModel> candidateModels = getCandidateSemanticModels(6, new Integer[]{0, 5, 11}, "C:\\D_Drive\\ASM\\experiment\\");
 
         // Leave One Out
 //        for (int i = 0; i < 15; i++) {

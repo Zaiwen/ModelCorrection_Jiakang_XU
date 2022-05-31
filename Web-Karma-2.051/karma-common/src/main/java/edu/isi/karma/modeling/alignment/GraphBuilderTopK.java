@@ -1,40 +1,22 @@
 package edu.isi.karma.modeling.alignment;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-
+import edu.isi.karma.modeling.Uris;
+import edu.isi.karma.modeling.alignment.learner.SemanticTypeMapping;
+import edu.isi.karma.modeling.alignment.learner.SteinerNodes;
+import edu.isi.karma.modeling.ontology.OntologyManager;
+import edu.isi.karma.modeling.steiner.topk.*;
+import edu.isi.karma.rep.alignment.*;
+import edu.isi.karma.util.EncodingDetector;
+import edu.isi.karma.webserver.ContextParametersRegistry;
+import edu.isi.karma.webserver.ServletContextParameterMap;
+import edu.isi.karma.webserver.ServletContextParameterMap.ContextParameter;
 import org.jgrapht.graph.DirectedWeightedMultigraph;
 import org.jgrapht.graph.WeightedMultigraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.isi.karma.modeling.Uris;
-import edu.isi.karma.modeling.alignment.learner.SemanticTypeMapping;
-import edu.isi.karma.modeling.alignment.learner.SteinerNodes;
-import edu.isi.karma.modeling.ontology.OntologyManager;
-import edu.isi.karma.modeling.steiner.topk.CustomizedBANKS;
-import edu.isi.karma.modeling.steiner.topk.Fact;
-import edu.isi.karma.modeling.steiner.topk.ResultGraph;
-import edu.isi.karma.modeling.steiner.topk.SteinerEdge;
-import edu.isi.karma.modeling.steiner.topk.SteinerNode;
-import edu.isi.karma.rep.alignment.CompactObjectPropertyLink;
-import edu.isi.karma.rep.alignment.DefaultLink;
-import edu.isi.karma.rep.alignment.InternalNode;
-import edu.isi.karma.rep.alignment.Label;
-import edu.isi.karma.rep.alignment.LabeledLink;
-import edu.isi.karma.rep.alignment.LinkStatus;
-import edu.isi.karma.rep.alignment.Node;
-import edu.isi.karma.rep.alignment.ObjectPropertyLink;
-import edu.isi.karma.rep.alignment.ObjectPropertyType;
-import edu.isi.karma.util.EncodingDetector;
-import edu.isi.karma.webserver.ContextParametersRegistry;
-import edu.isi.karma.webserver.ServletContextParameterMap;
-import edu.isi.karma.webserver.ServletContextParameterMap.ContextParameter;
+import java.io.File;
+import java.util.*;
 
 
 public class GraphBuilderTopK extends GraphBuilder {
@@ -177,13 +159,17 @@ public class GraphBuilderTopK extends GraphBuilder {
 
 			terminals.add(new SteinerNode(n.getId()));
 
+
 			/**debug terminals for debugging, added on 1 Oct 17**/
-			System.out.println("steiner nodes id ------ " + n.getId() );
+//			System.out.println("steiner nodes id ------ " + n.getId());
+
 		}
 
 		CustomizedBANKS N = new CustomizedBANKS(terminals, recursiveLevel, maxPermutations, ontologyManager.getContextId());
 		CustomizedBANKS.graph = this.getTopKGraph();
 		CustomizedBANKS.nodes = this.getTopKGraphNodes();
+
+
 		
 		List<DirectedWeightedMultigraph<Node, LabeledLink>> results = new
 				LinkedList<>();
@@ -194,7 +180,7 @@ public class GraphBuilderTopK extends GraphBuilder {
 		if (!terminals.isEmpty() && N.getResultQueue().isEmpty()) { 
 			// No edge in the tree, we still want to return a graph with only nodes
 			// no solution found! --> return a tree with just terminal nodes
-
+//			System.out.println(terminals);
 		}
 		
 		for(ResultGraph tree: N.getResultQueue()){

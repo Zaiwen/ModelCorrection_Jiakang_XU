@@ -108,7 +108,7 @@ public class RightMostExtension<NodeType, EdgeType> extends
 			validEdges.add(new ValidEdge(2, 20, 1));
 			validEdges.add(new ValidEdge(23, 28, 2));
 			validEdges.add(new ValidEdge(23, 11, 6));
-			validEdges.add(new ValidEdge(2, 1, 6));
+//			validEdges.add(new ValidEdge(2, 1, 6));
 			validEdges.add(new ValidEdge(7, 16, 14));
 			validEdges.add(new ValidEdge(1, 19, 9));
 			validEdges.add(new ValidEdge(15, 24, 11));

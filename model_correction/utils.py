@@ -7,9 +7,9 @@ DS = "museum"
 
 
 def load_dict():
-    with open(DS+r"_node_dict.json", 'r')as f:
+    with open(DS + r"_node_dict.json", 'r') as f:
         node_dict = json.load(f)
-    with open(DS+r"_edge_dict.json", 'r')as f:
+    with open(DS + r"_edge_dict.json", 'r') as f:
         edge_dict = json.load(f)
     return node_dict, edge_dict
 
@@ -40,7 +40,7 @@ def load_lg_graph(filename):
 def load_graph_from_csv(filename):
     graph = nx.DiGraph()
     try:
-        with open(filename)as graph_file:
+        with open(filename) as graph_file:
             for line in graph_file:
                 if "source" not in line:
                     line_split = line.split(",")
@@ -61,20 +61,65 @@ def load_graph_from_csv1(filename):
     graph = nx.DiGraph()
     try:
         df = pd.read_csv(filename)
-        for _,row in df.iterrows():
+        for _, row in df.iterrows():
             source = row["source"]
             target = row["target"]
             edge_label = row["edge_label"]
-            target_node_type = row["target_node_type"]
-            graph.add_node(source, label=source[:-1], nodeType="InternalNode")
-            if target_node_type == "InternalNode":
-                graph.add_node(target, label=target[:-1], nodeType=target_node_type)
-            else:
-                graph.add_node(target, nodeType=target_node_type, learnedTypes=row["learned_types"])
-            graph.add_edge(source, target, label=edge_label)
+            if "target_node_type" in df.columns:
+                target_node_type = row["target_node_type"]
+                graph.add_node(source, label=source[:-1], nodeType="InternalNode")
+                if target_node_type == "InternalNode":
+                    graph.add_node(target, label=target[:-1], nodeType=target_node_type)
+                else:
+                    graph.add_node(target, nodeType=target_node_type, learnedTypes=row["learned_types"])
+                graph.add_edge(source, target, label=edge_label)
         return graph
+    # except FileNotFoundError:
+    #     print("the file", filename, "does not exist!")
+    except Exception as e:
+        print(e)
+
+
+def parse_learned_types(graph, cNode):
+    learn_types = graph.nodes[cNode]["learnedTypes"]
+
+    if not isinstance(learn_types, str):
+        eNode = list(graph.predecessors(cNode))[0]
+        data_property = graph.edges[(eNode, cNode)]["label"]
+        return [(eNode[:-1], data_property, 1.0)]
+
+    ls = []
+    types = learn_types.rstrip().split("\t")
+    for ct in types:
+        entity = ct.split()[0]
+        data_property = ct.split()[1]
+        score = float(ct.split()[2])
+        if score > 0.05:
+            ls.append((entity, data_property, score))
+
+    if len(ls) > 1 and ls[0][2] / ls[1][2] > 3:
+        ls = [ls[0]]
+    return ls
+
+
+def add_learn_types_into_graph(model):
+    i = 0
+    try:
+        nodes = list(model.nodes)
+        for node in nodes:
+            if model.nodes[node]["nodeType"] == "columnNode":
+                candidate_types = parse_learned_types(model, node)
+                if len(candidate_types) > 1:
+                    for ct in candidate_types:
+                        entity = ct[0]
+                        data_property = ct[1]
+                        score = float(ct[2])
+                        model.add_node(entity + "__ct_" + str(i), nodeType="InternalNode", label=entity)
+                        model.add_edge(entity + "__ct_" + str(i), node,
+                                       label=data_property + " " + str(round(score, 3)))
+                        i += 1
     except Exception:
-        print("the file", filename, "does not exist!")
+        pass
 
 
 def get_mcs(g1, g2) -> nx.DiGraph:
@@ -92,13 +137,11 @@ def get_mcs(g1, g2) -> nx.DiGraph:
 
 def merge_graph(g1: nx.DiGraph, g2: nx.DiGraph, s1: str, s2: str) -> nx.DiGraph:
     merged_graph = nx.DiGraph()
-
     try:
         g1.remove_nodes_from([node for node in g1.nodes if g1.nodes[node]["nodeType"] == "columnNode"])
         g2.remove_nodes_from([node for node in g2.nodes if g2.nodes[node]["nodeType"] == "columnNode"])
-    except:
+    except Exception:
         pass
-
     for node in g1.nodes.data():
         merged_graph.add_node(node[0] + s1, label=node[1]['label'])
 
@@ -122,11 +165,11 @@ def merge_graph(g1: nx.DiGraph, g2: nx.DiGraph, s1: str, s2: str) -> nx.DiGraph:
                 for node in mcs_g1.nodes:
                     if i_node[:-1] == node[:-1] and mcs_g2.degree(i_node) == mcs_g1.degree(node):
                         if i_node == s_node:
-                            merged_graph.add_edge(node+s1, n_node+s2, label=edge[2]['label'])
+                            merged_graph.add_edge(node + s1, n_node + s2, label=edge[2]['label'])
                         else:
-                            merged_graph.add_edge(n_node+s2,  node+s1, label=edge[2]['label'])
+                            merged_graph.add_edge(n_node + s2, node + s1, label=edge[2]['label'])
             else:
-                merged_graph.add_edge(s_node+s2, t_node+s2, label=edge[2]['label'])
+                merged_graph.add_edge(s_node + s2, t_node + s2, label=edge[2]['label'])
 
     return merged_graph
 
@@ -134,8 +177,10 @@ def merge_graph(g1: nx.DiGraph, g2: nx.DiGraph, s1: str, s2: str) -> nx.DiGraph:
 def csv_to_lg(csv_graph):
     node_dict, edge_dict = load_dict()
     try:
-        csv_graph.remove_nodes_from(nodes=[node for node in csv_graph.nodes if csv_graph.nodes[node]["nodeType"] == "columnNode"])
-    except Exception:
+        csv_graph.remove_nodes_from(
+            nodes=[node for node in csv_graph.nodes if csv_graph.nodes[node]["nodeType"] == "columnNode"])
+    except Exception as e:
+        # print(e)
         pass
 
     graph = nx.DiGraph()
@@ -161,6 +206,9 @@ def lg_to_csv(lg_graph):
     edge_dict = {v: k for k, v in edge_dict.items()}
 
     graph = nx.DiGraph()
+    if not lg_graph.nodes:
+        return graph
+
     nodes = [[node[0], node[1]['label']] for node in lg_graph.nodes.data()]
     nodes.sort(key=lambda x: x[1])
     i = 0
@@ -172,7 +220,7 @@ def lg_to_csv(lg_graph):
         i += 1
         last_node = node
 
-    def get(nodes, id):
+    def get_id(nodes, id):
         for node in nodes:
             if node[0] == id:
                 return node
@@ -181,8 +229,8 @@ def lg_to_csv(lg_graph):
         s_id = edge[0]
         t_id = edge[1]
         label = edge[2]['label']
-        s_node = get(nodes, s_id)
-        t_node = get(nodes, t_id)
+        s_node = get_id(nodes, s_id)
+        t_node = get_id(nodes, t_id)
         graph.add_edge(s_node[2], t_node[2], label=edge_dict.get(label))
     return graph
 
@@ -208,28 +256,36 @@ def save_lg_graph(g, filename):
     with open(filename, 'w') as f:
         f.write('t # 1\n')
         for node in sorted(g.nodes):
-            # f.writelines('v ' + str(node) + ' ' + str(g.nodes[node]['label']) + '\n')
             f.write(' '.join(['v', str(node), str(g.nodes[node]['label'])]) + '\n')
         for edge in g.edges:
-            # f.writelines('e ' + str(edge[0]) + ' ' + str(edge[1]) + ' ' + str(g.edges[edge]['label']) + '\n')
             f.write(' '.join(['e', str(edge[0]), str(edge[1]), str(g.edges[edge]['label'])]) + '\n')
 
 
 def save_csv_graph(g, filename):
-    with open(file=filename, mode="w")as f:
-        f.write(",".join(['source', 'target', 'edge_label']) + "\n")
-        for edge in g.edges:
-            source = edge[0]
-            target = edge[1]
-            edge_label = g.edges[edge]['label']
-            f.write(",".join([source, target, edge_label]) + "\n")
+    df = pd.DataFrame(columns=["source", "target", "edge_label"])
+    for i, edge in enumerate(g.edges):
+        df.loc[i] = [edge[0], edge[1], g.edges[edge]["label"]]
+    df.to_csv(filename, index=False)
+
+
+def save_csv_graph1(g, filename):
+    df = pd.DataFrame(columns=["source", "target", "edge_label", "target_node_type", "learned_types"])
+    for i, edge in enumerate(g.edges):
+        target_node_type = g.nodes[edge[1]]["nodeType"]
+        learned_types = g.nodes[edge[1]]["learnedTypes"] if target_node_type == "columnNode" else None
+        df.loc[i] = [edge[0], edge[1], g.edges[edge]["label"], target_node_type, learned_types]
+    df.to_csv(filename, index=False)
 
 
 if __name__ == '__main__':
 
-    # graph = load_graph_from_csv(r"D:\ASM\experiment\exp_20220322\train_2_5_6\newSource_24\cytoscape\model.csv")
-    #
-    # save_lg_graph(csv_to_lg(graph), r"D:\ASM\experiment\exp_20220329\s24_seed.lg")
+    save_csv_graph(
+        lg_to_csv(load_lg_graph(rf"C:\D_Drive\ASM\experiment\exp_20220530\s17_result.lg")),
+        rf"C:\D_Drive\ASM\experiment\exp_20220530\s17_result.lg.csv")
 
-    graph = load_lg_graph(r"D:\ASM\experiment\exp_20220329\s08_result.lg")
-    save_csv_graph(lg_to_csv(graph), r"D:\ASM\experiment\exp_20220329\s08_result.csv")
+
+    #
+    # for file in os.listdir(r"C:\D_Drive\ASM\experiment\exp_20220522\extension\(10,12,18)\seed_models"):
+    #     if file.endswith("lg"):
+    #         save_csv_graph(lg_to_csv(load_lg_graph(rf"C:\D_Drive\ASM\experiment\exp_20220522\extension\(10,12,18)\seed_models\{file}")),
+    #                        rf"C:\D_Drive\ASM\experiment\exp_20220522\extension\(10,12,18)\seed_models\{file}.csv")

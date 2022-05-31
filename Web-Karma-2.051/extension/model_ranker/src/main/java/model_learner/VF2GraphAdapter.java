@@ -34,7 +34,7 @@ public class VF2GraphAdapter {
             Node node = entry.getKey();
             Integer nodeId = entry.getValue();
             String nodeLabel = node.getLabel().getLocalName();
-            System.out.println(nodeLabel);
+//            System.out.println(nodeLabel);
             nodeLabel = nodeLabel.substring(nodeLabel.lastIndexOf("/")+1);
 //            if(!nodeLabel.startsWith("E")){
 //                nodeLabel = nodeLabel.substring(nodeLabel.indexOf('E'));
@@ -42,7 +42,7 @@ public class VF2GraphAdapter {
 
             vf2Graph.addNode(nodeId, LabelDir.NodeLabel.getOrDefault(nodeLabel, defaultLabel));
 
-            System.out.println(nodeLabel+": "+LabelDir.NodeLabel.getOrDefault(nodeLabel, defaultLabel));
+//            System.out.println(nodeLabel+": "+LabelDir.NodeLabel.getOrDefault(nodeLabel, defaultLabel));
         }
 //        System.out.println(vf2Graph.nodes.size());
 //        System.out.println();
@@ -68,7 +68,7 @@ public class VF2GraphAdapter {
             int sourceId = edgePair.getKey();
             int targetId = edgePair.getValue();
 
-            System.out.println(edgeLabel);
+//            System.out.println(edgeLabel);
             edgeLabel = edgeLabel.substring(edgeLabel.lastIndexOf("/")+1);
 //            if (!edgeLabel.startsWith("P")){
 //                edgeLabel = edgeLabel.substring(edgeLabel.indexOf('P'));

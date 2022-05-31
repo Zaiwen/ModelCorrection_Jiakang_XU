@@ -87,17 +87,27 @@ public class Graph
 
 
 	public static Graph DFSCodeToGraph(DFSCode code){
+//		try {
+//			FileWriter fw = new FileWriter("C:\\D_Drive\\ASM\\DataMatchingMaster\\tmp.lg");
+//			fw.write("t # 1\n");
+//			fw.write(DFScodeSerializer.serialize(code.getHPlistGraph()));
+//			fw.close();
+//			Graph graph = new Graph(1, 0);
+//			graph.loadFromFile_Ehab("C:\\D_Drive\\ASM\\DataMatchingMaster\\tmp.lg");
+//
+//			return graph;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		try {
-			FileWriter fw = new FileWriter("D:\\ASM\\DataMatchingMaster\\tmp.lg");
-			fw.write("t # 1\n");
-			fw.write(DFScodeSerializer.serialize(code.getHPlistGraph()));
-			fw.close();
 			Graph graph = new Graph(1, 0);
-			graph.loadFromFile_Ehab("D:\\ASM\\DataMatchingMaster\\tmp.lg");
+			graph.loadFromDFSCode(code);
 			return graph;
-		} catch (Exception e) {
+		}catch (Exception e){
 			e.printStackTrace();
 		}
+
+
 		return null;
 	}
 
@@ -185,6 +195,118 @@ public class Graph
 		}
 		
 		bin.close();		
+	}
+
+
+	public void loadFromDFSCode(DFSCode code) throws Exception{
+		String codeStr = "t # 1\n";
+		codeStr += DFScodeSerializer.serialize(code.getHPlistGraph());
+		String text = "";
+		final BufferedReader rows = new BufferedReader(new StringReader(codeStr));
+
+		// read graph from rows
+		// nodes
+		int counter = 0;
+		int numberOfNodes=0;
+		String line;
+		String tempLine;
+		rows.readLine();
+		while ((line = rows.readLine()) !=null && (line.charAt(0) == 'v')) {
+			final String[] parts = line.split("\\s+");
+			final int index = Integer.parseInt(parts[1]);
+			final int label = Integer.parseInt(parts[2]);
+			if (index != counter) {
+				System.out.println(index+" "+counter);
+				throw new ParseException("The node list is not sorted", counter);
+			}
+
+			addNode(label);
+			myNode n = new myNode(numberOfNodes, label);
+			nodes.add(n);
+			HashMap<Integer,myNode> tmp = nodesByLabel.get(label);
+			if(tmp==null)
+			{
+				tmp = new HashMap<Integer,myNode>();
+				nodesByLabel.put(label, tmp);
+			}
+
+			tmp.put(n.getID(), n);
+			numberOfNodes++;
+			counter++;
+		}
+		nodeCount=numberOfNodes;
+		tempLine = line;
+
+		// edges
+
+		//use the first edge line
+		if(tempLine.charAt(0)=='e')
+			line = tempLine;
+		else
+			line = rows.readLine();
+
+		if(line!=null)
+		{
+			do
+			{
+				final String[] parts = line.split("\\s+");
+				final int index1 = Integer.parseInt(parts[1]);
+				final int index2 = Integer.parseInt(parts[2]);
+				final int label = Integer.parseInt(parts[3]);
+				addEdge(index1, index2, label);
+			} while((line = rows.readLine()) !=null && (line.charAt(0) == 'e'));
+		}
+
+		//prune infrequent edge labels
+		for (Iterator<  Entry< Double,Integer> >  it= this.edgeLabelsWithFreq.entrySet().iterator(); it.hasNext();)
+		{
+			Entry< Double,Integer > ar =  it.next();
+			if(ar.getValue().doubleValue()>=freqThreshold)
+			{
+				this.freqEdgeLabels.add(ar.getKey());
+			}
+		}
+
+		//now prune the infrequent nodes
+		for (Iterator<  Entry< Integer, HashMap<Integer,myNode> > >  it= nodesByLabel.entrySet().iterator(); it.hasNext();)
+		{
+			Entry< Integer, HashMap<Integer,myNode> > ar =  it.next();
+			if(ar.getValue().size()>=freqThreshold)
+			{
+				sortedFreqLabelsWithFreq.add(new Point(ar.getKey(),ar.getValue().size()));
+				freqNodesByLabel.put(ar.getKey(), ar.getValue());
+			}
+		}
+
+		Collections.sort(sortedFreqLabelsWithFreq, new freqComparator());
+
+		for (int j = 0; j < sortedFreqLabelsWithFreq.size(); j++)
+		{
+			sortedFreqLabels.add(sortedFreqLabelsWithFreq.get(j).x);
+		}
+
+		//prune frequent hashedEdges
+		Vector toBeDeleted = new Vector();
+		Set<String> s = StaticData.hashedEdges.keySet();
+		for (Iterator<String>  it= s.iterator(); it.hasNext();)
+		{
+			String sig =  it.next();
+			HashMap[] hm = StaticData.hashedEdges.get(sig);
+			if(hm[0].size()<freqThreshold || hm[1].size()<freqThreshold)
+			{
+				toBeDeleted.addElement(sig);
+			}
+			else
+				;
+		}
+		Enumeration<String> enum1 = toBeDeleted.elements();
+		while(enum1.hasMoreElements())
+		{
+			String sig = enum1.nextElement();
+			StaticData.hashedEdges.remove(sig);
+		}
+
+		rows.close();
 	}
 	
 	public void loadFromFile_Ehab(String fileName) throws Exception
@@ -296,6 +418,7 @@ public class Graph
 		
 		rows.close();		
 	}
+
 
 	
 	public void printFreqNodes()

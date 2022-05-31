@@ -29,13 +29,13 @@ public class SemanticLabeling {
     public static void main(String[] args) throws Exception {
 
         removeKnownModels();
-        semanticLabeling(new Integer[]{1, 4, 5}, 0);
-//        for (int i = 0; i < 29; i++) {
-//            if (i != 26) {
-////                semanticLabeling(new Integer[]{1, 4, 5}, i);
-//                semanticLabeling(i);
-//            }
-//        }
+//        semanticLabeling(new Integer[]{1, 4, 5}, 0);
+        for (int i = 0; i < 29; i++) {
+            if (i != 26) {
+//                semanticLabeling(new Integer[]{1, 4, 5}, i);
+                semanticLabeling(i);
+            }
+        }
 
 
     }
@@ -91,7 +91,7 @@ public class SemanticLabeling {
 
     public static void semanticLabeling(int newSourceIndex) throws Exception {
         removeKnownModels();
-        List<SemanticModel> semanticModels = ModelReader.importSemanticModelsFromJsonFiles(Params.ROOT_DIR + "models-json-20220314", Params.MODEL_MAIN_FILE_EXT);
+        List<SemanticModel> semanticModels = ModelReader.importSemanticModelsFromJsonFiles(Params.ROOT_DIR + "models-json-20220522", Params.MODEL_MAIN_FILE_EXT);
         OntologyManager ontologyManager = new OntologyManager("");
         File oFile = new File(Params.ROOT_DIR+"ecrm_update(20190521).owl");
         ontologyManager.doImport(oFile, "UTF-8");
@@ -144,7 +144,7 @@ public class SemanticLabeling {
         ontologyManager.updateCache();
 
 
-        File sourceDir = new File("D:\\ASM\\DataSets\\museum-crm\\sources-modified-20210828");
+        File sourceDir = new File(Params.ROOT_DIR+"\\sources-modified-20210828");
 
 
         for (Integer index : trainIndex) {
@@ -181,7 +181,7 @@ public class SemanticLabeling {
     }
 
     public static void removeKnownModels(){
-        modelHandler.removeAllLabels();
+        System.out.println(modelHandler.removeAllLabels());
     }
 
 }

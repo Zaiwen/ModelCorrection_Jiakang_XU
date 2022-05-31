@@ -34,4 +34,5 @@ public class DataPropertyLink extends LabeledLink {
 	public DataPropertyLink(String id, Label label, boolean isProvenance) {
 		super(id, label, LinkType.DataPropertyLink, isProvenance);
 	}
+
 }

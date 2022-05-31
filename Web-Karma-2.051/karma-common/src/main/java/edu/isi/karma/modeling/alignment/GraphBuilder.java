@@ -20,20 +20,6 @@
  ******************************************************************************/
 package edu.isi.karma.modeling.alignment;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.jgrapht.graph.DirectedWeightedMultigraph;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import edu.isi.karma.config.ModelingConfiguration;
 import edu.isi.karma.config.ModelingConfigurationRegistry;
 import edu.isi.karma.modeling.ModelingParams;
@@ -43,25 +29,16 @@ import edu.isi.karma.modeling.Uris;
 import edu.isi.karma.modeling.alignment.learner.SemanticTypeMapping;
 import edu.isi.karma.modeling.ontology.OntologyManager;
 import edu.isi.karma.modeling.research.Params;
-import edu.isi.karma.rep.alignment.ColumnNode;
-import edu.isi.karma.rep.alignment.CompactLink;
-import edu.isi.karma.rep.alignment.CompactObjectPropertyLink;
-import edu.isi.karma.rep.alignment.CompactSubClassLink;
-import edu.isi.karma.rep.alignment.DefaultLink;
-import edu.isi.karma.rep.alignment.InternalNode;
-import edu.isi.karma.rep.alignment.Label;
-import edu.isi.karma.rep.alignment.LabeledLink;
-import edu.isi.karma.rep.alignment.LinkPriorityComparator;
-import edu.isi.karma.rep.alignment.LinkStatus;
-import edu.isi.karma.rep.alignment.LinkType;
-import edu.isi.karma.rep.alignment.Node;
-import edu.isi.karma.rep.alignment.NodeType;
-import edu.isi.karma.rep.alignment.ObjectPropertyLink;
-import edu.isi.karma.rep.alignment.ObjectPropertyType;
-import edu.isi.karma.rep.alignment.SubClassLink;
+import edu.isi.karma.rep.alignment.*;
 import edu.isi.karma.util.EncodingDetector;
 import edu.isi.karma.webserver.ContextParametersRegistry;
 import edu.isi.karma.webserver.ServletContextParameterMap;
+import org.jgrapht.graph.DirectedWeightedMultigraph;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.util.*;
 
 public class GraphBuilder {
 
@@ -512,6 +489,7 @@ public class GraphBuilder {
 			Label label = this.ontologyManager.getUriLabel(uri);
 			if (label == null) {
 				logger.debug("The resource " + uri + " does not exist in the ontology.");
+				System.out.println("The resource " + uri + " does not exist in the ontology.");
 				return false;
 			}
 			((LabeledLink)link).getLabel().setNs(label.getNs());
@@ -1117,7 +1095,7 @@ public class GraphBuilder {
 	/**
 	 * returns all the new nodes that should be added to the graph due to adding the input node
 	 * @param node
-	 * @param closure: contains all the nodes that are connected to the input node 
+	 * @param : contains all the nodes that are connected to the input node
 	 * by ObjectProperty or SubClass links. ------------Very important! 2 June 2019.
 	 * @return
 	 */

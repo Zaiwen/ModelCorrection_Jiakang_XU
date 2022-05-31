@@ -18,9 +18,7 @@ package search;
 import AlgorithmInterface.Algorithm;
 import au.com.d2dcrc.GramiMatcher;
 import dataStructures.*;
-import jnr.ffi.annotations.In;
 
-import java.text.ParseException;
 import java.util.*;
 
 
@@ -47,7 +45,7 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 
 	private DFSCode<NodeType, EdgeType> canonicalCode;
 
-	private HPListGraph<NodeType, EdgeType> listGraph;
+	private HPListGraph<Integer, Double> listGraph;
 
 	private ArrayList<Integer> graphNodes;
 
@@ -65,6 +63,11 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 
 	private HashMap<Integer, Integer[]>nodeAdjs;
 
+	private ArrayList<Integer> nodeLabels;
+
+	private boolean continueExtend = true;
+
+
 	public RecursiveStrategy() {
 
 	}
@@ -72,7 +75,7 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 	public RecursiveStrategy(Graph initGraph, ArrayList<Integer> newNodes, HashMap<Integer, Integer> constraintMap) {
 		this.initGraph = initGraph;
 		this.initGraph.setShortestPaths_1hop();
-		listGraph = (HPListGraph<NodeType, EdgeType>) initGraph.getListGraph();
+		listGraph = initGraph.getListGraph();
 		graphLevel = listGraph.getNodeCount();
 		graphNodes = (ArrayList<Integer>) listGraph.getNodeLabels();
 		this.newNodes = new ArrayList<Integer>();
@@ -81,6 +84,7 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 		this.constraintNodes = new ArrayList<>(graphNodes);
 		this.constraintNodes.addAll(newNodes);
 		this.nodeAdjs = new HashMap<>();
+		this.nodeLabels = initGraph.getListGraph().getNodeLabels();
 //		{
 //			this.nodeAdjs.put(0, new Integer[]{1, 2, 4, 6, 14, 19});
 //			this.nodeAdjs.put(1, new Integer[]{0, 2, 7, 8, 9, 12, 13, 14});
@@ -110,7 +114,7 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 
 	}
 
-	public RecursiveStrategy(HPListGraph<NodeType, EdgeType> listGraph){
+	public RecursiveStrategy(HPListGraph<Integer, Double> listGraph){
 		this.listGraph = listGraph;
 	}
 
@@ -147,7 +151,6 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 		}
 		return ret;
 	}
-
 
 
 
@@ -286,15 +289,49 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 
 	private void extend(final SearchLatticeNode<NodeType, EdgeType> node) {//RECURSIVE NODES SEARCH
 
-//		if (node.store() && isCandidateResult((DFSCode<NodeType, EdgeType>) node)) {
-//			node.store(ret);
-//		}
+		if(!continueExtend){
+			return;
+		}
 
 		if (ret.size() == 1){
 			return;
 		}
 
-		node.stopExtend(stopExtend((DFSCode<NodeType, EdgeType>) node));
+//		if (DFScodeSerializer.serialize(node.getHPlistGraph()).equals("v 0 0\n" +
+//				"v 1 1\n" +
+//				"v 2 8\n" +
+//				"v 3 4\n" +
+//				"v 4 15\n" +
+//				"v 5 9\n" +
+//				"v 6 7\n" +
+//				"v 7 4\n" +
+//				"v 8 8\n" +
+//				"e 0 1 0\n" +
+//				"e 1 2 3\n" +
+//				"e 2 3 2\n" +
+//				"e 4 3 2\n" +
+//				"e 1 5 4\n" +
+//				"e 1 6 5\n" +
+//				"e 6 7 2\n" +
+//				"e 8 7 2\n")){
+//			node.finalizeIt();
+//			System.out.println("finish iterate");
+//			continueExtend = false;
+//			System.exit(1);
+//		}
+
+
+		boolean extendFlag = stopExtend((DFSCode<NodeType, EdgeType>) node);
+
+		System.out.println("check node:");
+		System.out.println(node);
+//		for (int count : counts) {
+//			System.out.print(count+" ");
+//		}
+		System.out.println("stop extend this node? "+extendFlag);
+		System.out.println();
+
+		node.stopExtend(extendFlag);
 
 		try {
 
@@ -324,40 +361,60 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 
 	private boolean stopExtend(DFSCode<NodeType, EdgeType> code){
 
-		HPListGraph<NodeType, EdgeType> codeGraph = code.getHPlistGraph();
+		HPListGraph<Integer, Double> codeGraph = (HPListGraph<Integer, Double>) code.getHPlistGraph();
+		ArrayList<Integer> codeNodeLabels = (ArrayList<Integer>) code.getHPlistGraph().getNodeLabels();
+		ArrayList<Integer> listGraphNodeLabels = listGraph.getNodeLabels();
+
+
+		boolean flag = true;
+		for (Integer label : codeNodeLabels) {
+			if (!listGraphNodeLabels.remove(new Integer(label))){
+				flag = false;
+				break;
+			}
+		}
+		if (flag){
+			GramiMatcher gm = new GramiMatcher();
+			gm.setGraph(initGraph);
+			gm.setQry(new Query(codeGraph));
+			int freq = gm.getFrequency(new HashMap<>(), 1);
+			if (freq > 0){
+				return false;
+			}
+		}
+
+
 
 		Arrays.fill(counts, 0);
 
 		IntIterator it =  codeGraph.nodeIndexIterator();
+
+		int t = code.getLast().getNodeB() - code.getLast().getNodeA();
+		assert code.getLast().getNodeB() > code.getLast().getNodeA();
 		while (it.hasNext()){
 			int nodeIdx = it.next();
-			int label = (Integer) codeGraph.getNodeLabel(nodeIdx);
+			int label = codeGraph.getNodeLabel(nodeIdx);
 			counts[label]++;
-			if (!constraintNodes.contains(label) && !isInternalNodes(label)){
+
+			int inDegree = codeGraph.getInDegree(nodeIdx);
+			int outDegree = codeGraph.getOutDegree(nodeIdx);
+			if (Math.abs(t) > 1 && (inDegree == 0 || outDegree == 0) && !constraintNodes.contains(label)){
 				return true;
 			}
-		}
 
-//		ArrayList<Integer> codeNodes = (ArrayList<Integer>) code.getHPlistGraph().getNodeLabels();
-//		for (Integer codeNode : codeNodes) {
-//			counts[codeNode]++;
-//			if (!constraintNodes.contains(codeNode)){
+//			if (!constraintNodes.contains(label)){
 //				return true;
 //			}
+
+		}
+
+
+//		int count = 0;
+//		for (int label : codeNodeLabels) {
+//			if (label == 0){
+//				count++;
+//			}
 //		}
-
-		System.out.println(code);
-		for (int count : counts) {
-			System.out.print(count+" ");
-		}
-		System.out.println();
-
-		int count = 0;
-		for (int label : (ArrayList<Integer>)codeGraph.getNodeLabels()) {
-			if (label == 0){
-				count++;
-			}
-		}
 
 		for (int i = 0; i < counts.length; i++) {
 			if (counts[i] > constraintMap.getOrDefault(i, Integer.MAX_VALUE)){
@@ -392,20 +449,50 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 //			}
 //		}
 
+		IntIterator eit = listGraph.edgeIndexIterator();
+		while (eit.hasNext()){
+			int edgeIdx = eit.next();
+			int nodeA = listGraph.getNodeA(edgeIdx);
+			int nodeB = listGraph.getNodeB(edgeIdx);
+			int labelA = listGraph.getNodeLabel(nodeA);
+			int labelB = listGraph.getNodeLabel(nodeB);
+			boolean a = constraintNodes.lastIndexOf(new Integer(labelA)) == constraintNodes.indexOf(new Integer(labelA));
+			boolean b = constraintNodes.lastIndexOf(new Integer(labelB)) == constraintNodes.indexOf(new Integer(labelB));
+			if (codeNodeLabels.contains(labelA)
+					&& codeNodeLabels.contains(labelB) && a && b
+					&& !codeGraph.hasEdge(labelA, labelB)){
+				return true;
+			}
+
+		}
+
+		TreeSet<Integer> tmp = new TreeSet<>();
+		int count4 = 0;
+		IntIterator eit1 = codeGraph.edgeIndexIterator();
+		while (eit1.hasNext()){
+			int edgeIdx = eit1.next();
+			int nodeA = codeGraph.getNodeA(edgeIdx);
+			int nodeB = codeGraph.getNodeB(edgeIdx);
+			int labelA = codeGraph.getNodeLabel(nodeA);
+			int labelB = codeGraph.getNodeLabel(nodeB);
+			if (labelA == 4){
+				count4++;
+				tmp.add(labelB);
+			}else if (labelB == 4){
+				count4++;
+				tmp.add(labelA);
+			}
+		}
+		if (tmp.size() < count4){
+			return true;
+		}
+
+
 		return false;
 
 	}
 
 
-	private boolean isInternalNodes(int label){
-//		Integer[] adjs = nodeAdjs.get(label);
-//		for (Integer adj : adjs) {
-//			if (newNodes.contains(adj)){
-//				return true;
-//			}
-//		}
-		return false;
-	}
 
 
 	private boolean isCandidateResult(DFSCode<NodeType, EdgeType> code)  {
@@ -413,7 +500,6 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 		ArrayList<Integer> codeNodes = (ArrayList<Integer>) code.getHPlistGraph().getNodeLabels();
 		System.err.println("codeNodes: "+codeNodes);
 //		System.err.println("constraintNodes: "+constraintNodes);
-
 
 
 		// code n_nodes > initGraph

@@ -156,6 +156,9 @@ public class Extension {
             }
         }
 
+//        System.out.println(constraintMap);
+//        System.exit(1);
+
         if (!constraintMap.containsKey(new Integer(8))){
             constraintMap.put(8, 0);
         }

@@ -13,6 +13,7 @@ import networkx as nx
 import pandas as pd
 import joblib
 
+
 def remove_incorrect_edge(kg, model, node_dict, edge_dict):
     kg_edges = set()
     for edge in kg.edges.data():
@@ -167,8 +168,6 @@ def check_candidate_types(iso_columns_dic, node_dic, kg, im):
                 cTypes.remove(ct)
 
 
-
-
 def search_edge_paths(newNode, kg_edges, nodes):
     res = []
 
@@ -206,10 +205,13 @@ def check_edge_paths(edge_paths, model, kg):
     em = nx.algorithms.isomorphism.categorical_node_match("label", None)
     for edge_path in edge_paths:
         new_model = model.copy()
-        new_model_nodes = [new_model.nodes[node]["label"] for node in new_model.nodes]
+        new_model_nodes = [new_model.nodes[node]["label"] for node in sorted(new_model.nodes)]
+        print(new_model.nodes.data())
         i = new_model.number_of_nodes()
         for edge in edge_path[::-1]:
             in_node, out_node, edge_label = edge[0], edge[1], edge[2]
+            print(in_node, out_node, edge_label)
+            print(new_model_nodes)
             if in_node in new_model_nodes:
                 new_model.add_node(i, label=out_node)
                 new_model.add_edge(new_model_nodes.index(in_node), i, label=edge_label)
@@ -217,7 +219,8 @@ def check_edge_paths(edge_paths, model, kg):
                 i += 1
             elif out_node in new_model_nodes:
                 new_model.add_node(i, label=in_node)
-                new_model.add_edge(i, new_model_nodes.index(out_node), label=edge_label)
+                idx = new_model_nodes.index(out_node)
+                new_model.add_edge(i, idx, label=edge_label)
                 new_model_nodes.append(in_node)
                 i += 1
             dgm = nx.isomorphism.DiGraphMatcher(kg, new_model, nm, em)
@@ -246,6 +249,13 @@ if __name__ == '__main__':
         s_node = kg.nodes[s]['label']
         t_node = kg.nodes[t]['label']
         kg_edges.add((s_node, t_node, edge[2]['label']))
+
+    # s17_lg = utils.load_lg_graph(r"C:\D_Drive\ASM\experiment\correct_models\lg\s17.csv.lg")
+    # nm = nx.algorithms.isomorphism.categorical_node_match("label", None)
+    # em = nx.algorithms.isomorphism.categorical_node_match("label", None)
+    # dgm = nx.isomorphism.DiGraphMatcher(kg, s17_lg, nm, em)
+    # print(dgm.subgraph_is_isomorphic())
+    # sys.exit(1)
     k_model = utils.load_graph_from_csv1(
         rf"C:\D_Drive\ASM\experiment\exp_20220530\train_1_6_12___1\newSource_17\cytoscape\candidate_model.csv")
     dic, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
@@ -285,15 +295,18 @@ if __name__ == '__main__':
             im.add_edge("E12_Production1", "E55_Type1", label="P32_used_general_technique")
         if pred == 1:
             im.add_node("E55_Type2", label="E55_Type")
-            im.add_edge("E22_Man-Made_Object1", "E55_Type2", label="P4_has_type")
+            im.add_edge("E22_Man-Made_Object1", "E55_Type2", label="P2_has_type")
 
     im_lg = utils.csv_to_lg(im)
     utils.save_csv_graph(im, r"C:\D_Drive\ASM\experiment\exp_20220530\tmp.csv")
     utils.save_lg_graph(im_lg, r"C:\D_Drive\ASM\experiment\exp_20220530\s17_seed.lg")
+    for node in im_lg.nodes.data():
+        print(node)
     nodes = [im_lg.nodes[node]["label"] for node in im_lg.nodes]
-    # edge_paths = search_edge_paths(17, kg_edges, nodes)
-    # print(edge_paths)
-    # print(check_edge_paths(edge_paths, im_lg, kg))
+    print(im_lg.nodes)
+    edge_paths = search_edge_paths(17, kg_edges, nodes)
+    print(edge_paths)
+    print(check_edge_paths(edge_paths, im_lg, kg))
     # check_candidate_types(dic, node_dict, kg, im)
     # for k, v in dic.items():
     #     print(k)

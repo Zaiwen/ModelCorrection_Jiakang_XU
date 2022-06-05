@@ -280,8 +280,8 @@ def save_csv_graph1(g, filename):
 if __name__ == '__main__':
 
     save_csv_graph(
-        lg_to_csv(load_lg_graph(rf"C:\D_Drive\ASM\experiment\exp_20220530\s17_result.lg")),
-        rf"C:\D_Drive\ASM\experiment\exp_20220530\s17_result.lg.csv")
+        lg_to_csv(load_lg_graph(rf"C:\D_Drive\ASM\experiment\exp_20220530\s15_result.lg")),
+        rf"C:\D_Drive\ASM\experiment\exp_20220530\s15_result.lg.csv")
 
 
     #

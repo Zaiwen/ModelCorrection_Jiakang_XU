@@ -1,10 +1,11 @@
 package model_learner;
 
 
+import VF2.graph.Edge;
 import edu.isi.karma.rep.alignment.LabeledLink;
 import edu.isi.karma.rep.alignment.Node;
 import VF2.algorithm.Pair;
-import VF2.graph.VF2Graph;
+import VF2.graph.LGGraph;
 import org.jgrapht.graph.DirectedWeightedMultigraph;
 
 import java.io.FileNotFoundException;
@@ -14,9 +15,9 @@ import java.util.Set;
 
 public class VF2GraphAdapter {
 
-    public static VF2Graph graphAdaptToVF2(DirectedWeightedMultigraph<Node, LabeledLink> dg) throws FileNotFoundException {
+    public static LGGraph graphAdaptToVF2(DirectedWeightedMultigraph<Node, LabeledLink> dg) throws FileNotFoundException {
 
-        VF2Graph vf2Graph = new VF2Graph();
+        LGGraph LGGraph = new LGGraph();
         Set<Node> nodes = dg.vertexSet();
         LabelDir.getLabel();
 
@@ -40,11 +41,11 @@ public class VF2GraphAdapter {
 //                nodeLabel = nodeLabel.substring(nodeLabel.indexOf('E'));
 //            }
 
-            vf2Graph.addNode(nodeId, LabelDir.NodeLabel.getOrDefault(nodeLabel, defaultLabel));
+            LGGraph.addNode(nodeId, LabelDir.NodeLabel.getOrDefault(nodeLabel, defaultLabel));
 
 //            System.out.println(nodeLabel+": "+LabelDir.NodeLabel.getOrDefault(nodeLabel, defaultLabel));
         }
-//        System.out.println(vf2Graph.nodes.size());
+//        System.out.println(LGGraph.nodes.size());
 //        System.out.println();
 
         for (Node node1 : nodes) {
@@ -74,16 +75,28 @@ public class VF2GraphAdapter {
 //                edgeLabel = edgeLabel.substring(edgeLabel.indexOf('P'));
 //            }
 
-            vf2Graph.addEdge(sourceId,targetId,LabelDir.EdgeLabel.getOrDefault(edgeLabel,defaultLabel));
+            LGGraph.addEdge(sourceId,targetId,LabelDir.EdgeLabel.getOrDefault(edgeLabel,defaultLabel));
 //            System.out.println(edgeLabel+": "+LabelDir.EdgeLabel.getOrDefault(edgeLabel, defaultLabel));
 
         }
-//        System.out.println(vf2Graph.edges.size());
+//        System.out.println(LGGraph.edges.size());
 
 
-        return vf2Graph;
+        return LGGraph;
     }
 
+    public static DirectedWeightedMultigraph<Node, LabeledLink> LgGraphToDWG(LGGraph lgGraph){
+
+        for (VF2.graph.Node node : lgGraph.nodes) {
+
+        }
+
+        for (Edge edge : lgGraph.edges) {
+
+        }
+
+        return null;
+    }
 
 
     public static void main(String[] args) {

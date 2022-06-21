@@ -9,12 +9,5 @@ import utils
 
 if __name__ == '__main__':
 
-    random.seed(10)
-    ls = []
-    for _ in range(10):
-        c = "#"
-        for i in range(6):
-            c += random.choice("0123456789ABCDEF")
-        ls.append(c)
-        # print(c)
-    print(ls)
+    g = utils.load_lg_graph(r"C:\D_Drive\rdf.lg")
+    utils.save_csv_graph(utils.lg_to_csv(g), r"C:\D_Drive\rdf.csv")

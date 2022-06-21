@@ -67,6 +67,19 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 
 	private boolean continueExtend = true;
 
+	private boolean stopSearching = false;
+
+	private Timer timer;
+
+	class StopTask extends TimerTask {
+		public void run() {
+			System.out.println();
+			System.out.println("time out! stop searching");
+			System.out.println();
+			stopSearching = true;
+		}
+	}
+
 
 	public RecursiveStrategy() {
 
@@ -85,6 +98,10 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 		this.constraintNodes.addAll(newNodes);
 		this.nodeAdjs = new HashMap<>();
 		this.nodeLabels = initGraph.getListGraph().getNodeLabels();
+		timer = new Timer(true);
+		this.timer.schedule(new StopTask(), 1000*60*5);
+
+
 //		{
 //			this.nodeAdjs.put(0, new Integer[]{1, 2, 4, 6, 14, 19});
 //			this.nodeAdjs.put(1, new Integer[]{0, 2, 7, 8, 9, 12, 13, 14});
@@ -202,6 +219,8 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 	@SuppressWarnings("unchecked")
 	private void search(final SearchLatticeNode<NodeType, EdgeType> node) {//RECURSIVE NODES SEARCH
 
+
+
 		//System.out.println("Getting Children");
 		final Collection<SearchLatticeNode<NodeType, EdgeType>> tmp = extender.getChildren(node);
 
@@ -289,6 +308,10 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 
 	private void extend(final SearchLatticeNode<NodeType, EdgeType> node) {//RECURSIVE NODES SEARCH
 
+		if (stopSearching){
+			return;
+		}
+
 		if(!continueExtend){
 			return;
 		}
@@ -296,29 +319,6 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 		if (ret.size() == 1){
 			return;
 		}
-
-//		if (DFScodeSerializer.serialize(node.getHPlistGraph()).equals("v 0 0\n" +
-//				"v 1 1\n" +
-//				"v 2 8\n" +
-//				"v 3 4\n" +
-//				"v 4 15\n" +
-//				"v 5 9\n" +
-//				"v 6 7\n" +
-//				"v 7 4\n" +
-//				"v 8 8\n" +
-//				"e 0 1 0\n" +
-//				"e 1 2 3\n" +
-//				"e 2 3 2\n" +
-//				"e 4 3 2\n" +
-//				"e 1 5 4\n" +
-//				"e 1 6 5\n" +
-//				"e 6 7 2\n" +
-//				"e 8 7 2\n")){
-//			node.finalizeIt();
-//			System.out.println("finish iterate");
-//			continueExtend = false;
-//			System.exit(1);
-//		}
 
 
 		boolean extendFlag = stopExtend((DFSCode<NodeType, EdgeType>) node);
@@ -426,7 +426,7 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 			return true;
 		}
 
-		if (code.getHPlistGraph().getNodeCount() > constraintNodes.size() + 1){
+		if (code.getHPlistGraph().getNodeCount() > constraintNodes.size()+1){
 			return true;
 		}
 

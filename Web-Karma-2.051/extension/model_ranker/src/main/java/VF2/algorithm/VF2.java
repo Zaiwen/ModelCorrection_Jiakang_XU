@@ -1,8 +1,8 @@
 package VF2.algorithm;
 
 import VF2.graph.Edge;
+import VF2.graph.LGGraph;
 import VF2.graph.Node;
-import VF2.graph.VF2Graph;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class VF2 {
     //输入查询图和目标图，返回子图集合
-    public ArrayList<int[]> matchGraphSetWithQuery(VF2Graph targetGraph, VF2Graph queryGraph) {
+    public ArrayList<int[]> matchGraphSetWithQuery(LGGraph targetGraph, LGGraph queryGraph) {
         ArrayList<int[]> stateSet = new ArrayList<int[]>();
         State state = new State(targetGraph, queryGraph);
         matchRecursive(state, stateSet, targetGraph, queryGraph);
@@ -18,7 +18,7 @@ public class VF2 {
     }
 
     //匹配
-    private void matchRecursive(State state, ArrayList<int[]> stateSet, VF2Graph targetGraph, VF2Graph queryGraph) {
+    private void matchRecursive(State state, ArrayList<int[]> stateSet, LGGraph targetGraph, LGGraph queryGraph) {
 
         if (state.depth == queryGraph.nodes.size()) {    // 找到一个匹配子图
             state.matched = true;
@@ -44,7 +44,7 @@ public class VF2 {
 
 
     //返回待筛选的匹配对
-    private ArrayList<Pair<Integer, Integer>> genCandidatePairs(State state, VF2Graph targetGraph, VF2Graph queryGraph) {
+    private ArrayList<Pair<Integer, Integer>> genCandidatePairs(State state, LGGraph targetGraph, LGGraph queryGraph) {
         ArrayList<Pair<Integer, Integer>> pairList = new ArrayList<Pair<Integer, Integer>>();
 
         if (!state.T1out.isEmpty() && !state.T2out.isEmpty()) { //判断是否有未配对且作为外边的另一端节点

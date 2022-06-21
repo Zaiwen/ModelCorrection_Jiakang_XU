@@ -1,7 +1,7 @@
 package VF2.algorithm;
 
+import VF2.graph.LGGraph;
 import VF2.graph.Node;
-import VF2.graph.VF2Graph;
 
 import java.util.HashSet;
 
@@ -26,11 +26,11 @@ public class State {
 
     public boolean matched = false;
 
-    public VF2Graph targetGraph;
-    public VF2Graph queryGraph;
+    public LGGraph targetGraph;
+    public LGGraph queryGraph;
 
     //初始化状态
-    public State(VF2Graph targetGraph, VF2Graph queryGraph) {
+    public State(LGGraph targetGraph, LGGraph queryGraph) {
 
         this.targetGraph = targetGraph;
         this.queryGraph = queryGraph;

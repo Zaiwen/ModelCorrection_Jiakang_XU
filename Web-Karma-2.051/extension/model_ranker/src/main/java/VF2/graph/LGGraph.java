@@ -7,16 +7,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class VF2Graph {
+public class LGGraph {
     public String name;
     public ArrayList<Node> nodes = new ArrayList<Node>();
     public ArrayList<Edge> edges = new ArrayList<Edge>();
 
 
-    public VF2Graph() {
+    public LGGraph() {
     }
 
-    public VF2Graph(String name) {
+    public LGGraph(String name) {
         this.name = name;
     }
 
@@ -32,28 +32,28 @@ public class VF2Graph {
         this.addEdge(this.nodes.get(sourceId), this.nodes.get(targetId), label);
     }
 
-    public static void printVF2Graph(VF2Graph vf2Graph){
-        for (Node node:vf2Graph.nodes){
+    public static void printVF2Graph(LGGraph LGGraph){
+        for (Node node: LGGraph.nodes){
             System.out.print("v ");
             System.out.print(node.id+" ");
             System.out.println(node.label);
         }
 
-        for(Edge edge:vf2Graph.edges){
+        for(Edge edge: LGGraph.edges){
             System.out.print("e ");
             System.out.println(edge.source.id+" "+edge.target.id+" "+ edge.label);
         }
         System.out.println();
     }
 
-    public static VF2Graph loadGraphSetFromFile(File file) throws FileNotFoundException {
+    public static LGGraph loadGraphSetFromFile(File file) throws FileNotFoundException {
         Scanner scanner = new Scanner(file);
-        VF2Graph graph = null;
+        LGGraph graph = null;
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine().trim();
             if (line.startsWith("t")) {
                 String graphId = line.split(" ")[2];
-                graph = new VF2Graph();
+                graph = new LGGraph();
             } else if (line.startsWith("v")) {
                 String[] lineSplit = line.split(" ");
                 int nodeId = Integer.parseInt(lineSplit[1]);
@@ -73,10 +73,10 @@ public class VF2Graph {
         return graph;
     }
 
-    public static void writeIntoFile(VF2Graph vf2Graph,String path) throws IOException {
+    public static void writeIntoFile(LGGraph LGGraph, String path) throws IOException {
         FileWriter fw = new FileWriter(path);
         fw.write("t # 1\n");
-        for (Node node:vf2Graph.nodes){
+        for (Node node: LGGraph.nodes){
 //            System.out.print("v ");
 //            System.out.print(node.id+" ");
 //            System.out.println(node.label);
@@ -85,7 +85,7 @@ public class VF2Graph {
             fw.write(node.label+"\n");
         }
 
-        for(Edge edge:vf2Graph.edges){
+        for(Edge edge: LGGraph.edges){
 //            System.out.print("e ");
 //            System.out.println(edge.source.id+" "+edge.target.id+" "+ edge.label);
             fw.write("e ");
@@ -96,6 +96,7 @@ public class VF2Graph {
 
         fw.close();
     }
+
 
 
 }

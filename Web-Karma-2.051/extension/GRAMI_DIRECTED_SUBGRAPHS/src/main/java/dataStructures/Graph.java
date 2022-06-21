@@ -346,7 +346,10 @@ public class Graph
 		}
 		nodeCount=numberOfNodes;
 		tempLine = line;
-		
+
+		if (tempLine == null){
+			return;
+		}
 		// edges
 		
 		//use the first edge line

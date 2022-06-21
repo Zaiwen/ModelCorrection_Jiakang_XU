@@ -1,7 +1,7 @@
 package VF2.runner;
 
 import VF2.algorithm.VF2;
-import VF2.graph.VF2Graph;
+import VF2.graph.LGGraph;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
@@ -15,8 +15,8 @@ public class Show {
         Path graphPath = Paths.get("C:\\Users\\lr slxdr\\Desktop\\Graph", "gmark_kg20200605_N4000.lg");
         Path queryPath = Paths.get("C:\\Users\\lr slxdr\\Desktop\\Graph", "pattern_C4.lg");
 
-        VF2Graph targetGraph = loadGraphSetFromFile(graphPath, "targetGraph ");
-        VF2Graph queryGraph = loadGraphSetFromFile(queryPath, "queryGraph ");
+        LGGraph targetGraph = loadGraphSetFromFile(graphPath, "targetGraph ");
+        LGGraph queryGraph = loadGraphSetFromFile(queryPath, "queryGraph ");
         VF2 vf2 = new VF2();
         long start = System.currentTimeMillis();
         ArrayList<int[]> stateSet = vf2.matchGraphSetWithQuery(targetGraph, queryGraph);
@@ -36,14 +36,14 @@ public class Show {
     }
 
     //加载文件
-    private static VF2Graph loadGraphSetFromFile(Path inpath, String namePrefix) throws FileNotFoundException{
+    private static LGGraph loadGraphSetFromFile(Path inpath, String namePrefix) throws FileNotFoundException{
         Scanner scanner = new Scanner(inpath.toFile());
-        VF2Graph graph = null;
+        LGGraph graph = null;
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine().trim();
             if (line.startsWith("t")) {
                 String graphId = line.split(" ")[2];
-                graph = new VF2Graph(namePrefix + graphId);
+                graph = new LGGraph(namePrefix + graphId);
             } else if (line.startsWith("v")) {
                 String[] lineSplit = line.split(" ");
                 int nodeId = Integer.parseInt(lineSplit[1]);

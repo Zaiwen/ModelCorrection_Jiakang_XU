@@ -146,6 +146,7 @@ public class ModelLearner_KnownModels4 {
             /**Get the top k Steiner Trees. 22 May 2018.**/
             int k = modelingConfiguration.getTopKSteinerTree();
 
+//            k = 1;
 
             topKSteinerTrees =  ((GraphBuilderTopK)this.graphBuilder).getTopKSteinerTrees(sn, k, null, null, false);
         }
@@ -163,11 +164,11 @@ public class ModelLearner_KnownModels4 {
 //		System.out.println(GraphUtil.labeledGraphToString(treePostProcess.getTree()));
 
 //		logger.info("END ...");
-
         for (DirectedWeightedMultigraph<Node, LabeledLink> tree: topKSteinerTrees) {
 
             if (tree != null) {
 //					System.out.println();
+
                 SemanticModel sm = new SemanticModel(new RandomGUID().toString(),
                         tree,
                         columnNodes,
@@ -949,6 +950,8 @@ public class ModelLearner_KnownModels4 {
 //        System.out.println(candidateSemanticModels.size());
         semanticModels = null;
         ontologyManager = null;
+
+//        System.out.println("ModelLearner_KnownModels4.main");
 
         List<SortableSemanticModel> candidateModels = getCandidateSemanticModels(6, new Integer[]{0, 5, 11}, "C:\\D_Drive\\ASM\\experiment\\");
 

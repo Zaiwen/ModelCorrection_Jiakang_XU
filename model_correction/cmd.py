@@ -108,8 +108,8 @@ def gen_cmd_file(dir):
 
 if __name__ == '__main__':
 
-    trains = [1, 6, 12]
+    trains = [5, 9, 26]
 
-    dir = rf"C:\D_Drive\ASM\experiment\exp_20220530\train_{trains[0]}_{trains[1]}_{trains[2]}___1"
+    dir = rf"C:\D_Drive\ASM\experiment\exp_20220613\train_{trains[0]}_{trains[1]}_{trains[2]}___1"
 
     gen_cmd_file(dir)

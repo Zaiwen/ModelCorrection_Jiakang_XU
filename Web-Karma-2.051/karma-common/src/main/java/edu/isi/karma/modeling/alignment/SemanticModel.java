@@ -275,6 +275,7 @@ public class SemanticModel {
 		double bestFMeasure = 0.0;
 		double bestPrecision = 0.0, bestRecall = 0.0, bestJaccard = 0.0;
 		double precision, recall, fmeasure, jaccard;
+		Set<String> bestTargetTriples = new HashSet<>();
 		for (HashMap<Node,String> targetNodeIds : targetNodeIdSets) {
 //			System.out.println("==============================");
 			targetTriples = getTriples(this.getGraph(), targetNodeIds, ignoreSemanticTypes, ignoreColumnNodes);
@@ -282,13 +283,16 @@ public class SemanticModel {
 			recall = getRecall(baseTriples, targetTriples);
 			jaccard = getJaccard(baseTriples, targetTriples);
 			fmeasure = 2 * precision * recall / (precision + recall);
+
 			if (fmeasure > bestFMeasure) {
 				bestFMeasure = fmeasure;
 				bestPrecision = precision;
 				bestRecall = recall;
 				bestJaccard = jaccard;
+				bestTargetTriples = new HashSet<>(targetTriples);
 			}
 		}
+
 		
 		return new ModelEvaluation(0.0, bestPrecision, bestRecall, bestJaccard);
 	}

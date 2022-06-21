@@ -14,14 +14,14 @@ public class Tmp {
 
         Graph kg = new Graph(1, 1);
 
-//        kg.loadFromFile_Ehab("C:\\D_Drive\\ASM\\DataSets\\museum-crm\\museum_kg_20220513.lg");
+        kg.loadFromFile_Ehab("C:\\D_Drive\\ASM\\DataSets\\museum-crm\\museum_kg_20220513.lg");
 
-        kg.loadFromFile_Ehab("C:\\D_Drive\\ASM\\experiment\\exp_20220530\\s15_result.lg");
+//        kg.loadFromFile_Ehab("C:\\D_Drive\\ASM\\experiment\\exp_20220530\\s15_result.lg");
 
         kg.setShortestPaths_1hop();
 
         Graph qryGraph = new Graph(2,1);
-        qryGraph.loadFromFile("C:\\D_Drive\\ASM\\experiment\\exp_20220530\\s15_seed.lg");
+        qryGraph.loadFromFile("C:\\D_Drive\\ASM\\experiment\\exp_20220613\\tmp2.lg");
         GramiMatcher gm = new GramiMatcher();
         gm.setGraph(kg);
         gm.setQry(new Query(qryGraph.getListGraph()));

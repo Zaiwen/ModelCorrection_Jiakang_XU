@@ -1,6 +1,6 @@
 package model_learner;
 
-import VF2.graph.VF2Graph;
+import VF2.graph.LGGraph;
 import edu.isi.karma.modeling.alignment.SemanticModel;
 import edu.isi.karma.modeling.alignment.learner.ModelReader;
 import edu.isi.karma.modeling.alignment.learner.SortableSemanticModel;
@@ -15,8 +15,11 @@ import java.io.IOException;
 import java.util.List;
 
 public class ModelLearner {
-    public static void main(String[] args) throws Exception {
 
+    public static FileWriter fw;
+
+
+    public static void main(String[] args) throws Exception {
 
 //        List<SemanticModel> correctModels = ModelReader.importSemanticModelsFromJsonFiles(
 //                Params.ROOT_DIR+"models-json-tmp", Params.MODEL_MAIN_FILE_EXT);
@@ -57,22 +60,43 @@ public class ModelLearner {
 //        System.exit(1);
 
         Integer[][] train = {
-                {0, 5, 11}
+                {15, 19, 28},
+                {4, 7, 16},
+                {0, 3, 19}
         };
 
 
         for (Integer[] trainDataIndex : train) {
+            String path = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220620\\train_%d_%d_%d___1",
+                    trainDataIndex[0]+1, trainDataIndex[1]+1, trainDataIndex[2]+1);
+
+            File dir = new File(path);
+            if (!dir.exists()){
+                dir.mkdirs();
+            }
+
+            String resPath = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220620\\train_%d_%d_%d___1\\(%d,%d,%d)result.csv",
+                    trainDataIndex[0]+1, trainDataIndex[1]+1, trainDataIndex[2]+1,
+                    trainDataIndex[0]+1, trainDataIndex[1]+1, trainDataIndex[2]+1);
+            File resFile = new File(resPath);
+            fw = new FileWriter(resFile);
+            fw.write(String.join(",", "data source", "precision: karma", "recall: karma", "running time(s): karma")+"\n");
+
             for (int i = 0; i < 29; i++) {
                 if(i != trainDataIndex[0] && i!= trainDataIndex[1] && i != trainDataIndex[2] && i != 26){
-                    String outputPath = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220530\\train_%d_%d_%d___1\\newSource_",
+                    String outputPath = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220620\\train_%d_%d_%d___1\\newSource_",
                             trainDataIndex[0]+1,trainDataIndex[1]+1, trainDataIndex[2]+1);
+
                     File expDir = new File(outputPath+(i+1));
                     if(!expDir.exists()){
                         expDir.mkdirs();
                     }
+
                     learnModel(i,trainDataIndex,outputPath+(i+1));
                 }
             }
+            fw.close();
+
         }
 
 
@@ -161,11 +185,13 @@ public class ModelLearner {
 
     public static void learnModel(int newSourceIndex, Integer[] trainDataIndex, String outputPath) throws Exception {
 
+        Long start = System.currentTimeMillis();
         List<SortableSemanticModel> candidateModels = ModelLearner_KnownModels4.
                 getCandidateSemanticModels(newSourceIndex, trainDataIndex, outputPath);
-
+        double runTime = (System.currentTimeMillis() - start) / 1000f;
         double precision = 0;
         double recall=0;
+
 
 
         if (candidateModels.size() > 0) {
@@ -194,8 +220,8 @@ public class ModelLearner {
                 cytoscapeDir.mkdir();
             }
 
-            VF2Graph correctGraph = VF2GraphAdapter.graphAdaptToVF2(correctModelGraph);
-//        VF2Graph.writeIntoFile(correctGraph,modelPath+"\\correct_model.lg");
+            LGGraph correctGraph = VF2GraphAdapter.graphAdaptToVF2(correctModelGraph);
+//        LGGraph.writeIntoFile(correctGraph,modelPath+"\\correct_model.lg");
             writeCSV(correctModel.getGraph(), cytoscapePath + "\\correct_model.csv");
 
 //        int i = 0;
@@ -203,21 +229,23 @@ public class ModelLearner {
 //        for (SortableSemanticModel semanticModel : candidateModels) {
 //            DirectedWeightedMultigraph<Node, LabeledLink> modelGraph = semanticModel.getSimpliedGraph();
 //            System.out.println(semanticModel.getGraph());
-//            VF2Graph graph = VF2GraphAdapter.graphAdaptToVF2(modelGraph);
-//            VF2Graph.printVF2Graph(graph);
-//            VF2Graph.writeIntoFile(graph,modelPath + "\\model_"+(i++)+".lg");
+//            LGGraph graph = VF2GraphAdapter.graphAdaptToVF2(modelGraph);
+//            LGGraph.printVF2Graph(graph);
+//            LGGraph.writeIntoFile(graph,modelPath + "\\model_"+(i++)+".lg");
 //            visualizeGraphInCytoscape(modelGraph,cytoscapePath + "\\model_"+(j++)+".csv");
 //        }
 
             DirectedWeightedMultigraph<Node, LabeledLink> modelGraph = candidateModel.getSimpliedGraph();
-            VF2Graph graph = VF2GraphAdapter.graphAdaptToVF2(modelGraph);
-//        VF2Graph.printVF2Graph(graph);
+            LGGraph graph = VF2GraphAdapter.graphAdaptToVF2(modelGraph);
+//        LGGraph.printVF2Graph(graph);
 
-//        VF2Graph.writeIntoFile(graph,modelPath + "\\candidate_model.lg");
+//        LGGraph.writeIntoFile(graph,modelPath + "\\candidate_model.lg");
             writeCSV(candidateModel.getGraph(), cytoscapePath + "\\candidate_model.csv");
 
             precision = candidateModel.evaluate(correctModel).getPrecision();
             recall = candidateModel.evaluate(correctModel).getRecall();
+
+            fw.append(String.join(",", "s"+(newSourceIndex+1)+".csv", String.valueOf(precision), String.valueOf(recall), String.valueOf(runTime))).append("\n");
         }
     }
 

@@ -4,7 +4,7 @@ import pandas as pd
 import os
 
 DS = "museum"
-
+# DS = "tmp"
 
 def load_dict():
     with open(DS + r"_node_dict.json", 'r') as f:
@@ -211,11 +211,11 @@ def lg_to_csv(lg_graph):
 
     nodes = [[node[0], node[1]['label']] for node in lg_graph.nodes.data()]
     nodes.sort(key=lambda x: x[1])
-    i = 0
+    i = 1
     last_node = nodes[0]
     for node in nodes.copy():
         if node[1] != last_node[1]:
-            i = 0
+            i = 1
         node.append(node_dict.get(node[1]) + str(i))
         i += 1
         last_node = node
@@ -279,13 +279,12 @@ def save_csv_graph1(g, filename):
 
 if __name__ == '__main__':
 
-    save_csv_graph(
-        lg_to_csv(load_lg_graph(rf"C:\D_Drive\ASM\experiment\exp_20220530\s15_result.lg")),
-        rf"C:\D_Drive\ASM\experiment\exp_20220530\s15_result.lg.csv")
+    dir_ = rf"C:\D_Drive\ASM\experiment\exp_20220613\extension\(1,4,21)\result_models"
 
+    for file in os.listdir(dir_):
+        if file.endswith(".lg"):
+            save_csv_graph(lg_to_csv(load_lg_graph(rf"{dir_}\{file}")), rf"{dir_}\{file}.csv")
 
-    #
-    # for file in os.listdir(r"C:\D_Drive\ASM\experiment\exp_20220522\extension\(10,12,18)\seed_models"):
-    #     if file.endswith("lg"):
-    #         save_csv_graph(lg_to_csv(load_lg_graph(rf"C:\D_Drive\ASM\experiment\exp_20220522\extension\(10,12,18)\seed_models\{file}")),
-    #                        rf"C:\D_Drive\ASM\experiment\exp_20220522\extension\(10,12,18)\seed_models\{file}.csv")
+    # save_csv_graph(
+    #     lg_to_csv(load_lg_graph(rf"C:\D_Drive\ASM\experiment\exp_20220530\s15_result.lg")),
+    #     rf"C:\D_Drive\ASM\experiment\exp_20220530\s15_result.lg.csv")

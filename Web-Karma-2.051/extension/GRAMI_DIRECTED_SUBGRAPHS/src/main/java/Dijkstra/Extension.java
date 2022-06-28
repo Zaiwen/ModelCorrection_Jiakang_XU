@@ -35,23 +35,40 @@ public class Extension {
 
     public static void main(String[] args) throws Exception {
 
-        TRAIN = new int[]{1, 4, 20};
+        boolean flag = true;
+        TRAIN = new int[]{7, 19, 23};
 
 
-        for (int i = 1; i < 30; i++) {
-            if (i != TRAIN[0] && i != TRAIN[1] && i != TRAIN[2] && i != 27){
-                TEST = i;
-                GRAPH_PATH = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220620\\train_%d_%d_%d___1\\newSource_%d\\seed.lg",
-                                TRAIN[0], TRAIN[1], TRAIN[2], TEST);
-                OUT_PATH = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220620\\train_%d_%d_%d___1\\newSource_%d\\",
-                                TRAIN[0], TRAIN[1], TRAIN[2], TEST);
-                isoColsList = new ArrayList<>();
-                try {
-                    loadIsoCols(String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220620\\train_%d_%d_%d___1\\newSource_%d\\isoCols.json",
-                            TRAIN[0], TRAIN[1], TRAIN[2], TEST));
-                }catch (FileNotFoundException ignored){
+        if (!flag) {
+            TEST = 9;
+            GRAPH_PATH = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220613\\train_%d_%d_%d___1\\newSource_%d\\seed.lg",
+                    TRAIN[0], TRAIN[1], TRAIN[2], TEST);
+            OUT_PATH = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220613\\train_%d_%d_%d___1\\newSource_%d\\",
+                    TRAIN[0], TRAIN[1], TRAIN[2], TEST);
+            isoColsList = new ArrayList<>();
+            try {
+                loadIsoCols(String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220613\\train_%d_%d_%d___1\\newSource_%d\\isoCols.json",
+                        TRAIN[0], TRAIN[1], TRAIN[2], TEST));
+            } catch (FileNotFoundException ignored) {
+            }
+            test();
+        }else {
+            for (int i = 1; i < 30; i++) {
+                if (i != TRAIN[0] && i != TRAIN[1] && i != TRAIN[2] && i != 27) {
+                    TEST = i;
+                    GRAPH_PATH = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220627\\train_%d_%d_%d___1\\newSource_%d\\seed.lg",
+                            TRAIN[0], TRAIN[1], TRAIN[2], TEST);
+                    OUT_PATH = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220627\\train_%d_%d_%d___1\\newSource_%d\\",
+                            TRAIN[0], TRAIN[1], TRAIN[2], TEST);
+                    isoColsList = new ArrayList<>();
+                    try {
+                        loadIsoCols(String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220627\\train_%d_%d_%d___1\\newSource_%d\\isoCols.json",
+                                TRAIN[0], TRAIN[1], TRAIN[2], TEST));
+//                        isoColsList = new ArrayList<>();
+                    } catch (FileNotFoundException ignored) {
+                    }
+                    test();
                 }
-                test();
             }
         }
 
@@ -68,16 +85,21 @@ public class Extension {
             return;
         }
 
+
+
         if (isoColsList.isEmpty()){
             return;
         }
 
         for (ArrayList<ArrayList<String>> isoCols : isoColsList) {
+
             ArrayList<Integer> newNodes =new ArrayList<>();
+            ArrayList<Integer> graphNodes = graph.getListGraph().getNodeLabels();
+            System.out.println(graphNodes);
             for (ArrayList<String> col : isoCols) {
                 Integer newNode = Integer.parseInt(col.get(0).replace("\"", ""));
                 if (newNode != 4 && newNode != 6){
-                    if (!newNodes.contains(new Integer(newNode))){
+                    if (!newNodes.contains(new Integer(newNode)) && !graphNodes.contains(new Integer(newNode))){
                         newNodes.add(newNode);
                     }
                 }
@@ -90,8 +112,11 @@ public class Extension {
             }
 
             if (newNodes.isEmpty()){
-                return;
+//                return;
+                continue;
             }
+
+            System.out.println(newNodes);
 
 
             HashMap<Integer, Integer> constraintMap = new HashMap<>();
@@ -111,7 +136,6 @@ public class Extension {
             }
 
 
-
             if (!constraintMap.containsKey(new Integer(8))){
                 constraintMap.put(8, 0);
             }
@@ -119,7 +143,7 @@ public class Extension {
             if (!constraintMap.containsKey(new Integer(7))){
                 constraintMap.put(7, 0);
             }
-            System.out.println(constraintMap);
+
 //            System.exit(1);
 
             long start = System.currentTimeMillis();

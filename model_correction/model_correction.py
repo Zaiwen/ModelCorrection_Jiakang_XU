@@ -78,8 +78,8 @@ def find_isolate_columns(kg, model: nx.DiGraph, node_dict, edge_dict):
     cNodes = [node for node in incomplete_model if incomplete_model.nodes[node]["nodeType"] == "columnNode"]
     dgm = nx.isomorphism.DiGraphMatcher(kg, utils.csv_to_lg(incomplete_model.copy()), nm, em)
     if not dgm.subgraph_is_monomorphic():
-        
-        for e in nx.edge_dfs(incomplete_model):
+
+        for e in nx.edge_bfs(incomplete_model):
             if g.nodes and e[0] not in g.nodes and e[1] not in g.nodes:
                 continue
             new_node = e[1] if e[1] not in g.nodes else e[0]
@@ -89,6 +89,8 @@ def find_isolate_columns(kg, model: nx.DiGraph, node_dict, edge_dict):
             dgm = nx.isomorphism.DiGraphMatcher(kg, utils.csv_to_lg(g), nm, em)
             if not dgm.subgraph_is_monomorphic():
                 g.remove_node(new_node)
+        # mcs = utils.get_mcs(kg, utils.csv_to_lg(incomplete_model))
+        # utils.save_csv_graph(utils.lg_to_csv(mcs), r"C:\D_Drive\ASM\experiment\exp_20220620\train_1_4_20___1\newSource_5\tmp.csv")
         im_nodes = cNodes[:]
         im_nodes.extend(g.nodes)
         incomplete_model = nx.DiGraph(nx.induced_subgraph(incomplete_model, im_nodes))
@@ -227,22 +229,22 @@ def move_incorrect_relation(new_source_idx, im):
             if pred == 0:
                 im.add_node("E52_Time-Span1", label="E52_Time-Span", nodeType="InternalNode")
                 im.add_edge("E67_Birth1", "E52_Time-Span1", label="P4_has_time-span")
-                cols[col] = ["E52_Time-Span1", "P4_has_time-span"]
+                cols[col] = ["E52_Time-Span1", "P82_at_some_time_within"]
             if pred == 1:
                 im.add_node("E52_Time-Span2", label="E52_Time-Span", nodeType="InternalNode")
                 im.add_edge("E69_Death1", "E52_Time-Span2", label="P4_has_time-span")
-                cols[col] = ["E52_Time-Span2", "P4_has_time-span"]
+                cols[col] = ["E52_Time-Span2", "P82_at_some_time_within"]
             if pred == 2:
                 im.add_node("E52_Time-Span3", label="E52_Time-Span", nodeType="InternalNode")
                 im.add_edge("E12_Production1", "E52_Time-Span3", label="P4_has_time-span")
-                cols[col] = ["E52_Time-Span3", "P4_has_time-span"]
+                cols[col] = ["E52_Time-Span3", "P82_at_some_time_within"]
             if pred == 3:
                 im.add_node("E52_Time-Span4", label="E52_Time-Span", nodeType="InternalNode")
                 if "E8_Acquisition1" not in im.nodes:
                     im.add_node("E8_Acquisition1", label="E8_Acquisition")
                     im.add_edge("E22_Man-Made_Object1", "E8_Acquisition1", label="P24i_changed_ownership_through")
                 im.add_edge("E8_Acquisition1", "E52_Time-Span4", label="P4_has_time-span")
-                cols[col] = ["E52_Time-Span4", "P4_has_time-span"]
+                cols[col] = ["E52_Time-Span4", "P82_at_some_time_within"]
 
     if len(E55_df):
         for col, pred in zip(E55_df.index, E55_model.predict(E55_df["features"][E55_features])):
@@ -250,12 +252,58 @@ def move_incorrect_relation(new_source_idx, im):
             if pred == 0:
                 im.add_node("E55_Type1", label="E55_Type", nodeType="InternalNode")
                 im.add_edge("E12_Production1", "E55_Type1", label="P32_used_general_technique")
-                cols[col] = ["E55_Type1", "P32_used_general_technique"]
+                cols[col] = ["E55_Type1", "label"]
             if pred == 1:
                 im.add_node("E55_Type2", label="E55_Type", nodeType="InternalNode")
                 im.add_edge("E22_Man-Made_Object1", "E55_Type2", label="P2_has_type")
-                cols[col] = ["E55_Type2", "P32_used_general_technique"]
+                cols[col] = ["E55_Type2", "label"]
     return cols
+
+
+def experiments(path):
+    for i in range(1, 30):
+        try:
+            # if i != 12:
+            #     continue
+            k_model = utils.load_graph_from_csv1\
+                (rf"{path}\newSource_{i}\cytoscape\candidate_model.csv")
+            dic, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
+            cNodes = {e[1]: [e[0], e[2]["label"]] for e in im.edges.data() if im.nodes[e[1]]["nodeType"] == "columnNode"}
+            if "E52_Time-Span1" in im.nodes:
+                im.remove_node("E52_Time-Span1")
+            if "E52_Time-Span2" in im.nodes:
+                im.remove_node("E52_Time-Span2")
+            if "E52_Time-Span3" in im.nodes:
+                im.remove_node("E52_Time-Span3")
+            if "E52_Time-Span4" in im.nodes:
+                im.remove_node("E52_Time-Span4")
+            if "E55_Type1" in im.nodes:
+                im.remove_node("E55_Type1")
+            if "E55_Type2" in im.nodes:
+                im.remove_node("E55_Type2")
+            ambiguous_cols = move_incorrect_relation(i, im)
+            cNodes.update(ambiguous_cols)
+
+            im_lg = utils.csv_to_lg(im)
+
+            check_candidate_types(dic, node_dict, kg, im)
+
+            utils.save_csv_graph(im,
+                                 rf"{path}\newSource_{i}\seed.csv")
+            utils.save_lg_graph(im_lg,
+                                rf"{path}\newSource_{i}\seed.lg")
+            print(f"ds: s{i}")
+            for k, v in dic.items():
+                print(f"isolate column: {k}\n")
+                print(f"candidate types: {v}\n")
+            isoCols = gen_candidate_nodes_combination(dic, node_dict)
+            with open(rf"{path}\newSource_{i}\cNode.json", "w") as jf:
+                json.dump(cNodes, jf, indent=2)
+            with open(rf"{path}\newSource_{i}\isoCols.json", "w") as jf:
+                json.dump(isoCols, jf, indent=2)
+        except Exception:
+            pass
+
 
 
 if __name__ == '__main__':
@@ -275,111 +323,58 @@ if __name__ == '__main__':
         t_node = kg.nodes[t]['label']
         kg_edges.add((s_node, t_node, edge[2]['label']))
 
-    train = [1, 4, 20]
-
-    for i in range(1, 30):
-        try:
-            if i != 5:
-                continue
-            k_model = utils.load_graph_from_csv1\
-                (rf"C:\D_Drive\ASM\experiment\exp_20220620\train_{train[0]}_{train[1]}_{train[2]}___1\newSource_{i}\cytoscape\candidate_model.csv")
-            dic, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
-            cNodes = {e[1]:[e[0], e[2]["label"]] for e in im.edges.data() if im.nodes[e[1]]["nodeType"] == "columnNode"}
-            if "E52_Time-Span1" in im.nodes:
-                im.remove_node("E52_Time-Span1")
-            if "E55_Type1" in im.nodes:
-                im.remove_node("E55_Type1")
-            if "E55_Type2" in im.nodes:
-                im.remove_node("E55_Type2")
-            ambiguous_cols = move_incorrect_relation(i, im)
-            cNodes.update(ambiguous_cols)
-
-            im_lg = utils.csv_to_lg(im)
-
-            nodes = [im_lg.nodes[node]["label"] for node in im_lg.nodes]
-            check_candidate_types(dic, node_dict, kg, im)
-
-            utils.save_csv_graph(im,
-                                 rf"C:\D_Drive\ASM\experiment\exp_20220620\train_{train[0]}_{train[1]}_{train[2]}___1\newSource_{i}\seed.csv")
-            utils.save_lg_graph(utils.csv_to_lg(im),
-                                rf"C:\D_Drive\ASM\experiment\exp_20220620\train_{train[0]}_{train[1]}_{train[2]}___1\newSource_{i}\seed.lg")
-            for k, v in dic.items():
-                print(f"isolate column: {k}\n")
-                print(f"candidate types: {v}\n")
-            isoCols = gen_candidate_nodes_combination(dic, node_dict)
-            with open(rf"C:\D_Drive\ASM\experiment\exp_20220620\train_{train[0]}_{train[1]}_{train[2]}___1\newSource_{i}\cNode.json", "w")as jf:
-                json.dump(cNodes, jf, indent=2)
-            with open(rf"C:\D_Drive\ASM\experiment\exp_20220620\train_{train[0]}_{train[1]}_{train[2]}___1\newSource_{i}\isoCols.json", "w")as jf:
-                json.dump(isoCols, jf, indent=2)
-        except Exception:
-            pass
-
-    '''
-    trains_ls = [
-        # [1, 4, 21],
-        # [1, 15, 16],
-        [2, 12, 23],
-        [4, 17, 25],
-        [5, 9, 26]
+    train_ls = [
+        [7, 19, 23],
+        # [8, 13, 28],
+        # [8, 21, 25]
     ]
-    for trains in trains_ls:
-        ofile = open(rf"C:\D_Drive\ASM\experiment\exp_20220620\extension\({trains[0]},{trains[1]},{trains[2]})\check_candidate_types_result.txt", 'w')
-        for i in range(1, 30):
-            try:
-                k_model = utils.load_graph_from_csv1(
-                    rf"C:\D_Drive\ASM\experiment\exp_20220620\train_{trains[0]}_{trains[1]}_{trains[2]}___1\newSource_{i}\cytoscape\candidate_model.csv")
-                if not k_model:
-                    continue
-                ofile.write(f"new ds:s{i}\n")
-                start = time.time()
-                dic, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
-                if "E52_Time-Span1" in im.nodes:
-                    im.remove_node("E52_Time-Span1")
-                if "E55_Type1" in im.nodes:
-                    im.remove_node("E55_Type1")
-                if "E55_Type2" in im.nodes:
-                    im.remove_node("E55_Type2")
-                move_incorrect_relation(i, im)
-                check_candidate_types(dic, node_dict, kg, im)
-                utils.save_csv_graph(im, rf"C:\D_Drive\ASM\experiment\exp_20220620\extension\({trains[0]},{trains[1]},{trains[2]})\seed_models\s{i}_seed.csv")
-                utils.save_lg_graph(utils.csv_to_lg(im), rf"C:\D_Drive\ASM\experiment\exp_20220620\extension\({trains[0]},{trains[1]},{trains[2]})\seed_models\s{i}_seed.lg")
-                for k, v in dic.items():
-                    ofile.write(f"isolate column: {k}\n")
-                    ofile.write(f"candidate types: {v}\n")
-                ofile.write(f"running time: {round(time.time() - start, 3)}\n")
-                ofile.write("\n")
-                ofile.flush()
-            except Exception:
-                pass
-        ofile.close()
-    '''
+    for train in train_ls:
+        dir_path = rf"C:\D_Drive\ASM\experiment\exp_20220627\train_{train[0]}_{train[1]}_{train[2]}___1"
+        experiments(dir_path)
 
-    '''
-    trains = [2, 5, 6]
-    ofile = open(rf"C:\D_Drive\ASM\experiment\exp_20220522\extension\({trains[0]},{trains[1]},{trains[2]})\candidate_check_result.txt", "w", encoding="utf-8")
-    try:
-        for i in range(1, 30):
-            k_model = utils.load_graph_from_csv1(
-                rf"C:\D_Drive\ASM\experiment\exp_20220522\train_{trains[0]}_{trains[1]}_{trains[2]}___1\newSource_{i}\cytoscape\candidate_model.csv")
-            if not k_model:
-                continue
-            ofile.write(f"new ds:s{i}\n")
-            start = time.time()
-            dic, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
-            utils.save_lg_graph(utils.csv_to_lg(im),
-                                rf"C:\D_Drive\ASM\experiment\exp_20220522\extension\({trains[0]},{trains[1]},{trains[2]})\seed_models\s{i}_seed.lg")
-            check_candidate_types(dic, node_dict, kg, im)
-            for k, v in dic.items():
-                ofile.write(f"isolate column: {k}\n")
-                ofile.write(f"candidate type: {v}\n")
-            end = time.time()
-            ofile.write(f"running time: {round(end-start, 3)}\n")
-            ofile.write("\n")
-            ofile.flush()
-        ofile.close()
-    except FileNotFoundError:
-        pass
-    '''
+    # for i in range(1, 30):
+    #     try:
+    #         # if i != 5:
+    #         #     continue
+    #         k_model = utils.load_graph_from_csv1\
+    #             (rf"{dir_path}\newSource_{i}\cytoscape\candidate_model.csv")
+    #         dic, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
+    #         cNodes = {e[1]:[e[0], e[2]["label"]] for e in im.edges.data() if im.nodes[e[1]]["nodeType"] == "columnNode"}
+    #         if "E52_Time-Span1" in im.nodes:
+    #             im.remove_node("E52_Time-Span1")
+    #         if "E52_Time-Span2" in im.nodes:
+    #             im.remove_node("E52_Time-Span1")
+    #         if "E52_Time-Span3" in im.nodes:
+    #             im.remove_node("E52_Time-Span1")
+    #         if "E52_Time-Span4" in im.nodes:
+    #             im.remove_node("E52_Time-Span1")
+    #         if "E55_Type1" in im.nodes:
+    #             im.remove_node("E55_Type1")
+    #         if "E55_Type2" in im.nodes:
+    #             im.remove_node("E55_Type2")
+    #         ambiguous_cols = move_incorrect_relation(i, im)
+    #         cNodes.update(ambiguous_cols)
+    #
+    #         im_lg = utils.csv_to_lg(im)
+    #
+    #         nodes = [im_lg.nodes[node]["label"] for node in im_lg.nodes]
+    #         check_candidate_types(dic, node_dict, kg, im)
+    #
+    #         utils.save_csv_graph(im,
+    #                              rf"{dir_path}\newSource_{i}\seed.csv")
+    #         utils.save_lg_graph(utils.csv_to_lg(im),
+    #                             rf"{dir_path}\newSource_{i}\seed.lg")
+    #         print(f"ds: s{i}")
+    #         for k, v in dic.items():
+    #             print(f"isolate column: {k}\n")
+    #             print(f"candidate types: {v}\n")
+    #         isoCols = gen_candidate_nodes_combination(dic, node_dict)
+    #         with open(rf"{dir_path}\newSource_{i}\cNode.json", "w")as jf:
+    #             json.dump(cNodes, jf, indent=2)
+    #         with open(rf"{dir_path}\newSource_{i}\isoCols.json", "w")as jf:
+    #             json.dump(isoCols, jf, indent=2)
+    #     except Exception:
+    #         pass
 
     # trains = [5, 9, 26]
     # for i in range(1, 30):

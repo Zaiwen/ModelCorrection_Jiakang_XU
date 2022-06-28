@@ -60,14 +60,12 @@ public class ModelLearner {
 //        System.exit(1);
 
         Integer[][] train = {
-                {15, 19, 28},
-                {4, 7, 16},
-                {0, 3, 19}
+                {6, 18, 22},
         };
 
 
         for (Integer[] trainDataIndex : train) {
-            String path = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220620\\train_%d_%d_%d___1",
+            String path = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220627\\train_%d_%d_%d___1",
                     trainDataIndex[0]+1, trainDataIndex[1]+1, trainDataIndex[2]+1);
 
             File dir = new File(path);
@@ -75,7 +73,7 @@ public class ModelLearner {
                 dir.mkdirs();
             }
 
-            String resPath = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220620\\train_%d_%d_%d___1\\(%d,%d,%d)result.csv",
+            String resPath = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220627\\train_%d_%d_%d___1\\(%d,%d,%d)result.csv",
                     trainDataIndex[0]+1, trainDataIndex[1]+1, trainDataIndex[2]+1,
                     trainDataIndex[0]+1, trainDataIndex[1]+1, trainDataIndex[2]+1);
             File resFile = new File(resPath);
@@ -84,7 +82,7 @@ public class ModelLearner {
 
             for (int i = 0; i < 29; i++) {
                 if(i != trainDataIndex[0] && i!= trainDataIndex[1] && i != trainDataIndex[2] && i != 26){
-                    String outputPath = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220620\\train_%d_%d_%d___1\\newSource_",
+                    String outputPath = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220627\\train_%d_%d_%d___1\\newSource_",
                             trainDataIndex[0]+1,trainDataIndex[1]+1, trainDataIndex[2]+1);
 
                     File expDir = new File(outputPath+(i+1));

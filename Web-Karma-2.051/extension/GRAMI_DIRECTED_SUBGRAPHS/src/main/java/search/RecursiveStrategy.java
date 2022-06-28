@@ -99,7 +99,7 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 		this.nodeAdjs = new HashMap<>();
 		this.nodeLabels = initGraph.getListGraph().getNodeLabels();
 		timer = new Timer(true);
-		this.timer.schedule(new StopTask(), 1000*60*5);
+		this.timer.schedule(new StopTask(), 1000*60*7);
 
 
 //		{

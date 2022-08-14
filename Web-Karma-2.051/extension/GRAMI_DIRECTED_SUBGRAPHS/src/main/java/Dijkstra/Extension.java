@@ -23,6 +23,7 @@ public class Extension {
         String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220613\\train_%d_%d_%d___1\\newSource_%d\\seed.lg",
                 TRAIN[0], TRAIN[1], TRAIN[2], TEST);
 
+
 //    public static final String GRAPH_PATH = "C:\\D_Drive\\ASM\\experiment\\correct_models\\lg\\s28.csv.lg";
     public static String KGPATH = "C:\\D_Drive\\ASM\\DataSets\\museum-crm\\museum_kg_20220513.lg";
 //    public static final String OUT_PATH =
@@ -43,6 +44,7 @@ public class Extension {
 //        System.exit(2);
 //        test1();
         test4();
+        System.out.println();
 
 
         System.exit(1);

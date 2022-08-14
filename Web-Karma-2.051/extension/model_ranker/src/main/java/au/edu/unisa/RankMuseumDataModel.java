@@ -225,7 +225,7 @@ public class RankMuseumDataModel {
 
     }
 
-    /**test the match between a steiner tree and big graph**/
+    /**museum_crm_test the match between a steiner tree and big graph**/
     public static void matchTest1 () {
 
         //load big graph

@@ -361,7 +361,7 @@ public class GramiMatcher {
 
     }
 
-    /**test for adaption GraMi to a sub-graph isomorphism matcher*
+    /**museum_crm_test for adaption GraMi to a sub-graph isomorphism matcher*
      * @from 8 Feb 2019
      * */
     public static void main (String args[]){

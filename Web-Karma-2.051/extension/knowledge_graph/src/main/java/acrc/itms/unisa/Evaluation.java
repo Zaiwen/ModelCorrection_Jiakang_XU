@@ -67,7 +67,7 @@ public class Evaluation {
             gramiMatcher.setQry(q);
             gramiMatcher.getFrequency(nonCandidates, 1);
 
-            System.out.println("test done.");
+            System.out.println("museum_crm_test done.");
 
         } catch (Exception e) {
             e.printStackTrace();

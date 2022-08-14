@@ -20,26 +20,18 @@
  ******************************************************************************/
 package edu.isi.karma.modeling.alignment;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-
+import edu.isi.karma.modeling.Uris;
+import edu.isi.karma.rep.alignment.*;
 import org.jgrapht.UndirectedGraph;
 import org.jgrapht.graph.DirectedWeightedMultigraph;
 import org.jgrapht.traverse.BreadthFirstIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import edu.isi.karma.modeling.Uris;
-import edu.isi.karma.rep.alignment.CompactLink;
-import edu.isi.karma.rep.alignment.CompactObjectPropertyLink;
-import edu.isi.karma.rep.alignment.CompactSubClassLink;
-import edu.isi.karma.rep.alignment.DefaultLink;
-import edu.isi.karma.rep.alignment.LabeledLink;
-import edu.isi.karma.rep.alignment.LinkPriorityComparator;
-import edu.isi.karma.rep.alignment.LinkType;
-import edu.isi.karma.rep.alignment.Node;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 
 public class TreePostProcess {
@@ -180,7 +172,6 @@ public class TreePostProcess {
 					
 					// pick the first one 
 					LabeledLink newLink = possibleLinks.get(0);
-					
 //					linkSourceId = LinkIdFactory.getLinkSourceId(newLink.getId());
 					//linkTargetId = LinkIdFactory.getLinkTargetId(newLink.getId());
 					

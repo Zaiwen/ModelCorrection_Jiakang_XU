@@ -15,7 +15,7 @@
 package dataStructures;
 
 /**
- * Stores and sorts the created extensions during the test for being canonical.
+ * Stores and sorts the created extensions during the museum_crm_test for being canonical.
  * <p>
  * It represents the head marker of a double linked ring list.
  * 

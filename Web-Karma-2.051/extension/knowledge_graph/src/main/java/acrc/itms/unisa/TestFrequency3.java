@@ -9,7 +9,7 @@ import org.jgrapht.graph.DirectedWeightedMultigraph;
 
 import java.util.*;
 
-/**test CSP-based exact subgraph matcher based on a big random graph. 17 Aug 2018**/
+/**museum_crm_test CSP-based exact subgraph matcher based on a big random graph. 17 Aug 2018**/
 public class TestFrequency3 {
 
     public static void main(String args[]){
@@ -40,7 +40,7 @@ public class TestFrequency3 {
         gramiMatcher.setQry(q);
         gramiMatcher.getFrequency(nonCandidates, 1);//1 or 2 have not been determined. 8 Jan 2019
 
-        System.out.println("test done.");
+        System.out.println("museum_crm_test done.");
 
 
 

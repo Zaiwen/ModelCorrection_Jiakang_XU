@@ -28,13 +28,15 @@ public class SemanticLabeling {
 
     public static void main(String[] args) throws Exception {
 
+
+//        System.exit(1);
         removeKnownModels();
 //        semanticLabeling(new Integer[]{1, 4, 5}, 0);
         for (int i = 0; i < 29; i++) {
-            if (i != 26) {
+            System.out.println(i);
 //                semanticLabeling(new Integer[]{1, 4, 5}, i);
-                semanticLabeling(i);
-            }
+            semanticLabeling(i);
+
         }
 
 
@@ -91,17 +93,25 @@ public class SemanticLabeling {
 
     public static void semanticLabeling(int newSourceIndex) throws Exception {
         removeKnownModels();
-        List<SemanticModel> semanticModels = ModelReader.importSemanticModelsFromJsonFiles(Params.ROOT_DIR + "models-json-20220522", Params.MODEL_MAIN_FILE_EXT);
+//        List<SemanticModel> semanticModels = ModelReader.importSemanticModelsFromJsonFiles(Params.ROOT_DIR + "models-json-20220522", Params.MODEL_MAIN_FILE_EXT);
+//        List<SemanticModel> semanticModels = ModelReader.importSemanticModelsFromJsonFiles(Params.ROOT_DIR + "models-json_20220720", Params.MODEL_MAIN_FILE_EXT);
+        List<SemanticModel> semanticModels = ModelReader.importSemanticModelsFromJsonFiles(Params.ROOT_DIR + "models-json-20220801", Params.MODEL_MAIN_FILE_EXT);
+
         OntologyManager ontologyManager = new OntologyManager("");
-        File oFile = new File(Params.ROOT_DIR+"ecrm_update(20190521).owl");
+//        File oFile = new File(Params.ROOT_DIR+"ecrm_update(20190521).owl");
+//        File oFile = new File(Params.ROOT_DIR+"weapon.owl");
+        File oFile = new File(Params.ROOT_DIR+"edm.owl");
+
+
         ontologyManager.doImport(oFile, "UTF-8");
         ontologyManager.updateCache();
 
-        File sourceDir = new File(Params.ROOT_DIR+"sources-modified-20210828");
+//        File sourceDir = new File(Params.ROOT_DIR+"sources-modified-20210828");
+        File sourceDir = new File(Params.ROOT_DIR+"sources-modified");
         SemanticModel newModel = semanticModels.get(newSourceIndex);
 
         for (int i = 0; i < Objects.requireNonNull(sourceDir.listFiles()).length; i++) {
-            if(i != newSourceIndex || i != 26){
+            if(i != newSourceIndex){
                 addKnownModelsForLabeling(semanticModels.get(i), loadCSV(Objects.requireNonNull(sourceDir.listFiles())[i].getAbsolutePath()));
             }
         }
@@ -116,17 +126,20 @@ public class SemanticLabeling {
                 }
             }
             List<SemanticType> predictedTypes = predictSemanticType(ontologyManager, cn, examples,4);
+            cn.setLearnedSemanticTypes(null);
 //            System.out.println(predictedTypes);
             if (!(predictedTypes == null || predictedTypes.isEmpty() || predictedTypes.get(0).getConfidenceScore() == 0)) {
                 cn.setLearnedSemanticTypes(predictedTypes);
             }
         }
 
-        if (newSourceIndex < 9){
-            newModel.writeJson(Params.ROOT_DIR + "models-json-tmp\\s0"+String.valueOf(newSourceIndex+1)+".csv.model.json");
-        }else {
-            newModel.writeJson(Params.ROOT_DIR + "models-json-tmp\\s"+String.valueOf(newSourceIndex+1)+".csv.model.json");
-        }
+        newModel.writeJson(Params.ROOT_DIR + "models-json-tmp\\" + newModel.getName() + ".model.json");
+
+//        if (newSourceIndex < 9){
+//            newModel.writeJson(Params.ROOT_DIR + "models-json-tmp\\s0"+String.valueOf(newSourceIndex+1)+".csv.model.json");
+//        }else {
+//            newModel.writeJson(Params.ROOT_DIR + "models-json-tmp\\s"+String.valueOf(newSourceIndex+1)+".csv.model.json");
+//        }
 
         System.out.println(newModel.getName());
 

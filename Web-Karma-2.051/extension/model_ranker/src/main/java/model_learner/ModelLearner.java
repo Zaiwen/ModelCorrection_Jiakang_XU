@@ -57,47 +57,72 @@ public class ModelLearner {
 //        fw.close();
 
 
-//        System.exit(1);
-
-        Integer[][] train = {
-                {6, 18, 22},
-        };
-
-
-        for (Integer[] trainDataIndex : train) {
-            String path = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220627\\train_%d_%d_%d___1",
-                    trainDataIndex[0]+1, trainDataIndex[1]+1, trainDataIndex[2]+1);
+            String path = "C:\\D_Drive\\ASM\\experiment\\exp_20220811\\";
 
             File dir = new File(path);
             if (!dir.exists()){
                 dir.mkdirs();
             }
 
-            String resPath = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220627\\train_%d_%d_%d___1\\(%d,%d,%d)result.csv",
-                    trainDataIndex[0]+1, trainDataIndex[1]+1, trainDataIndex[2]+1,
-                    trainDataIndex[0]+1, trainDataIndex[1]+1, trainDataIndex[2]+1);
+            String resPath = "C:\\D_Drive\\ASM\\experiment\\exp_20220811\\result.csv";
             File resFile = new File(resPath);
             fw = new FileWriter(resFile);
             fw.write(String.join(",", "data source", "precision: karma", "recall: karma", "running time(s): karma")+"\n");
 
             for (int i = 0; i < 29; i++) {
-                if(i != trainDataIndex[0] && i!= trainDataIndex[1] && i != trainDataIndex[2] && i != 26){
-                    String outputPath = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220627\\train_%d_%d_%d___1\\newSource_",
-                            trainDataIndex[0]+1,trainDataIndex[1]+1, trainDataIndex[2]+1);
-
-                    File expDir = new File(outputPath+(i+1));
-                    if(!expDir.exists()){
-                        expDir.mkdirs();
-                    }
-
-                    learnModel(i,trainDataIndex,outputPath+(i+1));
+                String outputPath = "C:\\D_Drive\\ASM\\experiment\\exp_20220811\\newSource_";
+                File expDir = new File(outputPath+(i+1));
+                if(!expDir.exists()){
+                    expDir.mkdirs();
                 }
+
+                learnModel(i,outputPath+(i+1));
+
             }
             fw.close();
 
-        }
 
 
+
+        System.exit(1);
+//
+//        Integer[][] train = {
+//                {0, 1},
+//        };
+//
+//
+//        for (Integer[] trainDataIndex : train) {
+//            String path = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220726\\train_%d_%d___1",
+//                    trainDataIndex[0]+1, trainDataIndex[1]+1);
+//
+//            File dir = new File(path);
+//            if (!dir.exists()){
+//                dir.mkdirs();
+//            }
+//
+//            String resPath = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220726\\train_%d_%d___1\\(%d,%d)result.csv",
+//                    trainDataIndex[0]+1, trainDataIndex[1]+1,
+//                    trainDataIndex[0]+1, trainDataIndex[1]+1);
+//            File resFile = new File(resPath);
+//            fw = new FileWriter(resFile);
+//            fw.write(String.join(",", "data source", "precision: karma", "recall: karma", "running time(s): karma")+"\n");
+//
+//            for (int i = 0; i < 15; i++) {
+//                if(i != trainDataIndex[0] && i!= trainDataIndex[1] && i != 26){
+//                    String outputPath = String.format("C:\\D_Drive\\ASM\\experiment\\exp_20220726\\train_%d_%d___1\\newSource_",
+//                            trainDataIndex[0]+1,trainDataIndex[1]+1);
+//
+//                    File expDir = new File(outputPath+(i+1));
+//                    if(!expDir.exists()){
+//                        expDir.mkdirs();
+//                    }
+//
+//                    learnModel(i,trainDataIndex,outputPath+(i+1));
+//                }
+//            }
+//            fw.close();
+//
+//        }
 
 
     }
@@ -204,15 +229,15 @@ public class ModelLearner {
                     Params.ROOT_DIR + "models-json-tmp", Params.MODEL_MAIN_FILE_EXT).get(newSourceIndex);
             DirectedWeightedMultigraph<Node, LabeledLink> correctModelGraph = correctModel.getSimpliedGraph();
 
-            String modelPath = outputPath + "\\modelgraphs";
+//            String modelPath = outputPath + "\\modelgraphs";
             String cytoscapePath = outputPath + "\\cytoscape";
 
-            File modelDir = new File(modelPath);
+//            File modelDir = new File(modelPath);
             File cytoscapeDir = new File(cytoscapePath);
 
-            if (!modelDir.exists()) {
-                modelDir.mkdir();
-            }
+//            if (!modelDir.exists()) {
+//                modelDir.mkdir();
+//            }
 
             if (!cytoscapeDir.exists()) {
                 cytoscapeDir.mkdir();
@@ -233,8 +258,75 @@ public class ModelLearner {
 //            visualizeGraphInCytoscape(modelGraph,cytoscapePath + "\\model_"+(j++)+".csv");
 //        }
 
-            DirectedWeightedMultigraph<Node, LabeledLink> modelGraph = candidateModel.getSimpliedGraph();
-            LGGraph graph = VF2GraphAdapter.graphAdaptToVF2(modelGraph);
+//            DirectedWeightedMultigraph<Node, LabeledLink> modelGraph = candidateModel.getSimpliedGraph();
+//            LGGraph graph = VF2GraphAdapter.graphAdaptToVF2(modelGraph);
+//        LGGraph.printVF2Graph(graph);
+
+//        LGGraph.writeIntoFile(graph,modelPath + "\\candidate_model.lg");
+            writeCSV(candidateModel.getGraph(), cytoscapePath + "\\candidate_model.csv");
+
+            precision = candidateModel.evaluate(correctModel).getPrecision();
+            recall = candidateModel.evaluate(correctModel).getRecall();
+
+            fw.append(String.join(",", "s"+(newSourceIndex+1)+".csv", String.valueOf(precision), String.valueOf(recall), String.valueOf(runTime))).append("\n");
+        }
+    }
+
+
+    public static void learnModel(int newSourceIndex, String outputPath) throws Exception {
+
+        Long start = System.currentTimeMillis();
+        List<SortableSemanticModel> candidateModels = ModelLearner_KnownModels4.
+                getCandidateSemanticModels(newSourceIndex, outputPath);
+        double runTime = (System.currentTimeMillis() - start) / 1000f;
+        double precision = 0;
+        double recall=0;
+
+
+
+        if (candidateModels.size() > 0) {
+
+            SemanticModel candidateModel = candidateModels.get(0);
+
+
+//            System.out.println("We get " + candidateModels.size() + " candidate semantic models for the new source!");
+//            System.out.println("============================================");
+
+            SemanticModel correctModel = ModelReader.importSemanticModelsFromJsonFiles(
+                    Params.ROOT_DIR + "models-json-tmp", Params.MODEL_MAIN_FILE_EXT).get(newSourceIndex);
+            DirectedWeightedMultigraph<Node, LabeledLink> correctModelGraph = correctModel.getSimpliedGraph();
+
+//            String modelPath = outputPath + "\\modelgraphs";
+            String cytoscapePath = outputPath + "\\cytoscape";
+
+//            File modelDir = new File(modelPath);
+            File cytoscapeDir = new File(cytoscapePath);
+
+//            if (!modelDir.exists()) {
+//                modelDir.mkdir();
+//            }
+
+            if (!cytoscapeDir.exists()) {
+                cytoscapeDir.mkdir();
+            }
+
+            LGGraph correctGraph = VF2GraphAdapter.graphAdaptToVF2(correctModelGraph);
+//        LGGraph.writeIntoFile(correctGraph,modelPath+"\\correct_model.lg");
+            writeCSV(correctModel.getGraph(), cytoscapePath + "\\correct_model.csv");
+
+//        int i = 0;
+//        int j = 0;
+//        for (SortableSemanticModel semanticModel : candidateModels) {
+//            DirectedWeightedMultigraph<Node, LabeledLink> modelGraph = semanticModel.getSimpliedGraph();
+//            System.out.println(semanticModel.getGraph());
+//            LGGraph graph = VF2GraphAdapter.graphAdaptToVF2(modelGraph);
+//            LGGraph.printVF2Graph(graph);
+//            LGGraph.writeIntoFile(graph,modelPath + "\\model_"+(i++)+".lg");
+//            visualizeGraphInCytoscape(modelGraph,cytoscapePath + "\\model_"+(j++)+".csv");
+//        }
+
+//            DirectedWeightedMultigraph<Node, LabeledLink> modelGraph = candidateModel.getSimpliedGraph();
+//            LGGraph graph = VF2GraphAdapter.graphAdaptToVF2(modelGraph);
 //        LGGraph.printVF2Graph(graph);
 
 //        LGGraph.writeIntoFile(graph,modelPath + "\\candidate_model.lg");

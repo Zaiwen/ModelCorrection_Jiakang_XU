@@ -119,11 +119,11 @@ public class VirtuosoSample {
 			con = repository.getConnection();
 			con.setAutoCommit(true);
 
-			// // test ask query
+			// // museum_crm_test ask query
 			// String ask = "ask { ?s <http://mso.monrai.com/foaf/name> ?o }";
 			// doQuery(con, ask);
 
-			// test add data to the repository
+			// museum_crm_test add data to the repository
 			boolean ok = true;
 			String query = null;
 			String strurl = "http://www.openlinksw.com/dataspace/person/kidehen@openlinksw.com/foaf.rdf";
@@ -132,7 +132,7 @@ public class VirtuosoSample {
 			Value[][] results = null;
 
 			startTest();
-			// test query data
+			// museum_crm_test query data
 			query = "SELECT * FROM <" + context + "> WHERE {?s ?p ?o} LIMIT 1";
 			try {
 				log("Loading data from URL: " + strurl);
@@ -162,7 +162,7 @@ public class VirtuosoSample {
 			}
 			endTest(ok); // should return sz == 0
 
-			// test add data from a flat file
+			// museum_crm_test add data from a flat file
 			startTest();
 			String fstr = "virtuoso_driver" + File.separator + "data.nt";
 			log("Loading data from file: " + fstr);
@@ -267,9 +267,9 @@ public class VirtuosoSample {
 				con.add(shermanmonroe, name, nameValue, context);
 				exists = con.hasStatement(shermanmonroe, name, null, false, context);
 				if (!exists) throw new Exception("Triple wasn't added");
-				// test remove a statement
+				// museum_crm_test remove a statement
 				con.remove(shermanmonroe, name, nameValue, (Resource) context);
-				// test statement removed
+				// museum_crm_test statement removed
 				log("Statement does not exists");
 				exists = con.hasStatement(shermanmonroe, name, null, false, context);
 			}
@@ -310,7 +310,7 @@ public class VirtuosoSample {
 			}
 			endTest((ok && exists)); // should return true
 
-			// test getNamespace
+			// museum_crm_test getNamespace
 			Namespace testns = null;
 			RepositoryResult<Namespace> namespaces = null;
 			boolean hasNamespaces = false;
@@ -330,7 +330,7 @@ public class VirtuosoSample {
 				ok = false;
 			}
 
-			// test getNamespaces and RepositoryResult implementation
+			// museum_crm_test getNamespaces and RepositoryResult implementation
 			startTest();
 			try {
 				ok = true;
@@ -350,7 +350,7 @@ public class VirtuosoSample {
 			endTest(ok); // should return true
 
 			RepositoryResult<Statement> statements = null;
-			// test getStatements and RepositoryResult implementation
+			// museum_crm_test getStatements and RepositoryResult implementation
 			startTest();
 			try {
 				ok = true;
@@ -369,7 +369,7 @@ public class VirtuosoSample {
 			}
 
 			startTest();
-			// test export and handlers
+			// museum_crm_test export and handlers
 			File f = new File("results.n3.txt");
 			try {
 				ok = true;
@@ -386,7 +386,7 @@ public class VirtuosoSample {
 
 			startTest();
 			RepositoryResult<Resource> contexts = null;
-			// test retrieve graph ids
+			// museum_crm_test retrieve graph ids
 			try {
 				ok = true;
 				log("Retrieving graph ids");
@@ -404,7 +404,7 @@ public class VirtuosoSample {
 			}
 
 			startTest();
-			// test get size
+			// museum_crm_test get size
 			try {
 				ok = true;
 				log("Retrieving triple store size");

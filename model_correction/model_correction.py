@@ -89,8 +89,6 @@ def find_isolate_columns(kg, model: nx.DiGraph, node_dict, edge_dict):
             dgm = nx.isomorphism.DiGraphMatcher(kg, utils.csv_to_lg(g), nm, em)
             if not dgm.subgraph_is_monomorphic():
                 g.remove_node(new_node)
-        # mcs = utils.get_mcs(kg, utils.csv_to_lg(incomplete_model))
-        # utils.save_csv_graph(utils.lg_to_csv(mcs), r"C:\D_Drive\ASM\experiment\exp_20220620\train_1_4_20___1\newSource_5\tmp.csv")
         im_nodes = cNodes[:]
         im_nodes.extend(g.nodes)
         incomplete_model = nx.DiGraph(nx.induced_subgraph(incomplete_model, im_nodes))
@@ -111,7 +109,8 @@ def gen_candidate_nodes_combination(iso_col_dic: dict, node_dic: dict):
         tmp = []
         for cType in v:
             tmp.append((node_dic[cType[0]], k, cType[0], cType[1]))
-        ls.append(tmp)
+        if tmp:
+            ls.append(tmp)
 
     pros = product(*ls)
 
@@ -129,14 +128,18 @@ def check_candidate_types(iso_columns_dic, node_dic, kg, im):
         s_node = kg.nodes[s]['label']
         t_node = kg.nodes[t]['label']
         kg_edges.add((s_node, t_node, edge[2]['label']))
-
+    dic = {}
     for col, cTypes in iso_columns_dic.items():
         for ct in cTypes.copy():
             entity = ct[0]
             newNode = node_dic[entity]
             edge_paths = search_edge_paths(newNode, kg_edges, nodes)
             if not check_edge_paths(edge_paths, im_lg, kg):
+                if len(cTypes) == 1:
+                    dic[col] = [ct[0], ct[1], newNode]
+                    pass
                 cTypes.remove(ct)
+    return dic
 
 
 def search_edge_paths(newNode, kg_edges, nodes):
@@ -260,13 +263,46 @@ def move_incorrect_relation(new_source_idx, im):
     return cols
 
 
-def experiments(path):
+def experiments_museum_crm(path):
+    # kg = utils.load_lg_graph(r"C:\D_Drive\ASM\DataSets\museum-crm\museum_kg_20220513.lg")
+    # freq_dic = {}.fromkeys(range(24), 0)
+    # node_set = set()
+    # for node in kg.nodes:
+    #     freq_dic[kg.nodes[node]["label"]] += 1
+    #     if kg.in_degree(node) == 0 or kg.out_degree(node) == 0:
+    #         node_set.add(kg.nodes[node]["label"])
+    # kg_edges = set()
+    # for edge in kg.edges.data():
+    #     s = edge[0]
+    #     t = edge[1]
+    #     s_node = kg.nodes[s]['label']
+    #     t_node = kg.nodes[t]['label']
+    #     kg_edges.add((s_node, t_node, edge[2]['label']))
+    res_df = pd.read_csv(rf"{path}\result.csv")
+    res_df["running time(s)"] = 0.0
+    ofile = open(rf"{path}\isoColumns.txt", "w", encoding="utf-8")
+
     for i in range(1, 30):
         try:
             # if i != 12:
             #     continue
+            kg = utils.load_lg_graph(rf"C:\D_Drive\ASM\DataSets\museum-crm\tmp\lg\museum_kg_s{i}.lg")
+            freq_dic = {}.fromkeys(range(24), 0)
+            node_set = set()
+            for node in kg.nodes:
+                freq_dic[kg.nodes[node]["label"]] += 1
+                if kg.in_degree(node) == 0 or kg.out_degree(node) == 0:
+                    node_set.add(kg.nodes[node]["label"])
+            kg_edges = set()
+            for edge in kg.edges.data():
+                s = edge[0]
+                t = edge[1]
+                s_node = kg.nodes[s]['label']
+                t_node = kg.nodes[t]['label']
+                kg_edges.add((s_node, t_node, edge[2]['label']))
             k_model = utils.load_graph_from_csv1\
                 (rf"{path}\newSource_{i}\cytoscape\candidate_model.csv")
+            start = time.time()
             dic, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
             cNodes = {e[1]: [e[0], e[2]["label"]] for e in im.edges.data() if im.nodes[e[1]]["nodeType"] == "columnNode"}
             if "E52_Time-Span1" in im.nodes:
@@ -283,54 +319,246 @@ def experiments(path):
                 im.remove_node("E55_Type2")
             ambiguous_cols = move_incorrect_relation(i, im)
             cNodes.update(ambiguous_cols)
-
             im_lg = utils.csv_to_lg(im)
-
-            check_candidate_types(dic, node_dict, kg, im)
-
+            dic1 = check_candidate_types(dic, node_dict, kg, im)
+            end = time.time()
+            run_time = round((end - start), 3)
+            idx = list(res_df["data source"]).index(rf"s{i}.csv")
+            res_df["running time(s)"][idx] = run_time
             utils.save_csv_graph(im,
                                  rf"{path}\newSource_{i}\seed.csv")
             utils.save_lg_graph(im_lg,
                                 rf"{path}\newSource_{i}\seed.lg")
-            print(f"ds: s{i}")
+            print(f"ds: s{i}", file=ofile)
             for k, v in dic.items():
-                print(f"isolate column: {k}\n")
-                print(f"candidate types: {v}\n")
+                print(f"isolate column: {k}\n", file=ofile)
+                print(f"candidate types: {v}\n", file=ofile)
             isoCols = gen_candidate_nodes_combination(dic, node_dict)
             with open(rf"{path}\newSource_{i}\cNode.json", "w") as jf:
                 json.dump(cNodes, jf, indent=2)
+            with open(rf"{path}\newSource_{i}\errorCols.json", "w") as jf:
+                json.dump(dic1, jf, indent=2)
             with open(rf"{path}\newSource_{i}\isoCols.json", "w") as jf:
                 json.dump(isoCols, jf, indent=2)
         except Exception:
             pass
+    ofile.close()
+    res_df.to_csv(rf"{path}\result.csv", index=False)
 
+
+def experiments_weapon_lod(path):
+
+    res_df = pd.read_csv(rf"{path}\result.csv")
+    res_df["running time(s)"] = 0.0
+
+    ofile = open(rf"{path}\isoColumns.txt", "w", encoding="utf-8")
+    kg_files = os.listdir("C:\D_Drive\ASM\DataSets\weapon-lod\kg_20220720\lg")
+    for i in range(0, 15):
+        try:
+            # if i != 14:
+            #     continue
+            print(kg_files[i])
+            kg = utils.load_lg_graph(rf"C:\D_Drive\ASM\DataSets\weapon-lod\kg_20220720\lg\{kg_files[i]}")
+            freq_dic = {}.fromkeys(range(24), 0)
+            node_set = set()
+            for node in kg.nodes:
+                freq_dic[kg.nodes[node]["label"]] += 1
+                if kg.in_degree(node) == 0 or kg.out_degree(node) == 0:
+                    node_set.add(kg.nodes[node]["label"])
+            kg_edges = set()
+            for edge in kg.edges.data():
+                s = edge[0]
+                t = edge[1]
+                s_node = kg.nodes[s]['label']
+                t_node = kg.nodes[t]['label']
+                kg_edges.add((s_node, t_node, edge[2]['label']))
+            k_model = utils.load_graph_from_csv1\
+                (rf"{path}\newSource_{i+1}\cytoscape\candidate_model.csv")
+            start = time.time()
+            dic, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
+
+            cNodes = {e[1]: [e[0], e[2]["label"]] for e in im.edges.data() if im.nodes[e[1]]["nodeType"] == "columnNode"}
+            # ambiguous_cols = move_incorrect_relation(i, im)
+            # cNodes.update(ambiguous_cols)
+            im_lg = utils.csv_to_lg(im)
+            dic1 = check_candidate_types(dic, node_dict, kg, im)
+
+            end = time.time()
+            run_time = round((end - start), 3)
+
+            idx = list(res_df["data source"]).index(rf"s{i+1}.csv")
+            res_df["running time(s)"][idx] = run_time
+            utils.save_csv_graph(im,
+                                 rf"{path}\newSource_{i+1}\seed.csv")
+            utils.save_lg_graph(im_lg,
+                                rf"{path}\newSource_{i+1}\seed.lg")
+            print(f"ds: s{i+1}", file=ofile)
+            for k, v in dic.items():
+                print(f"isolate column: {k}\n", file=ofile)
+                print(f"candidate types: {v}\n", file=ofile)
+            isoCols = gen_candidate_nodes_combination(dic, node_dict)
+            with open(rf"{path}\newSource_{i+1}\cNode.json", "w") as jf:
+                json.dump(cNodes, jf, indent=2)
+            with open(rf"{path}\newSource_{i+1}\errorCols.json", "w") as jf:
+                json.dump(dic1, jf, indent=2)
+            with open(rf"{path}\newSource_{i+1}\isoCols.json", "w") as jf:
+                json.dump(isoCols, jf, indent=2)
+        except Exception as e:
+            print(e)
+            pass
+    ofile.close()
+    res_df.to_csv(rf"{path}\result.csv", index=False)
+
+
+def experiments_museum_edm(path):
+
+    res_df = pd.read_csv(rf"{path}\result.csv")
+    res_df["running time(s)"] = 0.0
+
+    ofile = open(rf"{path}\isoColumns.txt", "w", encoding="utf-8")
+    for i in range(1, 30):
+        try:
+            # if i != 24:
+            #     continue
+
+            kg = utils.load_lg_graph(rf"C:\D_Drive\ASM\DataSets\museum-edm\kg_20220802\lg\museum_edm_kg_s{i}.lg")
+            print(rf"museum_edm_kg_s{i}.lg")
+            freq_dic = {}.fromkeys(range(24), 0)
+            node_set = set()
+            for node in kg.nodes:
+                freq_dic[kg.nodes[node]["label"]] += 1
+                if kg.in_degree(node) == 0 or kg.out_degree(node) == 0:
+                    node_set.add(kg.nodes[node]["label"])
+            kg_edges = set()
+            for edge in kg.edges.data():
+                s = edge[0]
+                t = edge[1]
+                s_node = kg.nodes[s]['label']
+                t_node = kg.nodes[t]['label']
+                kg_edges.add((s_node, t_node, edge[2]['label']))
+            k_model = utils.load_graph_from_csv1\
+                (rf"{path}\newSource_{i}\cytoscape\candidate_model.csv")
+            start = time.time()
+            dic, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
+
+            cNodes = {e[1]: [e[0], e[2]["label"]] for e in im.edges.data() if im.nodes[e[1]]["nodeType"] == "columnNode"}
+            # ambiguous_cols = move_incorrect_relation(i, im)
+            # cNodes.update(ambiguous_cols)
+            im_lg = utils.csv_to_lg(im)
+            dic1 = check_candidate_types(dic, node_dict, kg, im)
+
+            end = time.time()
+            run_time = round((end - start), 3)
+
+            idx = list(res_df["data source"]).index(rf"s{i}.csv")
+            res_df["running time(s)"][idx] = run_time
+            utils.save_csv_graph(im,
+                                 rf"{path}\newSource_{i}\seed.csv")
+            utils.save_lg_graph(im_lg,
+                                rf"{path}\newSource_{i}\seed.lg")
+            print(f"ds: s{i}", file=ofile)
+            for k, v in dic.items():
+                print(f"isolate column: {k}\n", file=ofile)
+                print(f"candidate types: {v}\n", file=ofile)
+            isoCols = gen_candidate_nodes_combination(dic, node_dict)
+            with open(rf"{path}\newSource_{i}\cNode.json", "w") as jf:
+                json.dump(cNodes, jf, indent=2)
+            with open(rf"{path}\newSource_{i}\errorCols.json", "w") as jf:
+                json.dump(dic1, jf, indent=2)
+            with open(rf"{path}\newSource_{i}\isoCols.json", "w") as jf:
+                json.dump(isoCols, jf, indent=2)
+        except Exception as e:
+            print(e)
+            pass
+    ofile.close()
+    res_df.to_csv(rf"{path}\result.csv", index=False)
+
+
+def experiments1(path):
+    res_df = pd.read_csv(rf"{path}\result.csv")
+    res_df["running time(s)"] = 0.0
+    ofile = open(rf"{path}\isoColumns.txt", "w", encoding="utf-8")
+    for i in range(1, 30):
+        try:
+            # if i != 28:
+            #     continue
+            kg = utils.load_lg_graph(rf"C:\D_Drive\ASM\DataSets\museum-crm\tmp\lg\museum_kg_s{i}.lg")
+            freq_dic = {}.fromkeys(range(24), 0)
+            node_set = set()
+            for node in kg.nodes:
+                freq_dic[kg.nodes[node]["label"]] += 1
+                if kg.in_degree(node) == 0 or kg.out_degree(node) == 0:
+                    node_set.add(kg.nodes[node]["label"])
+            kg_edges = set()
+            for edge in kg.edges.data():
+                s = edge[0]
+                t = edge[1]
+                s_node = kg.nodes[s]['label']
+                t_node = kg.nodes[t]['label']
+                kg_edges.add((s_node, t_node, edge[2]['label']))
+
+            k_model = utils.load_graph_from_csv1\
+                (rf"{path}\newSource_{i}\cytoscape\candidate_model.csv")
+            start = time.time()
+            dic, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
+            cNodes = {e[1]: [e[0], e[2]["label"]] for e in im.edges.data() if im.nodes[e[1]]["nodeType"] == "columnNode"}
+            if "E52_Time-Span1" in im.nodes:
+                im.remove_node("E52_Time-Span1")
+            if "E52_Time-Span2" in im.nodes:
+                im.remove_node("E52_Time-Span2")
+            if "E52_Time-Span3" in im.nodes:
+                im.remove_node("E52_Time-Span3")
+            if "E52_Time-Span4" in im.nodes:
+                im.remove_node("E52_Time-Span4")
+            if "E55_Type1" in im.nodes:
+                im.remove_node("E55_Type1")
+            if "E55_Type2" in im.nodes:
+                im.remove_node("E55_Type2")
+            ambiguous_cols = move_incorrect_relation(i, im)
+            cNodes.update(ambiguous_cols)
+            im_lg = utils.csv_to_lg(im)
+            dic1 = check_candidate_types(dic, node_dict, kg, im)
+            end = time.time()
+            run_time = round((end - start), 3)
+            idx = list(res_df["data source"]).index(rf"s{i}.csv")
+            res_df["running time(s)"][idx] = run_time
+            utils.save_csv_graph(im,
+                                 rf"{path}\newSource_{i}\seed.csv")
+            utils.save_lg_graph(im_lg,
+                                rf"{path}\newSource_{i}\seed.lg")
+            print(f"ds: s{i}", file=ofile)
+            # ofile.write(f"ds: s{i}")
+            for k, v in dic.items():
+                print(f"isolate column: {k}\n", file=ofile)
+                print(f"candidate types: {v}\n", file=ofile)
+
+            isoCols = gen_candidate_nodes_combination(dic, node_dict)
+            with open(rf"{path}\newSource_{i}\cNode.json", "w") as jf:
+                json.dump(cNodes, jf, indent=2)
+            with open(rf"{path}\newSource_{i}\errorCols.json", "w") as jf:
+                json.dump(dic1, jf, indent=2)
+            with open(rf"{path}\newSource_{i}\isoCols.json", "w") as jf:
+                json.dump(isoCols, jf, indent=2)
+        except Exception:
+            pass
+    ofile.close()
+    res_df.to_csv(rf"{path}\result.csv", index=False)
 
 
 if __name__ == '__main__':
     node_dict, edge_dict = utils.load_dict()
-    kg = utils.load_lg_graph(r"C:\D_Drive\ASM\DataSets\museum-crm\museum_kg_20220513.lg")
-    freq_dic = {}.fromkeys(range(24), 0)
-    node_set = set()
-    for node in kg.nodes:
-        freq_dic[kg.nodes[node]["label"]] += 1
-        if kg.in_degree(node) == 0 or kg.out_degree(node) == 0:
-            node_set.add(kg.nodes[node]["label"])
-    kg_edges = set()
-    for edge in kg.edges.data():
-        s = edge[0]
-        t = edge[1]
-        s_node = kg.nodes[s]['label']
-        t_node = kg.nodes[t]['label']
-        kg_edges.add((s_node, t_node, edge[2]['label']))
-
+    # experiments1(rf"C:\D_Drive\ASM\experiment\exp_20220712")
+    # experiments_weapon_lod(rf"C:\D_Drive\ASM\experiment\exp_20220721")
+    experiments_museum_edm(rf"C:\D_Drive\ASM\experiment\exp_20220809")
     train_ls = [
-        [7, 19, 23],
-        # [8, 13, 28],
-        # [8, 21, 25]
+        # [2, 6, 29],
+        # [1, 6, 12]
+        # [1, 15, 26]
     ]
     for train in train_ls:
-        dir_path = rf"C:\D_Drive\ASM\experiment\exp_20220627\train_{train[0]}_{train[1]}_{train[2]}___1"
-        experiments(dir_path)
+        dir_path = rf"C:\D_Drive\ASM\experiment\exp_20220705\train_{train[0]}_{train[1]}_{train[2]}___1"
+        experiments_museum_crm(dir_path)
+
 
     # for i in range(1, 30):
     #     try:

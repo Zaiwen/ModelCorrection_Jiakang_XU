@@ -373,6 +373,7 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 				break;
 			}
 		}
+
 		if (flag){
 			GramiMatcher gm = new GramiMatcher();
 			gm.setGraph(initGraph);
@@ -389,8 +390,12 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 
 		IntIterator it =  codeGraph.nodeIndexIterator();
 
+
+
 		int t = code.getLast().getNodeB() - code.getLast().getNodeA();
+//		System.out.println(code.getLast());
 		assert code.getLast().getNodeB() > code.getLast().getNodeA();
+
 		while (it.hasNext()){
 			int nodeIdx = it.next();
 			int label = codeGraph.getNodeLabel(nodeIdx);
@@ -402,10 +407,10 @@ public class RecursiveStrategy<NodeType, EdgeType> implements
 				return true;
 			}
 
+
 //			if (!constraintNodes.contains(label)){
 //				return true;
 //			}
-
 		}
 
 

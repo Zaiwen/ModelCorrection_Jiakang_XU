@@ -63,7 +63,7 @@ public class Predicate {
         this.predicate = predicate;
     }
 
-    /**test function*
+    /**museum_crm_test function*
      * @param args input args
      * */
     public static void main (String args[]){

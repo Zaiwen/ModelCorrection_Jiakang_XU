@@ -15,7 +15,7 @@
 package dataStructures;
 
 /**
- * Represents a possible extension used during the test for beingcanonical.
+ * Represents a possible extension used during the museum_crm_test for beingcanonical.
  * <p>
  * It can/will be stored in local object pool to avoid object generation/garbage
  * collection.

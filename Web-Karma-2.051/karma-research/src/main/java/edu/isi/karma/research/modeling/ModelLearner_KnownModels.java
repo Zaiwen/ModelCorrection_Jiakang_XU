@@ -859,7 +859,7 @@ public class ModelLearner_KnownModels {
 					try {
 //						GraphUtil.exportJson(modelLearningGraph.getGraphBuilder().getGraph(), graphName, true, true);
 //						GraphVizUtil.exportJGraphToGraphviz(modelLearner.graphBuilder.getGraph(),
-//								"test",
+//								"museum_crm_test",
 //								true,
 //								GraphVizLabelType.LocalId,
 //								GraphVizLabelType.LocalUri,

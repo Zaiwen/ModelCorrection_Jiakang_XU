@@ -2,15 +2,28 @@ import json
 import networkx as nx
 import pandas as pd
 import os
+import random
 
-DS = "museum"
-# DS = "tmp"
+# DS = "museum"
+# DS = "weapon"
+# DS = "museum_edm"
+DS = "tmp"
 
 def load_dict():
     with open(DS + r"_node_dict.json", 'r') as f:
         node_dict = json.load(f)
     with open(DS + r"_edge_dict.json", 'r') as f:
         edge_dict = json.load(f)
+    return node_dict, edge_dict
+
+
+def load_dict1():
+    with open(DS + r"_node_dict.json", 'r') as f:
+        node_dict = json.load(f)
+    with open(DS + r"_edge_dict.json", 'r') as f:
+        edge_dict = json.load(f)
+    node_dict = {v: k for k, v in node_dict.items()}
+    edge_dict = {v: k for k, v in edge_dict.items()}
     return node_dict, edge_dict
 
 
@@ -178,13 +191,14 @@ def csv_to_lg(csv_graph):
     node_dict, edge_dict = load_dict()
     try:
         csv_graph.remove_nodes_from(
-            nodes=[node for node in csv_graph.nodes if csv_graph.nodes[node]["nodeType"] == "columnNode"])
+            nodes=[node for node in csv_graph.nodes if csv_graph.nodes[node].get("nodeType") == "columnNode"])
     except Exception as e:
         # print(e)
         pass
 
     graph = nx.DiGraph()
     i = 0
+
     for node in csv_graph.nodes:
         csv_graph.nodes[node]["id"] = i
         i += 1
@@ -279,12 +293,41 @@ def save_csv_graph1(g, filename):
 
 if __name__ == '__main__':
 
-    dir_ = rf"C:\D_Drive\ASM\experiment\exp_20220613\extension\(1,4,21)\result_models"
+    # dir1 = rf"C:\D_Drive\ASM\DataSets\museum-crm\KG\lg"
+    # dir2 = rf"C:\D_Drive\ASM\DataSets\museum-crm\KG\csv"
+    # dir3 = rf"C:\D_Drive\ASM\DataSets\museum-crm\KG\cmd"
+    #
+    # for file in os.listdir(dir1):
+    #     if file == "s14.lg":
+    #
+    #         save_csv_graph(lg_to_csv(load_lg_graph(rf"{dir1}\{file}")), rf"{dir2}\{file}.csv")
+    ls = [str(i) for i in range(10)]
+    ls.extend(['A', 'B', 'C', 'D', 'E', 'F'])
+    # print(ls)
+    #
+    # for file in os.listdir(dir2):
+    #     graph = load_graph_from_csv(rf"{dir2}\{file}")
+    #     node_set = {node.rstrip("0123456789") for node in graph.nodes}
+    #     cmd_file = open(rf"{dir3}\{file}_cmd.txt", "w")
+    #     for n in node_set:
+    #         random.seed(n)
+    #         color = "#" + "".join(random.choices(ls, k=6))
+    #         nodes = [node for node in graph.nodes if node.startswith(n)]
+    #         cmd = f'''node set properties bypass=true network=current nodeList="{",".join(nodes)}"'''
+    #         cmd += f''' propertyList="fill color" valueList="{color}"\n'''
+    #         cmd_file.write(cmd)
+    #     cmd_file.close()
 
-    for file in os.listdir(dir_):
-        if file.endswith(".lg"):
-            save_csv_graph(lg_to_csv(load_lg_graph(rf"{dir_}\{file}")), rf"{dir_}\{file}.csv")
+    lg = load_lg_graph(rf"C:\D_Drive\ASM\DataSets\weapon-lod\kg_20220720\weapon_kg_alaskaslist.lg")
+    graph = lg_to_csv(lg)
+    node_set = {node.rstrip("0123456789") for node in graph.nodes}
+    with open(rf"C:\D_Drive\ASM\DataSets\weapon-lod\kg_20220720\cmd.txt", "w")as f:
+        for n in node_set:
+            random.seed(n+"2022")
+            color = "#" + "".join(random.choices(ls, k=6))
+            nodes = [node for node in graph.nodes if node.startswith(n)]
+            cmd = f'''node set properties bypass=true network=current nodeList="{",".join(nodes)}"'''
+            cmd += f''' propertyList="fill color" valueList="{color}"\n'''
+            f.write(cmd)
+    save_csv_graph(graph, rf"C:\D_Drive\ASM\DataSets\weapon-lod\kg_20220720\weapon_kg_alaskaslist.lg.csv")
 
-    # save_csv_graph(
-    #     lg_to_csv(load_lg_graph(rf"C:\D_Drive\ASM\experiment\exp_20220530\s15_result.lg")),
-    #     rf"C:\D_Drive\ASM\experiment\exp_20220530\s15_result.lg.csv")

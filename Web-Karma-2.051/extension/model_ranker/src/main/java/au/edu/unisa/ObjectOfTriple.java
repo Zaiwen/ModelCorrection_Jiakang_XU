@@ -187,7 +187,7 @@ public class ObjectOfTriple {
         this.isEntity = isEntity;
     }
 
-    /**test function*
+    /**museum_crm_test function*
      * @param args input
      * */
     public static void main(String args[]){

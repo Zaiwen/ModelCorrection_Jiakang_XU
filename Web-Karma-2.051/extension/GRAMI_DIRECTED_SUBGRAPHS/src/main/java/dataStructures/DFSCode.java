@@ -586,7 +586,7 @@ public class DFSCode<NodeType, EdgeType> extends
 	}
 
 	/**
-	 * helper function for the test of being canonical
+	 * helper function for the museum_crm_test of being canonical
 	 * 
 	 * search for a smaller first edge or starts recursive extension for equally
 	 * ones
@@ -670,7 +670,7 @@ public class DFSCode<NodeType, EdgeType> extends
 	}
 
 	/**
-	 * helper function for the test of being canonical
+	 * helper function for the museum_crm_test of being canonical
 	 * 
 	 * extends current detected DFSCode and searches for new extensions
 	 * 

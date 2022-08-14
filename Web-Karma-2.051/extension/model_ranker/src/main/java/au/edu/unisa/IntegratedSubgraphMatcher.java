@@ -255,7 +255,7 @@ public class IntegratedSubgraphMatcher {
         return connectingNodeMap;
     }
 
-    /**test the AC-MNI matcher*
+    /**museum_crm_test the AC-MNI matcher*
      * @from 26 Feb 2019
      * */
     public static void main (String args[]) {

@@ -258,7 +258,7 @@ public class GraphBuilderTopK extends GraphBuilder {
 			if (l == null) {
 				logger.error("this should not happen! there is a bug!");
 			}
-			
+
 			weight = f.weight();
 			if (!visitedNodes.contains(source)) {
 				tree.addVertex(source);
@@ -268,8 +268,9 @@ public class GraphBuilderTopK extends GraphBuilder {
 				tree.addVertex(target);
 				visitedNodes.add(target);
 			}
+
 //			System.out.println(f.toString());
-			
+//			System.out.println(l.getId());
 			tree.addEdge(source, target, l);
 			tree.setEdgeWeight(l, weight);
 		}

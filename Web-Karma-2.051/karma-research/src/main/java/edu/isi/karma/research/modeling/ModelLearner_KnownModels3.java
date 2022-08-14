@@ -329,7 +329,7 @@
 ////		System.out.println("numberOfAttributesWhoseTypeIsFirstCRFType:" + numberOfAttributesWhoseTypeIsFirstCRFType);
 //	}
 //
-//	public static void test() throws Exception {
+//	public static void museum_crm_test() throws Exception {
 //
 //		ServletContextParameterMap contextParameters = ContextParametersRegistry.getInstance().getDefault();
 //
@@ -479,7 +479,7 @@
 ////						GraphUtil.exportJson(modelLearningGraph.getGraphBuilder().getGraph(), graphName);
 //						/**Visualize the merged graph (model learning graph). 18 June 2018.**/
 //						GraphVizUtil.exportJGraphToGraphviz(modelLearner.graphBuilder.getGraph(),
-//								"test",
+//								"museum_crm_test",
 //								true,
 //								GraphVizLabelType.LocalId,
 //								GraphVizLabelType.LocalUri,
@@ -604,7 +604,7 @@
 //
 //	public static void main(String[] args) throws Exception {
 //
-//		test();
+//		museum_crm_test();
 //
 //	}
 //

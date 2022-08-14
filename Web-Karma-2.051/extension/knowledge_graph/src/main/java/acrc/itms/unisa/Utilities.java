@@ -377,7 +377,7 @@ public class Utilities {
         }
     }
 
-    //test
+    //museum_crm_test
     public static void main(String args[]){
 
         double n = Math.random();

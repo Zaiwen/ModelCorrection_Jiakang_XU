@@ -752,7 +752,7 @@ public class SteinerTree{
     /**check if a graph is connected or not**/
 
 
-    /**test decomposition function *
+    /**museum_crm_test decomposition function *
      * @from 21 Feb 2019
      * */
     public static void main (String args[]) {

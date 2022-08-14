@@ -32,6 +32,7 @@ public class LabelDir {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
+
         System.out.println("LabelDir.main");
     }
 }

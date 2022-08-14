@@ -469,7 +469,7 @@ public class GraphGeneration {
 //        return randomElement;
 //    }
 
-    /**test function**/
+    /**museum_crm_test function**/
     public static void main(String args[]){
 
 

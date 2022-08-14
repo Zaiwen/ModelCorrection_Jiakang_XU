@@ -16,6 +16,7 @@ package search;
 
 import CSP.Variable;
 import dataStructures.*;
+import edu.isi.karma.modeling.research.Params;
 import utilities.MyPair;
 
 import java.awt.*;
@@ -50,6 +51,7 @@ public class RightMostExtension<NodeType, EdgeType> extends
 	private ArrayList<ValidEdge> validEdges;
 
 
+
 	/**
 	 * creates a new pruning
 	 * 
@@ -64,17 +66,8 @@ public class RightMostExtension<NodeType, EdgeType> extends
 		freqs.add(new IntFrequency(0));
 
 		validEdges = new ArrayList<>();
-//		validEdges.add(new ValidEdge(6, 6, 2));
-//		validEdges.add(new ValidEdge(0, 7, 0));
-//		validEdges.add(new ValidEdge(0, 1, 3));
-//		validEdges.add(new ValidEdge(2, 2, 5));
-//		validEdges.add(new ValidEdge(3, 2, 5));
-//		validEdges.add(new ValidEdge(2, 4, 4));
-//		validEdges.add(new ValidEdge(0, 3, 6));
-//		validEdges.add(new ValidEdge(0, 0, 2));
-//		validEdges.add(new ValidEdge(0, 5, 1));
 
-		{
+		if (Objects.equals(Params.DATASET_NAME, "museum-crm")){
 			validEdges.add(new ValidEdge(0, 2, 4));
 			validEdges.add(new ValidEdge(0, 0, 1));
 			validEdges.add(new ValidEdge(0, 1, 6));
@@ -108,7 +101,6 @@ public class RightMostExtension<NodeType, EdgeType> extends
 			validEdges.add(new ValidEdge(2, 20, 1));
 			validEdges.add(new ValidEdge(23, 28, 2));
 			validEdges.add(new ValidEdge(23, 11, 6));
-//			validEdges.add(new ValidEdge(2, 1, 6));
 			validEdges.add(new ValidEdge(7, 16, 14));
 			validEdges.add(new ValidEdge(1, 19, 9));
 			validEdges.add(new ValidEdge(15, 24, 11));
@@ -118,6 +110,27 @@ public class RightMostExtension<NodeType, EdgeType> extends
 			validEdges.add(new ValidEdge(0, 7, 1));
 			validEdges.add(new ValidEdge(14, 19, 18));
 			validEdges.add(new ValidEdge(6, 25, 6));
+		}
+		else if (Objects.equals(Params.DATASET_NAME, "weapon-lod")){
+			validEdges.add(new ValidEdge(2, 3, 3));
+			validEdges.add(new ValidEdge(0, 4, 1));
+			validEdges.add(new ValidEdge(2, 5, 5));
+			validEdges.add(new ValidEdge(3, 6, 0));
+			validEdges.add(new ValidEdge(4, 2, 6));
+			validEdges.add(new ValidEdge(2, 1, 4));
+			validEdges.add(new ValidEdge(2, 7, 2));
+			validEdges.add(new ValidEdge(2, 0, 0));
+			validEdges.add(new ValidEdge(0, 2, 6));
+		}
+		else if (Params.DATASET_NAME == "museum-edm"){
+			validEdges.add(new ValidEdge(4, 7, 0));
+			validEdges.add(new ValidEdge(4, 5, 4));
+			validEdges.add(new ValidEdge(2, 4, 4));
+			validEdges.add(new ValidEdge(4, 1, 6));
+			validEdges.add(new ValidEdge(2, 2, 1));
+			validEdges.add(new ValidEdge(4, 6, 5));
+			validEdges.add(new ValidEdge(4, 0, 3));
+			validEdges.add(new ValidEdge(4, 3, 3));
 		}
 
 		// TODO: evtl schnellere vergleich der gEdges, aber das macht nicht viel

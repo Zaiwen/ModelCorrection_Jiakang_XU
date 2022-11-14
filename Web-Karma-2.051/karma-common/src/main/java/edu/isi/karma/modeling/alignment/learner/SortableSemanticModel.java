@@ -22,10 +22,10 @@
 package edu.isi.karma.modeling.alignment.learner;
 
 
-import java.text.DecimalFormat;
-
 import edu.isi.karma.modeling.alignment.SemanticModel;
 import edu.isi.karma.rep.alignment.LabeledLink;
+
+import java.text.DecimalFormat;
 
 public class SortableSemanticModel extends SemanticModel
 	implements Comparable<SortableSemanticModel>{
@@ -190,21 +190,21 @@ public class SortableSemanticModel extends SemanticModel
 //		double score1 = this.getScore();
 //		double score2 = m.getScore();
 
-//		double linkCoherence1 = this.linkCoherence.getCoherenceValue();
-//		double linkCoherence2 = m.linkCoherence.getCoherenceValue();
-//		
-//		if (linkCoherence1 > linkCoherence2)
-//			return greaterThan;
-//		else if (linkCoherence1 < linkCoherence2)
-//			return lessThan;
-		
-		Integer[] linkCoherencePair1 = this.linkCoherence.getCoherencePair();
-		Integer[] linkCoherencePair2 = m.linkCoherence.getCoherencePair();
-		int linkCoherence = this.compareCoherencePair(linkCoherencePair1, linkCoherencePair2);
-		if (linkCoherence < 0)
+		double linkCoherence1 = this.linkCoherence.getCoherenceValue();
+		double linkCoherence2 = m.linkCoherence.getCoherenceValue();
+
+		if (linkCoherence1 > linkCoherence2)
 			return greaterThan;
-		else if (linkCoherence > 0)
+		else if (linkCoherence1 < linkCoherence2)
 			return lessThan;
+		
+//		Integer[] linkCoherencePair1 = this.linkCoherence.getCoherencePair();
+//		Integer[] linkCoherencePair2 = m.linkCoherence.getCoherencePair();
+//		int linkCoherence = this.compareCoherencePair(linkCoherencePair1, linkCoherencePair2);
+//		if (linkCoherence < 0)
+//			return greaterThan;
+//		else if (linkCoherence > 0)
+//			return lessThan;
 
 //		if (score1 > score2)
 //			return greaterThan;

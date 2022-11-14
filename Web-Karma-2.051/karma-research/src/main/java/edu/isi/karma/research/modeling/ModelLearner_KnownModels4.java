@@ -19,11 +19,7 @@ import edu.isi.karma.webserver.ServletContextParameterMap;
 import org.jgrapht.graph.AsUndirectedGraph;
 import org.jgrapht.graph.DirectedWeightedMultigraph;
 import org.jgrapht.graph.WeightedMultigraph;
-import org.python.core.PyFunction;
-import org.python.core.PyInteger;
-import org.python.core.PyList;
 import org.python.google.common.collect.Lists;
-import org.python.util.PythonInterpreter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -146,8 +142,6 @@ public class ModelLearner_KnownModels4 {
             /**Get the top k Steiner Trees. 22 May 2018.**/
             int k = modelingConfiguration.getTopKSteinerTree();
 
-//            k = 1;
-
             topKSteinerTrees =  ((GraphBuilderTopK)this.graphBuilder).getTopKSteinerTrees(sn, k, null, null, false);
         }
         else
@@ -182,13 +176,12 @@ public class ModelLearner_KnownModels4 {
 //					System.out.println(sortableSemanticModel.getLinkCoherence().printCoherenceList());
             }
         }
-
         Collections.sort(sortableSemanticModels);
         int count = Math.min(sortableSemanticModels.size(), modelingConfiguration.getNumCandidateMappings());
         logger.info("results are ready ...");
 //		sortableSemanticModels.get(0).print();
         return sortableSemanticModels.subList(0, count);
-
+//        return sortableSemanticModels;
     }
 
     private List<SemanticType> getCandidateSteinerSets(ColumnNode steinerNode, boolean useCorrectTypes, int numberOfCandidates) {
@@ -203,8 +196,8 @@ public class ModelLearner_KnownModels4 {
             if (steinerNode.getLearnedSemanticTypes()!=null && steinerNode.getLearnedSemanticTypes().size() > 0){
                 if (steinerNode.getLearnedSemanticTypes().size() > 1 &&
                         steinerNode.getLearnedSemanticTypes().get(0).getConfidenceScore()
-                                / steinerNode.getLearnedSemanticTypes().get(1).getConfidenceScore() > 1){
-                    candidateSemanticTypes = steinerNode.getTopKLearnedSemanticTypes(4);
+                                / steinerNode.getLearnedSemanticTypes().get(1).getConfidenceScore() >= 1){
+                    candidateSemanticTypes = steinerNode.getTopKLearnedSemanticTypes(1);
                 }else {
                     candidateSemanticTypes = steinerNode.getTopKLearnedSemanticTypes(numberOfCandidates);
                 }
@@ -913,9 +906,8 @@ public class ModelLearner_KnownModels4 {
         /**begin to import the common data model (CDM)**/
         if(ontologyManager == null) {
             ontologyManager = new OntologyManager(contextParameters.getId());
-//            File oFile = new File(Params.ROOT_DIR + "weapon.owl");
-            File oFile = new File(Params.ROOT_DIR + "edm.owl");
-
+            File oFile = new File(Params.ROOT_DIR + "weapon.owl");
+//            File oFile = new File(Params.ROOT_DIR + "edm.owl");
 //            File oFile = new File(Params.ROOT_DIR+"ecrm_update(20190521).owl");
 //        File ff = new File(Params.ROOT_DIR+"preloaded-ontologies");
 //        File[] files = ff.listFiles();
@@ -929,6 +921,11 @@ public class ModelLearner_KnownModels4 {
             ontologyManager.doImport(oFile, "UTF-8");
             ontologyManager.updateCache();
         }
+
+        System.out.println(ontologyManager.getClasses().size());
+        System.out.println(ontologyManager.getProperties().size());
+
+        System.exit(1);
 
 
         ModelLearningGraph modelLearningGraph = null;
@@ -1041,10 +1038,10 @@ public class ModelLearner_KnownModels4 {
         modelLearner.nodeIdFactory = modelLearner.graphBuilder.getNodeIdFactory();
 //
 //            /**print alignment graph**/
-////            DirectedWeightedMultigraph<Node , DefaultLink> currentGraph = modelLearner.graphBuilder.getGraph();
-////            printDirectedWeightedMultigraph(currentGraph);//print the graph
-////            System.out.println("# of nodes in model learning graph: " + currentGraph.vertexSet().size());
-////            System.out.println("# of links in model learning graph: " +currentGraph.edgeSet().size());
+//            DirectedWeightedMultigraph<Node , DefaultLink> currentGraph = modelLearner.graphBuilder.getGraph();
+//            printDirectedWeightedMultigraph(currentGraph);//print the graph
+//            System.out.println("# of nodes in model learning graph: " + currentGraph.vertexSet().size());
+//            System.out.println("# of links in model learning graph: " +currentGraph.edgeSet().size());
 //
 //            // save graph to file
 //            try {
@@ -1101,6 +1098,7 @@ public class ModelLearner_KnownModels4 {
                 SortableSemanticModel m = topHypotheses.get(k);
 
                 me = m.evaluate(correctModel);
+
 
                 String label = "candidate " + k + "\n" +
 //								(m.getSteinerNodes() == null ? "" : m.getSteinerNodes().getScoreDetailsString()) +
@@ -1217,9 +1215,6 @@ public class ModelLearner_KnownModels4 {
 
 
 
-
-
-    /**just for museum_crm_test . 14 Aug 2018.**/
     public static void main(String[] args) throws Exception {
 
 
@@ -1234,13 +1229,19 @@ public class ModelLearner_KnownModels4 {
         ontologyManager = null;
 
 //        System.out.println("ModelLearner_KnownModels4.main");
-        for (int i = 0; i < 29; i++) {
-            if (i == 26){
-                continue;
-            }
-            List<SortableSemanticModel> candidateModels = getCandidateSemanticModels(i, "C:\\D_Drive\\ASM\\experiment\\");
 
+        List<SortableSemanticModel> candidateModels = getCandidateSemanticModels(0, "C:\\D_Drive\\ASM\\experiment\\");
+//        SortableSemanticModel sm1 = candidateModels.get(0);
+//        SortableSemanticModel sm2 = candidateModels.get(16);
+//        System.out.println(sm1.compareTo(sm2));
+        for (SortableSemanticModel model : candidateModels) {
+            System.out.println("cost:"+model.getCost());
+            System.out.println("confidence score:"+model.getConfidenceScore());
+//            System.out.println("con"+model.getConfidenceScore());
+            System.out.println(model.getLinkCoherence().getCoherenceValue());
+            System.out.println();
         }
+
 
         // Leave One Out
 //        for (int i = 0; i < 15; i++) {
@@ -1263,43 +1264,11 @@ public class ModelLearner_KnownModels4 {
 //        }
 //        resultFile.close();
         // numbers of known models = 10
-        System.exit(1);
-        for (int i = 0; i < 15; i++) {
-            Integer[] trainIndex = randomTrainIndex(i, 10, i);
-            getCandidateSemanticModels(i, trainIndex);
-        }
+
+
 //        resultFile.close();
 
     }
 
-    public static int[] LOO(int i){
-        ArrayList<Integer> list = new ArrayList<>();
-
-
-        for (int j = 0; j < 15; j++) {
-            list.add(j);
-        }
-
-        list.remove(i);
-        int[] arr = new int[14];
-        for (int j = 0; j < 14; j++) {
-            arr[j] = list.get(j);
-        }
-
-        return arr;
-    }
-
-    public static Integer[] randomTrainIndex(int testIndex, int numbersOfKnownModels, int seed){
-        PythonInterpreter interpreter = new PythonInterpreter();
-        interpreter.execfile("C:\\D_Drive\\ASM\\DataMatchingMaster\\randomTrainIndex.py");
-        PyFunction pyFunction = interpreter.get("randomTrainIndex", PyFunction.class);
-        PyList pyList = (PyList) pyFunction.__call__(new PyInteger(testIndex), new PyInteger(numbersOfKnownModels), new PyInteger(seed));
-        pyList.sort();
-        Integer[] arr = new Integer[numbersOfKnownModels];
-        for (int j = 0; j < numbersOfKnownModels; j++) {
-            arr[j] = (int) pyList.get(j);
-        }
-        return arr;
-    }
 
 }

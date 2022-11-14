@@ -900,6 +900,9 @@ public class HPListGraph<NodeType, EdgeType> implements
 	public ArrayList<EdgeType> getEdgeLabels(){
 		edgeLabels = new ArrayList<>();
 		edgeLabels.addAll(Arrays.asList(edge_labels));
+		while (edgeLabels.contains(null)){
+			edgeLabels.remove(null);
+		}
 		return edgeLabels;
 	}
 

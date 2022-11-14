@@ -4,10 +4,9 @@ import pandas as pd
 import os
 import random
 
-# DS = "museum"
+DS = "museum_crm"
 # DS = "weapon"
 # DS = "museum_edm"
-DS = "tmp"
 
 def load_dict():
     with open(DS + r"_node_dict.json", 'r') as f:
@@ -53,18 +52,27 @@ def load_lg_graph(filename):
 def load_graph_from_csv(filename):
     graph = nx.DiGraph()
     try:
-        with open(filename) as graph_file:
-            for line in graph_file:
-                if "source" not in line:
-                    line_split = line.split(",")
-                    source = line_split[0]
-                    source_label = line_split[0][:-1]
-                    target = line_split[1]
-                    target_label = line_split[1][:-1]
-                    edge_label = line_split[2].rstrip("\n")
-                    graph.add_node(source, label=source_label)
-                    graph.add_node(target, label=target_label)
-                    graph.add_edge(source, target, label=edge_label)
+        # with open(filename) as graph_file:
+        #     for line in graph_file:
+        #         if "source" not in line:
+        #             line_split = line.split(",")
+        #             source = line_split[0]
+        #             source_label = line_split[0][:-1]
+        #             target = line_split[1]
+        #             target_label = line_split[1][:-1]
+        #             edge_label = line_split[2].rstrip("\n")
+        #             graph.add_node(source, label=source_label)
+        #             graph.add_node(target, label=target_label)
+        #             graph.add_edge(source, target, label=edge_label)
+        # return graph
+        df = pd.read_csv(filename)
+        for _, row in df.iterrows():
+            source = row["source"]
+            target = row["target"]
+            edge_label = row["edge_label"]
+            graph.add_node(source, label=source.rstrip("0123456789"))
+            graph.add_node(target, label=target.rstrip("0123456789"))
+            graph.add_edge(source, target, label=edge_label)
         return graph
     except FileNotFoundError:
         print("the file", filename, "does not exist!")
@@ -148,6 +156,21 @@ def get_mcs(g1, g2) -> nx.DiGraph:
     return nx.induced_subgraph(g2, largest_component)
 
 
+def split_graph(graph: nx.DiGraph):
+    entity_nodes = [node for node in graph.nodes if graph.nodes[node]["nodeType"] == "InternalNode"]
+    subgraphs = []
+    for node in entity_nodes:
+        column_nodes = [cn for cn in graph.successors(node) if graph.nodes[cn]["nodeType"] == "columnNode"]
+        # print(column_nodes)
+        nodes = column_nodes.copy()
+        nodes.append(node)
+        subgraph = nx.induced_subgraph(graph, nodes)
+        subgraphs.append(subgraph)
+
+    return subgraphs
+
+
+
 def merge_graph(g1: nx.DiGraph, g2: nx.DiGraph, s1: str, s2: str) -> nx.DiGraph:
     merged_graph = nx.DiGraph()
     try:
@@ -167,7 +190,6 @@ def merge_graph(g1: nx.DiGraph, g2: nx.DiGraph, s1: str, s2: str) -> nx.DiGraph:
     for node in g2.nodes.data():
         if node not in mcs_g2.nodes.data():
             merged_graph.add_node(node[0] + s2, label=node[1]['label'])
-
     for edge in g2.edges.data():
         if edge not in mcs_g2.edges.data():
             s_node = edge[0]
@@ -183,7 +205,6 @@ def merge_graph(g1: nx.DiGraph, g2: nx.DiGraph, s1: str, s2: str) -> nx.DiGraph:
                             merged_graph.add_edge(n_node + s2, node + s1, label=edge[2]['label'])
             else:
                 merged_graph.add_edge(s_node + s2, t_node + s2, label=edge[2]['label'])
-
     return merged_graph
 
 
@@ -196,6 +217,7 @@ def csv_to_lg(csv_graph):
         # print(e)
         pass
 
+
     graph = nx.DiGraph()
     i = 0
 
@@ -207,6 +229,30 @@ def csv_to_lg(csv_graph):
         source_label = csv_graph.nodes[edge[0]]['label']
         target_id = csv_graph.nodes[edge[1]]['id']
         target_label = csv_graph.nodes[edge[1]]['label']
+        edge_label = csv_graph.edges[edge]['label']
+        graph.add_node(source_id, label=node_dict.get(source_label, -1))
+        graph.add_node(target_id, label=node_dict.get(target_label, -1))
+        graph.add_edge(source_id, target_id, label=edge_dict.get(edge_label, -1))
+    return graph
+
+
+def csv_to_lg1(csv_graph):
+    node_dict, edge_dict = load_dict()
+
+    graph = nx.DiGraph()
+    i = 0
+
+    for node in csv_graph.nodes:
+        csv_graph.nodes[node]["id"] = i
+        i += 1
+    for edge in csv_graph.edges:
+        source_id = csv_graph.nodes[edge[0]]['id']
+        source_label = csv_graph.nodes[edge[0]]['label']
+        target_id = csv_graph.nodes[edge[1]]['id']
+        if csv_graph.nodes[edge[1]]["nodeType"] == "columnNode":
+            target_label = "data_value"
+        else:
+            target_label = csv_graph.nodes[edge[1]]['label']
         edge_label = csv_graph.edges[edge]['label']
         graph.add_node(source_id, label=node_dict.get(source_label, -1))
         graph.add_node(target_id, label=node_dict.get(target_label, -1))
@@ -293,41 +339,11 @@ def save_csv_graph1(g, filename):
 
 if __name__ == '__main__':
 
-    # dir1 = rf"C:\D_Drive\ASM\DataSets\museum-crm\KG\lg"
-    # dir2 = rf"C:\D_Drive\ASM\DataSets\museum-crm\KG\csv"
-    # dir3 = rf"C:\D_Drive\ASM\DataSets\museum-crm\KG\cmd"
-    #
-    # for file in os.listdir(dir1):
-    #     if file == "s14.lg":
-    #
-    #         save_csv_graph(lg_to_csv(load_lg_graph(rf"{dir1}\{file}")), rf"{dir2}\{file}.csv")
-    ls = [str(i) for i in range(10)]
-    ls.extend(['A', 'B', 'C', 'D', 'E', 'F'])
-    # print(ls)
-    #
-    # for file in os.listdir(dir2):
-    #     graph = load_graph_from_csv(rf"{dir2}\{file}")
-    #     node_set = {node.rstrip("0123456789") for node in graph.nodes}
-    #     cmd_file = open(rf"{dir3}\{file}_cmd.txt", "w")
-    #     for n in node_set:
-    #         random.seed(n)
-    #         color = "#" + "".join(random.choices(ls, k=6))
-    #         nodes = [node for node in graph.nodes if node.startswith(n)]
-    #         cmd = f'''node set properties bypass=true network=current nodeList="{",".join(nodes)}"'''
-    #         cmd += f''' propertyList="fill color" valueList="{color}"\n'''
-    #         cmd_file.write(cmd)
-    #     cmd_file.close()
-
-    lg = load_lg_graph(rf"C:\D_Drive\ASM\DataSets\weapon-lod\kg_20220720\weapon_kg_alaskaslist.lg")
-    graph = lg_to_csv(lg)
-    node_set = {node.rstrip("0123456789") for node in graph.nodes}
-    with open(rf"C:\D_Drive\ASM\DataSets\weapon-lod\kg_20220720\cmd.txt", "w")as f:
-        for n in node_set:
-            random.seed(n+"2022")
-            color = "#" + "".join(random.choices(ls, k=6))
-            nodes = [node for node in graph.nodes if node.startswith(n)]
-            cmd = f'''node set properties bypass=true network=current nodeList="{",".join(nodes)}"'''
-            cmd += f''' propertyList="fill color" valueList="{color}"\n'''
-            f.write(cmd)
-    save_csv_graph(graph, rf"C:\D_Drive\ASM\DataSets\weapon-lod\kg_20220720\weapon_kg_alaskaslist.lg.csv")
-
+    lg = load_lg_graph(rf"C:\D_Drive\ASM\experiment\tmp\tmp.lg")
+    save_csv_graph(lg_to_csv(lg), rf"C:\D_Drive\ASM\experiment\tmp\tmp.csv")
+    # for i in range(1, 16):
+    #     try:
+    #         lg = load_lg_graph(rf"C:\D_Drive\ASM\experiment\exp_20220920\train_1_6_12___1\newSource_{i}\s{i}_result.lg")
+    #         save_csv_graph(lg_to_csv(lg), rf"C:\D_Drive\ASM\experiment\exp_20220920\train_1_6_12___1\newSource_{i}\s{i}_result.lg.csv")
+    #     except Exception:
+    #         pass

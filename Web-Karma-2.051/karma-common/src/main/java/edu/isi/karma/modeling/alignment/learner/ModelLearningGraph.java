@@ -254,7 +254,6 @@ public abstract class ModelLearningGraph {
 
 		    /**Get all the internal nodes of domain ontology**/
             Set<InternalNode> classesAtOnt = getEntitiesFromOntology("http://erlangen-crm.org/current/");
-
             Set<InternalNode> entityAtSemanticModel = model.getInternalNodes();
             Set<String> entityURIAtSemanticModel = new HashSet<>();
             for (InternalNode internalNode : entityAtSemanticModel) {

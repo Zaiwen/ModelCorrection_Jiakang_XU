@@ -112,25 +112,54 @@ public class RightMostExtension<NodeType, EdgeType> extends
 			validEdges.add(new ValidEdge(6, 25, 6));
 		}
 		else if (Objects.equals(Params.DATASET_NAME, "weapon-lod")){
-			validEdges.add(new ValidEdge(2, 3, 3));
-			validEdges.add(new ValidEdge(0, 4, 1));
-			validEdges.add(new ValidEdge(2, 5, 5));
-			validEdges.add(new ValidEdge(3, 6, 0));
-			validEdges.add(new ValidEdge(4, 2, 6));
-			validEdges.add(new ValidEdge(2, 1, 4));
-			validEdges.add(new ValidEdge(2, 7, 2));
-			validEdges.add(new ValidEdge(2, 0, 0));
-			validEdges.add(new ValidEdge(0, 2, 6));
+			validEdges.add(new ValidEdge(1, 11, 0));
+			validEdges.add(new ValidEdge(2, 2, 0));
+			validEdges.add(new ValidEdge(2, 0, 1));
+			validEdges.add(new ValidEdge(2, 8, 0));
+			validEdges.add(new ValidEdge(2, 5, 2));
+			validEdges.add(new ValidEdge(5, 7, 0));
+			validEdges.add(new ValidEdge(4, 13, 0));
+			validEdges.add(new ValidEdge(5, 13, 0));
+			validEdges.add(new ValidEdge(2, 12, 3));
+			validEdges.add(new ValidEdge(1, 13, 0));
+			validEdges.add(new ValidEdge(2, 1, 0));
+			validEdges.add(new ValidEdge(2, 13, 0));
+			validEdges.add(new ValidEdge(2, 3, 5));
+			validEdges.add(new ValidEdge(3, 4, 1));
+			validEdges.add(new ValidEdge(2, 10, 4));
+			validEdges.add(new ValidEdge(1, 9, 0));
+			validEdges.add(new ValidEdge(3, 14, 0));
+			validEdges.add(new ValidEdge(2, 9, 0));
+			validEdges.add(new ValidEdge(2, 6, 0));
+
 		}
-		else if (Params.DATASET_NAME == "museum-edm"){
-			validEdges.add(new ValidEdge(4, 7, 0));
-			validEdges.add(new ValidEdge(4, 5, 4));
-			validEdges.add(new ValidEdge(2, 4, 4));
-			validEdges.add(new ValidEdge(4, 1, 6));
-			validEdges.add(new ValidEdge(2, 2, 1));
-			validEdges.add(new ValidEdge(4, 6, 5));
-			validEdges.add(new ValidEdge(4, 0, 3));
-			validEdges.add(new ValidEdge(4, 3, 3));
+		else if (Objects.equals(Params.DATASET_NAME, "museum-edm")){
+			validEdges.add(new ValidEdge(5, 17, 4));
+			validEdges.add(new ValidEdge(4, 16, 0));
+			validEdges.add(new ValidEdge(5, 1, 0));
+			validEdges.add(new ValidEdge(2, 11, 0));
+			validEdges.add(new ValidEdge(3, 18, 5));
+			validEdges.add(new ValidEdge(5, 20, 6));
+			validEdges.add(new ValidEdge(5, 10, 0));
+			validEdges.add(new ValidEdge(4, 13, 0));
+			validEdges.add(new ValidEdge(1, 7, 0));
+			validEdges.add(new ValidEdge(4, 9, 0));
+			validEdges.add(new ValidEdge(5, 0, 0));
+			validEdges.add(new ValidEdge(6, 11, 0));
+			validEdges.add(new ValidEdge(5, 6, 0));
+			validEdges.add(new ValidEdge(5, 12, 0));
+			validEdges.add(new ValidEdge(4, 21, 0));
+			validEdges.add(new ValidEdge(7, 11, 0));
+			validEdges.add(new ValidEdge(3, 15, 2));
+			validEdges.add(new ValidEdge(5, 3, 4));
+			validEdges.add(new ValidEdge(3, 11, 0));
+			validEdges.add(new ValidEdge(4, 2, 0));
+			validEdges.add(new ValidEdge(4, 5, 0));
+			validEdges.add(new ValidEdge(5, 22, 1));
+			validEdges.add(new ValidEdge(5, 8, 0));
+			validEdges.add(new ValidEdge(5, 14, 0));
+			validEdges.add(new ValidEdge(5, 4, 7));
+			validEdges.add(new ValidEdge(5, 19, 5));
 		}
 
 		// TODO: evtl schnellere vergleich der gEdges, aber das macht nicht viel

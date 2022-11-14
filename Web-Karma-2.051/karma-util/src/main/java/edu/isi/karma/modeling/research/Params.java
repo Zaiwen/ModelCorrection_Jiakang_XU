@@ -30,10 +30,11 @@ public class Params {
 //	public static String DATASET_NAME = "museum-29-crm";
 //	public static String DATASET_NAME = "museum-29-crm-lod";
 //	public static String DATASET_NAME = "museum-29-edm-lod";
-//	public static String DATASET_NAME = "weapon-lod";
 //	public static String DATASET_NAME = "music";
-//    public static String DATASET_NAME = "museum-crm";
-    public static String DATASET_NAME = "museum-edm";
+    public static String DATASET_NAME = "museum-crm";
+//    public static String DATASET_NAME = "museum-edm";
+//	public static String DATASET_NAME = "weapon-lod";
+
 
 	public static String ROOT_DIR = "C:\\D_Drive\\ASM\\DataSets\\" + DATASET_NAME + "\\";
 	public static String ONTOLOGY_DIR = ROOT_DIR + "preloaded-ontologies/";

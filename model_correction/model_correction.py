@@ -1,5 +1,4 @@
-import itertools
-import operator
+import random
 import sys
 import time
 
@@ -9,6 +8,7 @@ import utils
 import os
 import json
 from itertools import product
+from itertools import combinations
 import networkx as nx
 import pandas as pd
 import joblib
@@ -34,6 +34,12 @@ def remove_incorrect_edge(kg, model, node_dict, edge_dict):
     components = nx.connected_components(graph)
     largest_component = max(components, key=len)
     return nx.induced_subgraph(model, largest_component)
+
+
+def largest_components_subgraph(m):
+    components = nx.weakly_connected_components(m)
+    largest_component = max(components, key=len)
+    return nx.DiGraph(nx.induced_subgraph(m, largest_component))
 
 
 def find_isolate_columns(kg, model: nx.DiGraph, node_dict, edge_dict):
@@ -63,11 +69,6 @@ def find_isolate_columns(kg, model: nx.DiGraph, node_dict, edge_dict):
                     flag = False
             if flag:
                 model.remove_node(node)
-
-    def largest_components_subgraph(m):
-        components = nx.weakly_connected_components(m)
-        largest_component = max(components, key=len)
-        return nx.DiGraph(nx.induced_subgraph(m, largest_component))
 
     isolate_columns_dic = {}
     incomplete_model = largest_components_subgraph(model)
@@ -101,6 +102,106 @@ def find_isolate_columns(kg, model: nx.DiGraph, node_dict, edge_dict):
             isolate_columns_dic[cNode] = learn_types
 
     return isolate_columns_dic, incomplete_model
+
+
+def find_isolate_columns1(kg, model: nx.DiGraph):
+
+    kg_edges = set()
+    for edge in kg.edges.data():
+        s = edge[0]
+        t = edge[1]
+        s_node = kg.nodes[s]['label']
+        t_node = kg.nodes[t]['label']
+        kg_edges.add((s_node, t_node, edge[2]['label']))
+
+    # for edge in model.copy().edges.data():
+    #     s_node = edge[0]
+    #     t_node = edge[1]
+    #     edge_label = edge[2]['label']
+    #     if model.nodes[t_node]["nodeType"] == "InternalNode" and \
+    #             (node_dict.get(s_node[:-1], -1), node_dict.get(t_node[:-1], -1),
+    #              edge_dict.get(edge_label, -1)) not in kg_edges:
+    #         model.remove_edge(edge[0], edge[1])
+
+    # for node in model.copy().nodes:
+    #     if model.nodes[node]["nodeType"] == "InternalNode":
+    #         flag = True
+    #         for succ in model.successors(node):
+    #             if model.nodes[succ]["nodeType"] == "columnNode":
+    #                 flag = False
+    #         if flag:
+    #             model.remove_node(node)
+
+    def largest_components_subgraph(m):
+        components = nx.weakly_connected_components(m)
+        largest_component = max(components, key=len)
+        return nx.DiGraph(nx.induced_subgraph(m, largest_component))
+
+    isolate_columns_dic = {}
+    incomplete_model = largest_components_subgraph(model)
+    nm = nx.algorithms.isomorphism.categorical_node_match("label", None)
+    em = nx.algorithms.isomorphism.categorical_node_match("label", None)
+    g = nx.DiGraph()
+    cNodes = [node for node in incomplete_model if incomplete_model.nodes[node]["nodeType"] == "columnNode"]
+    dgm = nx.isomorphism.DiGraphMatcher(kg, utils.csv_to_lg1(incomplete_model.copy()), nm, em)
+    if not dgm.subgraph_is_monomorphic():
+
+        for e in nx.edge_bfs(incomplete_model):
+            print(e)
+            if g.nodes and e[0] not in g.nodes and e[1] not in g.nodes:
+                continue
+            new_node = e[1] if e[1] not in g.nodes else e[0]
+            g.add_node(e[0], label=e[0][:-1])
+            g.add_node(e[1], label=e[1][:-1])
+            g.add_edge(*e, label=model.edges[e]["label"])
+            dgm = nx.isomorphism.DiGraphMatcher(kg, utils.csv_to_lg1(g), nm, em)
+            if not dgm.subgraph_is_monomorphic():
+                g.remove_node(new_node)
+        im_nodes = cNodes[:]
+        im_nodes.extend(g.nodes)
+        incomplete_model = nx.DiGraph(nx.induced_subgraph(incomplete_model, im_nodes))
+        incomplete_model = largest_components_subgraph(incomplete_model)
+
+    for cNode in [node for node in model.nodes if model.nodes[node]["nodeType"] == "columnNode"]:
+        eNode = list(model.predecessors(cNode))[0]
+        if eNode not in incomplete_model:
+            learn_types = utils.parse_learned_types(model, cNode)
+            isolate_columns_dic[cNode] = learn_types
+
+    return isolate_columns_dic, incomplete_model
+
+
+def func(kg, graph:nx.DiGraph):
+    column_nodes = [node for node in graph.nodes if graph.nodes[node]["nodeType"] == "columnNode"]
+    # print(column_nodes)
+    candidate_nodes = []
+    flag = False
+    best_score = float("inf")
+    for j in range(len(column_nodes)):
+        for com in combinations(column_nodes, j):
+            # print(com)
+            # continue
+            # subgraph = nx.DiGraph()
+            subgraph = nx.induced_subgraph(graph, [node for node in graph.nodes if node not in com])
+            subgraph_lg = utils.csv_to_lg1(subgraph)
+            subgraph_isomorphic = check_subgraph_isomorphic(kg, subgraph_lg)
+            if subgraph_isomorphic:
+                score = 0
+                for node in com:
+                    learnedTypes = graph.nodes[node]["learnedTypes"]
+                    if type(learnedTypes) == float:
+                        top_1_type_score = 1
+                    else:
+                        top_1_type_score = float(learnedTypes.split("\t")[0].split()[2])
+                    score += top_1_type_score
+                if score < best_score:
+                    candidate_nodes = list(com)
+                    best_score = score
+                flag = True
+        if flag:
+            break
+
+    return candidate_nodes
 
 
 def gen_candidate_nodes_combination(iso_col_dic: dict, node_dic: dict):
@@ -176,7 +277,7 @@ def search_edge_paths(newNode, kg_edges, nodes):
 
 def check_subgraph_isomorphic(kg, graph, by_monomorphic=False):
     nm = nx.algorithms.isomorphism.categorical_node_match("label", None)
-    em = nx.algorithms.isomorphism.categorical_node_match("label", None)
+    em = nx.algorithms.isomorphism.categorical_edge_match("label", None)
     dgm = nx.isomorphism.DiGraphMatcher(kg, graph, nm, em)
 
     if by_monomorphic:
@@ -264,20 +365,6 @@ def move_incorrect_relation(new_source_idx, im):
 
 
 def experiments_museum_crm(path):
-    # kg = utils.load_lg_graph(r"C:\D_Drive\ASM\DataSets\museum-crm\museum_kg_20220513.lg")
-    # freq_dic = {}.fromkeys(range(24), 0)
-    # node_set = set()
-    # for node in kg.nodes:
-    #     freq_dic[kg.nodes[node]["label"]] += 1
-    #     if kg.in_degree(node) == 0 or kg.out_degree(node) == 0:
-    #         node_set.add(kg.nodes[node]["label"])
-    # kg_edges = set()
-    # for edge in kg.edges.data():
-    #     s = edge[0]
-    #     t = edge[1]
-    #     s_node = kg.nodes[s]['label']
-    #     t_node = kg.nodes[t]['label']
-    #     kg_edges.add((s_node, t_node, edge[2]['label']))
     res_df = pd.read_csv(rf"{path}\result.csv")
     res_df["running time(s)"] = 0.0
     ofile = open(rf"{path}\isoColumns.txt", "w", encoding="utf-8")
@@ -288,18 +375,6 @@ def experiments_museum_crm(path):
             #     continue
             kg = utils.load_lg_graph(rf"C:\D_Drive\ASM\DataSets\museum-crm\tmp\lg\museum_kg_s{i}.lg")
             freq_dic = {}.fromkeys(range(24), 0)
-            node_set = set()
-            for node in kg.nodes:
-                freq_dic[kg.nodes[node]["label"]] += 1
-                if kg.in_degree(node) == 0 or kg.out_degree(node) == 0:
-                    node_set.add(kg.nodes[node]["label"])
-            kg_edges = set()
-            for edge in kg.edges.data():
-                s = edge[0]
-                t = edge[1]
-                s_node = kg.nodes[s]['label']
-                t_node = kg.nodes[t]['label']
-                kg_edges.add((s_node, t_node, edge[2]['label']))
             k_model = utils.load_graph_from_csv1\
                 (rf"{path}\newSource_{i}\cytoscape\candidate_model.csv")
             start = time.time()
@@ -346,132 +421,222 @@ def experiments_museum_crm(path):
     res_df.to_csv(rf"{path}\result.csv", index=False)
 
 
-def experiments_weapon_lod(path):
+def experiments_weapon_lod():
 
-    res_df = pd.read_csv(rf"{path}\result.csv")
-    res_df["running time(s)"] = 0.0
+    kg_files = os.listdir("C:\D_Drive\ASM\DataSets\weapon-lod\kg_20220720\lg_20220919")
+    print(kg_files)
+    for i in range(1, 16):
+        if i == 1 or i == 6 or i == 12:
+            continue
 
-    ofile = open(rf"{path}\isoColumns.txt", "w", encoding="utf-8")
-    kg_files = os.listdir("C:\D_Drive\ASM\DataSets\weapon-lod\kg_20220720\lg")
-    for i in range(0, 15):
-        try:
-            # if i != 14:
-            #     continue
-            print(kg_files[i])
-            kg = utils.load_lg_graph(rf"C:\D_Drive\ASM\DataSets\weapon-lod\kg_20220720\lg\{kg_files[i]}")
-            freq_dic = {}.fromkeys(range(24), 0)
-            node_set = set()
-            for node in kg.nodes:
-                freq_dic[kg.nodes[node]["label"]] += 1
-                if kg.in_degree(node) == 0 or kg.out_degree(node) == 0:
-                    node_set.add(kg.nodes[node]["label"])
-            kg_edges = set()
-            for edge in kg.edges.data():
-                s = edge[0]
-                t = edge[1]
-                s_node = kg.nodes[s]['label']
-                t_node = kg.nodes[t]['label']
-                kg_edges.add((s_node, t_node, edge[2]['label']))
-            k_model = utils.load_graph_from_csv1\
-                (rf"{path}\newSource_{i+1}\cytoscape\candidate_model.csv")
-            start = time.time()
-            dic, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
+        start = time.time()
+        kg = utils.load_lg_graph(rf"C:\D_Drive\ASM\DataSets\weapon-lod\kg_20220720\lg_20220919\{kg_files[i-1]}")
+        # kg = utils.load_lg_graph(rf"C:\D_Drive\ASM\DataSets\museum-edm\kg_20220802\lg_20220914\museum_edm_kg_s{i}.lg")
+        kg_edges = set()
+        for edge in kg.edges.data():
+            s = edge[0]
+            t = edge[1]
+            s_node = kg.nodes[s]['label']
+            t_node = kg.nodes[t]['label']
+            kg_edges.add((s_node, t_node, edge[2]['label']))
 
-            cNodes = {e[1]: [e[0], e[2]["label"]] for e in im.edges.data() if im.nodes[e[1]]["nodeType"] == "columnNode"}
-            # ambiguous_cols = move_incorrect_relation(i, im)
-            # cNodes.update(ambiguous_cols)
-            im_lg = utils.csv_to_lg(im)
-            dic1 = check_candidate_types(dic, node_dict, kg, im)
+        c_model = utils.load_graph_from_csv1(rf"C:\D_Drive\ASM\experiment\exp_20220920\newSource_{i}\cytoscape\correct_model.csv")
+        # c_model.remove_nodes_from(["Address2324", "Model2378", "Manf2363", "PersonOrOrganization2"])
+        # c_model.remove_nodes_from(["Name0846", "For0031"])
+        c_model_lg = utils.csv_to_lg1(c_model)
+        # entity_subgraph = nx.induced_subgraph(c_model, [node for node in c_model.nodes if c_model.nodes[node]["nodeType"] == "InternalNode"])
+        # error_column_nodes = []
+        # for edge in entity_subgraph.copy().edges.data():
+        #     s_node = edge[0][:-1]
+        #     t_node = edge[1][:-1]
+        #     edge_label = edge[2]['label']
+        #     if (node_dict.get(s_node, -1), node_dict.get(t_node, -1), edge_dict.get(edge_label, -1)) not in kg_edges:
+        #         c_model.remove_edge(edge[0], edge[1])
+        #
+        # for node in entity_subgraph.copy().nodes:
+        #     if c_model.copy().nodes[node]["nodeType"] == "InternalNode":
+        #         flag = True
+        #         for succ in c_model.copy().successors(node):
+        #             if c_model.copy().nodes[succ]["nodeType"] == "columnNode":
+        #                 flag = False
+        #         if flag:
+        #             c_model.remove_node(node)
+        #
+        # seed_model = largest_components_subgraph(c_model)
+        # error_column_nodes.extend([node for node in c_model.nodes if
+        #                            c_model.nodes[node]["nodeType"] == "columnNode" and node not in seed_model.nodes])
+        # subgraphs = utils.split_graph(c_model)
+        # for subgraph in subgraphs:
+        #     error_column_nodes.extend(func(kg, subgraph))
+        #     # print(subgraph.nodes.data())
+        # seed_model.remove_nodes_from(error_column_nodes)
+        # error_column_nodes.extend(func(kg, seed_model))
+        # seed_model.remove_nodes_from(error_column_nodes)
+        # print(error_column_nodes)
+        # seed_lg = utils.csv_to_lg1(seed_model)
 
-            end = time.time()
-            run_time = round((end - start), 3)
+        # lg = nx.DiGraph()
+        # lg.add_node(0, label=2)
+        # lg.add_node(1, label=0)
+        # lg.add_node(2, label=0)
+        # lg.add_edge(0, 1, label=2)
+        # lg.add_edge(0, 2, label=2)
+        # print(i, kg_files[i-1], check_subgraph_isomorphic(kg, lg, by_monomorphic=True))
 
-            idx = list(res_df["data source"]).index(rf"s{i+1}.csv")
-            res_df["running time(s)"][idx] = run_time
-            utils.save_csv_graph(im,
-                                 rf"{path}\newSource_{i+1}\seed.csv")
-            utils.save_lg_graph(im_lg,
-                                rf"{path}\newSource_{i+1}\seed.lg")
-            print(f"ds: s{i+1}", file=ofile)
-            for k, v in dic.items():
-                print(f"isolate column: {k}\n", file=ofile)
-                print(f"candidate types: {v}\n", file=ofile)
-            isoCols = gen_candidate_nodes_combination(dic, node_dict)
-            with open(rf"{path}\newSource_{i+1}\cNode.json", "w") as jf:
-                json.dump(cNodes, jf, indent=2)
-            with open(rf"{path}\newSource_{i+1}\errorCols.json", "w") as jf:
-                json.dump(dic1, jf, indent=2)
-            with open(rf"{path}\newSource_{i+1}\isoCols.json", "w") as jf:
-                json.dump(isoCols, jf, indent=2)
-        except Exception as e:
-            print(e)
-            pass
-    ofile.close()
-    res_df.to_csv(rf"{path}\result.csv", index=False)
+        # continue
 
 
-def experiments_museum_edm(path):
+        print(i, kg_files[i-1], check_subgraph_isomorphic(kg, c_model_lg, by_monomorphic=False))
 
-    res_df = pd.read_csv(rf"{path}\result.csv")
-    res_df["running time(s)"] = 0.0
+        # print(i, kg_files[i-1], check_subgraph_isomorphic(kg, seed_lg, by_monomorphic=False))
 
-    ofile = open(rf"{path}\isoColumns.txt", "w", encoding="utf-8")
+        # print(i, check_subgraph_isomorphic(kg, c_model_lg, by_monomorphic=False))
+
+
+
+        # c_model.remove_node("Updated1527")
+        # c_model.remove_nodes_from(["Accepted4257", "Name4205", "Name4209", "Fax4229", "Zip4218", "State4214", "PostalAddress1"])
+
+
+        k_model = utils.load_graph_from_csv1\
+            (rf"C:\D_Drive\ASM\experiment\exp_20220920\train_1_6_12___1\newSource_{i}\cytoscape\candidate_model.csv")
+        error_column_nodes = []
+        entity_subgraph = nx.induced_subgraph(k_model, [node for node in k_model.nodes if k_model.nodes[node]["nodeType"] == "InternalNode"])
+
+        for edge in entity_subgraph.copy().edges.data():
+            s_node = edge[0][:-1]
+            t_node = edge[1][:-1]
+            edge_label = edge[2]['label']
+            if (node_dict.get(s_node, -1), node_dict.get(t_node, -1), edge_dict.get(edge_label, -1)) not in kg_edges:
+                k_model.remove_edge(edge[0], edge[1])
+
+        for node in entity_subgraph.copy().nodes:
+            if k_model.copy().nodes[node]["nodeType"] == "InternalNode":
+                flag = True
+                for succ in k_model.copy().successors(node):
+                    if k_model.copy().nodes[succ]["nodeType"] == "columnNode":
+                        flag = False
+                if flag:
+                    k_model.remove_node(node)
+
+        seed_model = largest_components_subgraph(k_model)
+        error_column_nodes.extend([node for node in k_model.nodes if
+                                   k_model.nodes[node]["nodeType"] == "columnNode" and node not in seed_model.nodes])
+
+        subgraphs = utils.split_graph(k_model)
+        for subgraph in subgraphs:
+            error_column_nodes.extend(func(kg, subgraph))
+            # print(subgraph.nodes.data())
+        seed_model.remove_nodes_from(error_column_nodes)
+        error_column_nodes.extend(func(kg, seed_model))
+        seed_model.remove_nodes_from(error_column_nodes)
+        print(error_column_nodes)
+        error_column_nodes_dic = {}.fromkeys(error_column_nodes)
+        for n in error_column_nodes:
+            cTypes = utils.parse_learned_types(k_model, n)
+            print(cTypes)
+            error_column_nodes_dic[n] = cTypes
+
+        isoCols = gen_candidate_nodes_combination(error_column_nodes_dic, node_dict)
+        with open(rf"C:\D_Drive\ASM\experiment\exp_20220920\train_1_6_12___1\newSource_{i}\isoCols.json", "w") as jf:
+            json.dump(isoCols, jf, indent=2)
+        k_model_lg = utils.csv_to_lg1(k_model)
+        seed_lg = utils.csv_to_lg1(seed_model)
+        utils.save_lg_graph(seed_lg, rf"C:\D_Drive\ASM\experiment\exp_20220920\train_1_6_12___1\newSource_{i}\seed.lg")
+        #
+        nm = nx.algorithms.isomorphism.categorical_node_match("label", None)
+        em = nx.algorithms.isomorphism.categorical_edge_match("label", None)
+        dgm = nx.isomorphism.DiGraphMatcher(kg, seed_lg, nm, em)
+        print(i, check_subgraph_isomorphic(kg, seed_lg, by_monomorphic=False))
+        # for node in c_model_lg.nodes.data():
+        #     print(node)
+        # for edge in c_model_lg.edges.data():
+        #     print(edge)
+        # c_model_lg.add_node(11, label=0)
+        # c_model_lg.add_edge(0, 11, label=15)
+        # dgm = nx.isomorphism.DiGraphMatcher(kg, c_model_lg, nm, em)
+        # print(i, check_subgraph_isomorphic(kg, k_model_lg))
+        # flag = False
+        print(i, time.time() - start)
+
+
+def experiments_museum_edm():
+
     for i in range(1, 30):
-        try:
-            # if i != 24:
-            #     continue
+        # if i != 28:
+        #     continue
+        if i == 1 or i == 6 or i == 12:
+            continue
 
-            kg = utils.load_lg_graph(rf"C:\D_Drive\ASM\DataSets\museum-edm\kg_20220802\lg\museum_edm_kg_s{i}.lg")
-            print(rf"museum_edm_kg_s{i}.lg")
-            freq_dic = {}.fromkeys(range(24), 0)
-            node_set = set()
-            for node in kg.nodes:
-                freq_dic[kg.nodes[node]["label"]] += 1
-                if kg.in_degree(node) == 0 or kg.out_degree(node) == 0:
-                    node_set.add(kg.nodes[node]["label"])
-            kg_edges = set()
-            for edge in kg.edges.data():
-                s = edge[0]
-                t = edge[1]
-                s_node = kg.nodes[s]['label']
-                t_node = kg.nodes[t]['label']
-                kg_edges.add((s_node, t_node, edge[2]['label']))
-            k_model = utils.load_graph_from_csv1\
-                (rf"{path}\newSource_{i}\cytoscape\candidate_model.csv")
-            start = time.time()
-            dic, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
+        dir_path = rf"C:\D_Drive\ASM\experiment\exp_20220916\train_1_6_12___1"
 
-            cNodes = {e[1]: [e[0], e[2]["label"]] for e in im.edges.data() if im.nodes[e[1]]["nodeType"] == "columnNode"}
-            # ambiguous_cols = move_incorrect_relation(i, im)
-            # cNodes.update(ambiguous_cols)
-            im_lg = utils.csv_to_lg(im)
-            dic1 = check_candidate_types(dic, node_dict, kg, im)
+        start = time.time()
+        kg = utils.load_lg_graph(rf"C:\D_Drive\ASM\DataSets\museum-edm\kg_20220802\lg_20220914\museum_edm_kg_s{i}.lg")
+        kg_edges = set()
+        for edge in kg.edges.data():
+            s = edge[0]
+            t = edge[1]
+            s_node = kg.nodes[s]['label']
+            t_node = kg.nodes[t]['label']
+            kg_edges.add((s_node, t_node, edge[2]['label']))
 
-            end = time.time()
-            run_time = round((end - start), 3)
+        c_model = utils.load_graph_from_csv1(rf"C:\D_Drive\ASM\experiment\exp_20220825\newSource_{i}\cytoscape\correct_model.csv")
 
-            idx = list(res_df["data source"]).index(rf"s{i}.csv")
-            res_df["running time(s)"][idx] = run_time
-            utils.save_csv_graph(im,
-                                 rf"{path}\newSource_{i}\seed.csv")
-            utils.save_lg_graph(im_lg,
-                                rf"{path}\newSource_{i}\seed.lg")
-            print(f"ds: s{i}", file=ofile)
-            for k, v in dic.items():
-                print(f"isolate column: {k}\n", file=ofile)
-                print(f"candidate types: {v}\n", file=ofile)
-            isoCols = gen_candidate_nodes_combination(dic, node_dict)
-            with open(rf"{path}\newSource_{i}\cNode.json", "w") as jf:
-                json.dump(cNodes, jf, indent=2)
-            with open(rf"{path}\newSource_{i}\errorCols.json", "w") as jf:
-                json.dump(dic1, jf, indent=2)
-            with open(rf"{path}\newSource_{i}\isoCols.json", "w") as jf:
-                json.dump(isoCols, jf, indent=2)
-        except Exception as e:
-            print(e)
-            pass
-    ofile.close()
-    res_df.to_csv(rf"{path}\result.csv", index=False)
+        k_model = utils.load_graph_from_csv1\
+            (rf"{dir_path}\newSource_{i}\cytoscape\candidate_model.csv")
+        error_column_nodes = []
+        entity_subgraph = nx.induced_subgraph(k_model, [node for node in k_model.nodes if k_model.nodes[node]["nodeType"] == "InternalNode"])
+        for edge in entity_subgraph.copy().edges.data():
+            s_node = edge[0][:-1]
+            t_node = edge[1][:-1]
+            edge_label = edge[2]['label']
+            if (node_dict.get(s_node, -1), node_dict.get(t_node, -1), edge_dict.get(edge_label, -1)) not in kg_edges:
+                k_model.remove_edge(edge[0], edge[1])
+
+        for node in entity_subgraph.copy().nodes:
+            if k_model.copy().nodes[node]["nodeType"] == "InternalNode":
+                flag = True
+                for succ in k_model.copy().successors(node):
+                    if k_model.copy().nodes[succ]["nodeType"] == "columnNode":
+                        flag = False
+                if flag:
+                    k_model.remove_node(node)
+
+        seed_model = largest_components_subgraph(k_model)
+        error_column_nodes.extend([node for node in k_model.nodes if
+                                   k_model.nodes[node]["nodeType"] == "columnNode" and node not in seed_model.nodes])
+
+        subgraphs = utils.split_graph(k_model)
+        for subgraph in subgraphs:
+            error_column_nodes.extend(func(kg, subgraph))
+            # print(subgraph.nodes.data())
+        seed_model.remove_nodes_from(error_column_nodes)
+        error_column_nodes.extend(func(kg, seed_model))
+        seed_model.remove_nodes_from(error_column_nodes)
+        print(error_column_nodes)
+        error_column_nodes_dic = {}.fromkeys(error_column_nodes)
+        for n in error_column_nodes:
+            cTypes = utils.parse_learned_types(k_model, n)
+            print(cTypes)
+            error_column_nodes_dic[n] = cTypes
+
+        isoCols = gen_candidate_nodes_combination(error_column_nodes_dic, node_dict)
+        with open(rf"{dir_path}\newSource_{i}\isoCols.json", "w") as jf:
+            json.dump(isoCols, jf, indent=2)
+        k_model_lg = utils.csv_to_lg1(k_model)
+        seed_lg = utils.csv_to_lg1(seed_model)
+        utils.save_lg_graph(seed_lg, rf"{dir_path}\newSource_{i}\seed.lg")
+
+        nm = nx.algorithms.isomorphism.categorical_node_match("label", None)
+        em = nx.algorithms.isomorphism.categorical_edge_match("label", None)
+        dgm = nx.isomorphism.DiGraphMatcher(kg, seed_lg, nm, em)
+        print(i, check_subgraph_isomorphic(kg, seed_lg, by_monomorphic=False))
+        # c_model_lg = utils.csv_to_lg1(c_model)
+        # dgm = nx.isomorphism.DiGraphMatcher(kg, c_model_lg, nm, em)
+        # print(i, check_subgraph_isomorphic(kg, c_model_lg, by_monomorphic=False))
+        # print(i, check_subgraph_isomorphic(kg, k_model_lg))
+        # flag = False
+        print(i, time.time() - start)
 
 
 def experiments1(path):
@@ -549,76 +714,12 @@ if __name__ == '__main__':
     node_dict, edge_dict = utils.load_dict()
     # experiments1(rf"C:\D_Drive\ASM\experiment\exp_20220712")
     # experiments_weapon_lod(rf"C:\D_Drive\ASM\experiment\exp_20220721")
-    experiments_museum_edm(rf"C:\D_Drive\ASM\experiment\exp_20220809")
-    train_ls = [
-        # [2, 6, 29],
-        # [1, 6, 12]
-        # [1, 15, 26]
-    ]
-    for train in train_ls:
-        dir_path = rf"C:\D_Drive\ASM\experiment\exp_20220705\train_{train[0]}_{train[1]}_{train[2]}___1"
-        experiments_museum_crm(dir_path)
+    # experiments_museum_edm(rf"C:\D_Drive\ASM\experiment\exp_20220811")
+    # dir_path = rf"C:\D_Drive\ASM\experiment\exp_20220705\train_1_15___1"
+    # experiments_museum_crm(dir_path)
+    # experiments_museum_edm()
+    # experiments_weapon_lod()
 
 
-    # for i in range(1, 30):
-    #     try:
-    #         # if i != 5:
-    #         #     continue
-    #         k_model = utils.load_graph_from_csv1\
-    #             (rf"{dir_path}\newSource_{i}\cytoscape\candidate_model.csv")
-    #         dic, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
-    #         cNodes = {e[1]:[e[0], e[2]["label"]] for e in im.edges.data() if im.nodes[e[1]]["nodeType"] == "columnNode"}
-    #         if "E52_Time-Span1" in im.nodes:
-    #             im.remove_node("E52_Time-Span1")
-    #         if "E52_Time-Span2" in im.nodes:
-    #             im.remove_node("E52_Time-Span1")
-    #         if "E52_Time-Span3" in im.nodes:
-    #             im.remove_node("E52_Time-Span1")
-    #         if "E52_Time-Span4" in im.nodes:
-    #             im.remove_node("E52_Time-Span1")
-    #         if "E55_Type1" in im.nodes:
-    #             im.remove_node("E55_Type1")
-    #         if "E55_Type2" in im.nodes:
-    #             im.remove_node("E55_Type2")
-    #         ambiguous_cols = move_incorrect_relation(i, im)
-    #         cNodes.update(ambiguous_cols)
-    #
-    #         im_lg = utils.csv_to_lg(im)
-    #
-    #         nodes = [im_lg.nodes[node]["label"] for node in im_lg.nodes]
-    #         check_candidate_types(dic, node_dict, kg, im)
-    #
-    #         utils.save_csv_graph(im,
-    #                              rf"{dir_path}\newSource_{i}\seed.csv")
-    #         utils.save_lg_graph(utils.csv_to_lg(im),
-    #                             rf"{dir_path}\newSource_{i}\seed.lg")
-    #         print(f"ds: s{i}")
-    #         for k, v in dic.items():
-    #             print(f"isolate column: {k}\n")
-    #             print(f"candidate types: {v}\n")
-    #         isoCols = gen_candidate_nodes_combination(dic, node_dict)
-    #         with open(rf"{dir_path}\newSource_{i}\cNode.json", "w")as jf:
-    #             json.dump(cNodes, jf, indent=2)
-    #         with open(rf"{dir_path}\newSource_{i}\isoCols.json", "w")as jf:
-    #             json.dump(isoCols, jf, indent=2)
-    #     except Exception:
-    #         pass
 
-    # trains = [5, 9, 26]
-    # for i in range(1, 30):
-    #     try:
-    #         os.chdir(
-    #             rf"C:\D_Drive\ASM\experiment\exp_20220613\train_{trains[0]}_{trains[1]}_{trains[2]}___1\newSource_{i}\cytoscape")
-    #         c_model = utils.load_graph_from_csv1("correct_model.csv")
-    #         k_model = utils.load_graph_from_csv1("candidate_model.csv")
-    #         utils.add_learn_types_into_graph(c_model)
-    #         utils.add_learn_types_into_graph(k_model)
-    #         utils.save_csv_graph1(c_model, "correct_model1.csv")
-    #         utils.save_csv_graph1(k_model, "candidate_model1.csv")
-    #         mg = utils.merge_graph(c_model, k_model, "__cm", "__km")
-    #         # d, im = find_isolate_columns(kg, k_model, node_dict, edge_dict)
-    #         im = remove_incorrect_edge(kg, k_model, node_dict, edge_dict)
-    #         utils.save_csv_graph(im, "model.csv")
-    #         utils.save_csv_graph(mg, "result.csv")
-    #     except Exception as e:
-    #         print(e)
+    sys.exit(1)

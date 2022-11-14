@@ -4,6 +4,7 @@ import json
 import pandas as pd
 from itertools import permutations
 from model_correction import search_edge_paths
+import random
 import sys
 
 
@@ -56,7 +57,7 @@ def add_searched_isoCols(result_model, isoCols):
                 col = isoCol[1]
                 entity = isoCol[2]
                 data_property = isoCol[3]
-                r_model.add_node(col, nodeType="columNode")
+                r_model.add_node(col, nodeType="columnNode")
                 for j in range(1, 5):
                     if entity+str(j) in result_model.nodes:
                         r_model.add_edge(entity+str(j), col, label=data_property)
@@ -69,7 +70,7 @@ def add_searched_isoCols(result_model, isoCols):
                 col = isoCol[1]
                 entity = isoCol[2]
                 data_property = isoCol[3]
-                r_model.add_node(col, nodeType="columNode")
+                r_model.add_node(col, nodeType="columnNode")
                 r_model.add_node(entity+str(i+1))
                 r_model.add_edge(entity+str(i+1), col, label=data_property)
             ls.append(re_label(r_model))
@@ -96,8 +97,11 @@ def add_remain_isoCols(model, k_model, c_model, remain_isoCols, kg_edges, node_d
     if not remain_isoCols:
         return model
 
+
     E52_cols = [col_ls for col_ls in remain_isoCols if col_ls[1] == "E52_Time-Span"]
+
     model_lg = utils.csv_to_lg(model.copy())
+
     nodes = [model_lg.nodes[node]["label"] for node in model_lg.nodes]
 
     not_kg_cols = []
@@ -211,11 +215,10 @@ def re_label(model):
     return model
 
 
-if __name__ == '__main__':
+def eval_museum_crm():
+    train = [2, 6]
 
-    train = [1, 15, 26]
-
-    dir_path = rf"C:\D_Drive\ASM\experiment\exp_20220705\train_{train[0]}_{train[1]}_{train[2]}___1"
+    dir_path = rf"C:\D_Drive\ASM\experiment\exp_20220705\train_{train[0]}_{train[1]}___1"
     # dir_path = rf"C:\D_Drive\ASM\experiment\exp_20220712"
 
     for i in range(1, 30):
@@ -235,7 +238,7 @@ if __name__ == '__main__':
 
     for i in range(1, 30):
 
-        # if i != 5:
+        # if i != 25:
         #     continue
 
         try:
@@ -269,6 +272,7 @@ if __name__ == '__main__':
                 with open(rf"{dir_path}\newSource_{i}\isoColsTypes.txt", 'r', encoding="utf-8")as f:
                     isoCols = eval(f.read())
                     ls = add_searched_isoCols(result_model, isoCols)
+
                 tmp = [model_evaluate(c_model, r_model) for r_model in ls]
                 precision, recall = max(tmp)
                 model = ls[list.index(tmp, (precision, recall))]
@@ -312,3 +316,136 @@ if __name__ == '__main__':
     res_df.to_csv(rf"{dir_path}\result.csv", index=False)
 
 
+def eval_museum_edm():
+    for i in range(1, 30):
+        try:
+            if i == 1 or i == 6 or i == 12:
+                continue
+
+            # if i != 4:
+            #     continue
+
+            c_model = utils.load_graph_from_csv1(rf"C:\D_Drive\ASM\experiment\exp_20220916\train_1_6_12___1\newSource_{i}\cytoscape\correct_model.csv")
+            c_model_lg = utils.csv_to_lg1(c_model)
+            c_model = utils.lg_to_csv(c_model_lg)
+
+            # for node in c_model.nodes:
+            #     print(node)
+            res_model = utils.load_graph_from_csv(rf"C:\D_Drive\ASM\experiment\exp_20220916\train_1_6_12___1\newSource_{i}\s{i}_result.lg.csv")
+            # for node in res_model.nodes.data():
+            #     print(node)
+
+            if i == 28:
+                res_model.add_node("data_value0", label="data_value")
+                res_model.add_edge("CulturalHeritageObject1", "data_value0", label="provenance")
+
+
+            cm_edges = []
+            rm_edges = []
+
+            for edge in c_model.edges.data():
+                if edge[1].startswith("data_value"):
+                    cm_edges.append((edge[0], "data_value", edge[2]["label"]))
+                else:
+                    cm_edges.append((edge[0], edge[1], edge[2]["label"]))
+
+            for edge in res_model.edges.data():
+                if edge[1].startswith("data_value"):
+                    rm_edges.append((edge[0], "data_value", edge[2]["label"]))
+                else:
+                    rm_edges.append((edge[0], edge[1], edge[2]["label"]))
+
+
+            n_edges_cm = len(c_model.edges)
+            n_edges_rm = len(res_model.edges)
+            n_edges_common = 0
+
+            for e in rm_edges:
+                for e1 in cm_edges.copy():
+                    if e == e1:
+                        n_edges_common += 1
+                        cm_edges.remove(e1)
+
+            # for e in res_model.edges.data():
+            #     flag = True
+            #     if e[1].startswith("data_value"):
+            #         for e1 in c_model.edges.data():
+            #             if e1[0] == e[0] and e[2]["label"] == e1[2]["label"]:
+            #                 n_edges_common += 1
+            #                 break
+            #     else:
+            #         for e1 in c_model.edges.data():
+            #             if e1[0] == e[0] and e1[1] == e[1] and e[2]["label"] == e1[2]["label"]:
+            #                 n_edges_common += 1
+            #                 break
+
+            precision = n_edges_common / n_edges_rm
+            precision = round(precision, 2)
+            recall = n_edges_common / n_edges_cm
+            recall = round(recall, 2)
+            print(i, precision, recall)
+        except Exception:
+            pass
+
+
+def eval_weapon_lod():
+    for i in range(1, 16):
+        try:
+            if i == 1 or i == 6 or i == 12:
+                continue
+
+            c_model = utils.load_graph_from_csv1(rf"C:\D_Drive\ASM\experiment\exp_20220920\train_1_6_12___1\newSource_{i}\cytoscape\correct_model.csv")
+            c_model_lg = utils.csv_to_lg1(c_model)
+            c_model = utils.lg_to_csv(c_model_lg)
+            # for node in c_model.nodes:
+            #     print(node)
+            res_model = utils.load_graph_from_csv(rf"C:\D_Drive\ASM\experiment\exp_20220920\train_1_6_12___1\newSource_{i}\s{i}_result.lg.csv")
+
+            # for node in res_model.nodes.data():
+            #     print(node)
+            if i == 3:
+                res_model.add_node("data_value0", label="data_value")
+                res_model.add_edge("PersonOrOrganization1", "data_value0", label="name")
+
+            if i == 5:
+                res_model.add_node("data_value0", label="data_value")
+                res_model.add_edge("PersonOrOrganization1", "data_value0", label="name")
+
+            if i == 7:
+                res_model.add_node("data_value0", label="data_value")
+                res_model.add_edge("PersonOrOrganization1", "data_value0", label="name")
+
+            if i == 14:
+                res_model.add_node("data_value0", label="data_value")
+                res_model.add_edge("Offer1", "data_value0", label="name")
+
+
+            n_edges_cm = len(c_model.edges)
+            n_edges_rm = len(res_model.edges)
+            n_edges_common = 0
+            for e in res_model.edges.data():
+
+                if e[1].startswith("data_value"):
+                    for e1 in c_model.edges.data():
+                        if e1[0] == e[0] and e[2]["label"] == e1[2]["label"]:
+                            n_edges_common += 1
+                            break
+                    pass
+                else:
+                    for e1 in c_model.edges.data():
+                        if e1[0] == e[0] and e1[1] == e[1] and e[2]["label"] == e1[2]["label"]:
+                            n_edges_common += 1
+                            break
+            precision = n_edges_common / n_edges_rm
+            precision = round(precision, 2)
+            recall = n_edges_common / n_edges_cm
+            recall = round(recall, 2)
+            print(i, precision, recall)
+        except Exception:
+            pass
+
+
+if __name__ == '__main__':
+    eval_weapon_lod()
+    # eval_museum_edm()
+    # eval_museum_crm()

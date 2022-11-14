@@ -14,9 +14,9 @@
  */
 package search;
 
-import java.util.Collection;
-
 import dataStructures.Extension;
+
+import java.util.Collection;
 
 
 /**

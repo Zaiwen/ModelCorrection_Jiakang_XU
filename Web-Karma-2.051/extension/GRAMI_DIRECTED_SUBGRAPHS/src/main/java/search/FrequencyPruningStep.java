@@ -14,10 +14,7 @@
  */
 package search;
 
-import dataStructures.Extension;
-import dataStructures.Frequency;
-import dataStructures.Frequented;
-import dataStructures.IntFrequency;
+import dataStructures.*;
 
 import java.util.Collection;
 import java.util.TreeSet;
@@ -84,14 +81,21 @@ public class FrequencyPruningStep<NodeType, EdgeType> extends
 //		}
 //
 //
+
 		if (max != null && max.compareTo(freq) < 0) {
 			node.store(false);
+			node.stopExtend(true);
 		}
 
 		if (min.compareTo(freq) > 0) {
+//			System.err.println(min);
+//			System.err.println(freq);
 			node.store(false);
+			node.stopExtend(true);
+//			System.err.println("min > freq");
 		}
 		else {
+//			System.err.println("freq next:"+next.getClass());
 			callNext(node, extensions);
 		}
 //		callNext(node, extensions);

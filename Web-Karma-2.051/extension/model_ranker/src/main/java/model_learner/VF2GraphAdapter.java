@@ -9,9 +9,7 @@ import VF2.graph.LGGraph;
 import org.jgrapht.graph.DirectedWeightedMultigraph;
 
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class VF2GraphAdapter {
 
@@ -100,7 +98,16 @@ public class VF2GraphAdapter {
 
 
     public static void main(String[] args) {
-
+        ArrayList<String> list = new ArrayList<>();
+        list.add("b");
+        list.add("a");
+        list.add("c");
+        list.add("d");
+        Collections.sort(list);
+        "a".compareTo("b");
+        for (String s : list) {
+            System.out.println(s);
+        }
     }
 }
 

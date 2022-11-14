@@ -56,16 +56,18 @@ public class CanonicalPruningStep<NodeType, EdgeType> extends
 			final Collection<Extension<NodeType, EdgeType>> extensions) {
 
 
+
 		final Canonizable can = (Canonizable) node;
 		if (node.isCanonPruning()) {
 			System.out.println("calculating is Canonical?...");
 			if (can.isCanonical()) {
 				System.out.println("....is Canonical");
+//				System.err.println("canon next:"+next.getClass());
 				this.callNext(node, extensions);
 
 			} else {
 				System.out.println("....is NOT Canonical");
-				node.store(false);
+//				node.store(false);
 			}
 		}else {
 			callNext(node, extensions);

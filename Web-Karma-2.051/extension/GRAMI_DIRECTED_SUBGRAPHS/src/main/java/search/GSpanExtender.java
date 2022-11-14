@@ -106,6 +106,7 @@ public class GSpanExtender<NodeType, EdgeType> extends
 
 
 		if (!node.stopExtend()){
+//			System.err.println("Extender next:"+first.getClass());
 			first.call(node, dummy);
 		}else {
 			node.store(false);

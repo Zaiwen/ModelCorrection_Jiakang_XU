@@ -135,6 +135,7 @@ public class GraphBuilderTopK extends GraphBuilder {
 				getTopKGraph().get(n2).add(e);
 		}
 	}
+
 	/**Get top k steiner trees from a weighed-edge graph and a set of steiner nodes, very important!!!**/
 	public List<DirectedWeightedMultigraph<Node, LabeledLink>> getTopKSteinerTrees(Set<Node> steinerNodes, 
 			int k, 

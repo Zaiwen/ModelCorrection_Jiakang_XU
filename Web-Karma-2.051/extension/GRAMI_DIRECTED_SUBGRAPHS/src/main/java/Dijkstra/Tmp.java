@@ -15,13 +15,13 @@ public class Tmp {
         Graph kg = new Graph(1, 1);
 
 //        kg.loadFromFile_Ehab("C:\\D_Drive\\ASM\\DataSets\\museum-crm\\museum_kg_20220513.lg");
-        kg.loadFromFile_Ehab("C:\\D_Drive\\ASM\\DataSets\\museum-crm\\tmp\\lg\\museum_kg_s1.lg");
+        kg.loadFromFile_Ehab("C:\\D_Drive\\ASM\\DataSets\\weapon-lod\\kg_20220720\\lg_20220919\\weapon_kg_elpasoguntrader.lg");
 //        kg.loadFromFile_Ehab("C:\\D_Drive\\ASM\\experiment\\exp_20220530\\s15_result.lg");
 
         kg.setShortestPaths_1hop();
 
         Graph qryGraph = new Graph(2,1);
-        qryGraph.loadFromFile("C:\\D_Drive\\ASM\\experiment\\exp_20220702\\newSource_1\\tmp.lg");
+        qryGraph.loadFromFile("C:\\D_Drive\\ASM\\experiment\\exp_20220920\\train_2_6___1\\newSource_4\\s4_result.lg");
         GramiMatcher gm = new GramiMatcher();
         gm.setGraph(kg);
         gm.setQry(new Query(qryGraph.getListGraph()));

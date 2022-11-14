@@ -199,10 +199,6 @@ public class DFSCode<NodeType, EdgeType> extends
 			System.out.println("noooooo!!");
 
 
-//		if (!GSpanEdge.isValidEdge(gEdge)){
-//			newNode.hasWrongEdge(true);
-//		}
-
 		return new DFSCode<NodeType, EdgeType>(sortedFreqLabels,singleGraph,Util.clone(nonCandidates)).set(ext.getFragment().getHPlistGraph(), nextFirst, nextLast, nextParents);
 
 	}
@@ -836,6 +832,13 @@ public class DFSCode<NodeType, EdgeType> extends
 	 */
 	@Override
 	public void setThreadNumber(final int idx) {
+	}
+
+	public int getFrequent(){
+		if (finalFrequency != null){
+			return finalFrequency.intValue();
+		}
+		return 0;
 	}
 
 

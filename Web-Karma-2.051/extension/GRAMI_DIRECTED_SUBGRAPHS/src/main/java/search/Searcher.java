@@ -219,11 +219,12 @@ public class Searcher<NodeType, EdgeType>
 		result = (ArrayList<HPListGraph<NodeType, EdgeType>>) rs.extend(algo, this.freqThreshold.intValue());
 	}
 
-	public void searchFromInitCode(){
-		Algorithm<NodeType, EdgeType> algo = new Algorithm<>();
-		algo.setInitialNode(initCode);
-		RecursiveStrategy<NodeType, EdgeType> rs = new RecursiveStrategy<>();
-		result = (ArrayList<HPListGraph<NodeType, EdgeType>>) rs.searchFromInitCode(algo);
+	public void extend(ArrayList<Integer> newNodes, ArrayList<Double> newEdges,
+				  HashMap<Integer, Integer> constraintNodesMap, HashMap<Double, Integer> constraintEdgesMap){
+		Algorithm<NodeType, EdgeType> algo = new Algorithm<NodeType, EdgeType>();
+		algo.setInitials(initials);
+		RecursiveStrategy<NodeType, EdgeType> rs = new RecursiveStrategy<NodeType, EdgeType>(initGraph, newNodes, newEdges, constraintNodesMap, constraintEdgesMap);
+		result = (ArrayList<HPListGraph<NodeType, EdgeType>>) rs.extend(algo, this.freqThreshold.intValue());
 	}
 
 	
@@ -235,12 +236,6 @@ public class Searcher<NodeType, EdgeType>
 		result= (ArrayList<HPListGraph<NodeType, EdgeType>>)rs.search(algo,this.freqThreshold.intValue());
 	}
 
-	public DFSCode<NodeType, EdgeType> getCode(){
-		Algorithm<NodeType, EdgeType> algo = new Algorithm<NodeType, EdgeType>();
-		algo.setInitials(initials);
-		RecursiveStrategy<NodeType, EdgeType> rs = new RecursiveStrategy<>(singleGraph.getListGraph());
-		return rs.searchDFSCode(algo);
-	}
 	
 	private int getNumOfDistinctLabels(HPListGraph<NodeType, EdgeType> list)
     {

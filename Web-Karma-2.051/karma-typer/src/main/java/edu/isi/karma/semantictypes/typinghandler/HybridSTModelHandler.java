@@ -56,7 +56,7 @@ public class HybridSTModelHandler implements ISemanticTypeModelHandler {
 	 */
 	private double trainNumericThreshold = 0.8;
 	private double trainTextualThreshold = 0.6;
-	private double testThreshold = 0.7;
+	private double testThreshold = 0.9;
 	
 	private String numericRegEx = "((\\-)?[0-9]{1,3}(,[0-9]{3})+(\\.[0-9]+)?)|((\\-)?[0-9]*\\.[0-9]+)|((\\-)?[0-9]+)|((\\-)?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?)";
 	

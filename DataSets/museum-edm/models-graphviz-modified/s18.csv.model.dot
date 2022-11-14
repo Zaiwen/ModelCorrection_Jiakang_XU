@@ -1,0 +1,21 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s18.csv"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n4[shape="plaintext",style="filled",fillcolor="gold",label="title"];
+n5[shape="plaintext",style="filled",fillcolor="gold",label="deathDate"];
+n6[shape="plaintext",style="filled",fillcolor="gold",label="birthDate"];
+n7[shape="plaintext",style="filled",fillcolor="gold",label="nationality"];
+n8[shape="plaintext",style="filled",fillcolor="gold",label="name"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="creator"]
+n2 -> n4[color="brown",fontcolor="black",label="title"]
+n3 -> n5[color="brown",fontcolor="black",label="dateOfDeath"]
+n3 -> n6[color="brown",fontcolor="black",label="dateOfBirth"]
+n3 -> n7[color="brown",fontcolor="black",label="countryAssociatedWithThePerson"]
+n3 -> n8[color="brown",fontcolor="black",label="nameOfThePerson"]
+}

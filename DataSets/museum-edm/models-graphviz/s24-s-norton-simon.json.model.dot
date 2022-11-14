@@ -1,0 +1,35 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s24-s-norton-simon.json"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n4[style="filled",color="white",fillcolor="lightgray",label="EuropeanaAggregation1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="WebResource1"];
+n6[shape="plaintext",style="filled",fillcolor="gold",label="made"];
+n7[shape="plaintext",style="filled",fillcolor="gold",label="title"];
+n8[shape="plaintext",style="filled",fillcolor="gold",label="artist"];
+n9[shape="plaintext",style="filled",fillcolor="gold",label="birthDate"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="prov"];
+n11[shape="plaintext",style="filled",fillcolor="gold",label="image_url"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="access"];
+n13[shape="plaintext",style="filled",fillcolor="gold",label="nationality"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="dim"];
+n15[shape="plaintext",style="filled",fillcolor="gold",label="deathDate"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="creator"]
+n4 -> n2[color="brown",fontcolor="black",label="aggregatedCHO"]
+n4 -> n5[color="brown",fontcolor="black",label="hasView"]
+n2 -> n6[color="brown",fontcolor="black",label="created"]
+n2 -> n7[color="brown",fontcolor="black",label="title"]
+n3 -> n8[color="brown",fontcolor="black",label="nameOfThePerson"]
+n3 -> n9[color="brown",fontcolor="black",label="dateOfBirth"]
+n2 -> n10[color="brown",fontcolor="black",label="provenance"]
+n5 -> n11[color="brown",fontcolor="black",label="classLink"]
+n2 -> n12[color="brown",fontcolor="black",label="accessionNumber"]
+n3 -> n13[color="brown",fontcolor="black",label="countryAssociatedWithThePerson"]
+n2 -> n14[color="brown",fontcolor="black",label="extent"]
+n3 -> n15[color="brown",fontcolor="black",label="dateOfDeath"]
+}

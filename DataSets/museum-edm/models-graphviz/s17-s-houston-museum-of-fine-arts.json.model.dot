@@ -1,0 +1,41 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s17-s-houston-museum-of-fine-arts.json"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n4[style="filled",color="white",fillcolor="lightgray",label="Document1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="EuropeanaAggregation1"];
+n6[style="filled",color="white",fillcolor="lightgray",label="WebResource1"];
+n7[shape="plaintext",style="filled",fillcolor="gold",label="credittext"];
+n8[shape="plaintext",style="filled",fillcolor="gold",label="nationality"];
+n9[shape="plaintext",style="filled",fillcolor="gold",label="technique"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="artist"];
+n11[shape="plaintext",style="filled",fillcolor="gold",label="photo"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="link"];
+n13[shape="plaintext",style="filled",fillcolor="gold",label="deathDate"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="birthDate"];
+n15[shape="plaintext",style="filled",fillcolor="gold",label="artyear"];
+n16[shape="plaintext",style="filled",fillcolor="gold",label="dimensions"];
+n17[shape="plaintext",style="filled",fillcolor="gold",label="title"];
+n18[shape="plaintext",style="filled",fillcolor="gold",label="artdesc"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="creator"]
+n2 -> n4[color="brown",fontcolor="black",label="page"]
+n5 -> n2[color="brown",fontcolor="black",label="aggregatedCHO"]
+n5 -> n6[color="brown",fontcolor="black",label="hasView"]
+n2 -> n7[color="brown",fontcolor="black",label="provenance"]
+n3 -> n8[color="brown",fontcolor="black",label="countryAssociatedWithThePerson"]
+n2 -> n9[color="brown",fontcolor="black",label="medium"]
+n3 -> n10[color="brown",fontcolor="black",label="nameOfThePerson"]
+n6 -> n11[color="brown",fontcolor="black",label="classLink"]
+n4 -> n12[color="brown",fontcolor="black",label="classLink"]
+n3 -> n13[color="brown",fontcolor="black",label="dateOfDeath"]
+n3 -> n14[color="brown",fontcolor="black",label="dateOfBirth"]
+n2 -> n15[color="brown",fontcolor="black",label="created"]
+n2 -> n16[color="brown",fontcolor="black",label="extent"]
+n2 -> n17[color="brown",fontcolor="black",label="title"]
+n2 -> n18[color="brown",fontcolor="black",label="description"]
+}

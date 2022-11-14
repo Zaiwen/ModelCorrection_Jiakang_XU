@@ -1,0 +1,51 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s26-s-san-francisco-moma.json"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n4[style="filled",color="white",fillcolor="lightgray",label="Concept1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="Document1"];
+n6[style="filled",color="white",fillcolor="lightgray",label="Place1"];
+n7[style="filled",color="white",fillcolor="lightgray",label="Place2"];
+n8[style="filled",color="white",fillcolor="lightgray",label="EuropeanaAggregation1"];
+n9[style="filled",color="white",fillcolor="lightgray",label="WebResource1"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="deathPlaceLabel"];
+n11[shape="plaintext",style="filled",fillcolor="gold",label="nationality"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="image-URL"];
+n13[shape="plaintext",style="filled",fillcolor="gold",label="credit"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="accession-id"];
+n15[shape="plaintext",style="filled",fillcolor="gold",label="copyright"];
+n16[shape="plaintext",style="filled",fillcolor="gold",label="dimensions"];
+n17[shape="plaintext",style="filled",fillcolor="gold",label="type"];
+n18[shape="plaintext",style="filled",fillcolor="gold",label="birthYear"];
+n19[shape="plaintext",style="filled",fillcolor="gold",label="deathYear"];
+n20[shape="plaintext",style="filled",fillcolor="gold",label="url"];
+n21[shape="plaintext",style="filled",fillcolor="gold",label="artistName"];
+n22[shape="plaintext",style="filled",fillcolor="gold",label="title"];
+n23[shape="plaintext",style="filled",fillcolor="gold",label="birthPlaceLabel"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="creator"]
+n2 -> n4[color="brown",fontcolor="black",label="hasType"]
+n2 -> n5[color="brown",fontcolor="black",label="page"]
+n3 -> n6[color="brown",fontcolor="black",label="placeOfBirth"]
+n3 -> n7[color="brown",fontcolor="black",label="placeOfDeath"]
+n8 -> n2[color="brown",fontcolor="black",label="aggregatedCHO"]
+n8 -> n9[color="brown",fontcolor="black",label="hasView"]
+n7 -> n10[color="brown",fontcolor="black",label="label"]
+n3 -> n11[color="brown",fontcolor="black",label="countryAssociatedWithThePerson"]
+n9 -> n12[color="brown",fontcolor="black",label="classLink"]
+n2 -> n13[color="brown",fontcolor="black",label="provenance"]
+n2 -> n14[color="brown",fontcolor="black",label="accessionNumber"]
+n2 -> n15[color="brown",fontcolor="black",label="rightsHolder"]
+n2 -> n16[color="brown",fontcolor="black",label="extent"]
+n4 -> n17[color="brown",fontcolor="black",label="prefLabel"]
+n3 -> n18[color="brown",fontcolor="black",label="dateOfBirth"]
+n3 -> n19[color="brown",fontcolor="black",label="dateOfDeath"]
+n5 -> n20[color="brown",fontcolor="black",label="classLink"]
+n3 -> n21[color="brown",fontcolor="black",label="nameOfThePerson"]
+n2 -> n22[color="brown",fontcolor="black",label="title"]
+n6 -> n23[color="brown",fontcolor="black",label="label"]
+}

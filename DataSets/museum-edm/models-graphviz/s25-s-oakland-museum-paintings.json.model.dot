@@ -1,0 +1,45 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s25-s-oakland-museum-paintings.json"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n4[style="filled",color="white",fillcolor="lightgray",label="Concept1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="Concept2"];
+n6[style="filled",color="white",fillcolor="lightgray",label="EuropeanaAggregation1"];
+n7[style="filled",color="white",fillcolor="lightgray",label="WebResource1"];
+n8[shape="plaintext",style="filled",fillcolor="gold",label="Pic_URL"];
+n9[shape="plaintext",style="filled",fillcolor="gold",label="deathDate"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="Dimensions"];
+n11[shape="plaintext",style="filled",fillcolor="gold",label="birthDate"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="Credit"];
+n13[shape="plaintext",style="filled",fillcolor="gold",label="Title"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="ArtistName"];
+n15[shape="plaintext",style="filled",fillcolor="gold",label="Type_of_Art"];
+n16[shape="plaintext",style="filled",fillcolor="gold",label="Subtype_of_Art"];
+n17[shape="plaintext",style="filled",fillcolor="gold",label="Date_made"];
+n18[shape="plaintext",style="filled",fillcolor="gold",label="Inscription"];
+n19[shape="plaintext",style="filled",fillcolor="gold",label="Keywords"];
+n20[shape="plaintext",style="filled",fillcolor="gold",label="Accession_id"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="creator"]
+n2 -> n4[color="brown",fontcolor="black",label="subject"]
+n2 -> n5[color="brown",fontcolor="black",label="hasType"]
+n6 -> n2[color="brown",fontcolor="black",label="aggregatedCHO"]
+n6 -> n7[color="brown",fontcolor="black",label="hasView"]
+n7 -> n8[color="brown",fontcolor="black",label="classLink"]
+n3 -> n9[color="brown",fontcolor="black",label="dateOfDeath"]
+n2 -> n10[color="brown",fontcolor="black",label="extent"]
+n3 -> n11[color="brown",fontcolor="black",label="dateOfBirth"]
+n2 -> n12[color="brown",fontcolor="black",label="provenance"]
+n2 -> n13[color="brown",fontcolor="black",label="title"]
+n3 -> n14[color="brown",fontcolor="black",label="nameOfThePerson"]
+n5 -> n15[color="brown",fontcolor="black",label="prefLabel"]
+n2 -> n16[color="brown",fontcolor="black",label="medium"]
+n2 -> n17[color="brown",fontcolor="black",label="created"]
+n2 -> n18[color="brown",fontcolor="black",label="description"]
+n4 -> n19[color="brown",fontcolor="black",label="prefLabel"]
+n2 -> n20[color="brown",fontcolor="black",label="accessionNumber"]
+}

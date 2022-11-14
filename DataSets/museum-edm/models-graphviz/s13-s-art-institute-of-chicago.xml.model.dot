@@ -1,0 +1,35 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s13-s-art-institute-of-chicago.xml"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n4[style="filled",color="white",fillcolor="lightgray",label="EuropeanaAggregation1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="WebResource1"];
+n6[shape="plaintext",style="filled",fillcolor="gold",label="Titleofartwork"];
+n7[shape="plaintext",style="filled",fillcolor="gold",label="Nationality"];
+n8[shape="plaintext",style="filled",fillcolor="gold",label="Accessionid"];
+n9[shape="plaintext",style="filled",fillcolor="gold",label="Typeofartwork"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="birthDate"];
+n11[shape="plaintext",style="filled",fillcolor="gold",label="ImageURL"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="Artistname"];
+n13[shape="plaintext",style="filled",fillcolor="gold",label="deathDate"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="Credit"];
+n15[shape="plaintext",style="filled",fillcolor="gold",label="Dimensions"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="creator"]
+n4 -> n2[color="brown",fontcolor="black",label="aggregatedCHO"]
+n4 -> n5[color="brown",fontcolor="black",label="hasView"]
+n2 -> n6[color="brown",fontcolor="black",label="title"]
+n3 -> n7[color="brown",fontcolor="black",label="countryAssociatedWithThePerson"]
+n2 -> n8[color="brown",fontcolor="black",label="accessionNumber"]
+n2 -> n9[color="brown",fontcolor="black",label="medium"]
+n3 -> n10[color="brown",fontcolor="black",label="dateOfBirth"]
+n5 -> n11[color="brown",fontcolor="black",label="classLink"]
+n3 -> n12[color="brown",fontcolor="black",label="nameOfThePerson"]
+n3 -> n13[color="brown",fontcolor="black",label="dateOfDeath"]
+n2 -> n14[color="brown",fontcolor="black",label="provenance"]
+n2 -> n15[color="brown",fontcolor="black",label="extent"]
+}

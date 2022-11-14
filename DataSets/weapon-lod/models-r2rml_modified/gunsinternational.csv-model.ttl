@@ -1,0 +1,991 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+@prefix memex: <http://schema.dig.isi.edu/ontology/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix karma: <http://isi.edu/integration/karma/ontologies/model/current#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix km-dev: <http://isi.edu/integration/karma/dev#> .
+
+_:node1gdim63g9x1 a km-dev:R2RMLMapping ;
+	km-dev:sourceName "gunsinternational.csv" ;
+	km-dev:modelPublicationTime "1663853334026"^^xsd:long ;
+	km-dev:modelVersion "1.7" ;
+	km-dev:hasInputColumns "[[{\"columnName\":\"On6622\"}],[{\"columnName\":\"Seller4193\"}],[{\"columnName\":\"Description4273\"}],[{\"columnName\":\"0077\"}],[{\"columnName\":\"Accessories4054\"}],[{\"columnName\":\"Phone4225\"}],[{\"columnName\":\"file_name\"}],[{\"columnName\":\"Price4278\"}],[{\"columnName\":\"State4214\"}]]" ;
+	km-dev:hasOutputColumns "[[{\"columnName\":\"On6622\"}],[{\"columnName\":\"Seller4193\"}],[{\"columnName\":\"Description4273\"}],[{\"columnName\":\"0077\"}],[{\"columnName\":\"Accessories4054\"}],[{\"columnName\":\"Phone4225\"}],[{\"columnName\":\"file_name\"}],[{\"columnName\":\"Price4278\"}],[{\"columnName\":\"State4214\"}]]" ;
+	km-dev:hasModelLabel "gunsinternational.csv" ;
+	km-dev:hasWorksheetHistory """[
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"file_name\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://schema.org/CreativeWork\",
+                    \"DomainId\": \"http://schema.org/CreativeWork1\",
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://schema.org/name\",
+                    \"DomainLabel\": \"schema:CreativeWork1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"file_name\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"file_name\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"0077\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://schema.org/Offer\",
+                    \"DomainId\": \"http://schema.org/Offer1\",
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://schema.org/name\",
+                    \"DomainLabel\": \"schema:Offer1 (add)\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"0077\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"0077\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Accessories4054\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://schema.dig.isi.edu/ontology/Firearm\",
+                    \"DomainId\": \"http://schema.dig.isi.edu/ontology/Firearm1\",
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://schema.org/category\",
+                    \"DomainLabel\": \"memex:Firearm1 (add)\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Accessories4054\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Accessories4054\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Description4273\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://schema.org/Offer\",
+                    \"DomainId\": \"http://schema.org/Offer1\",
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://schema.org/description\",
+                    \"DomainLabel\": \"schema:Offer1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Description4273\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Description4273\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"On6622\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://schema.org/CreativeWork\",
+                    \"DomainId\": \"http://schema.org/CreativeWork1\",
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://schema.org/copyrightYear\",
+                    \"DomainLabel\": \"schema:CreativeWork1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"On6622\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"On6622\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Phone4225\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://schema.dig.isi.edu/ontology/PersonOrOrganization\",
+                    \"DomainId\": \"http://schema.dig.isi.edu/ontology/PersonOrOrganization1\",
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://schema.org/telephone\",
+                    \"DomainLabel\": \"memex:PersonOrOrganization1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Phone4225\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Phone4225\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Price4278\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://schema.org/Offer\",
+                    \"DomainId\": \"http://schema.org/Offer1\",
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://schema.org/price\",
+                    \"DomainLabel\": \"schema:Offer1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Price4278\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Price4278\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Seller4193\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://schema.dig.isi.edu/ontology/PersonOrOrganization\",
+                    \"DomainId\": \"http://schema.dig.isi.edu/ontology/PersonOrOrganization1\",
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://schema.org/name\",
+                    \"DomainLabel\": \"memex:PersonOrOrganization1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Seller4193\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Seller4193\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"State4214\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://schema.org/Place\",
+                    \"DomainId\": \"http://schema.org/Place1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://schema.org/name\",
+                    \"DomainLabel\": \"schema:Place1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"State4214\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"State4214\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeId\": \"http://schema.org/itemOffered\",
+                    \"edgeTargetId\": \"http://schema.dig.isi.edu/ontology/Firearm1\",
+                    \"edgeTargetUri\": \"http://schema.dig.isi.edu/ontology/Firearm\",
+                    \"edgeSourceId\": \"http://schema.org/Offer1\",
+                    \"edgeSourceUri\": \"http://schema.org/Offer\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeId\": \"http://schema.org/mainEntityOfPage\",
+                    \"edgeTargetId\": \"http://schema.org/CreativeWork1\",
+                    \"edgeTargetUri\": \"http://schema.org/CreativeWork\",
+                    \"edgeSourceId\": \"http://schema.org/Offer1\",
+                    \"edgeSourceUri\": \"http://schema.org/Offer\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeId\": \"http://schema.org/seller\",
+                    \"edgeTargetId\": \"http://schema.dig.isi.edu/ontology/PersonOrOrganization1\",
+                    \"edgeTargetUri\": \"http://schema.dig.isi.edu/ontology/PersonOrOrganization\",
+                    \"edgeSourceId\": \"http://schema.org/Offer1\",
+                    \"edgeSourceUri\": \"http://schema.org/Offer\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://schema.org/Place1\",
+                    \"edgeId\": \"http://schema.org/availableAtOrFrom\",
+                    \"edgeTargetUri\": \"http://schema.org/Place\",
+                    \"edgeSourceId\": \"http://schema.org/Offer1\",
+                    \"edgeSourceUri\": \"http://schema.org/Offer\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    }
+]""" .
+
+km-dev:TriplesMap_7eb68cad-d58f-4f9a-9efa-4e072d0748af a rr:TriplesMap .
+
+_:node1gdim63g9x1 km-dev:hasTriplesMap km-dev:TriplesMap_7eb68cad-d58f-4f9a-9efa-4e072d0748af .
+
+km-dev:TriplesMap_7eb68cad-d58f-4f9a-9efa-4e072d0748af km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x2 rr:tableName "gunsinternational.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasLogicalTable _:node1gdim63g9x2 .
+
+km-dev:TriplesMap_7eb68cad-d58f-4f9a-9efa-4e072d0748af rr:logicalTable _:node1gdim63g9x2 ;
+	rr:subjectMap _:node1gdim63g9x3 .
+
+_:node1gdim63g9x1 km-dev:hasSubjectMap _:node1gdim63g9x3 .
+
+_:node1gdim63g9x3 km-dev:isPartOfMapping _:node1gdim63g9x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://schema.org/Offer1" ;
+	rr:class schema:Offer ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "schema:Offer1" ;
+	a km-dev:steinerTreeRootNode .
+
+km-dev:PredicateObjectMap_ba5468f8-b28b-4ead-ac7b-54d2986d2d75 rr:predicate schema:itemOffered .
+
+km-dev:RefObjectMap_73c64673-dfcc-4c97-8772-277ff6618b88 a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_e1d690cf-c8f0-48b7-966c-2146ee50897a ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasObjectMap km-dev:RefObjectMap_73c64673-dfcc-4c97-8772-277ff6618b88 .
+
+km-dev:PredicateObjectMap_ba5468f8-b28b-4ead-ac7b-54d2986d2d75 rr:objectMap km-dev:RefObjectMap_73c64673-dfcc-4c97-8772-277ff6618b88 .
+
+km-dev:TriplesMap_7eb68cad-d58f-4f9a-9efa-4e072d0748af rr:predicateObjectMap km-dev:PredicateObjectMap_ba5468f8-b28b-4ead-ac7b-54d2986d2d75 .
+
+km-dev:PredicateObjectMap_ba5468f8-b28b-4ead-ac7b-54d2986d2d75 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_ba5468f8-b28b-4ead-ac7b-54d2986d2d75 .
+
+km-dev:PredicateObjectMap_1b311b62-38be-4969-b6ce-9b74fc9cc21b rr:predicate schema:seller .
+
+km-dev:RefObjectMap_170037c0-3ab3-4859-8cfe-a99fcd540fd8 a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_768d7a0f-b353-483f-a07a-56703f087252 ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasObjectMap km-dev:RefObjectMap_170037c0-3ab3-4859-8cfe-a99fcd540fd8 .
+
+km-dev:PredicateObjectMap_1b311b62-38be-4969-b6ce-9b74fc9cc21b rr:objectMap km-dev:RefObjectMap_170037c0-3ab3-4859-8cfe-a99fcd540fd8 .
+
+km-dev:TriplesMap_7eb68cad-d58f-4f9a-9efa-4e072d0748af rr:predicateObjectMap km-dev:PredicateObjectMap_1b311b62-38be-4969-b6ce-9b74fc9cc21b .
+
+km-dev:PredicateObjectMap_1b311b62-38be-4969-b6ce-9b74fc9cc21b a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_1b311b62-38be-4969-b6ce-9b74fc9cc21b .
+
+km-dev:PredicateObjectMap_20ce378d-6fab-4671-8219-c31cb0ea9258 rr:predicate schema:mainEntityOfPage .
+
+km-dev:RefObjectMap_dfce3542-6f98-4679-a908-dfccc8b32514 a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_43551d9d-caa8-4e77-89fa-aae487c42e40 ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasObjectMap km-dev:RefObjectMap_dfce3542-6f98-4679-a908-dfccc8b32514 .
+
+km-dev:PredicateObjectMap_20ce378d-6fab-4671-8219-c31cb0ea9258 rr:objectMap km-dev:RefObjectMap_dfce3542-6f98-4679-a908-dfccc8b32514 .
+
+km-dev:TriplesMap_7eb68cad-d58f-4f9a-9efa-4e072d0748af rr:predicateObjectMap km-dev:PredicateObjectMap_20ce378d-6fab-4671-8219-c31cb0ea9258 .
+
+km-dev:PredicateObjectMap_20ce378d-6fab-4671-8219-c31cb0ea9258 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_20ce378d-6fab-4671-8219-c31cb0ea9258 .
+
+km-dev:PredicateObjectMap_45ee2626-6c75-40e6-af1a-a5b316e520fa rr:predicate schema:availableAtOrFrom .
+
+km-dev:RefObjectMap_255382cb-4bb0-4b62-88d2-4975603d0bdd a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_f770c89e-1528-4b3e-994d-435893c8395f ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasObjectMap km-dev:RefObjectMap_255382cb-4bb0-4b62-88d2-4975603d0bdd .
+
+km-dev:PredicateObjectMap_45ee2626-6c75-40e6-af1a-a5b316e520fa rr:objectMap km-dev:RefObjectMap_255382cb-4bb0-4b62-88d2-4975603d0bdd .
+
+km-dev:TriplesMap_7eb68cad-d58f-4f9a-9efa-4e072d0748af rr:predicateObjectMap km-dev:PredicateObjectMap_45ee2626-6c75-40e6-af1a-a5b316e520fa .
+
+km-dev:PredicateObjectMap_45ee2626-6c75-40e6-af1a-a5b316e520fa a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_45ee2626-6c75-40e6-af1a-a5b316e520fa .
+
+km-dev:PredicateObjectMap_ed29467c-6076-4e15-a259-cad32e75c9e6 rr:predicate schema:description .
+
+_:node1gdim63g9x4 rr:column "Description4273" ;
+	a rr:ObjectMap ;
+	rr:language "null" ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasObjectMap _:node1gdim63g9x4 .
+
+km-dev:PredicateObjectMap_ed29467c-6076-4e15-a259-cad32e75c9e6 rr:objectMap _:node1gdim63g9x4 .
+
+km-dev:TriplesMap_7eb68cad-d58f-4f9a-9efa-4e072d0748af rr:predicateObjectMap km-dev:PredicateObjectMap_ed29467c-6076-4e15-a259-cad32e75c9e6 .
+
+km-dev:PredicateObjectMap_ed29467c-6076-4e15-a259-cad32e75c9e6 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_ed29467c-6076-4e15-a259-cad32e75c9e6 .
+
+km-dev:PredicateObjectMap_001865c6-17e2-4b3a-b490-6e408744c88b rr:predicate schema:name .
+
+_:node1gdim63g9x5 rr:column "0077" ;
+	a rr:ObjectMap ;
+	rr:language "null" ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasObjectMap _:node1gdim63g9x5 .
+
+km-dev:PredicateObjectMap_001865c6-17e2-4b3a-b490-6e408744c88b rr:objectMap _:node1gdim63g9x5 .
+
+km-dev:TriplesMap_7eb68cad-d58f-4f9a-9efa-4e072d0748af rr:predicateObjectMap km-dev:PredicateObjectMap_001865c6-17e2-4b3a-b490-6e408744c88b .
+
+km-dev:PredicateObjectMap_001865c6-17e2-4b3a-b490-6e408744c88b a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_001865c6-17e2-4b3a-b490-6e408744c88b .
+
+km-dev:PredicateObjectMap_827411af-3714-4ce4-8749-024c071ce088 rr:predicate schema:price .
+
+_:node1gdim63g9x6 rr:column "Price4278" ;
+	a rr:ObjectMap ;
+	rr:language "null" ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasObjectMap _:node1gdim63g9x6 .
+
+km-dev:PredicateObjectMap_827411af-3714-4ce4-8749-024c071ce088 rr:objectMap _:node1gdim63g9x6 .
+
+km-dev:TriplesMap_7eb68cad-d58f-4f9a-9efa-4e072d0748af rr:predicateObjectMap km-dev:PredicateObjectMap_827411af-3714-4ce4-8749-024c071ce088 .
+
+km-dev:PredicateObjectMap_827411af-3714-4ce4-8749-024c071ce088 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_827411af-3714-4ce4-8749-024c071ce088 .
+
+km-dev:TriplesMap_e1d690cf-c8f0-48b7-966c-2146ee50897a a rr:TriplesMap .
+
+_:node1gdim63g9x1 km-dev:hasTriplesMap km-dev:TriplesMap_e1d690cf-c8f0-48b7-966c-2146ee50897a .
+
+km-dev:TriplesMap_e1d690cf-c8f0-48b7-966c-2146ee50897a km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x7 rr:tableName "gunsinternational.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasLogicalTable _:node1gdim63g9x7 .
+
+km-dev:TriplesMap_e1d690cf-c8f0-48b7-966c-2146ee50897a rr:logicalTable _:node1gdim63g9x7 ;
+	rr:subjectMap _:node1gdim63g9x8 .
+
+_:node1gdim63g9x1 km-dev:hasSubjectMap _:node1gdim63g9x8 .
+
+_:node1gdim63g9x8 km-dev:isPartOfMapping _:node1gdim63g9x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://schema.dig.isi.edu/ontology/Firearm1" ;
+	rr:class memex:Firearm ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "memex:Firearm1" .
+
+km-dev:PredicateObjectMap_a022acf0-a778-4f19-9544-3788da9d1145 rr:predicate schema:category .
+
+_:node1gdim63g9x9 rr:column "Accessories4054" ;
+	a rr:ObjectMap ;
+	rr:language "null" ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasObjectMap _:node1gdim63g9x9 .
+
+km-dev:PredicateObjectMap_a022acf0-a778-4f19-9544-3788da9d1145 rr:objectMap _:node1gdim63g9x9 .
+
+km-dev:TriplesMap_e1d690cf-c8f0-48b7-966c-2146ee50897a rr:predicateObjectMap km-dev:PredicateObjectMap_a022acf0-a778-4f19-9544-3788da9d1145 .
+
+km-dev:PredicateObjectMap_a022acf0-a778-4f19-9544-3788da9d1145 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_a022acf0-a778-4f19-9544-3788da9d1145 .
+
+km-dev:TriplesMap_768d7a0f-b353-483f-a07a-56703f087252 a rr:TriplesMap .
+
+_:node1gdim63g9x1 km-dev:hasTriplesMap km-dev:TriplesMap_768d7a0f-b353-483f-a07a-56703f087252 .
+
+km-dev:TriplesMap_768d7a0f-b353-483f-a07a-56703f087252 km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x10 rr:tableName "gunsinternational.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasLogicalTable _:node1gdim63g9x10 .
+
+km-dev:TriplesMap_768d7a0f-b353-483f-a07a-56703f087252 rr:logicalTable _:node1gdim63g9x10 ;
+	rr:subjectMap _:node1gdim63g9x11 .
+
+_:node1gdim63g9x1 km-dev:hasSubjectMap _:node1gdim63g9x11 .
+
+_:node1gdim63g9x11 km-dev:isPartOfMapping _:node1gdim63g9x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://schema.dig.isi.edu/ontology/PersonOrOrganization1" ;
+	rr:class memex:PersonOrOrganization ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "memex:PersonOrOrganization1" .
+
+km-dev:PredicateObjectMap_5477ecee-2814-4516-a61b-58538fb63ab4 rr:predicate schema:name .
+
+_:node1gdim63g9x12 rr:column "Seller4193" ;
+	a rr:ObjectMap ;
+	rr:language "null" ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasObjectMap _:node1gdim63g9x12 .
+
+km-dev:PredicateObjectMap_5477ecee-2814-4516-a61b-58538fb63ab4 rr:objectMap _:node1gdim63g9x12 .
+
+km-dev:TriplesMap_768d7a0f-b353-483f-a07a-56703f087252 rr:predicateObjectMap km-dev:PredicateObjectMap_5477ecee-2814-4516-a61b-58538fb63ab4 .
+
+km-dev:PredicateObjectMap_5477ecee-2814-4516-a61b-58538fb63ab4 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_5477ecee-2814-4516-a61b-58538fb63ab4 .
+
+km-dev:PredicateObjectMap_949841a4-ba5b-4118-b817-f9ddc9b6720a rr:predicate schema:telephone .
+
+_:node1gdim63g9x13 rr:column "Phone4225" ;
+	a rr:ObjectMap ;
+	rr:language "null" ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasObjectMap _:node1gdim63g9x13 .
+
+km-dev:PredicateObjectMap_949841a4-ba5b-4118-b817-f9ddc9b6720a rr:objectMap _:node1gdim63g9x13 .
+
+km-dev:TriplesMap_768d7a0f-b353-483f-a07a-56703f087252 rr:predicateObjectMap km-dev:PredicateObjectMap_949841a4-ba5b-4118-b817-f9ddc9b6720a .
+
+km-dev:PredicateObjectMap_949841a4-ba5b-4118-b817-f9ddc9b6720a a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_949841a4-ba5b-4118-b817-f9ddc9b6720a .
+
+km-dev:TriplesMap_43551d9d-caa8-4e77-89fa-aae487c42e40 a rr:TriplesMap .
+
+_:node1gdim63g9x1 km-dev:hasTriplesMap km-dev:TriplesMap_43551d9d-caa8-4e77-89fa-aae487c42e40 .
+
+km-dev:TriplesMap_43551d9d-caa8-4e77-89fa-aae487c42e40 km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x14 rr:tableName "gunsinternational.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasLogicalTable _:node1gdim63g9x14 .
+
+km-dev:TriplesMap_43551d9d-caa8-4e77-89fa-aae487c42e40 rr:logicalTable _:node1gdim63g9x14 ;
+	rr:subjectMap _:node1gdim63g9x15 .
+
+_:node1gdim63g9x1 km-dev:hasSubjectMap _:node1gdim63g9x15 .
+
+_:node1gdim63g9x15 km-dev:isPartOfMapping _:node1gdim63g9x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://schema.org/CreativeWork1" ;
+	rr:class schema:CreativeWork ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "schema:CreativeWork1" .
+
+km-dev:PredicateObjectMap_5bdde9ca-a660-4274-a832-2cdfa1ba5717 rr:predicate schema:copyrightYear .
+
+_:node1gdim63g9x16 rr:column "On6622" ;
+	a rr:ObjectMap ;
+	rr:language "null" ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasObjectMap _:node1gdim63g9x16 .
+
+km-dev:PredicateObjectMap_5bdde9ca-a660-4274-a832-2cdfa1ba5717 rr:objectMap _:node1gdim63g9x16 .
+
+km-dev:TriplesMap_43551d9d-caa8-4e77-89fa-aae487c42e40 rr:predicateObjectMap km-dev:PredicateObjectMap_5bdde9ca-a660-4274-a832-2cdfa1ba5717 .
+
+km-dev:PredicateObjectMap_5bdde9ca-a660-4274-a832-2cdfa1ba5717 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_5bdde9ca-a660-4274-a832-2cdfa1ba5717 .
+
+km-dev:PredicateObjectMap_6c748e95-9904-411a-8e41-9d50509d1875 rr:predicate schema:name .
+
+_:node1gdim63g9x17 rr:column "file_name" ;
+	a rr:ObjectMap ;
+	rr:language "null" ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasObjectMap _:node1gdim63g9x17 .
+
+km-dev:PredicateObjectMap_6c748e95-9904-411a-8e41-9d50509d1875 rr:objectMap _:node1gdim63g9x17 .
+
+km-dev:TriplesMap_43551d9d-caa8-4e77-89fa-aae487c42e40 rr:predicateObjectMap km-dev:PredicateObjectMap_6c748e95-9904-411a-8e41-9d50509d1875 .
+
+km-dev:PredicateObjectMap_6c748e95-9904-411a-8e41-9d50509d1875 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_6c748e95-9904-411a-8e41-9d50509d1875 .
+
+km-dev:TriplesMap_f770c89e-1528-4b3e-994d-435893c8395f a rr:TriplesMap .
+
+_:node1gdim63g9x1 km-dev:hasTriplesMap km-dev:TriplesMap_f770c89e-1528-4b3e-994d-435893c8395f .
+
+km-dev:TriplesMap_f770c89e-1528-4b3e-994d-435893c8395f km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x18 rr:tableName "gunsinternational.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasLogicalTable _:node1gdim63g9x18 .
+
+km-dev:TriplesMap_f770c89e-1528-4b3e-994d-435893c8395f rr:logicalTable _:node1gdim63g9x18 ;
+	rr:subjectMap _:node1gdim63g9x19 .
+
+_:node1gdim63g9x1 km-dev:hasSubjectMap _:node1gdim63g9x19 .
+
+_:node1gdim63g9x19 km-dev:isPartOfMapping _:node1gdim63g9x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://schema.org/Place1" ;
+	rr:class schema:Place ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "schema:Place1" .
+
+km-dev:PredicateObjectMap_80572d93-1d2b-4901-8139-87bb182be698 rr:predicate schema:name .
+
+_:node1gdim63g9x20 rr:column "State4214" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasObjectMap _:node1gdim63g9x20 .
+
+km-dev:PredicateObjectMap_80572d93-1d2b-4901-8139-87bb182be698 rr:objectMap _:node1gdim63g9x20 .
+
+km-dev:TriplesMap_f770c89e-1528-4b3e-994d-435893c8395f rr:predicateObjectMap km-dev:PredicateObjectMap_80572d93-1d2b-4901-8139-87bb182be698 .
+
+km-dev:PredicateObjectMap_80572d93-1d2b-4901-8139-87bb182be698 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1gdim63g9x1 .
+
+_:node1gdim63g9x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_80572d93-1d2b-4901-8139-87bb182be698 .

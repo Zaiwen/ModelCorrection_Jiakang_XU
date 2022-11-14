@@ -1,0 +1,57 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s23-s-national-portrait-gallery.json"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n4[style="filled",color="white",fillcolor="lightgray",label="Person2"];
+n5[style="filled",color="white",fillcolor="lightgray",label="Concept1"];
+n6[style="filled",color="white",fillcolor="lightgray",label="Concept2"];
+n7[style="filled",color="white",fillcolor="lightgray",label="EuropeanaAggregation1"];
+n8[style="filled",color="white",fillcolor="lightgray",label="WebResource1"];
+n9[shape="plaintext",style="filled",fillcolor="gold",label="Dimension"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="DateOfWork"];
+n11[shape="plaintext",style="filled",fillcolor="gold",label="Medium"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="CreditLine"];
+n13[shape="plaintext",style="filled",fillcolor="gold",label="values"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="values"];
+n15[shape="plaintext",style="filled",fillcolor="gold",label="Description"];
+n16[shape="plaintext",style="filled",fillcolor="gold",label="sitterDeathDate"];
+n17[shape="plaintext",style="filled",fillcolor="gold",label="Image"];
+n18[shape="plaintext",style="filled",fillcolor="gold",label="Ref"];
+n19[shape="plaintext",style="filled",fillcolor="gold",label="Owner"];
+n20[shape="plaintext",style="filled",fillcolor="gold",label="Copyright"];
+n21[shape="plaintext",style="filled",fillcolor="gold",label="birthDate"];
+n22[shape="plaintext",style="filled",fillcolor="gold",label="Classification"];
+n23[shape="plaintext",style="filled",fillcolor="gold",label="sitterBirthDate"];
+n24[shape="plaintext",style="filled",fillcolor="gold",label="Artist"];
+n25[shape="plaintext",style="filled",fillcolor="gold",label="Title"];
+n26[shape="plaintext",style="filled",fillcolor="gold",label="deathDate"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="creator"]
+n2 -> n4[color="brown",fontcolor="black",label="sitter"]
+n2 -> n5[color="brown",fontcolor="black",label="subject"]
+n2 -> n6[color="brown",fontcolor="black",label="hasType"]
+n7 -> n2[color="brown",fontcolor="black",label="aggregatedCHO"]
+n7 -> n8[color="brown",fontcolor="black",label="hasView"]
+n2 -> n9[color="brown",fontcolor="black",label="extent"]
+n2 -> n10[color="brown",fontcolor="black",label="created"]
+n2 -> n11[color="brown",fontcolor="black",label="medium"]
+n2 -> n12[color="brown",fontcolor="black",label="provenance"]
+n5 -> n13[color="brown",fontcolor="black",label="prefLabel"]
+n4 -> n14[color="brown",fontcolor="black",label="nameOfThePerson"]
+n2 -> n15[color="brown",fontcolor="black",label="description"]
+n4 -> n16[color="brown",fontcolor="black",label="dateOfDeath"]
+n8 -> n17[color="brown",fontcolor="black",label="classLink"]
+n2 -> n18[color="brown",fontcolor="black",label="accessionNumber"]
+n2 -> n19[color="brown",fontcolor="black",label="rightsHolder"]
+n2 -> n20[color="brown",fontcolor="black",label="rights"]
+n3 -> n21[color="brown",fontcolor="black",label="dateOfBirth"]
+n6 -> n22[color="brown",fontcolor="black",label="prefLabel"]
+n4 -> n23[color="brown",fontcolor="black",label="dateOfBirth"]
+n3 -> n24[color="brown",fontcolor="black",label="nameOfThePerson"]
+n2 -> n25[color="brown",fontcolor="black",label="title"]
+n3 -> n26[color="brown",fontcolor="black",label="dateOfDeath"]
+}

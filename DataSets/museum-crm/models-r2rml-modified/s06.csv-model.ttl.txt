@@ -1,0 +1,3013 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix km-dev: <http://isi.edu/integration/karma/dev#> .
+
+_:node1fuqv1rp3x1 a km-dev:R2RMLMapping ;
+	km-dev:sourceName "s06.csv" ;
+	km-dev:modelPublicationTime "1648024940323"^^xsd:long ;
+	km-dev:modelVersion "1.7" ;
+	km-dev:hasInputColumns "[[{\"columnName\":\"ArtistBornDate\"}],[{\"columnName\":\"ArtistDiedDate\"}],[{\"columnName\":\"DateOfWork\"}],[{\"columnName\":\"CreditLine\"}],[{\"columnName\":\"production_id\"}],[{\"columnName\":\"Medium\"}],[{\"columnName\":\"Dimension\"}],[{\"columnName\":\"Artist\"}],[{\"columnName\":\"Classification\"}],[{\"columnName\":\"Image\"}],[{\"columnName\":\"Description\"}],[{\"columnName\":\"Owner\"}],[{\"columnName\":\"AquisitionDate\"}],[{\"columnName\":\"Title\"}]]" ;
+	km-dev:hasOutputColumns "[[{\"columnName\":\"ArtistBornDate\"}],[{\"columnName\":\"ArtistDiedDate\"}],[{\"columnName\":\"DateOfWork\"}],[{\"columnName\":\"CreditLine\"}],[{\"columnName\":\"production_id\"}],[{\"columnName\":\"Death_URI\"}],[{\"columnName\":\"Medium\"}],[{\"columnName\":\"Dimension\"}],[{\"columnName\":\"Artist\"}],[{\"columnName\":\"Classification\"}],[{\"columnName\":\"Image\"}],[{\"columnName\":\"Description\"}],[{\"columnName\":\"Owner\"}],[{\"columnName\":\"AquisitionDate\"}],[{\"columnName\":\"Object_URI\"}],[{\"columnName\":\"Birth_URI\"}],[{\"columnName\":\"Actor_URI\"}],[{\"columnName\":\"Person_URI\"}],[{\"columnName\":\"Title\"}]]" ;
+	km-dev:hasModelLabel "s06.csv" ;
+	km-dev:hasWorksheetHistory """[
+    {
+        \"commandName\": \"AddColumnCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"production_id\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"hTableId\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"newColumnName\",
+                \"type\": \"other\",
+                \"value\": \"Object_URI\"
+            },
+            {
+                \"name\": \"defaultValue\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Object_URI\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"Transformation\"]
+    },
+    {
+        \"commandName\": \"AddColumnCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"ArtistBornDate\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"hTableId\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"newColumnName\",
+                \"type\": \"other\",
+                \"value\": \"Birth_URI\"
+            },
+            {
+                \"name\": \"defaultValue\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Birth_URI\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"Transformation\"]
+    },
+    {
+        \"commandName\": \"AddColumnCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"ArtistDiedDate\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"hTableId\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"newColumnName\",
+                \"type\": \"other\",
+                \"value\": \"Death_URI\"
+            },
+            {
+                \"name\": \"defaultValue\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Death_URI\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"Transformation\"]
+    },
+    {
+        \"commandName\": \"AddColumnCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Artist\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"hTableId\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"newColumnName\",
+                \"type\": \"other\",
+                \"value\": \"Actor_URI\"
+            },
+            {
+                \"name\": \"defaultValue\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Actor_URI\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"Transformation\"]
+    },
+    {
+        \"commandName\": \"AddColumnCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Title\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"hTableId\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"newColumnName\",
+                \"type\": \"other\",
+                \"value\": \"Person_URI\"
+            },
+            {
+                \"name\": \"defaultValue\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Person_URI\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"Transformation\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Classification\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E55_Type\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E55_Type1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://www.w3.org/2000/01/rdf-schema#label\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E55_Type/E55_Type1 (add)\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Classification\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Classification\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Medium\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E55_Type\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E55_Type2\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://www.w3.org/2000/01/rdf-schema#label\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E55_Type/E55_Type2 (add)\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Medium\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Medium\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Dimension\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E54_Dimension\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E54_Dimension1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://erlangen-crm.org/current/P3_has_note\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E54_Dimension/E54_Dimension1 (add)\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Dimension\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Dimension\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Owner\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E40_Legal_Body\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E40_Legal_Body1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://www.w3.org/2000/01/rdf-schema#label\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E40_Legal_Body/E40_Legal_Body1 (add)\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Owner\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Owner\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"AquisitionDate\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E52_Time-Span\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E52_Time-Span1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://erlangen-crm.org/current/P82_at_some_time_within\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E52_Time-Span/E52_Time-Span1 (add)\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"AquisitionDate\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"AquisitionDate\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Description\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E22_Man-Made_Object\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E22_Man-Made_Object1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://erlangen-crm.org/current/P3_has_note\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E22_Man-Made_Object1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Description\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Description\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"ArtistBornDate\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E52_Time-Span\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E52_Time-Span2\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://erlangen-crm.org/current/P82_at_some_time_within\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E52_Time-Span2\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"ArtistBornDate\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"ArtistBornDate\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"ArtistDiedDate\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E52_Time-Span\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E52_Time-Span3\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://erlangen-crm.org/current/P82_at_some_time_within\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E52_Time-Span3\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"ArtistDiedDate\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"ArtistDiedDate\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"DateOfWork\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E52_Time-Span\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E52_Time-Span4\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://erlangen-crm.org/current/P82_at_some_time_within\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E52_Time-Span/E52_Time-Span4 (add)\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"DateOfWork\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"DateOfWork\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"CreditLine\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E8_Acquisition\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E8_Acquisition1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://erlangen-crm.org/current/P3_has_note\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E8_Acquisition/E8_Acquisition1 (add)\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"CreditLine\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"CreditLine\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Artist\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E82_Actor_Appellation\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E82_Actor_Appellation1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://www.w3.org/2000/01/rdf-schema#label\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E82_Actor_Appellation1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Artist\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Artist\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Title\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E82_Actor_Appellation\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E82_Actor_Appellation2\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://www.w3.org/2000/01/rdf-schema#label\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E82_Actor_Appellation2\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Title\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Title\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Image\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E38_Image\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E38_Image1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://www.w3.org/2000/01/rdf-schema#label\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E38_Image/E38_Image1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Image\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Image\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"production_id\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E12_Production\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E12_Production1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://www.w3.org/2000/01/rdf-schema#label\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E12_Production1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"production_id\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"production_id\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetMetaPropertyCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Actor_URI\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"metaPropertyName\",
+                \"type\": \"other\",
+                \"value\": \"isUriOfClass\"
+            },
+            {
+                \"name\": \"metaPropertyUri\",
+                \"type\": \"other\",
+                \"value\": \"http://erlangen-crm.org/current/E21_Person\"
+            },
+            {
+                \"name\": \"metaPropertyId\",
+                \"type\": \"other\",
+                \"value\": \"http://erlangen-crm.org/current/E21_Person1\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E21_Person\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E21_Person1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://isi.edu/integration/karma/dev#classLink\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E21_Person/E21_Person1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Actor_URI\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Actor_URI\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetMetaPropertyCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Birth_URI\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"metaPropertyName\",
+                \"type\": \"other\",
+                \"value\": \"isUriOfClass\"
+            },
+            {
+                \"name\": \"metaPropertyUri\",
+                \"type\": \"other\",
+                \"value\": \"http://erlangen-crm.org/current/E67_Birth\"
+            },
+            {
+                \"name\": \"metaPropertyId\",
+                \"type\": \"other\",
+                \"value\": \"http://erlangen-crm.org/current/E67_Birth1\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E67_Birth\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E67_Birth1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://isi.edu/integration/karma/dev#classLink\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E67_Birth/E67_Birth1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Birth_URI\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Birth_URI\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetMetaPropertyCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Death_URI\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"metaPropertyName\",
+                \"type\": \"other\",
+                \"value\": \"isUriOfClass\"
+            },
+            {
+                \"name\": \"metaPropertyUri\",
+                \"type\": \"other\",
+                \"value\": \"http://erlangen-crm.org/current/E69_Death\"
+            },
+            {
+                \"name\": \"metaPropertyId\",
+                \"type\": \"other\",
+                \"value\": \"http://erlangen-crm.org/current/E69_Death1\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E69_Death\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E69_Death1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://isi.edu/integration/karma/dev#classLink\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E69_Death/E69_Death1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Death_URI\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Death_URI\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetMetaPropertyCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Object_URI\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"metaPropertyName\",
+                \"type\": \"other\",
+                \"value\": \"isUriOfClass\"
+            },
+            {
+                \"name\": \"metaPropertyUri\",
+                \"type\": \"other\",
+                \"value\": \"http://erlangen-crm.org/current/E22_Man-Made_Object\"
+            },
+            {
+                \"name\": \"metaPropertyId\",
+                \"type\": \"other\",
+                \"value\": \"http://erlangen-crm.org/current/E22_Man-Made_Object1\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E22_Man-Made_Object\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E22_Man-Made_Object1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://isi.edu/integration/karma/dev#classLink\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E22_Man-Made_Object/E22_Man-Made_Object1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Object_URI\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Object_URI\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetMetaPropertyCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"Person_URI\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"metaPropertyName\",
+                \"type\": \"other\",
+                \"value\": \"isUriOfClass\"
+            },
+            {
+                \"name\": \"metaPropertyUri\",
+                \"type\": \"other\",
+                \"value\": \"http://erlangen-crm.org/current/E21_Person\"
+            },
+            {
+                \"name\": \"metaPropertyId\",
+                \"type\": \"other\",
+                \"value\": \"http://erlangen-crm.org/current/E21_Person2\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://erlangen-crm.org/current/E21_Person\",
+                    \"DomainId\": \"http://erlangen-crm.org/current/E21_Person2\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://isi.edu/integration/karma/dev#classLink\",
+                    \"DomainLabel\": \"http://erlangen-crm.org/current/E21_Person/E21_Person2\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Person_URI\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"Person_URI\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E54_Dimension1\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P43_has_dimension\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E54_Dimension\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E22_Man-Made_Object1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E22_Man-Made_Object\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E40_Legal_Body1\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P51_has_former_or_current_owner\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E40_Legal_Body\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E22_Man-Made_Object1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E22_Man-Made_Object\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E55_Type1\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P2_has_type\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E55_Type\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E22_Man-Made_Object1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E22_Man-Made_Object\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E8_Acquisition1\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P24i_changed_ownership_through\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E8_Acquisition\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E22_Man-Made_Object1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E22_Man-Made_Object\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E82_Actor_Appellation1\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P131_is_identified_by\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E82_Actor_Appellation\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E21_Person1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E21_Person\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E21_Person1\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P14_carried_out_by\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E21_Person\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E12_Production1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E12_Production\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E12_Production1\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P108i_was_produced_by\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E12_Production\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E22_Man-Made_Object1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E22_Man-Made_Object\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E55_Type2\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P32_used_general_technique\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E55_Type\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E12_Production1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E12_Production\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E52_Time-Span4\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P4_has_time-span\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E52_Time-Span\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E12_Production1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E12_Production\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E82_Actor_Appellation2\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P131_is_identified_by\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E82_Actor_Appellation\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E21_Person2\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E21_Person\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E21_Person2\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P62_depicts\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E21_Person\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E22_Man-Made_Object1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E22_Man-Made_Object\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E52_Time-Span1\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P4_has_time-span\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E52_Time-Span\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E8_Acquisition1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E8_Acquisition\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E22_Man-Made_Object1\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P138_represents\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E22_Man-Made_Object\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E38_Image1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E38_Image\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E52_Time-Span2\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P4_has_time-span\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E52_Time-Span\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E67_Birth1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E67_Birth\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E52_Time-Span3\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P4_has_time-span\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E52_Time-Span\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E69_Death1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E69_Death\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E67_Birth1\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P98i_was_born\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E67_Birth\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E21_Person1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E21_Person\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E69_Death1\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P100i_died_in\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E69_Death\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E21_Person1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E21_Person\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://erlangen-crm.org/current/E40_Legal_Body1\",
+                    \"edgeId\": \"http://erlangen-crm.org/current/P22_transferred_title_to\",
+                    \"edgeTargetUri\": \"http://erlangen-crm.org/current/E40_Legal_Body\",
+                    \"edgeSourceId\": \"http://erlangen-crm.org/current/E8_Acquisition1\",
+                    \"edgeSourceUri\": \"http://erlangen-crm.org/current/E8_Acquisition\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    }
+]""" .
+
+km-dev:TriplesMap_372a40bd-6a63-4a47-80ca-3276bbf79e98 a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_372a40bd-6a63-4a47-80ca-3276bbf79e98 .
+
+km-dev:TriplesMap_372a40bd-6a63-4a47-80ca-3276bbf79e98 km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x2 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x2 .
+
+km-dev:TriplesMap_372a40bd-6a63-4a47-80ca-3276bbf79e98 rr:logicalTable _:node1fuqv1rp3x2 ;
+	rr:subjectMap _:node1fuqv1rp3x3 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x3 .
+
+_:node1fuqv1rp3x3 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E12_Production1" ;
+	rr:class <http://erlangen-crm.org/current/E12_Production> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "E12_Production1" .
+
+km-dev:PredicateObjectMap_42640f37-9dd4-47d8-aa51-4880edf70d60 rr:predicate <http://erlangen-crm.org/current/P14_carried_out_by> .
+
+km-dev:RefObjectMap_66b11765-7fe1-48d7-9b44-92ba028aec3d a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_7866d118-f674-433a-ba3e-81d72f231da3 ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_66b11765-7fe1-48d7-9b44-92ba028aec3d .
+
+km-dev:PredicateObjectMap_42640f37-9dd4-47d8-aa51-4880edf70d60 rr:objectMap km-dev:RefObjectMap_66b11765-7fe1-48d7-9b44-92ba028aec3d .
+
+km-dev:TriplesMap_372a40bd-6a63-4a47-80ca-3276bbf79e98 rr:predicateObjectMap km-dev:PredicateObjectMap_42640f37-9dd4-47d8-aa51-4880edf70d60 .
+
+km-dev:PredicateObjectMap_42640f37-9dd4-47d8-aa51-4880edf70d60 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_42640f37-9dd4-47d8-aa51-4880edf70d60 .
+
+km-dev:PredicateObjectMap_a07f673a-48e6-48ca-b0d7-abf953b7feaf rr:predicate <http://erlangen-crm.org/current/P4_has_time-span> .
+
+km-dev:RefObjectMap_e2e82d63-1305-4db4-8e1a-f974543df0e8 a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_ada5e038-48c6-4e95-a92a-79c64f9f908b ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_e2e82d63-1305-4db4-8e1a-f974543df0e8 .
+
+km-dev:PredicateObjectMap_a07f673a-48e6-48ca-b0d7-abf953b7feaf rr:objectMap km-dev:RefObjectMap_e2e82d63-1305-4db4-8e1a-f974543df0e8 .
+
+km-dev:TriplesMap_372a40bd-6a63-4a47-80ca-3276bbf79e98 rr:predicateObjectMap km-dev:PredicateObjectMap_a07f673a-48e6-48ca-b0d7-abf953b7feaf .
+
+km-dev:PredicateObjectMap_a07f673a-48e6-48ca-b0d7-abf953b7feaf a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_a07f673a-48e6-48ca-b0d7-abf953b7feaf .
+
+km-dev:PredicateObjectMap_09eb980a-1e8b-4bea-a79d-0d5e6cf66043 rr:predicate <http://erlangen-crm.org/current/P32_used_general_technique> .
+
+km-dev:RefObjectMap_23f7442c-ef81-41e4-a379-8eed6152b34e a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_dbf293a3-485f-470f-b42a-9c1f9c9013fc ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_23f7442c-ef81-41e4-a379-8eed6152b34e .
+
+km-dev:PredicateObjectMap_09eb980a-1e8b-4bea-a79d-0d5e6cf66043 rr:objectMap km-dev:RefObjectMap_23f7442c-ef81-41e4-a379-8eed6152b34e .
+
+km-dev:TriplesMap_372a40bd-6a63-4a47-80ca-3276bbf79e98 rr:predicateObjectMap km-dev:PredicateObjectMap_09eb980a-1e8b-4bea-a79d-0d5e6cf66043 .
+
+km-dev:PredicateObjectMap_09eb980a-1e8b-4bea-a79d-0d5e6cf66043 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_09eb980a-1e8b-4bea-a79d-0d5e6cf66043 .
+
+km-dev:PredicateObjectMap_a37420d5-2c84-4c5b-8131-157ae8a83040 rr:predicate rdfs:label .
+
+_:node1fuqv1rp3x4 rr:column "production_id" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x4 .
+
+km-dev:PredicateObjectMap_a37420d5-2c84-4c5b-8131-157ae8a83040 rr:objectMap _:node1fuqv1rp3x4 .
+
+km-dev:TriplesMap_372a40bd-6a63-4a47-80ca-3276bbf79e98 rr:predicateObjectMap km-dev:PredicateObjectMap_a37420d5-2c84-4c5b-8131-157ae8a83040 .
+
+km-dev:PredicateObjectMap_a37420d5-2c84-4c5b-8131-157ae8a83040 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_a37420d5-2c84-4c5b-8131-157ae8a83040 .
+
+km-dev:TriplesMap_7866d118-f674-433a-ba3e-81d72f231da3 a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_7866d118-f674-433a-ba3e-81d72f231da3 .
+
+km-dev:TriplesMap_7866d118-f674-433a-ba3e-81d72f231da3 km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x5 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x5 .
+
+km-dev:TriplesMap_7866d118-f674-433a-ba3e-81d72f231da3 rr:logicalTable _:node1fuqv1rp3x5 ;
+	rr:subjectMap _:node1fuqv1rp3x6 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x6 .
+
+_:node1fuqv1rp3x6 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E21_Person1" ;
+	rr:class <http://erlangen-crm.org/current/E21_Person> ;
+	rr:template "{Actor_URI}" .
+
+km-dev:PredicateObjectMap_08855db1-8816-4bb8-b86c-4a16d43b3865 rr:predicate <http://erlangen-crm.org/current/P98i_was_born> .
+
+km-dev:RefObjectMap_b98bc1d6-911f-4499-a3cb-11cbd7b064b8 a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_9843d347-59e7-4e46-a876-5bca37634a03 ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_b98bc1d6-911f-4499-a3cb-11cbd7b064b8 .
+
+km-dev:PredicateObjectMap_08855db1-8816-4bb8-b86c-4a16d43b3865 rr:objectMap km-dev:RefObjectMap_b98bc1d6-911f-4499-a3cb-11cbd7b064b8 .
+
+km-dev:TriplesMap_7866d118-f674-433a-ba3e-81d72f231da3 rr:predicateObjectMap km-dev:PredicateObjectMap_08855db1-8816-4bb8-b86c-4a16d43b3865 .
+
+km-dev:PredicateObjectMap_08855db1-8816-4bb8-b86c-4a16d43b3865 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_08855db1-8816-4bb8-b86c-4a16d43b3865 .
+
+km-dev:PredicateObjectMap_03cfdfeb-36d0-4b47-b402-549aa57f79ed rr:predicate <http://erlangen-crm.org/current/P100i_died_in> .
+
+km-dev:RefObjectMap_b459b674-083d-4bfa-abb6-ba9d4e974f0c a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_e235927c-8b13-47bc-9633-fadb61d0e8fa ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_b459b674-083d-4bfa-abb6-ba9d4e974f0c .
+
+km-dev:PredicateObjectMap_03cfdfeb-36d0-4b47-b402-549aa57f79ed rr:objectMap km-dev:RefObjectMap_b459b674-083d-4bfa-abb6-ba9d4e974f0c .
+
+km-dev:TriplesMap_7866d118-f674-433a-ba3e-81d72f231da3 rr:predicateObjectMap km-dev:PredicateObjectMap_03cfdfeb-36d0-4b47-b402-549aa57f79ed .
+
+km-dev:PredicateObjectMap_03cfdfeb-36d0-4b47-b402-549aa57f79ed a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_03cfdfeb-36d0-4b47-b402-549aa57f79ed .
+
+km-dev:PredicateObjectMap_a7df1288-d874-4df7-8283-ce70d4014e3e rr:predicate <http://erlangen-crm.org/current/P131_is_identified_by> .
+
+km-dev:RefObjectMap_2c0b26e0-1441-4885-bb3d-9fc1c7844201 a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_16d37bf5-1200-415e-8a71-e60d85614433 ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_2c0b26e0-1441-4885-bb3d-9fc1c7844201 .
+
+km-dev:PredicateObjectMap_a7df1288-d874-4df7-8283-ce70d4014e3e rr:objectMap km-dev:RefObjectMap_2c0b26e0-1441-4885-bb3d-9fc1c7844201 .
+
+km-dev:TriplesMap_7866d118-f674-433a-ba3e-81d72f231da3 rr:predicateObjectMap km-dev:PredicateObjectMap_a7df1288-d874-4df7-8283-ce70d4014e3e .
+
+km-dev:PredicateObjectMap_a7df1288-d874-4df7-8283-ce70d4014e3e a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_a7df1288-d874-4df7-8283-ce70d4014e3e .
+
+km-dev:TriplesMap_ada5e038-48c6-4e95-a92a-79c64f9f908b a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_ada5e038-48c6-4e95-a92a-79c64f9f908b .
+
+km-dev:TriplesMap_ada5e038-48c6-4e95-a92a-79c64f9f908b km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x7 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x7 .
+
+km-dev:TriplesMap_ada5e038-48c6-4e95-a92a-79c64f9f908b rr:logicalTable _:node1fuqv1rp3x7 ;
+	rr:subjectMap _:node1fuqv1rp3x8 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x8 .
+
+_:node1fuqv1rp3x8 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E52_Time-Span4" ;
+	rr:class <http://erlangen-crm.org/current/E52_Time-Span> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "E52_Time-Span4" .
+
+km-dev:PredicateObjectMap_d30f6961-7a2e-47b3-8552-8cf717235bd1 rr:predicate <http://erlangen-crm.org/current/P82_at_some_time_within> .
+
+_:node1fuqv1rp3x9 rr:column "DateOfWork" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x9 .
+
+km-dev:PredicateObjectMap_d30f6961-7a2e-47b3-8552-8cf717235bd1 rr:objectMap _:node1fuqv1rp3x9 .
+
+km-dev:TriplesMap_ada5e038-48c6-4e95-a92a-79c64f9f908b rr:predicateObjectMap km-dev:PredicateObjectMap_d30f6961-7a2e-47b3-8552-8cf717235bd1 .
+
+km-dev:PredicateObjectMap_d30f6961-7a2e-47b3-8552-8cf717235bd1 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_d30f6961-7a2e-47b3-8552-8cf717235bd1 .
+
+km-dev:TriplesMap_dbf293a3-485f-470f-b42a-9c1f9c9013fc a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_dbf293a3-485f-470f-b42a-9c1f9c9013fc .
+
+km-dev:TriplesMap_dbf293a3-485f-470f-b42a-9c1f9c9013fc km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x10 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x10 .
+
+km-dev:TriplesMap_dbf293a3-485f-470f-b42a-9c1f9c9013fc rr:logicalTable _:node1fuqv1rp3x10 ;
+	rr:subjectMap _:node1fuqv1rp3x11 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x11 .
+
+_:node1fuqv1rp3x11 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E55_Type2" ;
+	rr:class <http://erlangen-crm.org/current/E55_Type> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "E55_Type2" .
+
+km-dev:PredicateObjectMap_4cd09f0a-f3dc-4e84-8a85-37af5bd78b73 rr:predicate rdfs:label .
+
+_:node1fuqv1rp3x12 rr:column "Medium" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x12 .
+
+km-dev:PredicateObjectMap_4cd09f0a-f3dc-4e84-8a85-37af5bd78b73 rr:objectMap _:node1fuqv1rp3x12 .
+
+km-dev:TriplesMap_dbf293a3-485f-470f-b42a-9c1f9c9013fc rr:predicateObjectMap km-dev:PredicateObjectMap_4cd09f0a-f3dc-4e84-8a85-37af5bd78b73 .
+
+km-dev:PredicateObjectMap_4cd09f0a-f3dc-4e84-8a85-37af5bd78b73 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_4cd09f0a-f3dc-4e84-8a85-37af5bd78b73 .
+
+km-dev:TriplesMap_9843d347-59e7-4e46-a876-5bca37634a03 a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_9843d347-59e7-4e46-a876-5bca37634a03 .
+
+km-dev:TriplesMap_9843d347-59e7-4e46-a876-5bca37634a03 km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x13 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x13 .
+
+km-dev:TriplesMap_9843d347-59e7-4e46-a876-5bca37634a03 rr:logicalTable _:node1fuqv1rp3x13 ;
+	rr:subjectMap _:node1fuqv1rp3x14 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x14 .
+
+_:node1fuqv1rp3x14 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E67_Birth1" ;
+	rr:class <http://erlangen-crm.org/current/E67_Birth> ;
+	rr:template "{Birth_URI}" .
+
+km-dev:PredicateObjectMap_11e6cdfd-974f-439b-8123-996ae968a2e6 rr:predicate <http://erlangen-crm.org/current/P4_has_time-span> .
+
+km-dev:RefObjectMap_f9619c2e-8db9-443d-a912-360f9787a5df a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_a9d7e484-8492-4331-a41e-a6de42b5e7d4 ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_f9619c2e-8db9-443d-a912-360f9787a5df .
+
+km-dev:PredicateObjectMap_11e6cdfd-974f-439b-8123-996ae968a2e6 rr:objectMap km-dev:RefObjectMap_f9619c2e-8db9-443d-a912-360f9787a5df .
+
+km-dev:TriplesMap_9843d347-59e7-4e46-a876-5bca37634a03 rr:predicateObjectMap km-dev:PredicateObjectMap_11e6cdfd-974f-439b-8123-996ae968a2e6 .
+
+km-dev:PredicateObjectMap_11e6cdfd-974f-439b-8123-996ae968a2e6 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_11e6cdfd-974f-439b-8123-996ae968a2e6 .
+
+km-dev:TriplesMap_e235927c-8b13-47bc-9633-fadb61d0e8fa a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_e235927c-8b13-47bc-9633-fadb61d0e8fa .
+
+km-dev:TriplesMap_e235927c-8b13-47bc-9633-fadb61d0e8fa km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x15 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x15 .
+
+km-dev:TriplesMap_e235927c-8b13-47bc-9633-fadb61d0e8fa rr:logicalTable _:node1fuqv1rp3x15 ;
+	rr:subjectMap _:node1fuqv1rp3x16 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x16 .
+
+_:node1fuqv1rp3x16 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E69_Death1" ;
+	rr:class <http://erlangen-crm.org/current/E69_Death> ;
+	rr:template "{Death_URI}" .
+
+km-dev:PredicateObjectMap_832d8f17-4722-4baf-8078-b728b02d790d rr:predicate <http://erlangen-crm.org/current/P4_has_time-span> .
+
+km-dev:RefObjectMap_9dcc1cc0-dff4-4db9-8133-843a162b67f2 a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_e5c754b4-8ff2-438a-8d38-7059c559becd ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_9dcc1cc0-dff4-4db9-8133-843a162b67f2 .
+
+km-dev:PredicateObjectMap_832d8f17-4722-4baf-8078-b728b02d790d rr:objectMap km-dev:RefObjectMap_9dcc1cc0-dff4-4db9-8133-843a162b67f2 .
+
+km-dev:TriplesMap_e235927c-8b13-47bc-9633-fadb61d0e8fa rr:predicateObjectMap km-dev:PredicateObjectMap_832d8f17-4722-4baf-8078-b728b02d790d .
+
+km-dev:PredicateObjectMap_832d8f17-4722-4baf-8078-b728b02d790d a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_832d8f17-4722-4baf-8078-b728b02d790d .
+
+km-dev:TriplesMap_16d37bf5-1200-415e-8a71-e60d85614433 a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_16d37bf5-1200-415e-8a71-e60d85614433 .
+
+km-dev:TriplesMap_16d37bf5-1200-415e-8a71-e60d85614433 km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x17 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x17 .
+
+km-dev:TriplesMap_16d37bf5-1200-415e-8a71-e60d85614433 rr:logicalTable _:node1fuqv1rp3x17 ;
+	rr:subjectMap _:node1fuqv1rp3x18 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x18 .
+
+_:node1fuqv1rp3x18 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E82_Actor_Appellation1" ;
+	rr:class <http://erlangen-crm.org/current/E82_Actor_Appellation> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "E82_Actor_Appellation1" .
+
+km-dev:PredicateObjectMap_0e99c50b-bbf3-4073-bb05-770737b44410 rr:predicate rdfs:label .
+
+_:node1fuqv1rp3x19 rr:column "Artist" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x19 .
+
+km-dev:PredicateObjectMap_0e99c50b-bbf3-4073-bb05-770737b44410 rr:objectMap _:node1fuqv1rp3x19 .
+
+km-dev:TriplesMap_16d37bf5-1200-415e-8a71-e60d85614433 rr:predicateObjectMap km-dev:PredicateObjectMap_0e99c50b-bbf3-4073-bb05-770737b44410 .
+
+km-dev:PredicateObjectMap_0e99c50b-bbf3-4073-bb05-770737b44410 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_0e99c50b-bbf3-4073-bb05-770737b44410 .
+
+km-dev:TriplesMap_b87fcd6a-e2f4-4588-934e-4c3a06d4c3a6 a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_b87fcd6a-e2f4-4588-934e-4c3a06d4c3a6 .
+
+km-dev:TriplesMap_b87fcd6a-e2f4-4588-934e-4c3a06d4c3a6 km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x20 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x20 .
+
+km-dev:TriplesMap_b87fcd6a-e2f4-4588-934e-4c3a06d4c3a6 rr:logicalTable _:node1fuqv1rp3x20 ;
+	rr:subjectMap _:node1fuqv1rp3x21 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x21 .
+
+_:node1fuqv1rp3x21 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E21_Person2" ;
+	rr:class <http://erlangen-crm.org/current/E21_Person> ;
+	rr:template "{Person_URI}" .
+
+km-dev:PredicateObjectMap_8bd28b6b-0eb3-4c94-a74c-729588ab0211 rr:predicate <http://erlangen-crm.org/current/P131_is_identified_by> .
+
+km-dev:RefObjectMap_279d7d72-a7b4-4ebe-98fe-86e343803049 a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_84fee5c0-acc0-40bb-b221-5a324431231a ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_279d7d72-a7b4-4ebe-98fe-86e343803049 .
+
+km-dev:PredicateObjectMap_8bd28b6b-0eb3-4c94-a74c-729588ab0211 rr:objectMap km-dev:RefObjectMap_279d7d72-a7b4-4ebe-98fe-86e343803049 .
+
+km-dev:TriplesMap_b87fcd6a-e2f4-4588-934e-4c3a06d4c3a6 rr:predicateObjectMap km-dev:PredicateObjectMap_8bd28b6b-0eb3-4c94-a74c-729588ab0211 .
+
+km-dev:PredicateObjectMap_8bd28b6b-0eb3-4c94-a74c-729588ab0211 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_8bd28b6b-0eb3-4c94-a74c-729588ab0211 .
+
+km-dev:TriplesMap_84fee5c0-acc0-40bb-b221-5a324431231a a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_84fee5c0-acc0-40bb-b221-5a324431231a .
+
+km-dev:TriplesMap_84fee5c0-acc0-40bb-b221-5a324431231a km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x22 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x22 .
+
+km-dev:TriplesMap_84fee5c0-acc0-40bb-b221-5a324431231a rr:logicalTable _:node1fuqv1rp3x22 ;
+	rr:subjectMap _:node1fuqv1rp3x23 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x23 .
+
+_:node1fuqv1rp3x23 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E82_Actor_Appellation2" ;
+	rr:class <http://erlangen-crm.org/current/E82_Actor_Appellation> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "E82_Actor_Appellation2" .
+
+km-dev:PredicateObjectMap_f89016c1-f3c4-470e-a703-994d9a05d70e rr:predicate rdfs:label .
+
+_:node1fuqv1rp3x24 rr:column "Title" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x24 .
+
+km-dev:PredicateObjectMap_f89016c1-f3c4-470e-a703-994d9a05d70e rr:objectMap _:node1fuqv1rp3x24 .
+
+km-dev:TriplesMap_84fee5c0-acc0-40bb-b221-5a324431231a rr:predicateObjectMap km-dev:PredicateObjectMap_f89016c1-f3c4-470e-a703-994d9a05d70e .
+
+km-dev:PredicateObjectMap_f89016c1-f3c4-470e-a703-994d9a05d70e a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_f89016c1-f3c4-470e-a703-994d9a05d70e .
+
+km-dev:TriplesMap_90949f1a-d131-46d9-af5b-41c3a40c0999 a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_90949f1a-d131-46d9-af5b-41c3a40c0999 .
+
+km-dev:TriplesMap_90949f1a-d131-46d9-af5b-41c3a40c0999 km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x25 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x25 .
+
+km-dev:TriplesMap_90949f1a-d131-46d9-af5b-41c3a40c0999 rr:logicalTable _:node1fuqv1rp3x25 ;
+	rr:subjectMap _:node1fuqv1rp3x26 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x26 .
+
+_:node1fuqv1rp3x26 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E22_Man-Made_Object1" ;
+	rr:class <http://erlangen-crm.org/current/E22_Man-Made_Object> ;
+	rr:template "{Object_URI}" .
+
+km-dev:PredicateObjectMap_c924c76c-7bd9-4855-a420-70ca11c65c39 rr:predicate <http://erlangen-crm.org/current/P108i_was_produced_by> .
+
+km-dev:RefObjectMap_10fb3120-1ed5-4538-9449-a45c221d8b4f a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_372a40bd-6a63-4a47-80ca-3276bbf79e98 ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_10fb3120-1ed5-4538-9449-a45c221d8b4f .
+
+km-dev:PredicateObjectMap_c924c76c-7bd9-4855-a420-70ca11c65c39 rr:objectMap km-dev:RefObjectMap_10fb3120-1ed5-4538-9449-a45c221d8b4f .
+
+km-dev:TriplesMap_90949f1a-d131-46d9-af5b-41c3a40c0999 rr:predicateObjectMap km-dev:PredicateObjectMap_c924c76c-7bd9-4855-a420-70ca11c65c39 .
+
+km-dev:PredicateObjectMap_c924c76c-7bd9-4855-a420-70ca11c65c39 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_c924c76c-7bd9-4855-a420-70ca11c65c39 .
+
+km-dev:PredicateObjectMap_e7a7514b-1a92-484e-b017-4c18fb597184 rr:predicate <http://erlangen-crm.org/current/P62_depicts> .
+
+km-dev:RefObjectMap_9cc66c71-11e8-4d79-b29c-c3d3ab0b53eb a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_b87fcd6a-e2f4-4588-934e-4c3a06d4c3a6 ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_9cc66c71-11e8-4d79-b29c-c3d3ab0b53eb .
+
+km-dev:PredicateObjectMap_e7a7514b-1a92-484e-b017-4c18fb597184 rr:objectMap km-dev:RefObjectMap_9cc66c71-11e8-4d79-b29c-c3d3ab0b53eb .
+
+km-dev:TriplesMap_90949f1a-d131-46d9-af5b-41c3a40c0999 rr:predicateObjectMap km-dev:PredicateObjectMap_e7a7514b-1a92-484e-b017-4c18fb597184 .
+
+km-dev:PredicateObjectMap_e7a7514b-1a92-484e-b017-4c18fb597184 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_e7a7514b-1a92-484e-b017-4c18fb597184 .
+
+km-dev:PredicateObjectMap_2796c6dd-015a-4038-813a-ea703085449c rr:predicate <http://erlangen-crm.org/current/P43_has_dimension> .
+
+km-dev:RefObjectMap_0f8afb63-3e7f-4422-911f-651b4b95630a a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_c7785768-0d0b-4a7f-9d34-817691f91112 ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_0f8afb63-3e7f-4422-911f-651b4b95630a .
+
+km-dev:PredicateObjectMap_2796c6dd-015a-4038-813a-ea703085449c rr:objectMap km-dev:RefObjectMap_0f8afb63-3e7f-4422-911f-651b4b95630a .
+
+km-dev:TriplesMap_90949f1a-d131-46d9-af5b-41c3a40c0999 rr:predicateObjectMap km-dev:PredicateObjectMap_2796c6dd-015a-4038-813a-ea703085449c .
+
+km-dev:PredicateObjectMap_2796c6dd-015a-4038-813a-ea703085449c a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_2796c6dd-015a-4038-813a-ea703085449c .
+
+km-dev:PredicateObjectMap_95f201ad-43f5-495f-beca-7aa6861a00eb rr:predicate <http://erlangen-crm.org/current/P2_has_type> .
+
+km-dev:RefObjectMap_659690e8-a254-4929-a759-e5e41d0e5f9a a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_8bbb4f4d-6be6-4682-bc24-9f512582eb5a ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_659690e8-a254-4929-a759-e5e41d0e5f9a .
+
+km-dev:PredicateObjectMap_95f201ad-43f5-495f-beca-7aa6861a00eb rr:objectMap km-dev:RefObjectMap_659690e8-a254-4929-a759-e5e41d0e5f9a .
+
+km-dev:TriplesMap_90949f1a-d131-46d9-af5b-41c3a40c0999 rr:predicateObjectMap km-dev:PredicateObjectMap_95f201ad-43f5-495f-beca-7aa6861a00eb .
+
+km-dev:PredicateObjectMap_95f201ad-43f5-495f-beca-7aa6861a00eb a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_95f201ad-43f5-495f-beca-7aa6861a00eb .
+
+km-dev:PredicateObjectMap_1dae1874-4847-49cf-9c5a-d3bf3f77c733 rr:predicate <http://erlangen-crm.org/current/P24i_changed_ownership_through> .
+
+km-dev:RefObjectMap_cee3c36e-d5b5-4489-9b1c-d4a029df669c a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_6f4cd4ce-41a7-4193-9dea-72748ab6a37f ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_cee3c36e-d5b5-4489-9b1c-d4a029df669c .
+
+km-dev:PredicateObjectMap_1dae1874-4847-49cf-9c5a-d3bf3f77c733 rr:objectMap km-dev:RefObjectMap_cee3c36e-d5b5-4489-9b1c-d4a029df669c .
+
+km-dev:TriplesMap_90949f1a-d131-46d9-af5b-41c3a40c0999 rr:predicateObjectMap km-dev:PredicateObjectMap_1dae1874-4847-49cf-9c5a-d3bf3f77c733 .
+
+km-dev:PredicateObjectMap_1dae1874-4847-49cf-9c5a-d3bf3f77c733 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_1dae1874-4847-49cf-9c5a-d3bf3f77c733 .
+
+km-dev:PredicateObjectMap_f5667ad5-8fe1-4453-824d-0fca793b6bcd rr:predicate <http://erlangen-crm.org/current/P3_has_note> .
+
+_:node1fuqv1rp3x27 rr:column "Description" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x27 .
+
+km-dev:PredicateObjectMap_f5667ad5-8fe1-4453-824d-0fca793b6bcd rr:objectMap _:node1fuqv1rp3x27 .
+
+km-dev:TriplesMap_90949f1a-d131-46d9-af5b-41c3a40c0999 rr:predicateObjectMap km-dev:PredicateObjectMap_f5667ad5-8fe1-4453-824d-0fca793b6bcd .
+
+km-dev:PredicateObjectMap_f5667ad5-8fe1-4453-824d-0fca793b6bcd a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_f5667ad5-8fe1-4453-824d-0fca793b6bcd .
+
+km-dev:PredicateObjectMap_bc9011d8-ecdc-4ea9-9943-dd9c6e646f0e rr:predicate <http://erlangen-crm.org/current/P51_has_former_or_current_owner> .
+
+km-dev:RefObjectMap_a45c5c29-655c-4d78-bae7-7b461427f7d5 a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_d7b3e88d-f4db-4385-8670-df915c5de1ea ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_a45c5c29-655c-4d78-bae7-7b461427f7d5 .
+
+km-dev:PredicateObjectMap_bc9011d8-ecdc-4ea9-9943-dd9c6e646f0e rr:objectMap km-dev:RefObjectMap_a45c5c29-655c-4d78-bae7-7b461427f7d5 .
+
+km-dev:TriplesMap_90949f1a-d131-46d9-af5b-41c3a40c0999 rr:predicateObjectMap km-dev:PredicateObjectMap_bc9011d8-ecdc-4ea9-9943-dd9c6e646f0e .
+
+km-dev:PredicateObjectMap_bc9011d8-ecdc-4ea9-9943-dd9c6e646f0e a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_bc9011d8-ecdc-4ea9-9943-dd9c6e646f0e .
+
+km-dev:TriplesMap_c7785768-0d0b-4a7f-9d34-817691f91112 a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_c7785768-0d0b-4a7f-9d34-817691f91112 .
+
+km-dev:TriplesMap_c7785768-0d0b-4a7f-9d34-817691f91112 km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x28 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x28 .
+
+km-dev:TriplesMap_c7785768-0d0b-4a7f-9d34-817691f91112 rr:logicalTable _:node1fuqv1rp3x28 ;
+	rr:subjectMap _:node1fuqv1rp3x29 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x29 .
+
+_:node1fuqv1rp3x29 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E54_Dimension1" ;
+	rr:class <http://erlangen-crm.org/current/E54_Dimension> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "E54_Dimension1" .
+
+km-dev:PredicateObjectMap_9bd1699d-4498-42de-a4e2-ed97c4d17afc rr:predicate <http://erlangen-crm.org/current/P3_has_note> .
+
+_:node1fuqv1rp3x30 rr:column "Dimension" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x30 .
+
+km-dev:PredicateObjectMap_9bd1699d-4498-42de-a4e2-ed97c4d17afc rr:objectMap _:node1fuqv1rp3x30 .
+
+km-dev:TriplesMap_c7785768-0d0b-4a7f-9d34-817691f91112 rr:predicateObjectMap km-dev:PredicateObjectMap_9bd1699d-4498-42de-a4e2-ed97c4d17afc .
+
+km-dev:PredicateObjectMap_9bd1699d-4498-42de-a4e2-ed97c4d17afc a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_9bd1699d-4498-42de-a4e2-ed97c4d17afc .
+
+km-dev:TriplesMap_8bbb4f4d-6be6-4682-bc24-9f512582eb5a a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_8bbb4f4d-6be6-4682-bc24-9f512582eb5a .
+
+km-dev:TriplesMap_8bbb4f4d-6be6-4682-bc24-9f512582eb5a km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x31 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x31 .
+
+km-dev:TriplesMap_8bbb4f4d-6be6-4682-bc24-9f512582eb5a rr:logicalTable _:node1fuqv1rp3x31 ;
+	rr:subjectMap _:node1fuqv1rp3x32 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x32 .
+
+_:node1fuqv1rp3x32 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E55_Type1" ;
+	rr:class <http://erlangen-crm.org/current/E55_Type> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "E55_Type1" .
+
+km-dev:PredicateObjectMap_47726bf2-f5d0-4ce8-b29d-f2cfdb7ee421 rr:predicate rdfs:label .
+
+_:node1fuqv1rp3x33 rr:column "Classification" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x33 .
+
+km-dev:PredicateObjectMap_47726bf2-f5d0-4ce8-b29d-f2cfdb7ee421 rr:objectMap _:node1fuqv1rp3x33 .
+
+km-dev:TriplesMap_8bbb4f4d-6be6-4682-bc24-9f512582eb5a rr:predicateObjectMap km-dev:PredicateObjectMap_47726bf2-f5d0-4ce8-b29d-f2cfdb7ee421 .
+
+km-dev:PredicateObjectMap_47726bf2-f5d0-4ce8-b29d-f2cfdb7ee421 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_47726bf2-f5d0-4ce8-b29d-f2cfdb7ee421 .
+
+km-dev:TriplesMap_6f4cd4ce-41a7-4193-9dea-72748ab6a37f a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_6f4cd4ce-41a7-4193-9dea-72748ab6a37f .
+
+km-dev:TriplesMap_6f4cd4ce-41a7-4193-9dea-72748ab6a37f km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x34 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x34 .
+
+km-dev:TriplesMap_6f4cd4ce-41a7-4193-9dea-72748ab6a37f rr:logicalTable _:node1fuqv1rp3x34 ;
+	rr:subjectMap _:node1fuqv1rp3x35 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x35 .
+
+_:node1fuqv1rp3x35 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E8_Acquisition1" ;
+	rr:class <http://erlangen-crm.org/current/E8_Acquisition> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "E8_Acquisition1" .
+
+km-dev:PredicateObjectMap_7c596822-b0c7-4ec1-bf15-c6fa15ebd14a rr:predicate <http://erlangen-crm.org/current/P22_transferred_title_to> .
+
+km-dev:RefObjectMap_575c269c-7a0a-4659-9ae3-3c545ec54bec a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_d7b3e88d-f4db-4385-8670-df915c5de1ea ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_575c269c-7a0a-4659-9ae3-3c545ec54bec .
+
+km-dev:PredicateObjectMap_7c596822-b0c7-4ec1-bf15-c6fa15ebd14a rr:objectMap km-dev:RefObjectMap_575c269c-7a0a-4659-9ae3-3c545ec54bec .
+
+km-dev:TriplesMap_6f4cd4ce-41a7-4193-9dea-72748ab6a37f rr:predicateObjectMap km-dev:PredicateObjectMap_7c596822-b0c7-4ec1-bf15-c6fa15ebd14a .
+
+km-dev:PredicateObjectMap_7c596822-b0c7-4ec1-bf15-c6fa15ebd14a a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_7c596822-b0c7-4ec1-bf15-c6fa15ebd14a .
+
+km-dev:PredicateObjectMap_60b3cefb-d5a9-4c54-af45-2930ad8d3e48 rr:predicate <http://erlangen-crm.org/current/P4_has_time-span> .
+
+km-dev:RefObjectMap_f6727fed-979e-409e-868a-42bc44ec5308 a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_ec2d7cfa-43c3-4394-846d-414d119dfb5d ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_f6727fed-979e-409e-868a-42bc44ec5308 .
+
+km-dev:PredicateObjectMap_60b3cefb-d5a9-4c54-af45-2930ad8d3e48 rr:objectMap km-dev:RefObjectMap_f6727fed-979e-409e-868a-42bc44ec5308 .
+
+km-dev:TriplesMap_6f4cd4ce-41a7-4193-9dea-72748ab6a37f rr:predicateObjectMap km-dev:PredicateObjectMap_60b3cefb-d5a9-4c54-af45-2930ad8d3e48 .
+
+km-dev:PredicateObjectMap_60b3cefb-d5a9-4c54-af45-2930ad8d3e48 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_60b3cefb-d5a9-4c54-af45-2930ad8d3e48 .
+
+km-dev:PredicateObjectMap_804b9f81-7779-4a76-b02f-8042be86a68e rr:predicate <http://erlangen-crm.org/current/P3_has_note> .
+
+_:node1fuqv1rp3x36 rr:column "CreditLine" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x36 .
+
+km-dev:PredicateObjectMap_804b9f81-7779-4a76-b02f-8042be86a68e rr:objectMap _:node1fuqv1rp3x36 .
+
+km-dev:TriplesMap_6f4cd4ce-41a7-4193-9dea-72748ab6a37f rr:predicateObjectMap km-dev:PredicateObjectMap_804b9f81-7779-4a76-b02f-8042be86a68e .
+
+km-dev:PredicateObjectMap_804b9f81-7779-4a76-b02f-8042be86a68e a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_804b9f81-7779-4a76-b02f-8042be86a68e .
+
+km-dev:TriplesMap_8774cccc-7ccf-466c-af6f-905fce69cc73 a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_8774cccc-7ccf-466c-af6f-905fce69cc73 .
+
+km-dev:TriplesMap_8774cccc-7ccf-466c-af6f-905fce69cc73 km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x37 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x37 .
+
+km-dev:TriplesMap_8774cccc-7ccf-466c-af6f-905fce69cc73 rr:logicalTable _:node1fuqv1rp3x37 ;
+	rr:subjectMap _:node1fuqv1rp3x38 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x38 .
+
+_:node1fuqv1rp3x38 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E38_Image1" ;
+	rr:class <http://erlangen-crm.org/current/E38_Image> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "E38_Image1" ;
+	a km-dev:steinerTreeRootNode .
+
+km-dev:PredicateObjectMap_4f883bb5-8cb1-4b8c-a875-1bb9a7970e53 rr:predicate <http://erlangen-crm.org/current/P138_represents> .
+
+km-dev:RefObjectMap_3b65b846-701e-4d09-8004-4d0ec2171643 a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_90949f1a-d131-46d9-af5b-41c3a40c0999 ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap km-dev:RefObjectMap_3b65b846-701e-4d09-8004-4d0ec2171643 .
+
+km-dev:PredicateObjectMap_4f883bb5-8cb1-4b8c-a875-1bb9a7970e53 rr:objectMap km-dev:RefObjectMap_3b65b846-701e-4d09-8004-4d0ec2171643 .
+
+km-dev:TriplesMap_8774cccc-7ccf-466c-af6f-905fce69cc73 rr:predicateObjectMap km-dev:PredicateObjectMap_4f883bb5-8cb1-4b8c-a875-1bb9a7970e53 .
+
+km-dev:PredicateObjectMap_4f883bb5-8cb1-4b8c-a875-1bb9a7970e53 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_4f883bb5-8cb1-4b8c-a875-1bb9a7970e53 .
+
+km-dev:PredicateObjectMap_7e8ea21e-492a-41aa-8a1a-4833c1d8873f rr:predicate rdfs:label .
+
+_:node1fuqv1rp3x39 rr:column "Image" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x39 .
+
+km-dev:PredicateObjectMap_7e8ea21e-492a-41aa-8a1a-4833c1d8873f rr:objectMap _:node1fuqv1rp3x39 .
+
+km-dev:TriplesMap_8774cccc-7ccf-466c-af6f-905fce69cc73 rr:predicateObjectMap km-dev:PredicateObjectMap_7e8ea21e-492a-41aa-8a1a-4833c1d8873f .
+
+km-dev:PredicateObjectMap_7e8ea21e-492a-41aa-8a1a-4833c1d8873f a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_7e8ea21e-492a-41aa-8a1a-4833c1d8873f .
+
+km-dev:TriplesMap_a9d7e484-8492-4331-a41e-a6de42b5e7d4 a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_a9d7e484-8492-4331-a41e-a6de42b5e7d4 .
+
+km-dev:TriplesMap_a9d7e484-8492-4331-a41e-a6de42b5e7d4 km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x40 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x40 .
+
+km-dev:TriplesMap_a9d7e484-8492-4331-a41e-a6de42b5e7d4 rr:logicalTable _:node1fuqv1rp3x40 ;
+	rr:subjectMap _:node1fuqv1rp3x41 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x41 .
+
+_:node1fuqv1rp3x41 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E52_Time-Span2" ;
+	rr:class <http://erlangen-crm.org/current/E52_Time-Span> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "E52_Time-Span2" .
+
+km-dev:PredicateObjectMap_1c9ca4ec-393f-472a-8971-9921a51e2b76 rr:predicate <http://erlangen-crm.org/current/P82_at_some_time_within> .
+
+_:node1fuqv1rp3x42 rr:column "ArtistBornDate" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x42 .
+
+km-dev:PredicateObjectMap_1c9ca4ec-393f-472a-8971-9921a51e2b76 rr:objectMap _:node1fuqv1rp3x42 .
+
+km-dev:TriplesMap_a9d7e484-8492-4331-a41e-a6de42b5e7d4 rr:predicateObjectMap km-dev:PredicateObjectMap_1c9ca4ec-393f-472a-8971-9921a51e2b76 .
+
+km-dev:PredicateObjectMap_1c9ca4ec-393f-472a-8971-9921a51e2b76 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_1c9ca4ec-393f-472a-8971-9921a51e2b76 .
+
+km-dev:TriplesMap_e5c754b4-8ff2-438a-8d38-7059c559becd a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_e5c754b4-8ff2-438a-8d38-7059c559becd .
+
+km-dev:TriplesMap_e5c754b4-8ff2-438a-8d38-7059c559becd km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x43 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x43 .
+
+km-dev:TriplesMap_e5c754b4-8ff2-438a-8d38-7059c559becd rr:logicalTable _:node1fuqv1rp3x43 ;
+	rr:subjectMap _:node1fuqv1rp3x44 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x44 .
+
+_:node1fuqv1rp3x44 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E52_Time-Span3" ;
+	rr:class <http://erlangen-crm.org/current/E52_Time-Span> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "E52_Time-Span3" .
+
+km-dev:PredicateObjectMap_241c8062-198f-4a11-b062-8c11d33dff9d rr:predicate <http://erlangen-crm.org/current/P82_at_some_time_within> .
+
+_:node1fuqv1rp3x45 rr:column "ArtistDiedDate" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x45 .
+
+km-dev:PredicateObjectMap_241c8062-198f-4a11-b062-8c11d33dff9d rr:objectMap _:node1fuqv1rp3x45 .
+
+km-dev:TriplesMap_e5c754b4-8ff2-438a-8d38-7059c559becd rr:predicateObjectMap km-dev:PredicateObjectMap_241c8062-198f-4a11-b062-8c11d33dff9d .
+
+km-dev:PredicateObjectMap_241c8062-198f-4a11-b062-8c11d33dff9d a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_241c8062-198f-4a11-b062-8c11d33dff9d .
+
+km-dev:TriplesMap_d7b3e88d-f4db-4385-8670-df915c5de1ea a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_d7b3e88d-f4db-4385-8670-df915c5de1ea .
+
+km-dev:TriplesMap_d7b3e88d-f4db-4385-8670-df915c5de1ea km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x46 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x46 .
+
+km-dev:TriplesMap_d7b3e88d-f4db-4385-8670-df915c5de1ea rr:logicalTable _:node1fuqv1rp3x46 ;
+	rr:subjectMap _:node1fuqv1rp3x47 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x47 .
+
+_:node1fuqv1rp3x47 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E40_Legal_Body1" ;
+	rr:class <http://erlangen-crm.org/current/E40_Legal_Body> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "E40_Legal_Body1" .
+
+km-dev:PredicateObjectMap_9f8219e6-8c09-4fb6-ad54-963d89487f93 rr:predicate rdfs:label .
+
+_:node1fuqv1rp3x48 rr:column "Owner" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x48 .
+
+km-dev:PredicateObjectMap_9f8219e6-8c09-4fb6-ad54-963d89487f93 rr:objectMap _:node1fuqv1rp3x48 .
+
+km-dev:TriplesMap_d7b3e88d-f4db-4385-8670-df915c5de1ea rr:predicateObjectMap km-dev:PredicateObjectMap_9f8219e6-8c09-4fb6-ad54-963d89487f93 .
+
+km-dev:PredicateObjectMap_9f8219e6-8c09-4fb6-ad54-963d89487f93 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_9f8219e6-8c09-4fb6-ad54-963d89487f93 .
+
+km-dev:TriplesMap_ec2d7cfa-43c3-4394-846d-414d119dfb5d a rr:TriplesMap .
+
+_:node1fuqv1rp3x1 km-dev:hasTriplesMap km-dev:TriplesMap_ec2d7cfa-43c3-4394-846d-414d119dfb5d .
+
+km-dev:TriplesMap_ec2d7cfa-43c3-4394-846d-414d119dfb5d km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x49 rr:tableName "s06.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasLogicalTable _:node1fuqv1rp3x49 .
+
+km-dev:TriplesMap_ec2d7cfa-43c3-4394-846d-414d119dfb5d rr:logicalTable _:node1fuqv1rp3x49 ;
+	rr:subjectMap _:node1fuqv1rp3x50 .
+
+_:node1fuqv1rp3x1 km-dev:hasSubjectMap _:node1fuqv1rp3x50 .
+
+_:node1fuqv1rp3x50 km-dev:isPartOfMapping _:node1fuqv1rp3x1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://erlangen-crm.org/current/E52_Time-Span1" ;
+	rr:class <http://erlangen-crm.org/current/E52_Time-Span> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "E52_Time-Span1" .
+
+km-dev:PredicateObjectMap_c32f116c-6089-4ecd-87a0-36c9ca127be5 rr:predicate <http://erlangen-crm.org/current/P82_at_some_time_within> .
+
+_:node1fuqv1rp3x51 rr:column "AquisitionDate" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasObjectMap _:node1fuqv1rp3x51 .
+
+km-dev:PredicateObjectMap_c32f116c-6089-4ecd-87a0-36c9ca127be5 rr:objectMap _:node1fuqv1rp3x51 .
+
+km-dev:TriplesMap_ec2d7cfa-43c3-4394-846d-414d119dfb5d rr:predicateObjectMap km-dev:PredicateObjectMap_c32f116c-6089-4ecd-87a0-36c9ca127be5 .
+
+km-dev:PredicateObjectMap_c32f116c-6089-4ecd-87a0-36c9ca127be5 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1fuqv1rp3x1 .
+
+_:node1fuqv1rp3x1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_c32f116c-6089-4ecd-87a0-36c9ca127be5 .

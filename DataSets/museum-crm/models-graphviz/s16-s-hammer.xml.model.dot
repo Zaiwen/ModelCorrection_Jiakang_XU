@@ -1,0 +1,45 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s16-s-hammer.xml"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="E12_Production1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="E21_Person1"];
+n4[style="filled",color="white",fillcolor="lightgray",label="E52_Time-Span1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="E82_Actor_Appellation1"];
+n6[shape="plaintext",style="filled",fillcolor="gold",label="artist_uri"];
+n7[style="filled",color="white",fillcolor="lightgray",label="E22_Man-Made_Object1"];
+n8[style="filled",color="white",fillcolor="lightgray",label="E35_Title1"];
+n9[style="filled",color="white",fillcolor="lightgray",label="E55_Type1"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="description"];
+n11[style="filled",color="white",fillcolor="lightgray",label="E78_Collection1"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="title"];
+n13[style="filled",color="white",fillcolor="lightgray",label="E38_Image1"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="image"];
+n15[shape="plaintext",style="filled",fillcolor="gold",label="year"];
+n16[shape="plaintext",style="filled",fillcolor="gold",label="technique_uri"];
+n17[shape="plaintext",style="filled",fillcolor="gold",label="technique"];
+n18[shape="plaintext",style="filled",fillcolor="gold",label="name"];
+n19[shape="plaintext",style="filled",fillcolor="gold",label="artist_appellation_uri"];
+n20[shape="plaintext",style="filled",fillcolor="gold",label="artist"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="P14_carried_out_by"]
+n2 -> n4[color="brown",fontcolor="black",label="P4_has_time-span"]
+n3 -> n5[color="brown",fontcolor="black",label="P131_is_identified_by"]
+n3 -> n6[color="brown",fontcolor="black",label="classLink"]
+n7 -> n8[color="brown",fontcolor="black",label="P102_has_title"]
+n7 -> n2[color="brown",fontcolor="black",label="P108i_was_produced_by"]
+n7 -> n9[color="brown",fontcolor="black",label="P2_has_type"]
+n7 -> n10[color="brown",fontcolor="black",label="P3_has_note"]
+n7 -> n11[color="brown",fontcolor="black",label="P46i_forms_part_of"]
+n8 -> n12[color="brown",fontcolor="black",label="label"]
+n13 -> n7[color="brown",fontcolor="black",label="P138_represents"]
+n13 -> n14[color="brown",fontcolor="black",label="classLink"]
+n4 -> n15[color="brown",fontcolor="black",label="P82_at_some_time_within"]
+n9 -> n16[color="brown",fontcolor="black",label="classLink"]
+n9 -> n17[color="brown",fontcolor="black",label="label"]
+n11 -> n18[color="brown",fontcolor="black",label="label"]
+n5 -> n19[color="brown",fontcolor="black",label="classLink"]
+n5 -> n20[color="brown",fontcolor="black",label="label"]
+}

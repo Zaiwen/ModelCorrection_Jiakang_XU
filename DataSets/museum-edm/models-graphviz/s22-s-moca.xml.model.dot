@@ -1,0 +1,31 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s22-s-moca.xml"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n4[style="filled",color="white",fillcolor="lightgray",label="EuropeanaAggregation1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="WebResource1"];
+n6[shape="plaintext",style="filled",fillcolor="gold",label="creationDate"];
+n7[shape="plaintext",style="filled",fillcolor="gold",label="title"];
+n8[shape="plaintext",style="filled",fillcolor="gold",label="image"];
+n9[shape="plaintext",style="filled",fillcolor="gold",label="Artist_Name"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="Dimensions"];
+n11[shape="plaintext",style="filled",fillcolor="gold",label="Assension_Number"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="Process"];
+n13[shape="plaintext",style="filled",fillcolor="gold",label="Provenance"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="creator"]
+n4 -> n2[color="brown",fontcolor="black",label="aggregatedCHO"]
+n4 -> n5[color="brown",fontcolor="black",label="hasView"]
+n2 -> n6[color="brown",fontcolor="black",label="created"]
+n2 -> n7[color="brown",fontcolor="black",label="title"]
+n5 -> n8[color="brown",fontcolor="black",label="classLink"]
+n3 -> n9[color="brown",fontcolor="black",label="nameOfThePerson"]
+n2 -> n10[color="brown",fontcolor="black",label="extent"]
+n2 -> n11[color="brown",fontcolor="black",label="accessionNumber"]
+n2 -> n12[color="brown",fontcolor="black",label="medium"]
+n2 -> n13[color="brown",fontcolor="black",label="provenance"]
+}

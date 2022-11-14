@@ -1,0 +1,63 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s20-s-lacma.xml"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="E12_Production1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="E21_Person1"];
+n4[style="filled",color="white",fillcolor="lightgray",label="E52_Time-Span1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="E69_Death1"];
+n6[style="filled",color="white",fillcolor="lightgray",label="E82_Actor_Appellation1"];
+n7[shape="plaintext",style="filled",fillcolor="gold",label="Artwork_in_Focus"];
+n8[style="filled",color="white",fillcolor="lightgray",label="E53_Place1"];
+n9[style="filled",color="white",fillcolor="lightgray",label="E67_Birth1"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="Artist_URI"];
+n11[style="filled",color="white",fillcolor="lightgray",label="E22_Man-Made_Object1"];
+n12[style="filled",color="white",fillcolor="lightgray",label="E35_Title1"];
+n13[style="filled",color="white",fillcolor="lightgray",label="E55_Type1"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="Artwork_Details"];
+n15[shape="plaintext",style="filled",fillcolor="gold",label="Object_URI"];
+n16[shape="plaintext",style="filled",fillcolor="gold",label="Title"];
+n17[style="filled",color="white",fillcolor="lightgray",label="E38_Image1"];
+n18[shape="plaintext",style="filled",fillcolor="gold",label="Image_URL"];
+n19[style="filled",color="white",fillcolor="lightgray",label="E48_Place_Name1"];
+n20[shape="plaintext",style="filled",fillcolor="gold",label="Residence"];
+n21[shape="plaintext",style="filled",fillcolor="gold",label="Production_Year"];
+n22[style="filled",color="white",fillcolor="lightgray",label="E52_Time-Span2"];
+n23[shape="plaintext",style="filled",fillcolor="gold",label="birth_date"];
+n24[style="filled",color="white",fillcolor="lightgray",label="E52_Time-Span3"];
+n25[shape="plaintext",style="filled",fillcolor="gold",label="death_date"];
+n26[shape="plaintext",style="filled",fillcolor="gold",label="Classification_URI"];
+n27[shape="plaintext",style="filled",fillcolor="gold",label="Classification"];
+n28[shape="plaintext",style="filled",fillcolor="gold",label="Artist_Appellation_URI"];
+n29[shape="plaintext",style="filled",fillcolor="gold",label="Artist_Name"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="P14_carried_out_by"]
+n2 -> n4[color="brown",fontcolor="black",label="P4_has_time-span"]
+n3 -> n5[color="brown",fontcolor="black",label="P100i_died_in"]
+n3 -> n6[color="brown",fontcolor="black",label="P131_is_identified_by"]
+n3 -> n7[color="brown",fontcolor="black",label="P3_has_note"]
+n3 -> n8[color="brown",fontcolor="black",label="P74_has_current_or_former_residence"]
+n3 -> n9[color="brown",fontcolor="black",label="P98i_was_born"]
+n3 -> n10[color="brown",fontcolor="black",label="classLink"]
+n11 -> n12[color="brown",fontcolor="black",label="P102_has_title"]
+n11 -> n2[color="brown",fontcolor="black",label="P108i_was_produced_by"]
+n11 -> n13[color="brown",fontcolor="black",label="P2_has_type"]
+n11 -> n14[color="brown",fontcolor="black",label="P3_has_note"]
+n11 -> n15[color="brown",fontcolor="black",label="classLink"]
+n12 -> n16[color="brown",fontcolor="black",label="label"]
+n17 -> n11[color="brown",fontcolor="black",label="P138_represents"]
+n17 -> n18[color="brown",fontcolor="black",label="classLink"]
+n19 -> n20[color="brown",fontcolor="black",label="label"]
+n4 -> n21[color="brown",fontcolor="black",label="P82_at_some_time_within"]
+n22 -> n23[color="brown",fontcolor="black",label="P82_at_some_time_within"]
+n24 -> n25[color="brown",fontcolor="black",label="P82_at_some_time_within"]
+n8 -> n19[color="brown",fontcolor="black",label="P87_is_identified_by"]
+n13 -> n26[color="brown",fontcolor="black",label="classLink"]
+n13 -> n27[color="brown",fontcolor="black",label="label"]
+n9 -> n22[color="brown",fontcolor="black",label="P4_has_time-span"]
+n5 -> n24[color="brown",fontcolor="black",label="P4_has_time-span"]
+n6 -> n28[color="brown",fontcolor="black",label="classLink"]
+n6 -> n29[color="brown",fontcolor="black",label="label"]
+}

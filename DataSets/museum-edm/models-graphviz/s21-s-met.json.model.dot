@@ -1,0 +1,83 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s21-s-met.json"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject2"];
+n4[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="Concept1"];
+n6[style="filled",color="white",fillcolor="lightgray",label="Person2"];
+n7[style="filled",color="white",fillcolor="lightgray",label="Concept2"];
+n8[style="filled",color="white",fillcolor="lightgray",label="Place1"];
+n9[style="filled",color="white",fillcolor="lightgray",label="Place2"];
+n10[style="filled",color="white",fillcolor="lightgray",label="Place3"];
+n11[style="filled",color="white",fillcolor="lightgray",label="Place4"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="nationality"];
+n13[shape="plaintext",style="filled",fillcolor="gold",label="birthPlace"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="birthDate"];
+n15[shape="plaintext",style="filled",fillcolor="gold",label="accessionNumber"];
+n16[shape="plaintext",style="filled",fillcolor="gold",label="provenance"];
+n17[shape="plaintext",style="filled",fillcolor="gold",label="classification"];
+n18[shape="plaintext",style="filled",fillcolor="gold",label="creditLine"];
+n19[shape="plaintext",style="filled",fillcolor="gold",label="artworkTitle"];
+n20[shape="plaintext",style="filled",fillcolor="gold",label="dimensions"];
+n21[shape="plaintext",style="filled",fillcolor="gold",label="artistName"];
+n22[shape="plaintext",style="filled",fillcolor="gold",label="dateOfEndOfCreation"];
+n23[shape="plaintext",style="filled",fillcolor="gold",label="artworkTitle"];
+n24[shape="plaintext",style="filled",fillcolor="gold",label="medium"];
+n25[shape="plaintext",style="filled",fillcolor="gold",label="dimensions"];
+n26[shape="plaintext",style="filled",fillcolor="gold",label="classification"];
+n27[shape="plaintext",style="filled",fillcolor="gold",label="creditLine"];
+n28[shape="plaintext",style="filled",fillcolor="gold",label="artistName"];
+n29[shape="plaintext",style="filled",fillcolor="gold",label="nationality"];
+n30[shape="plaintext",style="filled",fillcolor="gold",label="medium"];
+n31[shape="plaintext",style="filled",fillcolor="gold",label="dateOfEndOfCreation"];
+n32[shape="plaintext",style="filled",fillcolor="gold",label="deathPlace"];
+n33[shape="plaintext",style="filled",fillcolor="gold",label="deathDate"];
+n34[shape="plaintext",style="filled",fillcolor="gold",label="provenance"];
+n35[shape="plaintext",style="filled",fillcolor="gold",label="deathDate"];
+n36[shape="plaintext",style="filled",fillcolor="gold",label="birthDate"];
+n37[shape="plaintext",style="filled",fillcolor="gold",label="accessionNumber"];
+n38[shape="plaintext",style="filled",fillcolor="gold",label="birthPlace"];
+n39[shape="plaintext",style="filled",fillcolor="gold",label="deathPlace"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="isRelatedTo"]
+n2 -> n4[color="brown",fontcolor="black",label="creator"]
+n2 -> n5[color="brown",fontcolor="black",label="hasType"]
+n3 -> n6[color="brown",fontcolor="black",label="creator"]
+n3 -> n7[color="brown",fontcolor="black",label="hasType"]
+n4 -> n8[color="brown",fontcolor="black",label="placeOfDeath"]
+n4 -> n9[color="brown",fontcolor="black",label="placeOfBirth"]
+n6 -> n10[color="brown",fontcolor="black",label="placeOfBirth"]
+n6 -> n11[color="brown",fontcolor="black",label="placeOfDeath"]
+n4 -> n12[color="brown",fontcolor="black",label="countryAssociatedWithThePerson"]
+n9 -> n13[color="brown",fontcolor="black",label="label"]
+n4 -> n14[color="brown",fontcolor="black",label="dateOfBirth"]
+n2 -> n15[color="brown",fontcolor="black",label="accessionNumber"]
+n2 -> n16[color="brown",fontcolor="black",label="provenance"]
+n5 -> n17[color="brown",fontcolor="black",label="prefLabel"]
+n2 -> n18[color="brown",fontcolor="black",label="provenance"]
+n2 -> n19[color="brown",fontcolor="black",label="title"]
+n2 -> n20[color="brown",fontcolor="black",label="extent"]
+n4 -> n21[color="brown",fontcolor="black",label="nameOfThePerson"]
+n3 -> n22[color="brown",fontcolor="black",label="created"]
+n3 -> n23[color="brown",fontcolor="black",label="title"]
+n3 -> n24[color="brown",fontcolor="black",label="medium"]
+n3 -> n25[color="brown",fontcolor="black",label="extent"]
+n7 -> n26[color="brown",fontcolor="black",label="prefLabel"]
+n3 -> n27[color="brown",fontcolor="black",label="provenance"]
+n6 -> n28[color="brown",fontcolor="black",label="nameOfThePerson"]
+n6 -> n29[color="brown",fontcolor="black",label="countryAssociatedWithThePerson"]
+n2 -> n30[color="brown",fontcolor="black",label="medium"]
+n2 -> n31[color="brown",fontcolor="black",label="created"]
+n8 -> n32[color="brown",fontcolor="black",label="label"]
+n4 -> n33[color="brown",fontcolor="black",label="dateOfDeath"]
+n3 -> n34[color="brown",fontcolor="black",label="provenance"]
+n6 -> n35[color="brown",fontcolor="black",label="dateOfDeath"]
+n6 -> n36[color="brown",fontcolor="black",label="dateOfBirth"]
+n3 -> n37[color="brown",fontcolor="black",label="accessionNumber"]
+n10 -> n38[color="brown",fontcolor="black",label="label"]
+n11 -> n39[color="brown",fontcolor="black",label="label"]
+}

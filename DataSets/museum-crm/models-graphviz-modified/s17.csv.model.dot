@@ -1,0 +1,71 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s17.csv"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="E12_Production1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="E21_Person1"];
+n4[style="filled",color="white",fillcolor="lightgray",label="E52_Time-Span1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="E55_Type1"];
+n6[style="filled",color="white",fillcolor="lightgray",label="E67_Birth1"];
+n7[style="filled",color="white",fillcolor="lightgray",label="E69_Death1"];
+n8[style="filled",color="white",fillcolor="lightgray",label="E74_Group1"];
+n9[style="filled",color="white",fillcolor="lightgray",label="E82_Actor_Appellation1"];
+n10[style="filled",color="white",fillcolor="lightgray",label="E22_Man-Made_Object1"];
+n11[style="filled",color="white",fillcolor="lightgray",label="E35_Title1"];
+n12[style="filled",color="white",fillcolor="lightgray",label="E54_Dimension1"];
+n13[style="filled",color="white",fillcolor="lightgray",label="E8_Acquisition1"];
+n14[style="filled",color="white",fillcolor="lightgray",label="E38_Image1"];
+n15[style="filled",color="white",fillcolor="lightgray",label="E52_Time-Span2"];
+n16[style="filled",color="white",fillcolor="lightgray",label="E52_Time-Span3"];
+n17[shape="plaintext",style="filled",fillcolor="gold",label="Object_URI"];
+n18[shape="plaintext",style="filled",fillcolor="gold",label="Death_URI"];
+n19[shape="plaintext",style="filled",fillcolor="gold",label="Birth_URI"];
+n20[shape="plaintext",style="filled",fillcolor="gold",label="Actor_URI"];
+n21[shape="plaintext",style="filled",fillcolor="gold",label="dimensions"];
+n22[shape="plaintext",style="filled",fillcolor="gold",label="artist_birth"];
+n23[shape="plaintext",style="filled",fillcolor="gold",label="artist"];
+n24[shape="plaintext",style="filled",fillcolor="gold",label="nationality"];
+n25[shape="plaintext",style="filled",fillcolor="gold",label="artdesc"];
+n26[shape="plaintext",style="filled",fillcolor="gold",label="link"];
+n27[shape="plaintext",style="filled",fillcolor="gold",label="artyear"];
+n28[shape="plaintext",style="filled",fillcolor="gold",label="credittext"];
+n29[shape="plaintext",style="filled",fillcolor="gold",label="technique"];
+n30[shape="plaintext",style="filled",fillcolor="gold",label="photo"];
+n31[shape="plaintext",style="filled",fillcolor="gold",label="title"];
+n32[shape="plaintext",style="filled",fillcolor="gold",label="production_id"];
+n33[shape="plaintext",style="filled",fillcolor="gold",label="artist_death"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="P14_carried_out_by"]
+n2 -> n4[color="brown",fontcolor="black",label="P4_has_time-span"]
+n2 -> n5[color="brown",fontcolor="black",label="P32_used_general_technique"]
+n3 -> n6[color="brown",fontcolor="black",label="P98i_was_born"]
+n3 -> n7[color="brown",fontcolor="black",label="P100i_died_in"]
+n3 -> n8[color="brown",fontcolor="black",label="P107i_is_current_or_former_member_of"]
+n3 -> n9[color="brown",fontcolor="black",label="P131_is_identified_by"]
+n10 -> n2[color="brown",fontcolor="black",label="P108i_was_produced_by"]
+n10 -> n11[color="brown",fontcolor="black",label="P102_has_title"]
+n10 -> n12[color="brown",fontcolor="black",label="P43_has_dimension"]
+n10 -> n13[color="brown",fontcolor="black",label="P24i_changed_ownership_through"]
+n14 -> n10[color="brown",fontcolor="black",label="P138_represents"]
+n6 -> n15[color="brown",fontcolor="black",label="P4_has_time-span"]
+n7 -> n16[color="brown",fontcolor="black",label="P4_has_time-span"]
+n10 -> n17[color="brown",fontcolor="black",label="classLink"]
+n7 -> n18[color="brown",fontcolor="black",label="classLink"]
+n6 -> n19[color="brown",fontcolor="black",label="classLink"]
+n3 -> n20[color="brown",fontcolor="black",label="classLink"]
+n12 -> n21[color="brown",fontcolor="black",label="P3_has_note"]
+n15 -> n22[color="brown",fontcolor="black",label="P82_at_some_time_within"]
+n9 -> n23[color="brown",fontcolor="black",label="label"]
+n8 -> n24[color="brown",fontcolor="black",label="label"]
+n10 -> n25[color="brown",fontcolor="black",label="P3_has_note"]
+n10 -> n26[color="brown",fontcolor="black",label="label"]
+n4 -> n27[color="brown",fontcolor="black",label="P82_at_some_time_within"]
+n13 -> n28[color="brown",fontcolor="black",label="P3_has_note"]
+n5 -> n29[color="brown",fontcolor="black",label="label"]
+n14 -> n30[color="brown",fontcolor="black",label="label"]
+n11 -> n31[color="brown",fontcolor="black",label="label"]
+n2 -> n32[color="brown",fontcolor="black",label="label"]
+n16 -> n33[color="brown",fontcolor="black",label="P82_at_some_time_within"]
+}

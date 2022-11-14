@@ -1,0 +1,33 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s21.csv"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n4[style="filled",color="white",fillcolor="lightgray",label="Concept1"];
+n5[shape="plaintext",style="filled",fillcolor="gold",label="creditLine"];
+n6[shape="plaintext",style="filled",fillcolor="gold",label="medium"];
+n7[shape="plaintext",style="filled",fillcolor="gold",label="dateOfEndOfCreation"];
+n8[shape="plaintext",style="filled",fillcolor="gold",label="classification"];
+n9[shape="plaintext",style="filled",fillcolor="gold",label="dimensions"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="nationality"];
+n11[shape="plaintext",style="filled",fillcolor="gold",label="artistName"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="deathDate"];
+n13[shape="plaintext",style="filled",fillcolor="gold",label="birthDate"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="artworkTitle"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="creator"]
+n2 -> n4[color="brown",fontcolor="black",label="hasType"]
+n2 -> n5[color="brown",fontcolor="black",label="provenance"]
+n2 -> n6[color="brown",fontcolor="black",label="medium"]
+n2 -> n7[color="brown",fontcolor="black",label="created"]
+n4 -> n8[color="brown",fontcolor="black",label="prefLabel"]
+n2 -> n9[color="brown",fontcolor="black",label="extent"]
+n3 -> n10[color="brown",fontcolor="black",label="countryAssociatedWithThePerson"]
+n3 -> n11[color="brown",fontcolor="black",label="nameOfThePerson"]
+n3 -> n12[color="brown",fontcolor="black",label="dateOfDeath"]
+n3 -> n13[color="brown",fontcolor="black",label="dateOfBirth"]
+n2 -> n14[color="brown",fontcolor="black",label="title"]
+}

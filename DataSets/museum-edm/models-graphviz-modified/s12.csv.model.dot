@@ -1,0 +1,33 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s12.csv"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n4[style="filled",color="white",fillcolor="lightgray",label="EuropeanaAggregation1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="WebResource1"];
+n6[shape="plaintext",style="filled",fillcolor="gold",label="img_url"];
+n7[shape="plaintext",style="filled",fillcolor="gold",label="dimensions"];
+n8[shape="plaintext",style="filled",fillcolor="gold",label="artist_name"];
+n9[shape="plaintext",style="filled",fillcolor="gold",label="date_made"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="description"];
+n11[shape="plaintext",style="filled",fillcolor="gold",label="nationality"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="technique"];
+n13[shape="plaintext",style="filled",fillcolor="gold",label="EA_id"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="title"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="creator"]
+n4 -> n2[color="brown",fontcolor="black",label="aggregatedCHO"]
+n4 -> n5[color="brown",fontcolor="black",label="hasView"]
+n5 -> n6[color="brown",fontcolor="black",label="label"]
+n2 -> n7[color="brown",fontcolor="black",label="extent"]
+n3 -> n8[color="brown",fontcolor="black",label="nameOfThePerson"]
+n2 -> n9[color="brown",fontcolor="black",label="created"]
+n2 -> n10[color="brown",fontcolor="black",label="description"]
+n3 -> n11[color="brown",fontcolor="black",label="countryAssociatedWithThePerson"]
+n2 -> n12[color="brown",fontcolor="black",label="medium"]
+n4 -> n13[color="brown",fontcolor="black",label="label"]
+n2 -> n14[color="brown",fontcolor="black",label="title"]
+}

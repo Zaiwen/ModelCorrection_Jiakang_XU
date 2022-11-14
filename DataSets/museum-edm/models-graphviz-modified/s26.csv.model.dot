@@ -1,0 +1,41 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s26.csv"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n4[style="filled",color="white",fillcolor="lightgray",label="Concept1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="Document1"];
+n6[style="filled",color="white",fillcolor="lightgray",label="EuropeanaAggregation1"];
+n7[style="filled",color="white",fillcolor="lightgray",label="WebResource1"];
+n8[shape="plaintext",style="filled",fillcolor="gold",label="type"];
+n9[shape="plaintext",style="filled",fillcolor="gold",label="image-URL"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="artistName"];
+n11[shape="plaintext",style="filled",fillcolor="gold",label="credit"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="deathYear"];
+n13[shape="plaintext",style="filled",fillcolor="gold",label="birthYear"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="EA_id"];
+n15[shape="plaintext",style="filled",fillcolor="gold",label="url"];
+n16[shape="plaintext",style="filled",fillcolor="gold",label="title"];
+n17[shape="plaintext",style="filled",fillcolor="gold",label="nationality"];
+n18[shape="plaintext",style="filled",fillcolor="gold",label="dimensions"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="creator"]
+n2 -> n4[color="brown",fontcolor="black",label="hasType"]
+n2 -> n5[color="brown",fontcolor="black",label="page"]
+n6 -> n2[color="brown",fontcolor="black",label="aggregatedCHO"]
+n6 -> n7[color="brown",fontcolor="black",label="hasView"]
+n4 -> n8[color="brown",fontcolor="black",label="prefLabel"]
+n7 -> n9[color="brown",fontcolor="black",label="label"]
+n3 -> n10[color="brown",fontcolor="black",label="nameOfThePerson"]
+n2 -> n11[color="brown",fontcolor="black",label="provenance"]
+n3 -> n12[color="brown",fontcolor="black",label="dateOfDeath"]
+n3 -> n13[color="brown",fontcolor="black",label="dateOfBirth"]
+n6 -> n14[color="brown",fontcolor="black",label="label"]
+n5 -> n15[color="brown",fontcolor="black",label="label"]
+n2 -> n16[color="brown",fontcolor="black",label="title"]
+n3 -> n17[color="brown",fontcolor="black",label="countryAssociatedWithThePerson"]
+n2 -> n18[color="brown",fontcolor="black",label="extent"]
+}

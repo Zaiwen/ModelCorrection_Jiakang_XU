@@ -1,0 +1,57 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s19-s-indianapolis-artworks.xml"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject2"];
+n4[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="Concept1"];
+n6[style="filled",color="white",fillcolor="lightgray",label="Document2"];
+n7[style="filled",color="white",fillcolor="lightgray",label="Document1"];
+n8[style="filled",color="white",fillcolor="lightgray",label="EuropeanaAggregation1"];
+n9[style="filled",color="white",fillcolor="lightgray",label="WebResource1"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="birthDate"];
+n11[shape="plaintext",style="filled",fillcolor="gold",label="title"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="deathDate"];
+n13[shape="plaintext",style="filled",fillcolor="gold",label="materials"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="values"];
+n15[shape="plaintext",style="filled",fillcolor="gold",label="nationality"];
+n16[shape="plaintext",style="filled",fillcolor="gold",label="sourceURL"];
+n17[shape="plaintext",style="filled",fillcolor="gold",label="galleryLabel"];
+n18[shape="plaintext",style="filled",fillcolor="gold",label="creationDate"];
+n19[shape="plaintext",style="filled",fillcolor="gold",label="relatedArtworksURL"];
+n20[shape="plaintext",style="filled",fillcolor="gold",label="artist"];
+n21[shape="plaintext",style="filled",fillcolor="gold",label="provenance"];
+n22[shape="plaintext",style="filled",fillcolor="gold",label="dimensions"];
+n23[shape="plaintext",style="filled",fillcolor="gold",label="creditLine"];
+n24[shape="plaintext",style="filled",fillcolor="gold",label="relatedArtworksTitle"];
+n25[shape="plaintext",style="filled",fillcolor="gold",label="accessionNumber"];
+n26[shape="plaintext",style="filled",fillcolor="gold",label="imageURL"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="isRelatedTo"]
+n2 -> n4[color="brown",fontcolor="black",label="creator"]
+n2 -> n5[color="brown",fontcolor="black",label="subject"]
+n2 -> n6[color="brown",fontcolor="black",label="page"]
+n3 -> n7[color="brown",fontcolor="black",label="page"]
+n8 -> n2[color="brown",fontcolor="black",label="aggregatedCHO"]
+n8 -> n9[color="brown",fontcolor="black",label="hasView"]
+n4 -> n10[color="brown",fontcolor="black",label="dateOfBirth"]
+n2 -> n11[color="brown",fontcolor="black",label="title"]
+n4 -> n12[color="brown",fontcolor="black",label="dateOfDeath"]
+n2 -> n13[color="brown",fontcolor="black",label="medium"]
+n5 -> n14[color="brown",fontcolor="black",label="prefLabel"]
+n4 -> n15[color="brown",fontcolor="black",label="countryAssociatedWithThePerson"]
+n6 -> n16[color="brown",fontcolor="black",label="classLink"]
+n2 -> n17[color="brown",fontcolor="black",label="description"]
+n2 -> n18[color="brown",fontcolor="black",label="created"]
+n7 -> n19[color="brown",fontcolor="black",label="classLink"]
+n4 -> n20[color="brown",fontcolor="black",label="nameOfThePerson"]
+n2 -> n21[color="brown",fontcolor="black",label="provenance"]
+n2 -> n22[color="brown",fontcolor="black",label="extent"]
+n2 -> n23[color="brown",fontcolor="black",label="provenance"]
+n3 -> n24[color="brown",fontcolor="black",label="title"]
+n2 -> n25[color="brown",fontcolor="black",label="accessionNumber"]
+n9 -> n26[color="brown",fontcolor="black",label="classLink"]
+}

@@ -1,0 +1,51 @@
+digraph n0 {
+fontcolor="blue"
+remincross="true"
+label="s05-met.json"
+subgraph cluster {
+label="model"
+n2[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject1"];
+n3[style="filled",color="white",fillcolor="lightgray",label="CulturalHeritageObject2"];
+n4[style="filled",color="white",fillcolor="lightgray",label="Person1"];
+n5[style="filled",color="white",fillcolor="lightgray",label="Place1"];
+n6[style="filled",color="white",fillcolor="lightgray",label="Concept1"];
+n7[style="filled",color="white",fillcolor="lightgray",label="Concept2"];
+n8[style="filled",color="white",fillcolor="lightgray",label="EuropeanaAggregation1"];
+n9[style="filled",color="white",fillcolor="lightgray",label="WebResource1"];
+n10[shape="plaintext",style="filled",fillcolor="gold",label="Description"];
+n11[shape="plaintext",style="filled",fillcolor="gold",label="values"];
+n12[shape="plaintext",style="filled",fillcolor="gold",label="values"];
+n13[shape="plaintext",style="filled",fillcolor="gold",label="Classification"];
+n14[shape="plaintext",style="filled",fillcolor="gold",label="values"];
+n15[shape="plaintext",style="filled",fillcolor="gold",label="Medium"];
+n16[shape="plaintext",style="filled",fillcolor="gold",label="Who"];
+n17[shape="plaintext",style="filled",fillcolor="gold",label="id"];
+n18[shape="plaintext",style="filled",fillcolor="gold",label="Geography"];
+n19[shape="plaintext",style="filled",fillcolor="gold",label="values"];
+n20[shape="plaintext",style="filled",fillcolor="gold",label="Credit Line"];
+n21[shape="plaintext",style="filled",fillcolor="gold",label="Date"];
+n22[shape="plaintext",style="filled",fillcolor="gold",label="Accession Number"];
+n23[shape="plaintext",style="filled",fillcolor="gold",label="image"];
+}
+n2 -> n3[color="brown",fontcolor="black",label="isRelatedTo"]
+n2 -> n4[color="brown",fontcolor="black",label="creator"]
+n2 -> n5[color="brown",fontcolor="black",label="associatedPlace"]
+n2 -> n6[color="brown",fontcolor="black",label="subject"]
+n2 -> n7[color="brown",fontcolor="black",label="hasType"]
+n8 -> n2[color="brown",fontcolor="black",label="aggregatedCHO"]
+n8 -> n9[color="brown",fontcolor="black",label="hasView"]
+n2 -> n10[color="brown",fontcolor="black",label="description"]
+n6 -> n11[color="brown",fontcolor="black",label="prefLabel"]
+n2 -> n12[color="brown",fontcolor="black",label="extent"]
+n7 -> n13[color="brown",fontcolor="black",label="prefLabel"]
+n3 -> n14[color="brown",fontcolor="black",label="objectId"]
+n2 -> n15[color="brown",fontcolor="black",label="medium"]
+n4 -> n16[color="brown",fontcolor="black",label="nameOfThePerson"]
+n2 -> n17[color="brown",fontcolor="black",label="objectId"]
+n5 -> n18[color="brown",fontcolor="black",label="label"]
+n2 -> n19[color="brown",fontcolor="black",label="provenance"]
+n2 -> n20[color="brown",fontcolor="black",label="provenance"]
+n2 -> n21[color="brown",fontcolor="black",label="created"]
+n2 -> n22[color="brown",fontcolor="black",label="accessionNumber"]
+n9 -> n23[color="brown",fontcolor="black",label="classLink"]
+}

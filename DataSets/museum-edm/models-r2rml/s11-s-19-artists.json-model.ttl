@@ -1,0 +1,598 @@
+@prefix status: <http://metadataregistry.org/uri/RegStatus/> .
+@prefix owl2xml: <http://www.w3.org/2006/12/owl2-xml#> .
+@prefix schema: <http://schema.org/> .
+@prefix aac-ont: <http://www.americanartcollaborative.org/ontology/> .
+@prefix reg: <http://metadataregistry.org/uri/profile/RegAp/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix msg0: <http://web.resource.org/cc/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix DOLCE-Lite: <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#> .
+@prefix dcmitype: <http://purl.org/dc/dcmitype/> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix FRBRentitiesRDA: <http://rdvocab.info/uri/schema/FRBRentitiesRDA/> .
+@prefix saam-ont: <http://americanart.si.edu/ontology/> .
+@prefix edm: <http://www.europeana.eu/schemas/edm/> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix ElementsGr2: <http://rdvocab.info/ElementsGr2/> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix skos: <http://www.w3.org/2008/05/skos#> .
+@prefix crm: <http://www.cidoc-crm.org/rdfs/cidoc-crm#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix frbr_core: <http://purl.org/vocab/frbr/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ore: <http://www.openarchives.org/ore/terms/> .
+@prefix abc: <http://metadata.net/harmony/abc#> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix rdfg: <http://www.w3.org/2004/03/trix/rdfg-1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix km-dev: <http://isi.edu/integration/karma/dev#> .
+
+_:node1950jqervx1 a km-dev:R2RMLMapping ;
+	km-dev:sourceName "s11-s-19-artists.json" ;
+	km-dev:modelPublicationTime "1414138772351"^^xsd:long ;
+	km-dev:modelVersion "1.7" ;
+	km-dev:hasInputColumns "[[{\"columnName\":\"getty_artists\"},{\"columnName\":\"birth_data_and_place\"}],[{\"columnName\":\"getty_artists\"},{\"columnName\":\"long_biography\"}],[{\"columnName\":\"getty_artists\"},{\"columnName\":\"occupation\"}],[{\"columnName\":\"getty_artists\"},{\"columnName\":\"artist_name\"}],[{\"columnName\":\"getty_artists\"},{\"columnName\":\"nationality\"}]]" ;
+	km-dev:hasOutputColumns "[[{\"columnName\":\"getty_artists\"},{\"columnName\":\"long_biography\"}],[{\"columnName\":\"getty_artists\"},{\"columnName\":\"occupation\"}],[{\"columnName\":\"getty_artists\"},{\"columnName\":\"birthDate\"}],[{\"columnName\":\"getty_artists\"},{\"columnName\":\"artist_name\"}],[{\"columnName\":\"getty_artists\"},{\"columnName\":\"nationality\"}],[{\"columnName\":\"getty_artists\"},{\"columnName\":\"deathDate\"}]]" ;
+	km-dev:hasModelLabel "s11-s-19-artists.json" ;
+	km-dev:hasBaseURI "http://localhost:8080/source/" ;
+	km-dev:hasWorksheetHistory """[
+    {
+        \"tags\": [\"Transformation\"],
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"value\": [
+                    {\"columnName\": \"getty_artists\"},
+                    {\"columnName\": \"birth_data_and_place\"}
+                ],
+                \"type\": \"hNodeId\"
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"value\": \"W\",
+                \"type\": \"worksheetId\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"value\": \"DEFAULT_TEST\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"newColumnName\",
+                \"value\": \"birthDate\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"transformationCode\",
+                \"value\": \"value = getValue(\\\"birth_data_and_place\\\")\\nidx = value.find(\\\"b. \\\")\\nbirth = value\\nif(idx != -1) : \\n    birth = value[idx+3:]\\nelse :\\n    idx = value.find(\\\"about \\\")   \\n    if(idx != -1) : \\n        birth = value[idx+6:]\\nbirth = birth.strip()\\nidx = birth.find(\\\" \\\")\\nif(idx != -1): \\n    birth = birth[0:idx]\\nreturn birth\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"errorDefaultValue\",
+                \"value\": \"\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"birth_data_and_place\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"birthDate\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            }
+        ],
+        \"commandName\": \"SubmitPythonTransformationCommand\"
+    },
+    {
+        \"tags\": [\"Transformation\"],
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"value\": [
+                    {\"columnName\": \"getty_artists\"},
+                    {\"columnName\": \"birthDate\"}
+                ],
+                \"type\": \"hNodeId\"
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"value\": \"W\",
+                \"type\": \"worksheetId\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"value\": \"DEFAULT_TEST\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"newColumnName\",
+                \"value\": \"deathDate\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"transformationCode\",
+                \"value\": \"value = getValue(\\\"birth_data_and_place\\\")\\nidx = value.find(\\\" d.\\\")\\nif(idx == -1) : \\n    idx = value.find(\\\" - \\\")\\ndeath = \\\"\\\"\\nif(idx != -1) : \\n    death = value[idx+3:].strip()\\nidx = death.find(\\\"about \\\")\\nif (idx != -1): \\n    death = death[idx+6:].strip()\\nidx = death.find(\\\" \\\")\\nif(idx != -1): \\n    death = death[0:idx]\\nreturn death\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"errorDefaultValue\",
+                \"value\": \"\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"birth_data_and_place\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"deathDate\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            }
+        ],
+        \"commandName\": \"SubmitPythonTransformationCommand\"
+    },
+    {
+        \"tags\": [\"Modeling\"],
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"value\": [
+                    {\"columnName\": \"getty_artists\"},
+                    {\"columnName\": \"birthDate\"}
+                ],
+                \"type\": \"hNodeId\"
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"value\": \"W\",
+                \"type\": \"worksheetId\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"value\": \"DEFAULT_TEST\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"value\": [{
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://rdvocab.info/ElementsGr2/dateOfBirth\",
+                    \"DomainLabel\": \"aac-ont:Person1 (add)\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/Person1 (add)\",
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/Person\"
+                }],
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"value\": false,
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"value\": \"\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"birthDate\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"birthDate\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            }
+        ],
+        \"commandName\": \"SetSemanticTypeCommand\"
+    },
+    {
+        \"tags\": [\"Modeling\"],
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"value\": [
+                    {\"columnName\": \"getty_artists\"},
+                    {\"columnName\": \"deathDate\"}
+                ],
+                \"type\": \"hNodeId\"
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"value\": \"W\",
+                \"type\": \"worksheetId\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"value\": \"DEFAULT_TEST\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"value\": [{
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://rdvocab.info/ElementsGr2/dateOfDeath\",
+                    \"DomainLabel\": \"aac-ont:Person1\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/Person1\",
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/Person\"
+                }],
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"value\": false,
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"value\": \"\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"deathDate\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"deathDate\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            }
+        ],
+        \"commandName\": \"SetSemanticTypeCommand\"
+    },
+    {
+        \"tags\": [\"Modeling\"],
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"value\": [
+                    {\"columnName\": \"getty_artists\"},
+                    {\"columnName\": \"long_biography\"}
+                ],
+                \"type\": \"hNodeId\"
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"value\": \"W\",
+                \"type\": \"worksheetId\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"value\": \"DEFAULT_TEST\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"value\": [{
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://rdvocab.info/ElementsGr2/biographicalInformation\",
+                    \"DomainLabel\": \"aac-ont:Person1\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/Person1\",
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/Person\"
+                }],
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"value\": false,
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"value\": \"\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"long_biography\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"long_biography\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            }
+        ],
+        \"commandName\": \"SetSemanticTypeCommand\"
+    },
+    {
+        \"tags\": [\"Modeling\"],
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"value\": [
+                    {\"columnName\": \"getty_artists\"},
+                    {\"columnName\": \"artist_name\"}
+                ],
+                \"type\": \"hNodeId\"
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"value\": \"W\",
+                \"type\": \"worksheetId\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"value\": \"DEFAULT_TEST\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"value\": [{
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://rdvocab.info/ElementsGr2/nameOfThePerson\",
+                    \"DomainLabel\": \"aac-ont:Person1\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/Person1\",
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/Person\"
+                }],
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"value\": false,
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"value\": \"\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"artist_name\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"artist_name\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            }
+        ],
+        \"commandName\": \"SetSemanticTypeCommand\"
+    },
+    {
+        \"tags\": [\"Modeling\"],
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"value\": [
+                    {\"columnName\": \"getty_artists\"},
+                    {\"columnName\": \"nationality\"}
+                ],
+                \"type\": \"hNodeId\"
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"value\": \"W\",
+                \"type\": \"worksheetId\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"value\": \"DEFAULT_TEST\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"value\": [{
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://rdvocab.info/ElementsGr2/countryAssociatedWithThePerson\",
+                    \"DomainLabel\": \"aac-ont:Person1\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/Person1\",
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/Person\"
+                }],
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"value\": false,
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"value\": \"\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"nationality\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"nationality\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            }
+        ],
+        \"commandName\": \"SetSemanticTypeCommand\"
+    },
+    {
+        \"tags\": [\"Modeling\"],
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"value\": [
+                    {\"columnName\": \"getty_artists\"},
+                    {\"columnName\": \"occupation\"}
+                ],
+                \"type\": \"hNodeId\"
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"value\": \"W\",
+                \"type\": \"worksheetId\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"value\": \"DEFAULT_TEST\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"value\": [{
+                    \"isPrimary\": true,
+                    \"FullType\": \"http://rdvocab.info/ElementsGr2/professionOrOccupation\",
+                    \"DomainLabel\": \"aac-ont:Person1\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/Person1\",
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/Person\"
+                }],
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"value\": false,
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"value\": \"\",
+                \"type\": \"other\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"occupation\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"getty_artists\\\"},{\\\"columnName\\\":\\\"occupation\\\"}]}]\",
+                \"type\": \"hNodeIdList\"
+            }
+        ],
+        \"commandName\": \"SetSemanticTypeCommand\"
+    }
+]""" .
+
+km-dev:TriplesMap_c077cca3-f344-4b33-99c6-9b4509e5d27b a rr:TriplesMap .
+
+_:node1950jqervx1 km-dev:hasTriplesMap km-dev:TriplesMap_c077cca3-f344-4b33-99c6-9b4509e5d27b .
+
+km-dev:TriplesMap_c077cca3-f344-4b33-99c6-9b4509e5d27b km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx2 rr:tableName "s11-s-19-artists.json" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx1 km-dev:hasLogicalTable _:node1950jqervx2 .
+
+km-dev:TriplesMap_c077cca3-f344-4b33-99c6-9b4509e5d27b rr:logicalTable _:node1950jqervx2 ;
+	rr:subjectMap _:node1950jqervx3 .
+
+_:node1950jqervx1 km-dev:hasSubjectMap _:node1950jqervx3 .
+
+_:node1950jqervx3 km-dev:isPartOfMapping _:node1950jqervx1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://www.americanartcollaborative.org/ontology/Person1" ;
+	rr:class aac-ont:Person ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "aac-ont:Person1" ;
+	a km-dev:steinerTreeRootNode .
+
+km-dev:PredicateObjectMap_d08a395f-137e-4ed1-9f03-de634502efa6 rr:predicate ElementsGr2:biographicalInformation .
+
+_:node1950jqervx4 rr:column "[\"getty_artists\",\"long_biography\"]" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx1 km-dev:hasObjectMap _:node1950jqervx4 .
+
+km-dev:PredicateObjectMap_d08a395f-137e-4ed1-9f03-de634502efa6 rr:objectMap _:node1950jqervx4 .
+
+km-dev:TriplesMap_c077cca3-f344-4b33-99c6-9b4509e5d27b rr:predicateObjectMap km-dev:PredicateObjectMap_d08a395f-137e-4ed1-9f03-de634502efa6 .
+
+km-dev:PredicateObjectMap_d08a395f-137e-4ed1-9f03-de634502efa6 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_d08a395f-137e-4ed1-9f03-de634502efa6 .
+
+km-dev:PredicateObjectMap_a34318d8-35bc-492f-8a90-e52828f65d3b rr:predicate ElementsGr2:countryAssociatedWithThePerson .
+
+_:node1950jqervx5 rr:column "[\"getty_artists\",\"nationality\"]" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx1 km-dev:hasObjectMap _:node1950jqervx5 .
+
+km-dev:PredicateObjectMap_a34318d8-35bc-492f-8a90-e52828f65d3b rr:objectMap _:node1950jqervx5 .
+
+km-dev:TriplesMap_c077cca3-f344-4b33-99c6-9b4509e5d27b rr:predicateObjectMap km-dev:PredicateObjectMap_a34318d8-35bc-492f-8a90-e52828f65d3b .
+
+km-dev:PredicateObjectMap_a34318d8-35bc-492f-8a90-e52828f65d3b a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_a34318d8-35bc-492f-8a90-e52828f65d3b .
+
+km-dev:PredicateObjectMap_e8ff289e-a38a-4d1f-ad37-8e58117be944 rr:predicate ElementsGr2:dateOfBirth .
+
+_:node1950jqervx6 rr:column "[\"getty_artists\",\"birthDate\"]" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx1 km-dev:hasObjectMap _:node1950jqervx6 .
+
+km-dev:PredicateObjectMap_e8ff289e-a38a-4d1f-ad37-8e58117be944 rr:objectMap _:node1950jqervx6 .
+
+km-dev:TriplesMap_c077cca3-f344-4b33-99c6-9b4509e5d27b rr:predicateObjectMap km-dev:PredicateObjectMap_e8ff289e-a38a-4d1f-ad37-8e58117be944 .
+
+km-dev:PredicateObjectMap_e8ff289e-a38a-4d1f-ad37-8e58117be944 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_e8ff289e-a38a-4d1f-ad37-8e58117be944 .
+
+km-dev:PredicateObjectMap_77986104-d6ff-4ea4-9e90-5fd9f29a999d rr:predicate ElementsGr2:dateOfDeath .
+
+_:node1950jqervx7 rr:column "[\"getty_artists\",\"deathDate\"]" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx1 km-dev:hasObjectMap _:node1950jqervx7 .
+
+km-dev:PredicateObjectMap_77986104-d6ff-4ea4-9e90-5fd9f29a999d rr:objectMap _:node1950jqervx7 .
+
+km-dev:TriplesMap_c077cca3-f344-4b33-99c6-9b4509e5d27b rr:predicateObjectMap km-dev:PredicateObjectMap_77986104-d6ff-4ea4-9e90-5fd9f29a999d .
+
+km-dev:PredicateObjectMap_77986104-d6ff-4ea4-9e90-5fd9f29a999d a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_77986104-d6ff-4ea4-9e90-5fd9f29a999d .
+
+km-dev:PredicateObjectMap_7e5a2226-69bc-478a-953e-5be953487286 rr:predicate ElementsGr2:nameOfThePerson .
+
+_:node1950jqervx8 rr:column "[\"getty_artists\",\"artist_name\"]" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx1 km-dev:hasObjectMap _:node1950jqervx8 .
+
+km-dev:PredicateObjectMap_7e5a2226-69bc-478a-953e-5be953487286 rr:objectMap _:node1950jqervx8 .
+
+km-dev:TriplesMap_c077cca3-f344-4b33-99c6-9b4509e5d27b rr:predicateObjectMap km-dev:PredicateObjectMap_7e5a2226-69bc-478a-953e-5be953487286 .
+
+km-dev:PredicateObjectMap_7e5a2226-69bc-478a-953e-5be953487286 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_7e5a2226-69bc-478a-953e-5be953487286 .
+
+km-dev:PredicateObjectMap_144d3a20-2ed8-4f62-9a4b-d212b049dcff rr:predicate ElementsGr2:professionOrOccupation .
+
+_:node1950jqervx9 rr:column "[\"getty_artists\",\"occupation\"]" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx1 km-dev:hasObjectMap _:node1950jqervx9 .
+
+km-dev:PredicateObjectMap_144d3a20-2ed8-4f62-9a4b-d212b049dcff rr:objectMap _:node1950jqervx9 .
+
+km-dev:TriplesMap_c077cca3-f344-4b33-99c6-9b4509e5d27b rr:predicateObjectMap km-dev:PredicateObjectMap_144d3a20-2ed8-4f62-9a4b-d212b049dcff .
+
+km-dev:PredicateObjectMap_144d3a20-2ed8-4f62-9a4b-d212b049dcff a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1950jqervx1 .
+
+_:node1950jqervx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_144d3a20-2ed8-4f62-9a4b-d212b049dcff .

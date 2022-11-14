@@ -1,0 +1,970 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ns: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix edm: <http://www.europeana.eu/schemas/edm/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix DOLCE-Lite: <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix cc: <http://web.resource.org/cc/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dcmitype: <http://purl.org/dc/dcmitype/> .
+@prefix ElementsGr2: <http://rdvocab.info/ElementsGr2/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix wot: <http://xmlns.com/wot/0.1/> .
+@prefix ontology: <http://americanart.si.edu/ontology/> .
+@prefix ore: <http://www.openarchives.org/ore/terms/> .
+@prefix skos1: <http://www.w3.org/2008/05/skos#> .
+@prefix frbr_core: <http://purl.org/vocab/frbr/core#> .
+@prefix crm: <http://www.cidoc-crm.org/rdfs/cidoc-crm#> .
+@prefix abc: <http://metadata.net/harmony/abc#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix RegAp: <http://metadataregistry.org/uri/profile/RegAp/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix km-dev: <http://isi.edu/integration/karma/dev#> .
+
+_:node1g9erc5inx1 a km-dev:R2RMLMapping ;
+	km-dev:sourceName "s21.csv" ;
+	km-dev:modelPublicationTime "1659429590615"^^xsd:long ;
+	km-dev:modelVersion "1.7" ;
+	km-dev:hasInputColumns "[[{\"columnName\":\"creditLine\"}],[{\"columnName\":\"medium\"}],[{\"columnName\":\"dateOfEndOfCreation\"}],[{\"columnName\":\"classification\"}],[{\"columnName\":\"dimensions\"}],[{\"columnName\":\"nationality\"}],[{\"columnName\":\"artistName\"}],[{\"columnName\":\"deathDate\"}],[{\"columnName\":\"birthDate\"}],[{\"columnName\":\"artworkTitle\"}]]" ;
+	km-dev:hasOutputColumns "[[{\"columnName\":\"creditLine\"}],[{\"columnName\":\"medium\"}],[{\"columnName\":\"dateOfEndOfCreation\"}],[{\"columnName\":\"classification\"}],[{\"columnName\":\"dimensions\"}],[{\"columnName\":\"nationality\"}],[{\"columnName\":\"artistName\"}],[{\"columnName\":\"deathDate\"}],[{\"columnName\":\"birthDate\"}],[{\"columnName\":\"artworkTitle\"}]]" ;
+	km-dev:hasModelLabel "s21.csv" ;
+	km-dev:hasBaseURI "http://localhost:8080/source/" ;
+	km-dev:hasWorksheetHistory """[
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"artworkTitle\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://purl.org/dc/terms/title\",
+                    \"DomainLabel\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject/CulturalHeritageObject1 (add)\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"artworkTitle\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"artworkTitle\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"artistName\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/Person\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/Person1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://rdvocab.info/ElementsGr2/nameOfThePerson\",
+                    \"DomainLabel\": \"http://www.americanartcollaborative.org/ontology/Person/Person1 (add)\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"artistName\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"artistName\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"nationality\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/Person\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/Person1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://rdvocab.info/ElementsGr2/countryAssociatedWithThePerson\",
+                    \"DomainLabel\": \"http://www.americanartcollaborative.org/ontology/Person/Person1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"nationality\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"nationality\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"birthDate\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/Person\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/Person1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://rdvocab.info/ElementsGr2/dateOfBirth\",
+                    \"DomainLabel\": \"http://www.americanartcollaborative.org/ontology/Person/Person1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"birthDate\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"birthDate\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"deathDate\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/Person\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/Person1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://rdvocab.info/ElementsGr2/dateOfDeath\",
+                    \"DomainLabel\": \"http://www.americanartcollaborative.org/ontology/Person/Person1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"deathDate\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"deathDate\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"dateOfEndOfCreation\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://purl.org/dc/terms/created\",
+                    \"DomainLabel\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject/CulturalHeritageObject1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"dateOfEndOfCreation\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"dateOfEndOfCreation\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"medium\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://purl.org/dc/terms/medium\",
+                    \"DomainLabel\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject/CulturalHeritageObject1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"medium\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"medium\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"dimensions\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://purl.org/dc/terms/extent\",
+                    \"DomainLabel\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject/CulturalHeritageObject1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"dimensions\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"dimensions\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"classification\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://www.w3.org/2004/02/skos/core#Concept\",
+                    \"DomainId\": \"http://www.w3.org/2004/02/skos/core#Concept1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://www.w3.org/2008/05/skos#prefLabel\",
+                    \"DomainLabel\": \"skos:Concept1 (add)\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"classification\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"classification\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"SetSemanticTypeCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"hNodeId\",
+                \"type\": \"hNodeId\",
+                \"value\": [{\"columnName\": \"creditLine\"}]
+            },
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"selectionName\",
+                \"type\": \"other\",
+                \"value\": \"DEFAULT_TEST\"
+            },
+            {
+                \"name\": \"SemanticTypesArray\",
+                \"type\": \"other\",
+                \"value\": [{
+                    \"DomainUri\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject\",
+                    \"DomainId\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject1\",
+                    \"isPrimary\": true,
+                    \"isProvenance\": false,
+                    \"FullType\": \"http://purl.org/dc/terms/provenance\",
+                    \"DomainLabel\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject/CulturalHeritageObject1\"
+                }]
+            },
+            {
+                \"name\": \"trainAndShowUpdates\",
+                \"type\": \"other\",
+                \"value\": true
+            },
+            {
+                \"name\": \"rdfLiteralType\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"language\",
+                \"type\": \"other\",
+                \"value\": \"\"
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"creditLine\\\"}]}]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[{\\\"value\\\":[{\\\"columnName\\\":\\\"creditLine\\\"}]}]\"
+            }
+        ],
+        \"tags\": [\"SemanticType\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://www.americanartcollaborative.org/ontology/Person1\",
+                    \"edgeId\": \"http://purl.org/dc/terms/creator\",
+                    \"edgeTargetUri\": \"http://www.americanartcollaborative.org/ontology/Person\",
+                    \"edgeSourceId\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject1\",
+                    \"edgeSourceUri\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    },
+    {
+        \"commandName\": \"AddLinkCommand\",
+        \"model\": \"new\",
+        \"inputParameters\": [
+            {
+                \"name\": \"worksheetId\",
+                \"type\": \"worksheetId\",
+                \"value\": \"W\"
+            },
+            {
+                \"name\": \"edge\",
+                \"type\": \"other\",
+                \"value\": {
+                    \"edgeTargetId\": \"http://www.w3.org/2004/02/skos/core#Concept1\",
+                    \"edgeId\": \"http://www.europeana.eu/schemas/edm/hasType\",
+                    \"edgeTargetUri\": \"http://www.w3.org/2004/02/skos/core#Concept\",
+                    \"edgeSourceId\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject1\",
+                    \"edgeSourceUri\": \"http://www.americanartcollaborative.org/ontology/CulturalHeritageObject\"
+                }
+            },
+            {
+                \"name\": \"inputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            },
+            {
+                \"name\": \"outputColumns\",
+                \"type\": \"hNodeIdList\",
+                \"value\": \"[]\"
+            }
+        ],
+        \"tags\": [\"Modeling\"]
+    }
+]""" .
+
+km-dev:TriplesMap_9e8620a1-2c45-4482-aed6-a61dbde68193 a rr:TriplesMap .
+
+_:node1g9erc5inx1 km-dev:hasTriplesMap km-dev:TriplesMap_9e8620a1-2c45-4482-aed6-a61dbde68193 .
+
+km-dev:TriplesMap_9e8620a1-2c45-4482-aed6-a61dbde68193 km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx2 rr:tableName "s21.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasLogicalTable _:node1g9erc5inx2 .
+
+km-dev:TriplesMap_9e8620a1-2c45-4482-aed6-a61dbde68193 rr:logicalTable _:node1g9erc5inx2 ;
+	rr:subjectMap _:node1g9erc5inx3 .
+
+_:node1g9erc5inx1 km-dev:hasSubjectMap _:node1g9erc5inx3 .
+
+_:node1g9erc5inx3 km-dev:isPartOfMapping _:node1g9erc5inx1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://www.americanartcollaborative.org/ontology/CulturalHeritageObject1" ;
+	rr:class <http://www.americanartcollaborative.org/ontology/CulturalHeritageObject> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "CulturalHeritageObject1" ;
+	a km-dev:steinerTreeRootNode .
+
+km-dev:PredicateObjectMap_31271ac6-354f-41a0-b951-849992eab1bf rr:predicate dcterms:creator .
+
+km-dev:RefObjectMap_5d136dbc-a258-4a3c-98a9-bbf5d97ec6d0 a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_6bc078a8-6fa5-4e12-a8a6-e76bb4913873 ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasObjectMap km-dev:RefObjectMap_5d136dbc-a258-4a3c-98a9-bbf5d97ec6d0 .
+
+km-dev:PredicateObjectMap_31271ac6-354f-41a0-b951-849992eab1bf rr:objectMap km-dev:RefObjectMap_5d136dbc-a258-4a3c-98a9-bbf5d97ec6d0 .
+
+km-dev:TriplesMap_9e8620a1-2c45-4482-aed6-a61dbde68193 rr:predicateObjectMap km-dev:PredicateObjectMap_31271ac6-354f-41a0-b951-849992eab1bf .
+
+km-dev:PredicateObjectMap_31271ac6-354f-41a0-b951-849992eab1bf a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_31271ac6-354f-41a0-b951-849992eab1bf .
+
+km-dev:PredicateObjectMap_a993556f-1e60-4fe3-9255-987748a05ad4 rr:predicate edm:hasType .
+
+km-dev:RefObjectMap_511d90e2-2c6a-4f56-8353-5373e55d1b2d a rr:RefObjectMap , rr:ObjectMap ;
+	rr:parentTriplesMap km-dev:TriplesMap_814b4e1e-673b-4fad-b27e-21805a5553d8 ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasObjectMap km-dev:RefObjectMap_511d90e2-2c6a-4f56-8353-5373e55d1b2d .
+
+km-dev:PredicateObjectMap_a993556f-1e60-4fe3-9255-987748a05ad4 rr:objectMap km-dev:RefObjectMap_511d90e2-2c6a-4f56-8353-5373e55d1b2d .
+
+km-dev:TriplesMap_9e8620a1-2c45-4482-aed6-a61dbde68193 rr:predicateObjectMap km-dev:PredicateObjectMap_a993556f-1e60-4fe3-9255-987748a05ad4 .
+
+km-dev:PredicateObjectMap_a993556f-1e60-4fe3-9255-987748a05ad4 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_a993556f-1e60-4fe3-9255-987748a05ad4 .
+
+km-dev:PredicateObjectMap_e0faaef9-1e6b-4313-8ffc-db78487619e1 rr:predicate dcterms:provenance .
+
+_:node1g9erc5inx4 rr:column "creditLine" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasObjectMap _:node1g9erc5inx4 .
+
+km-dev:PredicateObjectMap_e0faaef9-1e6b-4313-8ffc-db78487619e1 rr:objectMap _:node1g9erc5inx4 .
+
+km-dev:TriplesMap_9e8620a1-2c45-4482-aed6-a61dbde68193 rr:predicateObjectMap km-dev:PredicateObjectMap_e0faaef9-1e6b-4313-8ffc-db78487619e1 .
+
+km-dev:PredicateObjectMap_e0faaef9-1e6b-4313-8ffc-db78487619e1 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_e0faaef9-1e6b-4313-8ffc-db78487619e1 .
+
+km-dev:PredicateObjectMap_13ea25b5-0c39-4466-9ca3-047298c86123 rr:predicate dcterms:medium .
+
+_:node1g9erc5inx5 rr:column "medium" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasObjectMap _:node1g9erc5inx5 .
+
+km-dev:PredicateObjectMap_13ea25b5-0c39-4466-9ca3-047298c86123 rr:objectMap _:node1g9erc5inx5 .
+
+km-dev:TriplesMap_9e8620a1-2c45-4482-aed6-a61dbde68193 rr:predicateObjectMap km-dev:PredicateObjectMap_13ea25b5-0c39-4466-9ca3-047298c86123 .
+
+km-dev:PredicateObjectMap_13ea25b5-0c39-4466-9ca3-047298c86123 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_13ea25b5-0c39-4466-9ca3-047298c86123 .
+
+km-dev:PredicateObjectMap_1a66c83a-5607-4f37-b0ae-e9e08aefed12 rr:predicate dcterms:created .
+
+_:node1g9erc5inx6 rr:column "dateOfEndOfCreation" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasObjectMap _:node1g9erc5inx6 .
+
+km-dev:PredicateObjectMap_1a66c83a-5607-4f37-b0ae-e9e08aefed12 rr:objectMap _:node1g9erc5inx6 .
+
+km-dev:TriplesMap_9e8620a1-2c45-4482-aed6-a61dbde68193 rr:predicateObjectMap km-dev:PredicateObjectMap_1a66c83a-5607-4f37-b0ae-e9e08aefed12 .
+
+km-dev:PredicateObjectMap_1a66c83a-5607-4f37-b0ae-e9e08aefed12 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_1a66c83a-5607-4f37-b0ae-e9e08aefed12 .
+
+km-dev:PredicateObjectMap_303380c0-4ce5-468e-bf8e-457bd4298828 rr:predicate dcterms:extent .
+
+_:node1g9erc5inx7 rr:column "dimensions" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasObjectMap _:node1g9erc5inx7 .
+
+km-dev:PredicateObjectMap_303380c0-4ce5-468e-bf8e-457bd4298828 rr:objectMap _:node1g9erc5inx7 .
+
+km-dev:TriplesMap_9e8620a1-2c45-4482-aed6-a61dbde68193 rr:predicateObjectMap km-dev:PredicateObjectMap_303380c0-4ce5-468e-bf8e-457bd4298828 .
+
+km-dev:PredicateObjectMap_303380c0-4ce5-468e-bf8e-457bd4298828 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_303380c0-4ce5-468e-bf8e-457bd4298828 .
+
+km-dev:PredicateObjectMap_86e4ea2a-942c-4161-b634-37bbd605fe87 rr:predicate dcterms:title .
+
+_:node1g9erc5inx8 rr:column "artworkTitle" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasObjectMap _:node1g9erc5inx8 .
+
+km-dev:PredicateObjectMap_86e4ea2a-942c-4161-b634-37bbd605fe87 rr:objectMap _:node1g9erc5inx8 .
+
+km-dev:TriplesMap_9e8620a1-2c45-4482-aed6-a61dbde68193 rr:predicateObjectMap km-dev:PredicateObjectMap_86e4ea2a-942c-4161-b634-37bbd605fe87 .
+
+km-dev:PredicateObjectMap_86e4ea2a-942c-4161-b634-37bbd605fe87 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_86e4ea2a-942c-4161-b634-37bbd605fe87 .
+
+km-dev:TriplesMap_6bc078a8-6fa5-4e12-a8a6-e76bb4913873 a rr:TriplesMap .
+
+_:node1g9erc5inx1 km-dev:hasTriplesMap km-dev:TriplesMap_6bc078a8-6fa5-4e12-a8a6-e76bb4913873 .
+
+km-dev:TriplesMap_6bc078a8-6fa5-4e12-a8a6-e76bb4913873 km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx9 rr:tableName "s21.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasLogicalTable _:node1g9erc5inx9 .
+
+km-dev:TriplesMap_6bc078a8-6fa5-4e12-a8a6-e76bb4913873 rr:logicalTable _:node1g9erc5inx9 ;
+	rr:subjectMap _:node1g9erc5inx10 .
+
+_:node1g9erc5inx1 km-dev:hasSubjectMap _:node1g9erc5inx10 .
+
+_:node1g9erc5inx10 km-dev:isPartOfMapping _:node1g9erc5inx1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://www.americanartcollaborative.org/ontology/Person1" ;
+	rr:class <http://www.americanartcollaborative.org/ontology/Person> ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "Person1" .
+
+km-dev:PredicateObjectMap_1f333cc7-aed8-46fe-81e3-d91026837ded rr:predicate ElementsGr2:countryAssociatedWithThePerson .
+
+_:node1g9erc5inx11 rr:column "nationality" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasObjectMap _:node1g9erc5inx11 .
+
+km-dev:PredicateObjectMap_1f333cc7-aed8-46fe-81e3-d91026837ded rr:objectMap _:node1g9erc5inx11 .
+
+km-dev:TriplesMap_6bc078a8-6fa5-4e12-a8a6-e76bb4913873 rr:predicateObjectMap km-dev:PredicateObjectMap_1f333cc7-aed8-46fe-81e3-d91026837ded .
+
+km-dev:PredicateObjectMap_1f333cc7-aed8-46fe-81e3-d91026837ded a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_1f333cc7-aed8-46fe-81e3-d91026837ded .
+
+km-dev:PredicateObjectMap_727a8408-8db2-401e-b727-d3c1c37d6221 rr:predicate ElementsGr2:nameOfThePerson .
+
+_:node1g9erc5inx12 rr:column "artistName" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasObjectMap _:node1g9erc5inx12 .
+
+km-dev:PredicateObjectMap_727a8408-8db2-401e-b727-d3c1c37d6221 rr:objectMap _:node1g9erc5inx12 .
+
+km-dev:TriplesMap_6bc078a8-6fa5-4e12-a8a6-e76bb4913873 rr:predicateObjectMap km-dev:PredicateObjectMap_727a8408-8db2-401e-b727-d3c1c37d6221 .
+
+km-dev:PredicateObjectMap_727a8408-8db2-401e-b727-d3c1c37d6221 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_727a8408-8db2-401e-b727-d3c1c37d6221 .
+
+km-dev:PredicateObjectMap_ae765c62-759b-4f46-977c-7bd85b76c1b2 rr:predicate ElementsGr2:dateOfDeath .
+
+_:node1g9erc5inx13 rr:column "deathDate" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasObjectMap _:node1g9erc5inx13 .
+
+km-dev:PredicateObjectMap_ae765c62-759b-4f46-977c-7bd85b76c1b2 rr:objectMap _:node1g9erc5inx13 .
+
+km-dev:TriplesMap_6bc078a8-6fa5-4e12-a8a6-e76bb4913873 rr:predicateObjectMap km-dev:PredicateObjectMap_ae765c62-759b-4f46-977c-7bd85b76c1b2 .
+
+km-dev:PredicateObjectMap_ae765c62-759b-4f46-977c-7bd85b76c1b2 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_ae765c62-759b-4f46-977c-7bd85b76c1b2 .
+
+km-dev:PredicateObjectMap_43827a2e-4f3c-4957-b84a-49fe79c4cd20 rr:predicate ElementsGr2:dateOfBirth .
+
+_:node1g9erc5inx14 rr:column "birthDate" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasObjectMap _:node1g9erc5inx14 .
+
+km-dev:PredicateObjectMap_43827a2e-4f3c-4957-b84a-49fe79c4cd20 rr:objectMap _:node1g9erc5inx14 .
+
+km-dev:TriplesMap_6bc078a8-6fa5-4e12-a8a6-e76bb4913873 rr:predicateObjectMap km-dev:PredicateObjectMap_43827a2e-4f3c-4957-b84a-49fe79c4cd20 .
+
+km-dev:PredicateObjectMap_43827a2e-4f3c-4957-b84a-49fe79c4cd20 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_43827a2e-4f3c-4957-b84a-49fe79c4cd20 .
+
+km-dev:TriplesMap_814b4e1e-673b-4fad-b27e-21805a5553d8 a rr:TriplesMap .
+
+_:node1g9erc5inx1 km-dev:hasTriplesMap km-dev:TriplesMap_814b4e1e-673b-4fad-b27e-21805a5553d8 .
+
+km-dev:TriplesMap_814b4e1e-673b-4fad-b27e-21805a5553d8 km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx15 rr:tableName "s21.csv" ;
+	a rr:LogicalTable ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasLogicalTable _:node1g9erc5inx15 .
+
+km-dev:TriplesMap_814b4e1e-673b-4fad-b27e-21805a5553d8 rr:logicalTable _:node1g9erc5inx15 ;
+	rr:subjectMap _:node1g9erc5inx16 .
+
+_:node1g9erc5inx1 km-dev:hasSubjectMap _:node1g9erc5inx16 .
+
+_:node1g9erc5inx16 km-dev:isPartOfMapping _:node1g9erc5inx1 ;
+	a rr:SubjectMap ;
+	km-dev:alignmentNodeId "http://www.w3.org/2004/02/skos/core#Concept1" ;
+	rr:class skos:Concept ;
+	rr:termType rr:BlankNode ;
+	km-dev:namePrefix "skos:Concept1" .
+
+km-dev:PredicateObjectMap_702b4bd5-d59c-4391-a667-6179250ca3e1 rr:predicate skos1:prefLabel .
+
+_:node1g9erc5inx17 rr:column "classification" ;
+	a rr:ObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasObjectMap _:node1g9erc5inx17 .
+
+km-dev:PredicateObjectMap_702b4bd5-d59c-4391-a667-6179250ca3e1 rr:objectMap _:node1g9erc5inx17 .
+
+km-dev:TriplesMap_814b4e1e-673b-4fad-b27e-21805a5553d8 rr:predicateObjectMap km-dev:PredicateObjectMap_702b4bd5-d59c-4391-a667-6179250ca3e1 .
+
+km-dev:PredicateObjectMap_702b4bd5-d59c-4391-a667-6179250ca3e1 a rr:PredicateObjectMap ;
+	km-dev:isPartOfMapping _:node1g9erc5inx1 .
+
+_:node1g9erc5inx1 km-dev:hasPredicateObjectMap km-dev:PredicateObjectMap_702b4bd5-d59c-4391-a667-6179250ca3e1 .
